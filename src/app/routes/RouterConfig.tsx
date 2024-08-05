@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 // login/signup
 // import { ConfirmNewPassword } from "pages/auth/forgot-password/confirm-new-password";
 // import { ForgotPassword } from "pages/auth/forgot-password/forgot-password";
-import { Login, Signup } from "../../pages/auth";
+import { Login, SignUp } from "../../pages/auth";
 
 // import { Signup } from "../../pages/auth/signup";
 
@@ -16,7 +16,7 @@ export function RouterConfig() {
     <Routes>
       <Route path="login" element={<Login />} />
 
-      <Route path="signup" element={<Signup />} />
+      <Route path="signup" element={<SignUp />} />
     </Routes>
   );
 }

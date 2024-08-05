@@ -38,22 +38,6 @@
       "DOWNLOAD_MONEY4YOU_APP": "Download money4you.APP",
       "SUBSCRIBE_NEWSLETTER": "Subscribe Newsletter"
     },
-    "TEXTS": {
-      "ANNOTATION": "Money4you is an innovative collective financing platform with an alternative financial system. It was established to build a community that enables entrepreneurs to meet investors who can execute their projects."
-    },
-    "LINKS": {
-      "DATA_PROTECTION": "Data Protection",
-      "IMPRINT": "Imprint",
-      "GENERAL_TERMS_AND_CONDITIONS": "General terms and conditions",
-      "RISK_AND_IMPORTANT_INFORMATION": "Risk and important information",
-      "LIST_OF_PRICES_AND_SERVICES": "List of prices and services"
-    },
     "COPYRIGHT": "© {{year}} money4you.financial. All rights reserved."
-  },
-  "WIDGETS": {
-    "RADIO": {
-      "WHAT_A_SONG": "What a song?"
-    },
-    "TV": {}
   }
 }

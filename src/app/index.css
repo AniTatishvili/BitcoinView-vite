@@ -55,6 +55,19 @@ button:focus-visible {
  
 }
 
+.react-tel-input .form-control{
+  width: 100%;
+  height: 40px;
+  background-color: #35363D;
+  color: #fff;
+  border-radius: 8px;
+  border: 0;
+}
+
+.react-tel-input .flag-dropdown{
+  border-radius: 8px 0 0 8px;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

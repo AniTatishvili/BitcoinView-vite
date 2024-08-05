@@ -1,18 +1,10 @@
 const formik_values = {
   initialValues: {
     username: "",
-    name: "",
-    surname: "",
-    passport_id: "",
     email: "",
     password: "",
-    password_confirm: "",
-    city: "",
-    post_code: "",
-    state: "",
-    street: "",
-    building_number: "",
-    apt_number: "",
+    // password_confirm: "",
+    // phone: "",
   },
 
   authorizationValues: {
