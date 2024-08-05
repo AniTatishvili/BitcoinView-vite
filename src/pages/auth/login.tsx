@@ -1,23 +1,24 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-import { Flex } from "@chakra-ui/react";
-import { PContentLayout, PContentSection } from "entities/layouts";
-import { LoginForm } from "widgets/auth/login";
+import { LoginForm } from "../../widgets/auth/login";
 
 export const Login = () => {
-  return (
-    <PContentLayout name={t("USER.AUTH.SIGNIN")}>
-      <PContentSection>
-        <Flex flexDir="column" alignItems="center">
-          <LoginForm />
+  const { t } = useTranslation();
 
-          <Flex align="center" mt={4} gap={1} color="#dd9933" fontSize=".875rem">
-            <Link to="/forgot-password">{t("USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link>
-            {"/"}
-            <Link to="/signup">{t("USER.AUTH.SIGNUP")}</Link>
-          </Flex>
-        </Flex>
-      </PContentSection>
-    </PContentLayout>
+  return (
+    <div className="w-full flex justify-center items-center">
+      <div className="w-[30%] flex flex-col items-center bg-[#1F2027] rounded-[8px] gap-4 p-10">
+        <h2 className="text-[#fff]">{t("SIGNIN")}</h2>
+        <LoginForm />
+
+        <div>
+          {/* <Link to="/forgot-password">{t("USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link> */}
+          {/* {"/"} */}
+          Don't you have an account?
+          <Link to="/signup"> {t("SIGNUP")}</Link>
+        </div>
+      </div>
+    </div>
   );
 };

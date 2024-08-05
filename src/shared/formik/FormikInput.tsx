@@ -1,47 +1,30 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
+// import { FormikIcon } from "./FormikIcon";
 
-import { Stack, InputGroup, InputLeftElement, InputRightElement, Input, Button } from "@chakra-ui/react";
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { ErrorBox } from "./ErrorBox";
-import { FormikIcon } from "./FormikIcon";
+interface FormikInputProps {
+  type: string;
+  placeholder: string;
+  name: string;
+  icon?: React.ReactNode;
+}
 
-export const FormikInput = (props, { ...rest }) => {
-  const { type, placeholder, name, icon } = props;
-  const [show, setShow] = React.useState(false);
-
+export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, name, icon }) => {
   return (
-    <Stack spacing={1}>
-      {type !== ("password" || "new_password") ? (
-        <>
-          {icon ? (
-            <InputGroup>
-              {/* eslint-disable-next-line */}
-              <InputLeftElement pointerEvents="none" children={<FormikIcon icon={icon} />} />
-              <Field type={type} name={name} placeholder={placeholder} {...rest} pl="2rem" as={Input} />
-            </InputGroup>
-          ) : (
-            <InputGroup>
-              <Field type={type} name={name} placeholder={placeholder} {...rest} {...props} as={Input} />
-            </InputGroup>
-          )}
-          <ErrorMessage name={name} component={ErrorBox} />
-        </>
-      ) : (
-        <>
-          <InputGroup size="md">
-            {/* eslint-disable-next-line */}
-            <InputLeftElement pointerEvents="none" children={<FormikIcon icon={icon} />} />
-            <Field as={Input} name={name} pr="4.5rem" type={show ? "text" : "password"} placeholder={placeholder} pl="2rem" />
-            <InputRightElement width="4.5rem">
-              <Button variant={"ghost"} h="1.75rem" size="sm" onClick={() => setShow(!show)}>
-                {show ? <FaEyeSlash /> : <FaEye />}
-              </Button>
-            </InputRightElement>
-          </InputGroup>
-          <ErrorMessage name={name} component={ErrorBox} />
-        </>
-      )}
-    </Stack>
+    <div style={{ position: "relative" }}>
+      {/* {icon && <FormikIcon icon={icon} />}  */}
+      <Field
+        name={name}
+        type={type}
+        placeholder={placeholder}
+        className="bg-[#35363D] text-[#fff] rounded-[8px] focus-visible:outline-0"
+        style={{
+          padding: icon ? "0.5rem 2rem 0.5rem 2.5rem" : "0.5rem 1rem",
+          width: "100%",
+          boxSizing: "border-box",
+        }}
+      />
+      <ErrorMessage name={name}>{(msg) => <div style={{ color: "red", fontSize: "0.875rem" }}>{msg}</div>}</ErrorMessage>
+    </div>
   );
 };

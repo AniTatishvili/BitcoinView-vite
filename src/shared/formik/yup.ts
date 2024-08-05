@@ -10,7 +10,7 @@ export const validationSchema = Yup.object({
   password_confirm: Yup.string()
     .required("Enter password")
     .min(9, "Password must be 9 characters or more")
-    .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    .oneOf([Yup.ref("password")], "Passwords must match"),
   city: Yup.string().required("Enter your city").max(38, "Your city must be at most 38 characters"),
   post_code: Yup.string().required("Enter your post code").max(12, "Your post code must be at most 12 characters"),
   state: Yup.string().required("State is required").max(38, "Your state must be at most 38 characters"),
@@ -38,7 +38,7 @@ export const confirmNewPasswordSchema = Yup.object({
   password_confirmation: Yup.string()
     .required("Enter password")
     .min(9, "Password must be 9 characters or more")
-    .oneOf([Yup.ref("password"), null], "Passwords must match"),
+    .oneOf([Yup.ref("password")], "Passwords must match"),
 });
 
 export const confirmValidationTokenSchema = Yup.object({
