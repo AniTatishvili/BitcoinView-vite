@@ -13,7 +13,7 @@ interface LoginFieldsProps {
 
 export const LoginFields: React.FC<LoginFieldsProps> = ({ formik }) => {
   const { t } = useTranslation();
-  const { loading, isValid, dirty } = formik;
+  const { loading } = formik;
 
   return (
     <div className="w-full flex flex-col items-center gap-4">
@@ -21,7 +21,7 @@ export const LoginFields: React.FC<LoginFieldsProps> = ({ formik }) => {
         <FormikInput name="username" type="text" placeholder={t("USERNAME")} />
         <FormikInput name="password" type="password" placeholder={t("PASSWORD")} />
       </div>
-      <PButton type="submit" className="w-full" disabled={!isValid || !dirty}>
+      <PButton type="submit" className="w-full">
         {loading ? t("LOADING") : t("SIGNIN")}
       </PButton>
     </div>

@@ -17,7 +17,7 @@ export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
     <div className="flex flex-col gap-4">
       <FormikInput name="username" type="text" placeholder={t("USERNAME")} />
       <FormikInput name="email" type="email" placeholder={t("EMAIL")} />
-      <FormikNumber name="tel" placeholder={t("PHONE")} />
+      <FormikNumber name="phone_number" placeholder={t("PHONE")} />
       <FormikInput name="password" type="password" placeholder={t("PASSWORD")} />
       <PButton
         type="submit"

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 export const validationSchema = Yup.object({
   username: Yup.string().required("Enter username"),
   email: Yup.string().email("Invalid email format").required("Email is required field"),
-  tel: Yup.string().required("Enter your phone number"),
+  // tel: Yup.string().required("Enter your phone number"),
   password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
 });
 
