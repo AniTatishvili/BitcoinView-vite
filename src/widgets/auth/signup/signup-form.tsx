@@ -4,7 +4,8 @@ import { Form, Formik } from "formik";
 
 import { useNavigate } from "react-router-dom";
 import { SignupFields } from "./signup-fields";
-import { initialValues, validationSchema } from "../../../shared/formik";
+import { initialValues } from "../../../shared/formik/FormikValues";
+import { validationSchema } from "../../../shared/formik/yup";
 
 export const SignupForm = () => {
   const navigate = useNavigate();
@@ -28,6 +29,7 @@ export const SignupForm = () => {
         },
       });
       console.log("User registered successfully.");
+      navigate("/Login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         console.error("Registration failed:", error.response?.data?.message || error.message);
@@ -44,20 +46,15 @@ export const SignupForm = () => {
 
         return (
           <Form style={{ width: "100%" }}>
-            <div>
-              <div>
-                <div>
-                  <SignupFields
-                    formik={{
-                      loading: false,
-                      isValid: false,
-                      dirty: false,
-                    }}
-                    {...formik}
-                  />
-                </div>
-              </div>
-            </div>
+            <SignupFields
+              formik={{
+                loading: isSubmitting,
+                isValid: isValid,
+                dirty: dirty,
+                isSubmitting: isSubmitting,
+              }}
+              {...formik}
+            />
           </Form>
         );
       }}

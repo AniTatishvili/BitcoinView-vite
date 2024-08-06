@@ -2,9 +2,8 @@ const formik_values = {
   initialValues: {
     username: "",
     email: "",
+    tel: "",
     password: "",
-    // password_confirm: "",
-    // phone: "",
   },
 
   authorizationValues: {

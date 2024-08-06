@@ -5,10 +5,10 @@ import { authorizationValidationSchema } from "../../../shared/formik/yup";
 
 import { LoginFields } from "./login-fields";
 import axios from "axios";
-interface LoginFormValues {
-  username: string;
-  password: string;
-}
+// interface LoginFormValues {
+//   username: string;
+//   password: string;
+// }
 
 export const LoginForm = () => {
   const signinFormSubmit = async (values: any) => {

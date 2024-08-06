@@ -21,8 +21,8 @@ export const LoginFields: React.FC<LoginFieldsProps> = ({ formik }) => {
         <FormikInput name="username" type="text" placeholder={t("USERNAME")} />
         <FormikInput name="password" type="password" placeholder={t("PASSWORD")} />
       </div>
-      <PButton type="submit" className="w-full">
-        {t("SIGNIN")}
+      <PButton type="submit" className="w-full" disabled={!isValid || !dirty}>
+        {loading ? t("LOADING") : t("SIGNIN")}
       </PButton>
     </div>
   );

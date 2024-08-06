@@ -5,25 +5,30 @@ import { isValidPhoneNumber } from "react-phone-number-input/mobile";
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import { useField } from "formik";
 
-import { ErrorBox } from "./ErrorBox";
+// import { ErrorBox } from "./ErrorBox";
+interface FormikNumberProps {
+  name: string;
+  placeholder?: string;
+}
 
-export const FormikNumber = (props: any) => {
+export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
   const [phone, setPhone] = React.useState<string>("");
   const [country, setCountry] = React.useState<string>("us");
+  const [field] = useField(name);
 
-  // const handleChangePhoneNumber = (value: any) => {
-  //   setNumber(value);
-  //   console.log("value", value);
-  // };
+  const handleChangePhoneNumber = (value: string) => {
+    setPhone(value);
+  };
 
   React.useEffect(() => {
-    // Fetch user's country using ip-api
+    // https://ip-api.com/json
     const fetchCountry = async () => {
       try {
-        const response = await axios.get("https://ip-api.com/json");
-        if (response.data && response.data.countryCode) {
-          setCountry(response.data.countryCode.toLowerCase());
+        const response = await axios.get("https://ipapi.co/json/");
+        if (response.data && response.data.country_code) {
+          setCountry(response.data.country_code.toLowerCase());
         }
       } catch (error) {
         console.error("Error fetching country:", error);
@@ -33,14 +38,14 @@ export const FormikNumber = (props: any) => {
     fetchCountry();
   }, []);
 
-  console.log(isValidPhoneNumber(phone));
   return (
     <>
       <div className="w-full">
         <PhoneInput
           country={country}
-          value={phone}
-          onChange={(phone) => setPhone(phone)}
+          value={field.value}
+          placeholder={placeholder}
+          onChange={(phone) => handleChangePhoneNumber(phone)}
           containerStyle={{ width: "100%", backgroundColor: "black", borderRadius: "8px" }}
         />
         {phone && !isValidPhoneNumber(phone) ? (
