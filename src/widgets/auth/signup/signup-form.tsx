@@ -11,50 +11,58 @@ import { useNavigate } from "react-router-dom";
 import { SignupFields } from "./signup-fields";
 import { initialValues } from "../../../shared/formik/FormikValues";
 import { validationSchema } from "../../../shared/formik/yup";
-import { CustomToast } from "../../../shared/hooks/customToast";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
+
+interface SignUpFormValues {
+  username: string;
+  email: string;
+  password: string;
+  phone_number: string;
+}
 
 export const SignupForm = () => {
   const { data } = useSelector((state: any) => state.signup);
   const navigate = useNavigate();
 
-  const [toastMessage, setToastMessage] = React.useState<string | null>(null);
-  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+  const showToast = useCustomToast();
+
   const digits = Object.values(data);
   const tel = `+${digits.join("")}`;
 
   const token =
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2NvaW5zZXJ2aWNlIiwiaWF0IjoxNzIyODkzMTI3LCJuYmYiOjE3MjI4OTMxMjcsImV4cCI6MTcyMzQ5NzkyNywiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.B9_3WSejRrZipQSMLT2gTTSrfC6sgPWj__Qn9TKL1f0";
+    "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2NvaW5zZXJ2aWNlIiwiaWF0IjoxNzIzMDUyMDAyLCJuYmYiOjE3MjMwNTIwMDIsImV4cCI6MTcyMzY1NjgwMiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.ri2KrvAqeFZET8v0hem3ISkcDbkPpHV0dpmg74scG0E";
 
-  const onFormSubmit = async (values: any) => {
+  const onFormSubmit = async (values: SignUpFormValues) => {
     console.log(values);
     const newUser = {
       username: values.username,
       email: values.email,
       password: values.password,
       phone_number: tel,
-      ...values,
     };
 
     const form_data = new FormData();
-    for (const i in newUser) {
-      form_data.append(i, newUser[i]);
-    }
+    Object.entries(newUser).forEach(([key, value]) => {
+      form_data.append(key, value);
+    });
 
     try {
-      await axios.post(`http://localhost/coinservice/wp-json/wp/v2/users`, form_data, {
+      await axios.post(`http://localhost/coinservice/wp-json/myplugin/v1/register`, form_data, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       console.log("form_data", form_data);
       console.log("User registered successfully.");
-      setToastMessage("User registered successfully.");
-      await delay(2000);
+      showToast("User registered successfully.");
+
       navigate("/Login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
+        showToast(error.response?.data?.message || error.message);
         console.error("Registration failed:", error.response?.data?.message || error.message);
       } else {
+        showToast((error as Error).message);
         console.error("Unexpected error:", (error as Error).message);
       }
     }
@@ -62,7 +70,6 @@ export const SignupForm = () => {
 
   return (
     <>
-      {toastMessage && <CustomToast message={toastMessage} />}
       <Formik initialValues={initialValues} validationSchema={validationSchema} validateOnMount onSubmit={onFormSubmit}>
         {(formik) => {
           const { isSubmitting, isValid, dirty } = formik;

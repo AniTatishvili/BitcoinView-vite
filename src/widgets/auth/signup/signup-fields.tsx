@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Flex } from "@chakra-ui/react";
 import { PButton } from "../../../shared/ui/buttons";
 import { FormikInput, FormikNumber } from "../../../shared/formik";
 
@@ -14,7 +15,7 @@ interface SignupFieldsProps {
 export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
   const { t } = useTranslation();
   return (
-    <div className="flex flex-col gap-4">
+    <Flex flexDir={"column"} gap={"16px"}>
       <FormikInput name="username" type="text" placeholder={t("USERNAME")} />
       <FormikInput name="email" type="email" placeholder={t("EMAIL")} />
       <FormikNumber name="phone_number" placeholder={t("PHONE")} />
@@ -26,6 +27,6 @@ export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
         onClick={() => console.log("Button clicked")}>
         {formik.loading ? t("LOADING") : t("SIGNUP")}
       </PButton>
-    </div>
+    </Flex>
   );
 };

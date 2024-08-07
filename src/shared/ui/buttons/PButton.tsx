@@ -1,3 +1,5 @@
+import { Button } from "@chakra-ui/react";
+
 interface PButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
@@ -10,8 +12,17 @@ interface PButtonProps {
 
 export const PButton = ({ children, onClick, className, type, isLoading, isSubmitting }: PButtonProps) => {
   return (
-    <button className={`bg-[#BCFE2F] text-[#fff] rounded-[8px] py-2 px-4 ${className}`} onClick={onClick} type={type}>
+    <Button
+      w={"100%"}
+      backgroundColor={"#BCFE2F"}
+      color={"#fff"}
+      borderRadius={"8px"}
+      py={"8px"}
+      px={"16px"}
+      className={className}
+      onClick={onClick}
+      type={type}>
       {isLoading || isSubmitting ? "Loading..." : children}
-    </button>
+    </Button>
   );
 };

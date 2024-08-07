@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import { Flex } from "@chakra-ui/react";
 import { FormikInput } from "../../../shared/formik";
 import { PButton } from "../../../shared/ui/buttons";
 
@@ -16,14 +17,12 @@ export const LoginFields: React.FC<LoginFieldsProps> = ({ formik }) => {
   const { loading } = formik;
 
   return (
-    <div className="w-full flex flex-col items-center gap-4">
-      <div className="w-full flex flex-col gap-4">
+    <Flex w={"100%"} flexDir={"column"} alignItems={"center"} gap={16}>
+      <Flex w={"100%"} flexDir={"column"} gap={16}>
         <FormikInput name="username" type="text" placeholder={t("USERNAME")} />
         <FormikInput name="password" type="password" placeholder={t("PASSWORD")} />
-      </div>
-      <PButton type="submit" className="w-full">
-        {loading ? t("LOADING") : t("SIGNIN")}
-      </PButton>
-    </div>
+      </Flex>
+      <PButton type="submit">{loading ? t("LOADING") : t("SIGNIN")}</PButton>
+    </Flex>
   );
 };

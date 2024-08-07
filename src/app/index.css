@@ -30,8 +30,8 @@ a:hover {
 body {
   background-color: #141316;
   margin: 0;
-  display: flex;
-  place-items: center;
+  /* display: flex;
+  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
 }
