@@ -18,7 +18,7 @@ export const SignupForm = () => {
   const navigate = useNavigate();
 
   const [toastMessage, setToastMessage] = React.useState<string | null>(null);
-
+  const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
   const digits = Object.values(data);
   const tel = `+${digits.join("")}`;
 
@@ -49,6 +49,7 @@ export const SignupForm = () => {
       console.log("form_data", form_data);
       console.log("User registered successfully.");
       setToastMessage("User registered successfully.");
+      await delay(2000);
       navigate("/Login");
     } catch (error) {
       if (axios.isAxiosError(error)) {
