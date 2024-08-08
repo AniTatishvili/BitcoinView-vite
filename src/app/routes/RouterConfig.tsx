@@ -15,6 +15,13 @@ import { AdviserDashboard } from "../../pages/dashboards/adviser-dashboard";
 import { UserDashboard } from "../../pages/dashboards/user-dashboard";
 import { AdminDashboard } from "../../pages/dashboards/admin-dashboard";
 
+//user dashboard pages
+
+import { Messages } from "../../pages/dashboards/user-dashboard/messages";
+import { Profile } from "../../pages/dashboards/user-dashboard/profile";
+import { Wallet } from "../../pages/dashboards/user-dashboard/wallet";
+import { UserDashboardHome } from "../../pages/dashboards/user-dashboard/user-dashboard-home";
+
 export function RouterConfig() {
   return (
     <Routes>
@@ -24,7 +31,13 @@ export function RouterConfig() {
 
       <Route path="admin-dashboard" element={<AdminDashboard />} />
       <Route path="adviser-dashboard" element={<AdviserDashboard />} />
-      <Route path="user-dashboard" element={<UserDashboard />} />
+
+      <Route path="user-dashboard" element={<UserDashboard />}>
+        <Route path="user-dashboard-home" element={<UserDashboardHome />} />
+        <Route path="messages" element={<Messages />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="wallet" element={<Wallet />} />
+      </Route>
     </Routes>
   );
 }

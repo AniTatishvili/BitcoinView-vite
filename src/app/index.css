@@ -68,6 +68,10 @@ button:focus-visible {
   border-radius: 8px 0 0 8px;
 }
 
+.side-menu a.active div{
+  color: #f7931a;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

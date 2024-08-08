@@ -14,7 +14,7 @@ export const PButton = ({ children, onClick, className, type, isLoading, isSubmi
   return (
     <Button
       w={"100%"}
-      backgroundColor={"#BCFE2F"}
+      backgroundColor={"#f7931a"}
       color={"#fff"}
       borderRadius={"8px"}
       py={"8px"}

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 
 import { isValidPhoneNumber } from "react-phone-number-input/mobile";
-import { setUpdateUserData } from "../../app/providers/store/slice/signup";
+import { setUpdateUserData } from "../../app/providers/store/slice/auth/signup";
 
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";

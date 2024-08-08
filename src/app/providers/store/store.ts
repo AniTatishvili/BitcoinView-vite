@@ -1,13 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 // slices
-import signup from "../store/slice/signup";
+import signup from "./slice/auth/signup";
+
+import user_dashboard_slice from "./slice/dashboard/user-dashboard-slice";
 
 export const store = configureStore({
   reducer: {
     // slices
     signup,
-
+    user_dashboard_slice,
     // api
     // [signupAPI.reducerPath]: signupAPI.reducer,
   },
