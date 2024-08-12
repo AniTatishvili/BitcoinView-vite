@@ -31,7 +31,7 @@ export const TradingViewChart: React.FC = () => {
   }, []);
 
   return (
-    <Box className="tradingview-widget-container" style={{ height: "100%", width: "100%" }}>
+    <Box className="tradingview-widget-container" style={{ height: "300px", width: "100%" }}>
       <Box className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></Box>
       <Box className="tradingview-widget-copyright">
         <NavLink to="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">

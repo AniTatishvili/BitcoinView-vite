@@ -1,4 +1,4 @@
-export * from "./yup";
+export * from "./yup.ts";
 export * from "./FormikInput.tsx";
 export * from "./FormikNumber.tsx";
 export * from "./FormikIcon.tsx";

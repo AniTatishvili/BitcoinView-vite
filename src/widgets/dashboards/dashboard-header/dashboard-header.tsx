@@ -68,7 +68,7 @@ export const DashboardHeader = () => {
             </Flex>
           </Flex>
         </MenuButton>
-        <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"}>
+        <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
           <MenuItem>
             <NavLink to="/user-dashboard/user-dashboard-home" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
               Home

@@ -8,14 +8,14 @@ export const Login = () => {
   const { t } = useTranslation();
 
   return (
-    <Flex w={"100%"} h={"100vhv"} justify={"center"} alignItems={"center"}>
-      <Flex w={{ lg: "30px", base: "90%" }} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={10} gap={8}>
+    <Flex w={"100%"} h={"100vh"} justify={"center"} alignItems={"center"}>
+      <Flex w={"30%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"30px"} gap={10}>
         <Text as="h2" color={"#fff"}>
           {t("SIGNIN")}
         </Text>
         <LoginForm />
 
-        <Flex>
+        <Flex justify={"center"}>
           {/* <Link to="/forgot-password">{t("USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link> */}
           {/* {"/"} */}
           Don't you have an account?

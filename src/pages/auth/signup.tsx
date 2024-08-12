@@ -7,9 +7,9 @@ export const SignUp = () => {
   const { t } = useTranslation();
 
   return (
-    <Flex className="w-full h-[100vh] flex justify-center items-center">
-      <Flex className="lg:w-[30%] w-[90%] h-fit flex flex-col items-center bg-[#1F2027] rounded-[8px] gap-4 p-10">
-        <Text as="h2" className="text-[#fff]">
+    <Flex w={"100%"} h={"100vh"} justify={"center"} alignItems={"center"}>
+      <Flex w={"30%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"30px"} gap={10}>
+        <Text as="h2" color={"#fff"}>
           {t("SIGNUP")}
         </Text>
         <SignupForm />

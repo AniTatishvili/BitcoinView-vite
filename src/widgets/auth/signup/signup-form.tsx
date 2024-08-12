@@ -1,5 +1,3 @@
-import React from "react";
-
 import axios from "axios";
 
 import { useSelector } from "react-redux";
@@ -21,6 +19,7 @@ interface SignUpFormValues {
 }
 
 export const SignupForm = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data } = useSelector((state: any) => state.signup);
   const navigate = useNavigate();
 

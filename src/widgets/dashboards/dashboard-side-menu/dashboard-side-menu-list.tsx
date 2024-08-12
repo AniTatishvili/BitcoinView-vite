@@ -7,6 +7,7 @@ import { FaUserAlt, FaWallet } from "react-icons/fa";
 import { useSelector } from "react-redux";
 
 export const DashboardSideMenuList = () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { user_dashboard_menu_visibility } = useSelector((state: any) => state.user_dashboard_slice);
 
   return (

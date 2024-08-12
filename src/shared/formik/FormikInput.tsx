@@ -17,8 +17,10 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
         name={name}
         type={type}
         placeholder={placeholder}
-        className="bg-[#35363D] text-[#fff] rounded-[8px] focus-visible:outline-0"
         style={{
+          background: "#35363D",
+          color: "#fff",
+          borderRadius: "8px",
           padding: icon ? "0.5rem 2rem 0.5rem 2.5rem" : "0.5rem 1rem",
           width: "100%",
           boxSizing: "border-box",
