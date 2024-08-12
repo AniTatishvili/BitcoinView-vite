@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 import { TiHome } from "react-icons/ti";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { FaUserAlt, FaWallet } from "react-icons/fa";
-import { useSelector } from "react-redux";
+
+import { useUserDashboardStore } from "../../../app/providers/store/slice/dashboard/user-dashboard-store";
 
 export const DashboardSideMenuList = () => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { user_dashboard_menu_visibility } = useSelector((state: any) => state.user_dashboard_slice);
+  const { user_dashboard_menu_visibility } = useUserDashboardStore();
 
   return (
     <Flex flexDir={"column"} className="side-menu">

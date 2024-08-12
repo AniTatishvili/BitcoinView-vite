@@ -10,7 +10,7 @@ export const UserDashboardHome = () => {
         h={"calc(100vh - 80px)"}
         overflowY={"scroll"}
         flexDir={{ base: "column", xl: "row" }}
-        flexWrap={"wrap"}
+        // flexWrap={"wrap"}
         p={"1rem"}
         gap={"1rem"}
         css={{

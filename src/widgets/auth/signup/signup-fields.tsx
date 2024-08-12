@@ -23,9 +23,9 @@ export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
       <PButton
         type="submit"
         // disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
-        isLoading={formik.isSubmitting}
-        onClick={() => console.log("Button clicked")}>
-        {formik.loading ? t("LOADING") : t("SIGNUP")}
+        isLoading={formik.isSubmitting}>
+        {/* {formik.loading ? t("LOADING") : t("SIGNUP")}*/}
+        {t("SIGNUP")}
       </PButton>
     </Flex>
   );

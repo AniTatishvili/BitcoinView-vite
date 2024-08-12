@@ -1,18 +1,12 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { userDashboardMenuVisibilityStatus } from "../../../app/providers/store/slice/dashboard/user-dashboard-slice";
-import { Box } from "@chakra-ui/react";
-import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 
-interface RootState {
-  user_dashboard_slice: {
-    user_dashboard_menu_visibility: boolean;
-  };
-}
+import { useUserDashboardStore } from "../../../app/providers/store/slice/dashboard/user-dashboard-store";
+
+import { Box } from "@chakra-ui/react";
+import { BsFillArrowLeftSquareFill, BsFillArrowRightSquareFill } from "react-icons/bs";
 
 export const DashboardSideMenuCollapseBtn: React.FC = () => {
-  const dispatch = useDispatch();
-  const { user_dashboard_menu_visibility } = useSelector((state: RootState) => state.user_dashboard_slice);
+  const { update_user_dashboard_menu_visibility, user_dashboard_menu_visibility } = useUserDashboardStore();
 
   const [tabStatus, setTabStatus] = React.useState<boolean | null>(() => {
     const status = window.localStorage.getItem("user_dashboard_menu_status");
@@ -30,15 +24,15 @@ export const DashboardSideMenuCollapseBtn: React.FC = () => {
   React.useEffect(() => {
     if (tabStatus === null) {
       window.localStorage.setItem("user_dashboard_menu_status", JSON.stringify(true));
-      dispatch(userDashboardMenuVisibilityStatus(true));
+      update_user_dashboard_menu_visibility(true);
     } else {
-      dispatch(userDashboardMenuVisibilityStatus(tabStatus));
+      update_user_dashboard_menu_visibility(tabStatus);
     }
-  }, [dispatch, tabStatus]);
+  }, [tabStatus]);
 
   return (
     <Box pos={"absolute"} bottom={"20px"} color={"#fff"} fontSize={"28px"} onClick={handleHiddingTabsTitle}>
-      <Box>{user_dashboard_menu_visibility ? <FaAngleDoubleLeft rotate="180deg" /> : <FaAngleDoubleRight />}</Box>
+      <Box>{user_dashboard_menu_visibility ? <BsFillArrowLeftSquareFill rotate="180deg" /> : <BsFillArrowRightSquareFill />}</Box>
     </Box>
   );
 };

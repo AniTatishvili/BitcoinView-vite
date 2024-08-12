@@ -95,6 +95,14 @@ td{
   height: 220px;
 }
 
+.chakra-select__icon-wrapper.css-ulx71t{
+  display: none !important;
+}
+
+.chakra-select.css-iv91g1{
+  padding: 0;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

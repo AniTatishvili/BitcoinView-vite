@@ -1,12 +1,11 @@
-import { useSelector } from "react-redux";
-
 import { Flex } from "@chakra-ui/react";
+import { useUserDashboardStore } from "../../../app/providers/store/slice/dashboard/user-dashboard-store";
 
 import { DashboardSideMenuList } from "./dashboard-side-menu-list";
 import { DashboardSideMenuCollapseBtn } from "./dashboard-side-menu-collapse-btn";
 
 export const DashboardSideMenu = () => {
-  const { user_dashboard_menu_visibility } = useSelector((state: any) => state.user_dashboard_slice);
+  const { user_dashboard_menu_visibility } = useUserDashboardStore();
 
   return (
     <Flex
