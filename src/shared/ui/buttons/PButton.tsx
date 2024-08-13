@@ -5,7 +5,7 @@ interface PButtonProps {
   onClick?: () => void;
   className?: string;
   type?: "button" | "submit" | "reset";
-  // disabled?: boolean;
+  disabled?: boolean;
   isLoading?: boolean;
   isSubmitting?: boolean;
 }
@@ -22,7 +22,7 @@ export const PButton = ({ children, onClick, className, type, isLoading, isSubmi
       className={className}
       onClick={onClick}
       type={type}>
-      {isLoading || isSubmitting ? "Loading..." : children}
+      {children}
     </Button>
   );
 };

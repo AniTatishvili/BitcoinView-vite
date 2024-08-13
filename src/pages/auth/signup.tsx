@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 
-import { SignupForm } from "../../widgets/auth/signup/signup-form";
+import { SignupForm } from "../../components/auth/signup/signup-form";
 import { Flex, Text } from "@chakra-ui/react";
 
 export const SignUp = () => {

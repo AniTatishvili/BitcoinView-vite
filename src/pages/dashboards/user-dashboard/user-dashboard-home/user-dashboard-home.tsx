@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import { UserDashboardDetails, UserDashboardOverview, UserDashboardTradingView, UserActivities } from "../../../../widgets/dashboards/user-dashboard";
-import { DashboardTable } from "../../../../widgets/dashboards/dashboard-table";
+import { UserDashboardDetails, UserDashboardOverview, UserActivities, UserDashboardPayments } from "../../../../components/dashboards/user-dashboard";
+import { DashboardTable } from "../../../../components/dashboards/dashboard-table";
 
 export const UserDashboardHome = () => {
   return (
@@ -28,11 +28,10 @@ export const UserDashboardHome = () => {
         <Flex w={"100%"} flexDir={"column"} gap={"1rem"}>
           <UserDashboardOverview />
           <DashboardTable />
-          <UserDashboardTradingView />
         </Flex>
         <Flex w={{ base: "100%", xl: "40%" }} flexDir={"column"} gap={"1rem"}>
           <UserDashboardDetails />
-          <UserDashboardDetails />
+          <UserDashboardPayments />
           <UserActivities />
         </Flex>
       </Flex>

@@ -1,6 +1,6 @@
 import { Flex } from "@chakra-ui/react";
-import { DashboardHeader } from "../../../widgets/dashboards/dashboard-header";
-import { DashboardSideMenu } from "../../../widgets/dashboards/dashboard-side-menu";
+import { DashboardHeader } from "../../../components/dashboards/dashboard-header";
+import { DashboardSideMenu } from "../../../components/dashboards/dashboard-side-menu";
 
 import { Outlet } from "react-router-dom";
 

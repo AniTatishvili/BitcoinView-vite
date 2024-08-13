@@ -15,7 +15,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
       {/* {icon && <FormikIcon icon={icon} />}  */}
       <Field
         name={name}
-        type={type}
+        type="tel"
         placeholder={placeholder}
         style={{
           background: "#35363D",

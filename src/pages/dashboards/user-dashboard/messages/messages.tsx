@@ -1,5 +1,5 @@
-import { Flex, Box, Button, VStack } from "@chakra-ui/react";
 import React from "react";
+import { Flex, Box, Button, VStack } from "@chakra-ui/react";
 
 interface MessagesProps {
   text: string;
