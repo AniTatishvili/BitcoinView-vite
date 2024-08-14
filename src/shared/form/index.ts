@@ -4,3 +4,5 @@ export * from "./FormikNumber.tsx";
 export * from "./FormikIcon.tsx";
 export * from "./FormikValues.tsx";
 export * from "./ErrorBox.tsx";
+export * from "./form-content.tsx";
+export * from "./form-input.tsx";

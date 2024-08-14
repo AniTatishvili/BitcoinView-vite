@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Flex } from "@chakra-ui/react";
-import { FormikInput } from "../../../shared/formik";
+import { FormikInput } from "../../../shared/form";
 import { PButton } from "../../../shared/ui/buttons";
 
 interface LoginFieldsProps {

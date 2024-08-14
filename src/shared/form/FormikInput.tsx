@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
+
 // import { FormikIcon } from "./FormikIcon";
 
 interface FormikInputProps {
@@ -15,7 +16,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
       {/* {icon && <FormikIcon icon={icon} />}  */}
       <Field
         name={name}
-        type="tel"
+        type={type}
         placeholder={placeholder}
         style={{
           background: "#35363D",

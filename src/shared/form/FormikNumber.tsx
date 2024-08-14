@@ -47,7 +47,7 @@ export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
         onChange={handleChangePhoneNumber}
         containerStyle={{ width: "100%", backgroundColor: "black", borderRadius: "8px" }}
       />
-      {field.value && !isValidPhoneNumber(field.value) ? <div>Incorrect mobile number format</div> : null}
+      {field.value && !isValidPhoneNumber(field.value) ? <div style={{ color: "red", fontSize: "0.875rem" }}>Incorrect mobile number format</div> : null}
     </div>
   );
 };

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
 
 import { useNavigate, NavLink } from "react-router-dom";
 
@@ -8,30 +9,39 @@ import { useTranslation } from "react-i18next";
 import { Menu, MenuButton, MenuList, MenuItem, Button, Avatar, Flex, Image } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
-import logo from "../../../assets/logo.png";
+import logo from "../../../assets/logo.svg";
+import { getUsersData } from "../../../services";
 
 export const DashboardHeader = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
+  useQuery({
+    queryKey: ["getUsersData"],
+    queryFn: async () => {
+      const res = await getUsersData();
+      console.log(res);
+      return res;
+    },
+  });
+  // const fetchUserProfile = async (token: string | null) => {
+  //   try {
+  //     const res = await axios.get("https://bitcoinview.org/wp-json/wp/v2/users/me", {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //     });
 
-  const fetchUserProfile = async (token: string | null) => {
-    try {
-      const res = await axios.get("http://localhost/coinservice/wp-json/wp/v2/users/me", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      console.log("User profile data:", res.data);
-    } catch (error) {
-      console.error("Failed to fetch user profile:", error);
-    }
-  };
+  //     console.log("User profile data:", res.data, 666);
+  //   } catch (error) {
+  //     console.error("Failed to fetch user profile:", error);
+  //     console.log(1111);
+  //   }
+  // };
 
   React.useEffect(() => {
-    fetchUserProfile(token);
+    // fetchUserProfile(token);
   }, []);
 
   const signout = () => {

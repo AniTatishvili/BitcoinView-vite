@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { Flex } from "@chakra-ui/react";
 import { PButton } from "../../../shared/ui/buttons";
-import { FormikInput, FormikNumber } from "../../../shared/formik";
+import { FormikInput, FormikNumber } from "../../../shared/form";
 
 interface SignupFieldsProps {
   formik: {

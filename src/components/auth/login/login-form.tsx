@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 // import { login } from "../../../app/api/authapi";
-import { authorizationValues } from "../../../shared/formik/FormikValues";
-import { authorizationValidationSchema } from "../../../shared/formik/yup";
+import { authorizationValues } from "../../../shared/form/FormikValues";
+import { authorizationValidationSchema } from "../../../shared/form/yup";
 import { LoginFields } from "./login-fields";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 // import axios from "axios";
