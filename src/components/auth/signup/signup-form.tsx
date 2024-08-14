@@ -27,11 +27,6 @@ export const SignupForm = () => {
 
   const showToast = useCustomToast();
 
-  //FIXME
-  const d = "";
-  const digits = Object.values(d);
-  const tel = `+${digits.join("")}`;
-
   const token =
     "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2NvaW5zZXJ2aWNlIiwiaWF0IjoxNzIzMDUyMDAyLCJuYmYiOjE3MjMwNTIwMDIsImV4cCI6MTcyMzY1NjgwMiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.ri2KrvAqeFZET8v0hem3ISkcDbkPpHV0dpmg74scG0E";
 
@@ -56,7 +51,7 @@ export const SignupForm = () => {
       username: values.username,
       email: values.email,
       password: values.password,
-      phone_number: tel,
+      phone_number: values.phone_number,
     };
 
     // const form_data = new FormData();

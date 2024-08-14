@@ -30,6 +30,7 @@ export const LoginForm = () => {
       localStorage.setItem("token", data.token);
       navigate("/user-dashboard");
     },
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
       showToast(error.message || "Login failed!");
     },
