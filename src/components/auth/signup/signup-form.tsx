@@ -41,8 +41,8 @@ export const SignupForm = () => {
     },
     onSuccess: (data) => {
       console.log(data, 555);
-
-      navigate("/Login");
+      showToast("Signup Successful!");
+      navigate("/user-login");
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
@@ -51,7 +51,6 @@ export const SignupForm = () => {
   });
 
   const onFormSubmit = async (values: SignUpFormValues) => {
-    console.log(values, 111);
     const newUser = {
       username: values.username,
       email: values.email,
@@ -75,7 +74,7 @@ export const SignupForm = () => {
           const { isSubmitting, isValid, dirty } = formik;
           console.log(formik);
           return (
-            <Form style={{ width: "100%" }}>
+            <Form style={{ width: "100%", display: "flex", justifyContent: "center" }}>
               <SignupFields
                 formik={{
                   loading: isSubmitting,

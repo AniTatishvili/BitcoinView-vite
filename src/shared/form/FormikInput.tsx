@@ -1,5 +1,6 @@
 import React from "react";
 import { Field, ErrorMessage } from "formik";
+import { Flex } from "@chakra-ui/react";
 
 // import { FormikIcon } from "./FormikIcon";
 
@@ -10,9 +11,9 @@ interface FormikInputProps {
   icon?: React.ReactNode;
 }
 
-export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, name, icon }) => {
+export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, name }) => {
   return (
-    <div style={{ position: "relative" }}>
+    <Flex w={"100%"} flexDir={"column"} gap={2}>
       {/* {icon && <FormikIcon icon={icon} />}  */}
       <Field
         name={name}
@@ -21,13 +22,17 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
         style={{
           background: "#35363D",
           color: "#fff",
+          fontSize: "16px",
+          lineHeight: 1,
+          border: 0,
           borderRadius: "8px",
-          padding: icon ? "0.5rem 2rem 0.5rem 2.5rem" : "0.5rem 1rem",
+          padding: "0.75rem 1rem",
           width: "100%",
           boxSizing: "border-box",
+          outline: 0,
         }}
       />
       <ErrorMessage name={name}>{(msg) => <div style={{ color: "red", fontSize: "0.875rem" }}>{msg}</div>}</ErrorMessage>
-    </div>
+    </Flex>
   );
 };

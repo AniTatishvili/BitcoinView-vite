@@ -21,13 +21,15 @@ import { Messages } from "../pages/dashboards/user-dashboard/messages";
 import { Profile } from "../pages/dashboards/user-dashboard/profile";
 import { Wallet } from "../pages/dashboards/user-dashboard/wallet";
 import { UserDashboardHome } from "../pages/dashboards/user-dashboard/user-dashboard-home";
+import { Home } from "../pages/home";
 
 export function RouterConfig() {
   return (
     <Routes>
-      <Route path="login" element={<Login />} />
+      <Route path="/" element={<Home />} />
+      <Route path="user-login" element={<Login />} />
 
-      <Route path="signup" element={<SignUp />} />
+      <Route path="user-signup" element={<SignUp />} />
 
       <Route path="admin-dashboard" element={<AdminDashboard />} />
       <Route path="adviser-dashboard" element={<AdviserDashboard />} />

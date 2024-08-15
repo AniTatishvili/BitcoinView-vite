@@ -3,7 +3,11 @@
     "AUTH": {
       "SIGNIN": "Sign in",
       "SIGNUP": "Sign up",
-      "FORGOT_YOUR_PASSWORD": "Forgot your password?"
+      "FORGOT_YOUR_PASSWORD": "Forgot your password?",
+      "USERNAME": "Username",
+      "PASSWORD": "Password",
+      "EMAIL": "Email",
+      "PHONE_NUMBER": "Phone number"
     }
   },
   "NAVIGATION": {

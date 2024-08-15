@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 // import { login } from "../../../app/api/authapi";
 import { authorizationValues } from "../../../shared/form/FormikValues";
@@ -15,7 +15,7 @@ interface LoginFormValues {
 }
 
 export const LoginForm = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const showToast = useCustomToast();
 
@@ -27,8 +27,9 @@ export const LoginForm = () => {
     },
     onSuccess: (data) => {
       console.log(data, 555);
-      localStorage.setItem("token", data.token);
-      navigate("/user-dashboard");
+      showToast("Login Successful!");
+      // navigate("/user-dashboard/user-dashboard-home");
+      window.location.href = "https://bitcoinview.org";
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
@@ -47,7 +48,7 @@ export const LoginForm = () => {
       <Formik initialValues={authorizationValues} validationSchema={authorizationValidationSchema} validateOnMount onSubmit={signinFormSubmit}>
         {(formik) => {
           return (
-            <Form style={{ width: "100%" }}>
+            <Form style={{ width: "100%", display: "flex", justifyContent: "center" }}>
               <LoginFields
                 formik={{
                   loading: false,

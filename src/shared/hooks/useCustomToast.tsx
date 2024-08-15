@@ -7,7 +7,7 @@ const useCustomToast = () => {
     toast({
       position: "top",
       description: msg,
-      duration: 3500,
+      duration: 6500,
       isClosable: true,
     });
   };

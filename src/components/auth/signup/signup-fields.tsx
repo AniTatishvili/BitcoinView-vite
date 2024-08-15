@@ -15,14 +15,13 @@ interface SignupFieldsProps {
 export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
   const { t } = useTranslation();
   return (
-    <Flex flexDir={"column"} gap={"16px"}>
-      <FormikInput name="username" type="text" placeholder={t("USERNAME")} />
-      <FormikInput name="email" type="email" placeholder={t("EMAIL")} />
-      <FormikNumber name="phone_number" placeholder={t("PHONE")} />
-      <FormikInput name="password" type="password" placeholder={t("PASSWORD")} />
+    <Flex w={"80%"} flexDir={"column"} gap={4}>
+      <FormikInput name="username" type="text" placeholder={t("common:USER.AUTH:USERNAME")} />
+      <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} />
+      <FormikNumber name="phone_number" placeholder={t("common:USER.AUTH.PHONE")} />
+      <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
       <PButton type="submit" isLoading={formik.isSubmitting} disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}>
-        {formik.loading ? t("LOADING") : t("SIGNUP")}
-        {t("SIGNUP")}
+        {formik.loading ? t("LOADING") : t("common:USER.AUTH.SIGNUP")}
       </PButton>
     </Flex>
   );

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
@@ -46,7 +45,7 @@ export const DashboardHeader = () => {
 
   const signout = () => {
     localStorage.removeItem("token");
-    navigate("/Login");
+    navigate("/user-login");
     console.log("signout");
   };
 

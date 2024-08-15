@@ -17,11 +17,14 @@ export const PButton = ({ children, onClick, className, type, isLoading, isSubmi
       backgroundColor={"#f7931a"}
       color={"#fff"}
       borderRadius={"8px"}
-      py={"8px"}
+      py={"14px"}
       px={"16px"}
+      cursor={"pointer"}
+      _hover={{ opacity: 0.8 }}
       className={className}
       onClick={onClick}
-      type={type}>
+      type={type}
+      disabled={isLoading || isSubmitting}>
       {children}
     </Button>
   );

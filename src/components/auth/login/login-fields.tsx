@@ -17,12 +17,12 @@ export const LoginFields: React.FC<LoginFieldsProps> = ({ formik }) => {
   const { loading } = formik;
 
   return (
-    <Flex w={"100%"} flexDir={"column"} alignItems={"center"} gap={16}>
-      <Flex w={"100%"} flexDir={"column"} gap={16}>
-        <FormikInput name="username" type="text" placeholder={t("USERNAME")} />
-        <FormikInput name="password" type="password" placeholder={t("PASSWORD")} />
+    <Flex w={"80%"} flexDir={"column"} alignItems={"center"} gap={4}>
+      <Flex w={"100%"} flexDir={"column"} gap={4}>
+        <FormikInput name="username" type="text" placeholder={t("common:USER.AUTH.USERNAME")} />
+        <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
       </Flex>
-      <PButton type="submit">{loading ? t("LOADING") : t("SIGNIN")}</PButton>
+      <PButton type="submit">{loading ? t("common:USER.AUTH.LOADING") : t("common:USER.AUTH.SIGNIN")}</PButton>
     </Flex>
   );
 };
