@@ -13,12 +13,13 @@ interface PButtonProps {
 export const PButton = ({ children, onClick, className, type, isLoading, isSubmitting }: PButtonProps) => {
   return (
     <Button
-      w={"100%"}
+      w={"fit-content"}
       backgroundColor={"#f7931a"}
       color={"#fff"}
       borderRadius={"8px"}
       py={"14px"}
       px={"16px"}
+      mx={"auto"}
       cursor={"pointer"}
       _hover={{ opacity: 0.8 }}
       className={className}

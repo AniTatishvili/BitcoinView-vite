@@ -19,7 +19,7 @@ export const Login = () => {
         </Flex>
         <Flex w={{ base: "100%", lg: "50%" }} justify={"center"} align={"center"} p={"0.5rem"}>
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} align={"center"} borderRadius={"8px"} p={"30px"} gap={10}>
-            <NavLink to="/">
+            <NavLink to="https://bitcoinview.org">
               <Image src={logo} alt="logo" w={"160px"} />
             </NavLink>
 

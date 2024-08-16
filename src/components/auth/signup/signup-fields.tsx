@@ -15,7 +15,7 @@ interface SignupFieldsProps {
 export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
   const { t } = useTranslation();
   return (
-    <Flex w={"80%"} flexDir={"column"} gap={4}>
+    <Flex w={{ base: "100%", sm: "360px" }} flexDir={"column"} gap={4}>
       <FormikInput name="username" type="text" placeholder={t("common:USER.AUTH:USERNAME")} />
       <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} />
       <FormikNumber name="phone_number" placeholder={t("common:USER.AUTH.PHONE")} />

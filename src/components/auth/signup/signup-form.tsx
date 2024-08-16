@@ -46,7 +46,7 @@ export const SignupForm = () => {
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
-      showToast(error.message || "Login failed!");
+      showToast(error.message || "Sign up failed!");
     },
   });
 
@@ -72,7 +72,7 @@ export const SignupForm = () => {
       <Formik initialValues={initialValues} validationSchema={validationSchema} validateOnMount onSubmit={onFormSubmit}>
         {(formik) => {
           const { isSubmitting, isValid, dirty } = formik;
-          console.log(formik);
+
           return (
             <Form style={{ width: "100%", display: "flex", justifyContent: "center" }}>
               <SignupFields
