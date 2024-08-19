@@ -2,7 +2,7 @@ import { Flex } from "@chakra-ui/react";
 import { UserDashboardDetails, UserDashboardOverview, UserActivities, UserDashboardPayments } from "../../../../components/dashboards/user-dashboard";
 import { DashboardTable } from "../../../../components/dashboards/dashboard-table";
 
-export const UserDashboardHome = () => {
+export const Overview = () => {
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex

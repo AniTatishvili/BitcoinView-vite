@@ -26,9 +26,6 @@ export const SignupForm = () => {
 
   const showToast = useCustomToast();
 
-  // const token =
-  //   "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0L2NvaW5zZXJ2aWNlIiwiaWF0IjoxNzIzMDUyMDAyLCJuYmYiOjE3MjMwNTIwMDIsImV4cCI6MTcyMzY1NjgwMiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMSJ9fX0.ri2KrvAqeFZET8v0hem3ISkcDbkPpHV0dpmg74scG0E";
-
   // const form = useForm<signupSchema>({
   //   resolver: zodResolver(validationSchema),
   //   // defaultValues: ,
@@ -41,12 +38,15 @@ export const SignupForm = () => {
     },
     onSuccess: (data) => {
       console.log(data, 555);
-      showToast("Signup Successful!");
+      const msg = "Signup Successful!";
+      showToast("success", msg);
+
       navigate("/user-login");
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
-      showToast(error.message || "Sign up failed!");
+      showToast("error", error.response.data.message || "Sign up failed!");
+      console.log(error);
     },
   });
 
@@ -60,12 +60,6 @@ export const SignupForm = () => {
 
     mutation.mutate(newUser);
   };
-
-  // const onSubmit = async (data) => {
-  //   console.log(data);
-
-  //   // mutation.mutate(data);
-  // };
 
   return (
     <>

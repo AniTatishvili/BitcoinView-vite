@@ -3,6 +3,7 @@ const formik_values = {
     username: "",
     email: "",
     password: "",
+    password_confirm: "",
     phone_number: "",
   },
 

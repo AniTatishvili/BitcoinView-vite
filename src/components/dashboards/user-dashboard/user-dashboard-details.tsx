@@ -10,7 +10,7 @@ export const UserDashboardDetails = () => {
     <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"column"} borderRadius={"8px"} p={"1rem"}>
       <Flex flexDir={"column"} gap={10}>
         <Flex w={"100%"} justify={"space-between"} align={"center"}>
-          <Flex gap={8}>
+          <Flex gap={3}>
             <Avatar
               name="Kola Tioluwani"
               src="https://bit.ly/tioluwani-kolawole"
@@ -21,7 +21,7 @@ export const UserDashboardDetails = () => {
               borderRadius={"50%"}
             />
 
-            <Flex flexDir={"column"} lineHeight={1} gap={4}>
+            <Flex flexDir={"column"} lineHeight={1} gap={2}>
               <Flex color={"#fff"} fontSize={"16px"}>
                 Kola Tioluwani
               </Flex>
@@ -30,27 +30,27 @@ export const UserDashboardDetails = () => {
               </Flex>
             </Flex>
           </Flex>
-          <Button backgroundColor={"#f7931a"} borderRadius={"8px"} px={8} py={6} cursor={"pointer"}>
+          <Button backgroundColor={"#f7931a"} borderRadius={"8px"} px={3} py={2} cursor={"pointer"}>
             Connect wallet
           </Button>
         </Flex>
         <List display={"Flex"} borderBottom={"1px solid #999"} gap={10} py={"15px"}>
-          <ListItem display={"flex"} alignItems={"center"} gap={4} color={"green"}>
+          <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <FaBtc /> Bitcoin
           </ListItem>
-          <ListItem display={"flex"} alignItems={"center"} gap={4} color={"green"}>
+          <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <LiaEthereum />
             +8.97%
           </ListItem>
-          <ListItem display={"flex"} alignItems={"center"} gap={4} color={"green"}>
+          <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <SiCardano />
             Cardano
           </ListItem>
-          <ListItem display={"flex"} alignItems={"center"} gap={4} color={"green"}>
+          <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <SiPolkadot />
             Pilkadot
           </ListItem>
-          <ListItem display={"flex"} alignItems={"center"} gap={4} color={"red"}>
+          <ListItem display={"flex"} alignItems={"center"} gap={2} color={"red"}>
             <SiTether />
             Tether
           </ListItem>
@@ -62,7 +62,7 @@ export const UserDashboardDetails = () => {
               $168,785.32
             </Box>
           </Box>
-          <Flex flexDir={"column"} gap={10}>
+          <Flex flexDir={"column"} gap={2}>
             <Box color={"#fff"}>Convert Balance</Box>
             <Flex
               justify={"space-between"}

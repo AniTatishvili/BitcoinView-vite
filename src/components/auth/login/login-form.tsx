@@ -1,4 +1,4 @@
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
 // import { login } from "../../../app/api/authapi";
 import { authorizationValues } from "../../../shared/form/FormikValues";
@@ -15,7 +15,7 @@ interface LoginFormValues {
 }
 
 export const LoginForm = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const showToast = useCustomToast();
 
@@ -27,13 +27,28 @@ export const LoginForm = () => {
     },
     onSuccess: (data) => {
       console.log(data, 555);
-      showToast("Login Successful!");
-      // navigate("/user-dashboard/user-dashboard-home");
-      window.location.href = "https://bitcoinview.org";
+
+      const msg = "Login Successful!";
+      showToast("success", msg);
+
+      const { user_id } = data;
+      window.localStorage.setItem("UID", JSON.stringify(user_id));
+      window.localStorage.setItem("LOGGED_IN", JSON.stringify(true));
+
+      navigate("/user-dashboard/overview");
+      // window.location.href = "https://bitcoinview.org";
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
-      showToast(error.message || "Login failed!");
+      const uid = window.localStorage.getItem("UID");
+      if (uid && JSON.parse(uid)) {
+        window.localStorage.removeItem("UID");
+      }
+
+      const msg = "You have entered an invalid username or password.";
+      showToast("error", msg || "Login failed!");
+
+      console.log(error);
     },
   });
 

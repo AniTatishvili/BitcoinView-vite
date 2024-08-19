@@ -5,6 +5,10 @@ export const validationSchema = Yup.object({
   email: Yup.string().email("Invalid email format").required("Email is required field"),
   phone_number: Yup.string().required("Enter your phone number"),
   password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
+  password_confirm: Yup.string()
+    .required("Enter password")
+    .min(9, "Password must be 9 characters or more")
+    .oneOf([Yup.ref("password")], "Passwords must match"),
 });
 
 export const authorizationValidationSchema = Yup.object({

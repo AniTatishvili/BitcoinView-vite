@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
 // global
-// import { Protected } from "./Protected";
+import { Protected } from "./Protected";
 // import { Redirect } from "./Redirect";
 
 // login/signup
@@ -20,7 +20,7 @@ import { AdminDashboard } from "../pages/dashboards/admin-dashboard";
 import { Messages } from "../pages/dashboards/user-dashboard/messages";
 import { Profile } from "../pages/dashboards/user-dashboard/profile";
 import { Wallet } from "../pages/dashboards/user-dashboard/wallet";
-import { UserDashboardHome } from "../pages/dashboards/user-dashboard/user-dashboard-home";
+import { Overview } from "../pages/dashboards/user-dashboard/overview";
 import { Home } from "../pages/home";
 
 export function RouterConfig() {
@@ -31,15 +31,21 @@ export function RouterConfig() {
 
       <Route path="user-signup" element={<SignUp />} />
 
-      <Route path="admin-dashboard" element={<AdminDashboard />} />
-      <Route path="adviser-dashboard" element={<AdviserDashboard />} />
+      <Route element={<Protected allowedRoles={["Admin"]} />}>
+        <Route path="admin-dashboard" element={<AdminDashboard />} />
+      </Route>
 
-      <Route path="user-dashboard" element={<UserDashboard />}>
-        {/* <Route index element={<UserDashboardHome />} /> */}
-        <Route path="user-dashboard-home" element={<UserDashboardHome />} />
-        <Route path="messages" element={<Messages />} />
-        <Route path="profile" element={<Profile />} />
-        <Route path="wallet" element={<Wallet />} />
+      <Route element={<Protected allowedRoles={["Adviser"]} />}>
+        <Route path="adviser-dashboard" element={<AdviserDashboard />} />{" "}
+      </Route>
+
+      <Route element={<Protected allowedRoles={["User"]} />}>
+        <Route path="user-dashboard" element={<UserDashboard />}>
+          <Route path="overview" element={<Overview />} />
+          <Route path="messages" element={<Messages />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="wallet" element={<Wallet />} />
+        </Route>
       </Route>
     </Routes>
   );

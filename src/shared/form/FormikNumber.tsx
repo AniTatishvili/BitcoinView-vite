@@ -4,6 +4,7 @@ import { isValidPhoneNumber } from "react-phone-number-input/mobile";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useField } from "formik";
+import { Box } from "@chakra-ui/react";
 
 interface FormikNumberProps {
   name: string;
@@ -36,7 +37,7 @@ export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
   }, []);
 
   return (
-    <div className="w-full">
+    <Box w={"100%"}>
       <PhoneInput
         country={country}
         value={field.value}
@@ -48,6 +49,6 @@ export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
         containerStyle={{ width: "100%", backgroundColor: "black", borderRadius: "8px" }}
       />
       {field.value && !isValidPhoneNumber(field.value) ? <div style={{ color: "red", fontSize: "0.875rem" }}>Incorrect mobile number format</div> : null}
-    </div>
+    </Box>
   );
 };

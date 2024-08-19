@@ -10,41 +10,38 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 
 import logo from "../../../assets/logo.svg";
 import { getUsersData } from "../../../services";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 export const DashboardHeader = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  useQuery({
+  const { updateUserFields } = useUserSignupStore();
+
+  const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+  const uid = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("UID") || "null") : null;
+  const logged_in = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("UID") || "null") : null;
+
+  const isUserLoggedIn = !!(Object.keys(auth).length > 0 || uid || logged_in);
+
+  const { data } = useQuery({
     queryKey: ["getUsersData"],
     queryFn: async () => {
       const res = await getUsersData();
       console.log(res);
+      updateUserFields(res);
       return res;
     },
+    enabled: isUserLoggedIn,
+    refetchOnWindowFocus: false,
+    staleTime: Infinity,
   });
-  // const fetchUserProfile = async (token: string | null) => {
-  //   try {
-  //     const res = await axios.get("https://bitcoinview.org/wp-json/wp/v2/users/me", {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //         "Content-Type": "application/json",
-  //       },
-  //     });
 
-  //     console.log("User profile data:", res.data, 666);
-  //   } catch (error) {
-  //     console.error("Failed to fetch user profile:", error);
-  //     console.log(1111);
-  //   }
-  // };
-
-  React.useEffect(() => {
-    // fetchUserProfile(token);
-  }, []);
-
+  console.log(data);
   const signout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("UID");
+    localStorage.removeItem("USER_AUTH");
     navigate("/user-login");
     console.log("signout");
   };
@@ -55,8 +52,8 @@ export const DashboardHeader = () => {
         <Image src={logo} alt="logo" w={"160px"} />
       </NavLink>
       <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} />}>
-          <Flex gap={8}>
+        <MenuButton as={Button} rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} />} bg={"transparent"} _hover={{ backround: "transparent" }}>
+          <Flex gap={3}>
             <Avatar
               name="Kola Tioluwani"
               src="https://bit.ly/tioluwani-kolawole"
@@ -67,7 +64,7 @@ export const DashboardHeader = () => {
               borderRadius={"50%"}
             />
 
-            <Flex flexDir={"column"} lineHeight={1} gap={4}>
+            <Flex flexDir={"column"} lineHeight={1} gap={2}>
               <Flex color={"#fff"} fontSize={"16px"}>
                 Kola Tioluwani
               </Flex>

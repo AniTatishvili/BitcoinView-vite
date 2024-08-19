@@ -3,11 +3,14 @@ import { useToast } from "@chakra-ui/react";
 const useCustomToast = () => {
   const toast = useToast();
 
-  const showToast = (msg: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const showToast = (status: any, msg: string) => {
     toast({
       position: "top",
+      // title: title || "Notification",
       description: msg,
-      duration: 6500,
+      status: status,
+      duration: 3500,
       isClosable: true,
     });
   };
