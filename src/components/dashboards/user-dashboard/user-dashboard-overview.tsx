@@ -9,10 +9,14 @@ export const UserDashboardOverview = () => {
       </Text>
 
       <Tabs>
-        <TabList display={"flex"} gap={10} mb={"10px"} color={"#fff"}>
-          <Tab>Overview</Tab>
+        <TabList display={"flex"} alignItems={"center"} gap={4} mb={"10px"} color={"#fff"} borderBottom={0}>
+          <Tab color={"#fff"} fontSize={"14px"} p={0}>
+            Overview
+          </Tab>
           {"/"}
-          <Tab>Tradingview</Tab>
+          <Tab color={"#fff"} fontSize={"14px"} p={0}>
+            Tradingview
+          </Tab>
         </TabList>
 
         <TabPanels>

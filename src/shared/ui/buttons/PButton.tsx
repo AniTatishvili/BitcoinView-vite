@@ -8,12 +8,13 @@ interface PButtonProps {
   disabled?: boolean;
   isLoading?: boolean;
   isSubmitting?: boolean;
+  w?: string;
 }
 
-export const PButton = ({ children, onClick, className, type, isLoading, isSubmitting }: PButtonProps) => {
+export const PButton = ({ children, onClick, className, type, isLoading, isSubmitting, w }: PButtonProps) => {
   return (
     <Button
-      w={"fit-content"}
+      w={w}
       backgroundColor={"#f7931a"}
       color={"#fff"}
       borderRadius={"8px"}

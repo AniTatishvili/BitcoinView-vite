@@ -22,7 +22,9 @@ export const LoginFields: React.FC<LoginFieldsProps> = ({ formik }) => {
         <FormikInput name="username" type="text" placeholder={t("common:USER.AUTH.USERNAME")} />
         <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
       </Flex>
-      <PButton type="submit">{loading ? t("common:USER.AUTH.LOADING") : t("common:USER.AUTH.SIGNIN")}</PButton>
+      <PButton type="submit" w={"fit-content"}>
+        {loading ? t("common:USER.AUTH.LOADING") : t("common:USER.AUTH.SIGNIN")}
+      </PButton>
     </Flex>
   );
 };

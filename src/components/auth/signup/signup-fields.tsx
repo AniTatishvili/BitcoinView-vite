@@ -21,7 +21,7 @@ export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
       <FormikNumber name="phone_number" placeholder={t("common:USER.AUTH.PHONE")} />
       <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
       <FormikInput name="password_confirm" type="password" placeholder={t("Confirm password")} />
-      <PButton type="submit" isLoading={formik.isSubmitting} disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}>
+      <PButton type="submit" isLoading={formik.isSubmitting} disabled={formik.isSubmitting || !formik.isValid || !formik.dirty} w={"fit-content"}>
         {formik.loading ? t("LOADING") : t("common:USER.AUTH.SIGNUP")}
       </PButton>
     </Flex>

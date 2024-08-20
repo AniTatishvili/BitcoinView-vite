@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "@tanstack/react-query";
 
 import { useNavigate, NavLink } from "react-router-dom";
@@ -52,7 +51,13 @@ export const DashboardHeader = () => {
         <Image src={logo} alt="logo" w={"160px"} />
       </NavLink>
       <Menu>
-        <MenuButton as={Button} rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} />} bg={"transparent"} _hover={{ backround: "transparent" }}>
+        <MenuButton
+          as={Button}
+          rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} />}
+          bg={"transparent"}
+          _hover={{ backround: "transparent" }}
+          _focus={{ backround: "transparent" }}
+          _active={{ backround: "transparent" }}>
           <Flex gap={3}>
             <Avatar
               name="Kola Tioluwani"
@@ -64,7 +69,7 @@ export const DashboardHeader = () => {
               borderRadius={"50%"}
             />
 
-            <Flex flexDir={"column"} lineHeight={1} gap={2}>
+            <Flex flexDir={"column"} lineHeight={1} gap={1}>
               <Flex color={"#fff"} fontSize={"16px"}>
                 Kola Tioluwani
               </Flex>

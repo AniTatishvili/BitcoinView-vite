@@ -13,8 +13,8 @@ const data = [
 export const UserDashboardChart = () => (
   <ResponsiveContainer width="100%" height={220}>
     <LineChart data={data}>
-      <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" />
+      <Line type="monotone" dataKey="uv" stroke="#f7931a" />
+      <CartesianGrid stroke="#fff" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />

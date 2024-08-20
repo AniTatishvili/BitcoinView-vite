@@ -8,7 +8,7 @@ import { SiTether } from "react-icons/si";
 export const UserDashboardDetails = () => {
   return (
     <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"column"} borderRadius={"8px"} p={"1rem"}>
-      <Flex flexDir={"column"} gap={10}>
+      <Flex flexDir={"column"} gap={4}>
         <Flex w={"100%"} justify={"space-between"} align={"center"}>
           <Flex gap={3}>
             <Avatar
@@ -21,7 +21,7 @@ export const UserDashboardDetails = () => {
               borderRadius={"50%"}
             />
 
-            <Flex flexDir={"column"} lineHeight={1} gap={2}>
+            <Flex flexDir={"column"} lineHeight={1} gap={1}>
               <Flex color={"#fff"} fontSize={"16px"}>
                 Kola Tioluwani
               </Flex>
@@ -64,20 +64,12 @@ export const UserDashboardDetails = () => {
           </Box>
           <Flex flexDir={"column"} gap={2}>
             <Box color={"#fff"}>Convert Balance</Box>
-            <Flex
-              justify={"space-between"}
-              align={"center"}
-              backgroundColor={"#35363D"}
-              color={"#fff"}
-              fontSize={"12px"}
-              borderRadius={"8px"}
-              px={"6px"}
-              py={"5px"}>
+            <Flex justify={"space-between"} align={"center"} bg={"#35363D"} color={"#fff"} fontSize={"12px"} borderRadius={"8px"} px={"6px"}>
               <Box borderRight={"1px solid #fff"} pe={"5px"}>
                 3.19999
               </Box>
-              <Box maxW={"60px"}>
-                <Select placeholder="BTC" w={"100%"} backgroundColor={"#35363D"} color={"#fff"} p={"0"}>
+              <Box w={"80px"}>
+                <Select placeholder="BTC" w={"100%"} bg={"#35363D"} color={"#fff"} border={0} p={0}>
                   <option value="option1">BTC</option>
                   <option value="option2">ETH 2</option>
                   <option value="option3">ADA</option>
