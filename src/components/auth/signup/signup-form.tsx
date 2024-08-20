@@ -6,7 +6,7 @@ import { SignupFields } from "./signup-fields";
 import { initialValues } from "../../../shared/form/FormikValues";
 import { validationSchema } from "../../../shared/form/yup";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
-import { signup } from "../../../services";
+import { signup, signupMonday } from "../../../services";
 import { useMutation } from "@tanstack/react-query";
 // import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 // import { FormContent } from "../../../shared/form";
@@ -34,10 +34,15 @@ export const SignupForm = () => {
   const mutation = useMutation({
     mutationFn: async (formData: SignUpFormValues) => {
       const response = await signup(formData);
-      return response;
+      // const mondayResponse = await signupMonday(formData);
+
+      return { response };
     },
-    onSuccess: (data) => {
-      console.log(data, 555);
+    onSuccess: async (data) => {
+      const { response } = data;
+      console.log("Signup response:", response);
+      // console.log("Monday API response:", mondayResponse);
+
       const msg = "Signup Successful!";
       showToast("success", msg);
 

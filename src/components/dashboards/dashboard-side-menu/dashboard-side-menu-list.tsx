@@ -14,25 +14,33 @@ export const DashboardSideMenuList = () => {
     <Flex flexDir={"column"} className="side-menu">
       <NavLink to="/user-dashboard/overview" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
         <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3}>
-          <TiHome />
+          <Text fontSize={"18px"}>
+            <TiHome />
+          </Text>
           <Text>{user_dashboard_menu_visibility ? "Home" : null}</Text>
         </Flex>
       </NavLink>
       <NavLink to="/user-dashboard/messages" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
         <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3}>
-          <FaFacebookMessenger />
+          <Text fontSize={"18px"}>
+            <FaFacebookMessenger />
+          </Text>
           <Text>{user_dashboard_menu_visibility ? "Messages" : null}</Text>
         </Flex>
       </NavLink>
       <NavLink to="/user-dashboard/profile" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
         <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3}>
-          <FaUserAlt />
+          <Text fontSize={"18px"}>
+            <FaUserAlt />
+          </Text>
           <Text>{user_dashboard_menu_visibility ? "Profile" : null}</Text>
         </Flex>
       </NavLink>
       <NavLink to="/user-dashboard/wallet" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
         <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3}>
-          <FaWallet />
+          <Text fontSize={"18px"}>
+            <FaWallet />
+          </Text>
           <Text>{user_dashboard_menu_visibility ? "Wallet" : null}</Text>
         </Flex>
       </NavLink>

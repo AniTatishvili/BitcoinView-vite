@@ -100,9 +100,7 @@ export const DashboardHeader = () => {
               Wallet
             </NavLink>
           </MenuItem>
-          <MenuItem>
-            <Button onClick={signout}>{t("common:MENU.SIGN_OUT")}</Button>
-          </MenuItem>
+          <MenuItem onClick={signout}>{t("common:MENU.SIGN_OUT")}</MenuItem>
         </MenuList>
       </Menu>
     </Flex>

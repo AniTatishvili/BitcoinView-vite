@@ -11,7 +11,7 @@ const data = [
 ];
 
 export const UserDashboardChart = () => (
-  <ResponsiveContainer width="100%" height={220}>
+  <ResponsiveContainer width="100%" height={400}>
     <LineChart data={data}>
       <Line type="monotone" dataKey="uv" stroke="#f7931a" />
       <CartesianGrid stroke="#fff" />

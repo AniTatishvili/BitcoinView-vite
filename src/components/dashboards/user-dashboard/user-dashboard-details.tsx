@@ -1,9 +1,9 @@
-import { Avatar, Box, Button, Flex, List, ListItem, Select } from "@chakra-ui/react";
+import { Avatar, Box, Button, Flex, List, ListItem } from "@chakra-ui/react";
 import { FaBtc } from "react-icons/fa";
 import { LiaEthereum } from "react-icons/lia";
-import { SiCardano } from "react-icons/si";
 import { SiPolkadot } from "react-icons/si";
 import { SiTether } from "react-icons/si";
+import { CryptoConverter } from "../../../shared/crypto-converter";
 
 export const UserDashboardDetails = () => {
   return (
@@ -34,17 +34,13 @@ export const UserDashboardDetails = () => {
             Connect wallet
           </Button>
         </Flex>
-        <List display={"Flex"} borderBottom={"1px solid #999"} gap={10} py={"15px"}>
+        <List display={"Flex"} borderBottom={"1px solid #999"} gap={2} py={"15px"}>
           <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <FaBtc /> Bitcoin
           </ListItem>
           <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <LiaEthereum />
             +8.97%
-          </ListItem>
-          <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
-            <SiCardano />
-            Cardano
           </ListItem>
           <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <SiPolkadot />
@@ -55,28 +51,14 @@ export const UserDashboardDetails = () => {
             Tether
           </ListItem>
         </List>
-        <Flex justify={"space-between"} align={"center"}>
+        <Flex flexDir={{ base: "column", sm: "row" }} justify={"space-between"} align={"center"} gap={6}>
           <Box>
             <Box color={"#fff"}>Toltal Balance</Box>
-            <Box color={"#f7931a"} fontSize={"28px"}>
+            <Box color={"#f7931a"} fontSize={"22px"}>
               $168,785.32
             </Box>
           </Box>
-          <Flex flexDir={"column"} gap={2}>
-            <Box color={"#fff"}>Convert Balance</Box>
-            <Flex justify={"space-between"} align={"center"} bg={"#35363D"} color={"#fff"} fontSize={"12px"} borderRadius={"8px"} px={"6px"}>
-              <Box borderRight={"1px solid #fff"} pe={"5px"}>
-                3.19999
-              </Box>
-              <Box w={"80px"}>
-                <Select placeholder="BTC" w={"100%"} bg={"#35363D"} color={"#fff"} border={0} p={0}>
-                  <option value="option1">BTC</option>
-                  <option value="option2">ETH 2</option>
-                  <option value="option3">ADA</option>
-                </Select>
-              </Box>
-            </Flex>
-          </Flex>
+          <CryptoConverter />
         </Flex>
       </Flex>
     </Flex>
