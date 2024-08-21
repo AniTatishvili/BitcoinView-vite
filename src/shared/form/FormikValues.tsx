@@ -19,12 +19,21 @@ const formik_values = {
     email: "",
     passport_id: "",
   },
-  confirmNewPasswordValues: {
+  updateUserProfile: {
+    name: "",
+    surname: "",
+    email: "",
+    phone_number: "",
+    country: "",
+    employee: "",
+    resource: "",
+    retention_status: "",
+    currency: "",
+    custumer_status: "",
     password: "",
-    password_confirmation: "",
-  },
-  confirmValidationTokenValues: {
-    token: "",
+    time_zone: "",
+    tp_account_groups: "",
+    passport_id: "",
   },
 };
-export const { initialValues, authorizationValues, otpValues, forgotPasswordValues, confirmNewPasswordValues, confirmValidationTokenValues } = formik_values;
+export const { initialValues, authorizationValues, otpValues, forgotPasswordValues, updateUserProfile } = formik_values;

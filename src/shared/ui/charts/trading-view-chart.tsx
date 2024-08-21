@@ -21,7 +21,7 @@ export const TradingViewChart: React.FC = () => {
     });
 
     document.querySelector(".tradingview-widget-container__widget")?.appendChild(script);
-
+    console.log(document.querySelector(".tradingview-widget-container__widget"), 88);
     return () => {
       const existingScript = document.querySelector(`script[src="${script.src}"]`);
       if (existingScript) {
@@ -31,7 +31,7 @@ export const TradingViewChart: React.FC = () => {
   }, []);
 
   return (
-    <Box className="tradingview-widget-container" style={{ height: "400px", width: "100%" }}>
+    <Box className="tradingview-widget-container" style={{ height: "360px", width: "100%" }}>
       <Box className="tradingview-widget-container__widget" style={{ height: "calc(100% - 32px)", width: "100%" }}></Box>
       <Box className="tradingview-widget-copyright">
         <NavLink to="https://www.tradingview.com/" rel="noopener nofollow" target="_blank">

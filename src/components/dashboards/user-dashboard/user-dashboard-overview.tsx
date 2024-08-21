@@ -1,5 +1,5 @@
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
-import { TradingViewChart, UserDashboardChart } from "../../../shared/charts";
+import { TradingViewChart, UserDashboardChart } from "../../../shared/ui/charts";
 
 export const UserDashboardOverview = () => {
   return (

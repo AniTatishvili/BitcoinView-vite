@@ -7,7 +7,7 @@ export const Overview = () => {
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
         w={"100%"}
-        h={"calc(100vh - 80px)"}
+        h={"100%"}
         overflowY={"scroll"}
         flexDir={{ base: "column", xl: "row" }}
         // flexWrap={"wrap"}

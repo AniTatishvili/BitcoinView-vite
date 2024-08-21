@@ -25,17 +25,19 @@ export const forgotPasswordValidate = Yup.object({
   passport_id: Yup.string().required("Enter your passport ID").min(6, "Passport ID must be 6 characters or more"),
 });
 
-export const confirmNewPasswordSchema = Yup.object({
+export const updateUserProfileSchema = Yup.object({
+  name: Yup.string().required("Enter name"),
+  surname: Yup.string().required("Enter surname"),
+  email: Yup.string().email("Invalid email format").required("Email is required field"),
+  phone_number: Yup.string().required("Enter your phone number"),
+  country: Yup.string().required("Select country"),
+  employee: Yup.string().required("Select employee"),
+  resource: Yup.string().required("Enter resource"),
+  retention_status: Yup.string().required("Select retention_status"),
+  currency: Yup.string().required("Select currency"),
+  custumer_status: Yup.string().required("Select custumer status"),
   password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
-  password_confirmation: Yup.string()
-    .required("Enter password")
-    .min(9, "Password must be 9 characters or more")
-    .oneOf([Yup.ref("password")], "Passwords must match"),
-});
-
-export const confirmValidationTokenSchema = Yup.object({
-  token: Yup.string()
-    .required("Enter verifide code")
-    .min(6, "Your validation code must be at least 6 characters")
-    .max(6, "Your validation must be at most 6 characters"),
+  time_zone: Yup.string().required("Select time zone"),
+  tp_account_groups: Yup.string().required("Select tp account groups"),
+  passport_id: Yup.string().required("Enter your passport ID").min(6, "Passport ID must be 6 characters or more"),
 });

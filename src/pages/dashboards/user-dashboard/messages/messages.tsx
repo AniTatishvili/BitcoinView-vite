@@ -24,7 +24,7 @@ export const Messages = () => {
   };
 
   return (
-    <VStack w={"100%"} p={"1rem"} gap={20}>
+    <VStack w={"100%"} p={"1rem"} gap={2}>
       {messagesArr.map((item, i) => {
         return (
           <Flex key={i} w={"100%"} h={"fit-content"} flexDir={"column"} align={"flex-start"} color={"#fff"}>

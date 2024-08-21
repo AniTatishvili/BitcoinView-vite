@@ -51,7 +51,7 @@ export const UserDashboardDetails = () => {
             Tether
           </ListItem>
         </List>
-        <Flex flexDir={{ base: "column", sm: "row" }} justify={"space-between"} align={"center"} gap={6}>
+        <Flex flexDir={{ base: "column", sm: "row" }} justify={"space-between"} gap={6}>
           <Box>
             <Box color={"#fff"}>Toltal Balance</Box>
             <Box color={"#f7931a"} fontSize={"22px"}>
