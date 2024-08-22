@@ -1,8 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
 import { PButton } from "../../../../shared/ui/buttons";
+import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table";
+import { TableFilter } from "../../../../shared/ui/table-filter";
 
 export const WalletContent = () => {
   const referralLink = "https://CPa_erefff";
@@ -59,14 +61,19 @@ export const WalletContent = () => {
           </Flex>
         </Flex>
         <Flex flexDir={"row"} gap={4} color={"#fff"}>
-          <NavLink to="/deposit">Deposit</NavLink>
-          <NavLink to="/withdraw">Withdraw</NavLink>
-          <NavLink to="/transfer">Transfer</NavLink>
+          <Link to="/user-dashboard/deposit">Deposit</Link>
+          <Link to="/user-dashboard/withdraw">Withdraw</Link>
         </Flex>
       </Flex>
 
-      <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"}>
+      <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
         <Text as="h3">Recent Transactions</Text>
+
+        <TableFilter />
+        <Box color={"#f7931a"} fontSize={"14px"} textDecoration={"underline"}>
+          <Link to="/">Deposit hasn't arrived?</Link>
+        </Box>
+        <PaymentTable />
       </Flex>
     </Flex>
   );

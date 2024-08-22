@@ -22,6 +22,10 @@ import { Profile } from "../pages/dashboards/user-dashboard/profile";
 import { Wallet } from "../pages/dashboards/user-dashboard/wallet";
 import { Overview } from "../pages/dashboards/user-dashboard/overview";
 import { Home } from "../pages/home";
+import { Deposit } from "../pages/dashboards/user-dashboard/deposit";
+import { Withdraw } from "../pages/dashboards/user-dashboard/withdraw";
+import { TransactionHistory } from "../pages/dashboards/user-dashboard/transaction-history";
+import { AddPaymentMethod } from "../pages/dashboards/user-dashboard/add-payment-method";
 
 export function RouterConfig() {
   return (
@@ -45,6 +49,10 @@ export function RouterConfig() {
         <Route path="messages" element={<Messages />} />
         <Route path="profile" element={<Profile />} />
         <Route path="wallet" element={<Wallet />} />
+        <Route path="deposit" element={<Deposit />} />
+        <Route path="withdraw" element={<Withdraw />} />
+        <Route path="transaction-history" element={<TransactionHistory />} />
+        <Route path="add-payment-method" element={<AddPaymentMethod />} />
       </Route>
       {/* </Route> */}
     </Routes>
