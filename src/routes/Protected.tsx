@@ -17,11 +17,11 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const uid = JSON.parse(window.localStorage.getItem("UID") || '""');
+    // const uid = JSON.parse(window.localStorage.getItem("UID") || '""');
     const logged_in = JSON.parse(window.localStorage.getItem("LOGGED_IN") || '""');
     const { token } = JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}");
 
-    if (token && uid && logged_in) {
+    if (token && logged_in) {
       try {
         const tokenExpiration = jwtDecode<{ exp: number }>(token).exp;
         const dateNow = Math.floor(new Date().getTime() / 1000);

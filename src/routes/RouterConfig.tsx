@@ -43,18 +43,18 @@ export function RouterConfig() {
         <Route path="adviser-dashboard" element={<AdviserDashboard />} />{" "}
       </Route>
 
-      <Route element={<Protected allowedRoles={["Subscriber"]} />}>
-        <Route path="user-dashboard" element={<UserDashboard />}>
-          <Route path="overview" element={<Overview />} />
-          <Route path="messages" element={<Messages />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="wallet" element={<Wallet />} />
-          <Route path="deposit" element={<Deposit />} />
-          <Route path="withdraw" element={<Withdraw />} />
-          <Route path="transaction-history" element={<TransactionHistory />} />
-          <Route path="add-payment-method" element={<AddPaymentMethod />} />
-        </Route>
+      {/* <Route element={<Protected allowedRoles={["Subscriber"]} />}> */}
+      <Route path="user-dashboard" element={<UserDashboard />}>
+        <Route path="overview" element={<Overview />} />
+        <Route path="messages" element={<Messages />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="wallet" element={<Wallet />} />
+        <Route path="deposit" element={<Deposit />} />
+        <Route path="withdraw" element={<Withdraw />} />
+        <Route path="transaction-history" element={<TransactionHistory />} />
+        <Route path="add-payment-method" element={<AddPaymentMethod />} />
       </Route>
+      {/* </Route> */}
     </Routes>
   );
 }

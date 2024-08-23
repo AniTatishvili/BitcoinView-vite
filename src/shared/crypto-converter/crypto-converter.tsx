@@ -5,7 +5,7 @@ import React from "react";
 export const CryptoConverter = () => {
   const amount = 1;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [fromCurrency, setFromCurrency] = React.useState("usd");
+  const fromCurrency = "usd";
   const [toCurrency, setToCurrency] = React.useState("bitcoin");
   const [conversionRates, setConversionRates] = React.useState<{ [key: string]: number }>({});
   const [loading, setLoading] = React.useState(true);

@@ -22,21 +22,21 @@ export const LoginForm = () => {
   const mutation = useMutation({
     mutationFn: async (formData: LoginFormValues) => {
       const response = await login(formData);
-      console.log(response, 122);
+      // console.log(response, 122);
       return response;
     },
-    onSuccess: (data) => {
-      console.log(data, 555);
+
+    onSuccess: () => {
+      // console.log(data, 555);
 
       const msg = "Login Successful!";
       showToast("success", msg);
 
-      const { user_id } = data;
-      window.localStorage.setItem("UID", JSON.stringify(user_id));
+      // const { user_id } = data;
+      // window.localStorage.setItem("UID", JSON.stringify(user_id));
       window.localStorage.setItem("LOGGED_IN", JSON.stringify(true));
 
       navigate("/user-dashboard/overview");
-      // window.location.href = "https://bitcoinview.org";
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
