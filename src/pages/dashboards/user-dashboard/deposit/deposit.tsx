@@ -31,11 +31,11 @@ export const Deposit = () => {
         <Flex flexDir={"column"} gap={4}>
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Cards & Payment method</Text>
-            <Flex w={"100%"} justify={"space-between"} align={"center"}>
+            <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} justify={"space-between"} align={"center"} gap={4}>
               <Box w={"50%"} borderRadius={"8px"} overflow={"hidden"}>
                 <Image src={card_img} alt="cards" w={"100%"} h={"100%"} objectFit={"cover"} />
               </Box>
-              <Flex fontSize={"14px"} gap={4}>
+              <Flex flexDir={{ base: "column", lg: "row" }} fontSize={"14px"} gap={4}>
                 <Box bg={"#3C3C3C"} borderRadius={"8px"} p={"5px"}>
                   <Link to="/user-dashboard/transaction-history">Transactions history</Link>
                 </Box>

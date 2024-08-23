@@ -20,7 +20,7 @@ export const ProfileFormFields: React.FC<SignupFieldsProps> = ({ formik }) => {
         Update profile
       </Text>
       <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} gap={4}>
-        <Flex w={{ base: "100%", sm: "360px" }} flexDir={"column"} gap={4}>
+        <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
           <FormikInput name="name" type="text" placeholder="Name" />
           <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} />
           <CountrySelect />
@@ -37,7 +37,7 @@ export const ProfileFormFields: React.FC<SignupFieldsProps> = ({ formik }) => {
           <FormikRegistrationCheckbox>Deposit notifications</FormikRegistrationCheckbox>
           <FormikRegistrationCheckbox>Other notifications</FormikRegistrationCheckbox>
         </Flex>
-        <Flex w={{ base: "100%", sm: "360px" }} flexDir={"column"} gap={4}>
+        <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
           <FormikInput name="surname" type="text" placeholder="Surname" />
           <FormikNumber name="phone_number" placeholder={t("common:USER.AUTH.PHONE")} />
           <FormSelect>

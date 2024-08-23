@@ -57,7 +57,7 @@ button:focus-visible {
   background: #f7931a !important;
 }
 
-.react-tel-input .form-control{
+.react-tel-input .form-control {
   width: 100%;
   height: 40px;
   background-color: #35363D;
@@ -71,22 +71,22 @@ button:focus-visible {
   overflow: hidden;
 }
 
-.side-menu a.active div{
+.side-menu a.active div {
   color: #f7931a;
 }
 
-th{
+th {
   color: #999;
   text-align: start !important;
   padding: .75rem 0 .75rem;
   border: 0 !important;
 }
 
-tr{
+tr {
   border-bottom: 1px solid #999;
 }
 
-tr:last-child{
+tr:last-child {
   border: 0;
 }
 
@@ -95,22 +95,27 @@ td{
   padding: 1rem 0 1rem;
 }
 
-option{
+option {
   background-color: #35363D !important;
 }
 
-.chart{
+.chart {
   width: 100%;
   height: 220px;
 }
 
-.chakra-select__icon-wrapper.css-ulx71t{
+.chakra-select__icon-wrapper.css-ulx71t {
   display: none !important;
 }
 
-.chakra-menu__menuitem.css-18esm8n{
+.chakra-menu__menuitem.css-18esm8n {
   background-color: transparent;
 }
+
+.css-lz86ae[data-status=complete],.css-4t6ey5[data-status=complete] {
+  background: #fff !important;
+}
+
 
 @media (prefers-color-scheme: light) {
   :root {

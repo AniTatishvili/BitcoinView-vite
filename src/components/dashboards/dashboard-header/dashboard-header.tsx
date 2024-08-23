@@ -48,7 +48,7 @@ export const DashboardHeader = () => {
   return (
     <Flex w={"100%"} backgroundColor={"#1F2027"} justify={"space-between"} p={"1rem"}>
       <NavLink to="https://bitcoinview.org">
-        <Image src={logo} alt="logo" w={"160px"} />
+        <Image src={logo} alt="logo" w={"78px"} />
       </NavLink>
       <Menu>
         <MenuButton

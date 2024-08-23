@@ -21,7 +21,15 @@ export const WalletContent = () => {
 
   return (
     <Flex w={"100%"} flexDir={"column"} gap={4}>
-      <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"row"} justify={"space-between"} borderRadius={"8px"} p={"1rem"}>
+      <Flex
+        w={"100%"}
+        h={"fit-content"}
+        backgroundColor={"#1F2027"}
+        flexDir={{ base: "column", lg: "row" }}
+        justify={"space-between"}
+        gap={4}
+        borderRadius={"8px"}
+        p={"1rem"}>
         <Box>
           <Text>Estimated Balance</Text>
           <Box>0.00 USD</Box>

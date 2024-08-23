@@ -9,7 +9,7 @@ export const UserDashboardDetails = () => {
   return (
     <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"column"} borderRadius={"8px"} p={"1rem"}>
       <Flex flexDir={"column"} gap={4}>
-        <Flex w={"100%"} justify={"space-between"} align={"center"}>
+        <Flex w={"100%"} flexDir={{ base: "column", sm: "row" }} justify={"space-between"} align={{ base: "start", sm: "center" }} gap={4}>
           <Flex gap={3}>
             <Avatar
               name="Kola Tioluwani"
@@ -34,7 +34,7 @@ export const UserDashboardDetails = () => {
             Connect wallet
           </Button>
         </Flex>
-        <List display={"Flex"} borderBottom={"1px solid #999"} gap={2} py={"15px"}>
+        <List display={"Flex"} borderBottom={"1px solid #999"} gap={2} py={"15px"} overflowX={{ base: "scroll", md: "hidden" }}>
           <ListItem display={"flex"} alignItems={"center"} gap={2} color={"green"}>
             <FaBtc /> Bitcoin
           </ListItem>

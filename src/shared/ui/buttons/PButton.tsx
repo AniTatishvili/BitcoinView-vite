@@ -8,7 +8,8 @@ interface PButtonProps {
   disabled?: boolean;
   isLoading?: boolean;
   isSubmitting?: boolean;
-  w?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  w?: string | any;
 }
 
 export const PButton = ({ children, onClick, className, type, isLoading, isSubmitting, w }: PButtonProps) => {

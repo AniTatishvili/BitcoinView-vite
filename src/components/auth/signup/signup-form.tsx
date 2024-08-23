@@ -6,7 +6,7 @@ import { SignupFields } from "./signup-fields";
 import { initialValues } from "../../../shared/form/FormikValues";
 import { validationSchema } from "../../../shared/form/yup";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
-import { signup, signupMonday } from "../../../services";
+import { signup } from "../../../services";
 import { useMutation } from "@tanstack/react-query";
 // import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 // import { FormContent } from "../../../shared/form";

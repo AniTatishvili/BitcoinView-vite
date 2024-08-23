@@ -7,10 +7,8 @@ export const CryptoConverter = () => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [fromCurrency, setFromCurrency] = React.useState("usd");
   const [toCurrency, setToCurrency] = React.useState("bitcoin");
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [conversionRates, setConversionRates] = React.useState<any>({});
+  const [conversionRates, setConversionRates] = React.useState<{ [key: string]: number }>({});
   const [loading, setLoading] = React.useState(true);
-
   const [cache, setCache] = React.useState<{ [key: string]: number }>({});
 
   React.useEffect(() => {
@@ -60,8 +58,17 @@ export const CryptoConverter = () => {
     <Flex w={"fit-content"} flexDir={"column"} color={"#fff"}>
       <Text>Convert Balance</Text>
 
-      <Flex w={"200px"} h={"fit-content"} flexDir={"row"} justify={"space-between"} alignItems={"center"} bg={"#35363D"} borderRadius={"8px"} p={1}>
-        <Text w={"50%"} h={"20px"} fontSize={"14px"} borderRight={"1px solid #ccc"} px={2}>
+      <Flex
+        w={"200px"}
+        h={"fit-content"}
+        flexDir={"row"}
+        justify={"space-between"}
+        alignItems={"center"}
+        bg={"#35363D"}
+        borderRadius={"8px"}
+        p={1}
+        minWidth={"200px"}>
+        <Text w={"50%"} h={"20px"} fontSize={"14px"} borderRight={"1px solid #ccc"} px={2} minWidth={"100px"} textAlign={"right"}>
           {getConvertedAmount()}
         </Text>
 
