@@ -3,7 +3,7 @@ import { Flex, Text } from "@chakra-ui/react";
 import { PButton } from "../../../../shared/ui/buttons";
 import { CountrySelect, FormikInput, FormikNumber, FormikRegistrationCheckbox, FormSelect } from "../../../../shared/form";
 
-interface SignupFieldsProps {
+interface ProfileFieldsProps {
   formik: {
     loading: boolean;
     isValid: boolean;
@@ -12,7 +12,7 @@ interface SignupFieldsProps {
   };
 }
 
-export const ProfileFormFields: React.FC<SignupFieldsProps> = ({ formik }) => {
+export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
   const { t } = useTranslation();
   return (
     <Flex flexDir={"column"} gap={4}>

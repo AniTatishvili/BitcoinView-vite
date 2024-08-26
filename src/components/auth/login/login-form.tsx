@@ -26,14 +26,14 @@ export const LoginForm = () => {
       return response;
     },
 
-    onSuccess: () => {
-      // console.log(data, 555);
+    onSuccess: (data) => {
+      console.log(data, 555);
 
       const msg = "Login Successful!";
       showToast("success", msg);
 
       // const { user_id } = data;
-      // window.localStorage.setItem("UID", JSON.stringify(user_id));
+      window.localStorage.setItem("USER_AUTH", JSON.stringify(data.token));
       window.localStorage.setItem("LOGGED_IN", JSON.stringify(true));
 
       navigate("/user-dashboard/overview");

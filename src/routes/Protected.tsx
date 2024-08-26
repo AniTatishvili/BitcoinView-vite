@@ -15,12 +15,12 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
   const { username, role } = useUserSignupStore();
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-
+  console.log(username, 55);
   useEffect(() => {
     // const uid = JSON.parse(window.localStorage.getItem("UID") || '""');
     const logged_in = JSON.parse(window.localStorage.getItem("LOGGED_IN") || '""');
-    const { token } = JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}");
-
+    const token = JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}");
+    console.log(isAuthenticated, 222);
     if (token && logged_in) {
       try {
         const tokenExpiration = jwtDecode<{ exp: number }>(token).exp;
@@ -29,6 +29,7 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
         if (tokenExpiration < dateNow) {
           setIsAuthenticated(false);
         } else {
+          console.log(isAuthenticated, 21121);
           setIsAuthenticated(true);
         }
       } catch (e) {
@@ -40,7 +41,7 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
   }, [username]);
 
   //   if (isAuthenticated === null) return <Loader />;
-
+  console.log(isAuthenticated, 244242442);
   if (isAuthenticated && username) {
     if (role?.some((role) => allowedRoles.includes(role))) {
       return <Outlet />;

@@ -41,3 +41,9 @@ export const updateUserProfileSchema = Yup.object({
   tp_account_groups: Yup.string().required("Select tp account groups"),
   passport_id: Yup.string().required("Enter your passport ID").min(6, "Passport ID must be 6 characters or more"),
 });
+
+export const paymentMethodSchema = Yup.object({
+  card_number: Yup.string().email("Invalid card number").required("Card number is required field"),
+  exp_data: Yup.string().required("Enter data"),
+  cvv: Yup.string().required("Enter card cvv").min(3, "Cvv must be 3 characters").max(3, "Cvv must be 3 characters"),
+});

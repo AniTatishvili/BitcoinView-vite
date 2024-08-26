@@ -8,6 +8,7 @@ import { validationSchema } from "../../../shared/form/yup";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 import { signup } from "../../../services";
 import { useMutation } from "@tanstack/react-query";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 // import { FormProvider, SubmitHandler, useForm } from "react-hook-form";
 // import { FormContent } from "../../../shared/form";
 
@@ -25,6 +26,8 @@ export const SignupForm = () => {
   const navigate = useNavigate();
 
   const showToast = useCustomToast();
+
+  const { updateUserFields } = useUserSignupStore();
 
   // const form = useForm<signupSchema>({
   //   resolver: zodResolver(validationSchema),
@@ -64,6 +67,8 @@ export const SignupForm = () => {
     };
 
     mutation.mutate(newUser);
+
+    updateUserFields(newUser);
   };
 
   return (

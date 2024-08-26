@@ -15,10 +15,12 @@ const formik_values = {
   otpValues: {
     otp: "",
   },
+
   forgotPasswordValues: {
     email: "",
     passport_id: "",
   },
+
   updateUserProfile: {
     name: "",
     surname: "",
@@ -35,5 +37,11 @@ const formik_values = {
     tp_account_groups: "",
     passport_id: "",
   },
+
+  paymentMethodValues: {
+    card_number: "",
+    exp_date: "",
+    cvv: "",
+  },
 };
-export const { initialValues, authorizationValues, otpValues, forgotPasswordValues, updateUserProfile } = formik_values;
+export const { initialValues, authorizationValues, otpValues, forgotPasswordValues, updateUserProfile, paymentMethodValues } = formik_values;

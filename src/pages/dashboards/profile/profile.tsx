@@ -1,5 +1,5 @@
 import { Flex } from "@chakra-ui/react";
-import { ProfileForm } from "../../../../components/dashboards/user-dashboard/profile-form";
+import { ProfileForm } from "../../../components/dashboards/user-dashboard/profile-form";
 
 export const Profile = () => {
   return (

@@ -5,7 +5,7 @@ type UserSignupStoreType = {
   email: string;
   password: string;
   phone_number: string;
-  role: [];
+  role: ["Subscriber"];
   updateUserFields: (fields: Partial<UserSignupStoreType>) => void;
 };
 
@@ -14,7 +14,8 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   email: "",
   password: "",
   phone_number: "",
-  role: [],
+  role: ["Subscriber"],
+
   updateUserFields: (fields: Partial<UserSignupStoreType>) => {
     set((state) => ({ ...state, ...fields }));
   },
