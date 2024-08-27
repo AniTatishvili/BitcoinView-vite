@@ -3,7 +3,7 @@ import { FaBtc } from "react-icons/fa";
 import { LiaEthereum } from "react-icons/lia";
 import { SiPolkadot } from "react-icons/si";
 import { SiTether } from "react-icons/si";
-// import { CryptoConverter } from "../../../shared/crypto-converter";
+import { CryptoConverter } from "../../../shared/crypto-converter";
 
 export const UserDashboardDetails = () => {
   return (
@@ -58,7 +58,7 @@ export const UserDashboardDetails = () => {
               $168,785.32
             </Box>
           </Box>
-          {/* <CryptoConverter /> */}
+          <CryptoConverter />
         </Flex>
       </Flex>
     </Flex>

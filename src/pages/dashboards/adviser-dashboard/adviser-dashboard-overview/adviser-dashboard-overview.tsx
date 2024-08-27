@@ -1,7 +1,7 @@
-import { Flex, Text } from "@chakra-ui/react";
-import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table";
+import { Flex } from "@chakra-ui/react";
+import { AdviserDashboardOverviewContent } from "../../../../components/dashboards/adviser-dashboard";
 
-export const UserList = () => {
+export const AdviserDashboardOverview = () => {
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
@@ -25,10 +25,7 @@ export const UserList = () => {
           },
         }}>
         <Flex w={"100%"} flexDir={"column"} gap={4}>
-          <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
-            <Text as="h2">Latest Users</Text>
-            <PaymentTable />
-          </Flex>
+          <AdviserDashboardOverviewContent />
         </Flex>
       </Flex>
     </Flex>

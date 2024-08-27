@@ -4,8 +4,13 @@ import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table"
 import { TableFilter } from "../../../../shared/ui/table-filter";
 
 import card_img from "../../../../assets/images/cards.png";
+import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 
 export const Deposit = () => {
+  const items = [
+    { url: "/app/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/app/user-dashboard/overview", text: "Deposit", isCurrentPage: true },
+  ];
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
@@ -29,6 +34,7 @@ export const Deposit = () => {
           },
         }}>
         <Flex flexDir={"column"} gap={4}>
+          <BreadCrumb items={items} />
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Cards & Payment method</Text>
             <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} justify={"space-between"} align={"center"} gap={4}>

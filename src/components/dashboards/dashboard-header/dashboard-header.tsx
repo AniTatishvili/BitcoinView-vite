@@ -8,10 +8,12 @@ import { Menu, MenuButton, MenuList, MenuItem, Button, Avatar, Flex, Image } fro
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 import logo from "../../../assets/black-logo.svg";
+import { DashboardMenuList } from "../dashboard-side-menu";
+import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 // import { getUsersData } from "../../../services";
 // import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
-export const DashboardHeader = () => {
+export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -79,26 +81,7 @@ export const DashboardHeader = () => {
           </Flex>
         </MenuButton>
         <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
-          <MenuItem>
-            <NavLink to="/user-dashboard/user-dashboard-home" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-              Home
-            </NavLink>
-          </MenuItem>
-          <MenuItem>
-            <NavLink to="/user-dashboard/messages" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-              Messages
-            </NavLink>
-          </MenuItem>
-          <MenuItem>
-            <NavLink to="/user-dashboard/profile" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-              Profile
-            </NavLink>
-          </MenuItem>
-          <MenuItem>
-            <NavLink to="/user-dashboard/wallet" className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-              Wallet
-            </NavLink>
-          </MenuItem>
+          <DashboardMenuList data={data} />
           <MenuItem onClick={signout}>{t("common:MENU.SIGN_OUT")}</MenuItem>
         </MenuList>
       </Menu>

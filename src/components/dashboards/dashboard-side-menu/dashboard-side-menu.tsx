@@ -1,10 +1,11 @@
 import { Flex, Hide } from "@chakra-ui/react";
 import { useUserDashboardStore } from "../../../store/dashboard/user-dashboard-store";
 
-import { DashboardSideMenuList } from "./dashboard-side-menu-list";
+import { DashboardMenuList } from "../dashboard-menu-list/dashboard-menu-list";
 import { DashboardSideMenuCollapseBtn } from "./dashboard-side-menu-collapse-btn";
+import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 
-export const DashboardSideMenu = () => {
+export const DashboardSideMenu: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { user_dashboard_menu_visibility } = useUserDashboardStore();
 
   return (
@@ -32,7 +33,7 @@ export const DashboardSideMenu = () => {
         //   zIndex: 1,
         // }}
       >
-        <DashboardSideMenuList />
+        <DashboardMenuList data={data} />
 
         <DashboardSideMenuCollapseBtn />
       </Flex>
