@@ -1,4 +1,5 @@
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
+import { Breadcrumb, BreadcrumbItem } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 interface BreadCrumbsItems {
   url: string;
@@ -14,16 +15,9 @@ export const BreadCrumb: React.FC<BreadCrumbsProps> = ({ items }) => {
     <Breadcrumb fontWeight="medium" fontSize="sm">
       {items.map((item, i) => (
         <BreadcrumbItem key={i} isCurrentPage={item.isCurrentPage}>
-          <BreadcrumbLink href={item.url}>{item.text}</BreadcrumbLink>
+          <Link to={item.url}>{item.text}</Link>
         </BreadcrumbItem>
       ))}
-      {/* <BreadcrumbItem>
-        <BreadcrumbLink href="/app/user-dashboard/overview">Home</BreadcrumbLink>
-      </BreadcrumbItem>
-
-      <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink href="#">Current</BreadcrumbLink>
-      </BreadcrumbItem> */}
     </Breadcrumb>
   );
 };

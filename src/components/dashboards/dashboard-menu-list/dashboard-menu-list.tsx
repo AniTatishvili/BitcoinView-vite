@@ -6,7 +6,7 @@ import { useUserDashboardStore } from "../../../store/dashboard/user-dashboard-s
 
 export const DashboardMenuList: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { user_dashboard_menu_visibility } = useUserDashboardStore();
-  console.log(data, 555);
+
   return (
     <Flex flexDir={"column"} className="side-menu">
       {data.map((item, i) => (

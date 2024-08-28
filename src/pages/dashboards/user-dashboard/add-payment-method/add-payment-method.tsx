@@ -2,8 +2,15 @@ import { Flex, Text, Button } from "@chakra-ui/react";
 import { FaCcVisa, FaCcMastercard, FaCcPaypal } from "react-icons/fa";
 import { PaymentMethod } from "../../../../components/dashboards/payment-method";
 import { SavedPaymentMethods } from "../../../../components/dashboards/payment-method";
+import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 
 export const AddPaymentMethod = () => {
+  const items = [
+    { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/deposit", text: "Deposit", isCurrentPage: false },
+    { url: "/user-dashboard/add-payment-method", text: "Add Payment Method", isCurrentPage: true },
+  ];
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
@@ -27,6 +34,7 @@ export const AddPaymentMethod = () => {
           },
         }}>
         <Flex w={"100%"} h={"fit-content"} flexDir={"column"} gap={4}>
+          <BreadCrumb items={items} />
           <Text as="h2" fontSize={"24px"} fontWeight={"600"} pb={"1rem"}>
             Payment Method
           </Text>

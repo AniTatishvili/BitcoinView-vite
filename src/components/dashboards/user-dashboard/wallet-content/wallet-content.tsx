@@ -68,7 +68,7 @@ export const WalletContent = () => {
             <PButton w={"100%"}>Invite Friends</PButton>
           </Flex>
         </Flex>
-        <Flex flexDir={"row"} gap={4} color={"#fff"}>
+        <Flex h={"fit-content"} flexDir={"row"} gap={4} color={"#fff"}>
           <Link to="/user-dashboard/deposit">Deposit</Link>
           <Link to="/user-dashboard/withdraw">Withdraw</Link>
         </Flex>

@@ -1,5 +1,5 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table";
+import { PaymentTable } from "../../../shared/ui/payment-table/payment-table";
 
 export const UserList = () => {
   return (

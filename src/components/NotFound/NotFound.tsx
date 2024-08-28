@@ -9,8 +9,8 @@ import { Flex } from "@chakra-ui/react";
 export default function NotFound() {
   const { t } = useTranslation("common");
   const navigate = useNavigate();
-  const getBack = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
+  const getBack = () => {
+    console.log("back");
     navigate(-1);
   };
 
@@ -21,7 +21,7 @@ export default function NotFound() {
         <Flex>{t("NOTFOUND.HEADING")}</Flex>
         <Flex>{t("NOTFOUND.TEXT")}</Flex>
       </Flex>
-      <PButton onClick={() => getBack}>
+      <PButton onClick={getBack}>
         <FaBackspace />
         {t("BUTTONS.BACK")}
       </PButton>

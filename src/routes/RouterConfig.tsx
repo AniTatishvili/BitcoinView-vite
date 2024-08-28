@@ -26,12 +26,13 @@ import { Deposit } from "../pages/dashboards/user-dashboard/deposit";
 import { Withdraw } from "../pages/dashboards/user-dashboard/withdraw";
 import { TransactionHistory } from "../pages/dashboards/user-dashboard/transaction-history";
 import { AddPaymentMethod } from "../pages/dashboards/user-dashboard/add-payment-method";
-import { UserList } from "../pages/dashboards/adviser-dashboard/user-list";
+import { UserList } from "../pages/dashboards/user-list";
 import NotFoundPage from "../pages/NotFoundPage";
 import { AdviserDashboardOverview } from "../pages/dashboards/adviser-dashboard/adviser-dashboard-overview";
 import { AdminDashboardOverview } from "../pages/dashboards/admin-dashboard/admin-dashboard-overview";
 import { Asset } from "../pages/dashboards/asset";
 import { Chart } from "../pages/dashboards/chart";
+import { PackageSelection } from "../pages/dashboards/package-selection";
 
 export function RouterConfig() {
   return (
@@ -75,6 +76,7 @@ export function RouterConfig() {
           <Route path="withdraw" element={<Withdraw />} />
           <Route path="transaction-history" element={<TransactionHistory />} />
           <Route path="add-payment-method" element={<AddPaymentMethod />} />
+          <Route path="package-selection" element={<PackageSelection />} />
         </Route>
       </Route>
     </Routes>

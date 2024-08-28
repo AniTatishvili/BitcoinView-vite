@@ -8,9 +8,10 @@ import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 
 export const Deposit = () => {
   const items = [
-    { url: "/app/user-dashboard/overview", text: "Home", isCurrentPage: false },
-    { url: "/app/user-dashboard/overview", text: "Deposit", isCurrentPage: true },
+    { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/deposit", text: "Deposit", isCurrentPage: true },
   ];
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex

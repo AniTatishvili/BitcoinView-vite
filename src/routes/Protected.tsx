@@ -15,7 +15,7 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
   const { username, role } = useUserSignupStore();
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-
+  console.log("isAuthenticated", isAuthenticated);
   useEffect(() => {
     // const uid = JSON.parse(window.localStorage.getItem("UID") || '""');
     const logged_in = JSON.parse(window.localStorage.getItem("LOGGED_IN") || '""');

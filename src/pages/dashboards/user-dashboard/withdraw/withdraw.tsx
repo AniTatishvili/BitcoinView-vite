@@ -4,15 +4,22 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table";
 import { TableFilter } from "../../../../shared/ui/table-filter";
 import { DashboardWithdrawSteps } from "../../../../components/dashboards/dashboard-withdraw-steps";
+import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 
 export const Withdraw = () => {
+  const items = [
+    { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/wallet", text: "Wallet", isCurrentPage: false },
+    { url: "/user-dashboard/withdraw", text: "Withdraw", isCurrentPage: true },
+  ];
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
         w={"100%"}
         h={"100%"}
         overflowY={"scroll"}
-        flexDir={{ base: "column", xl: "row" }}
+        flexDir={"column"}
         // flexWrap={"wrap"}
         p={"1rem"}
         gap={"1rem"}
@@ -28,6 +35,7 @@ export const Withdraw = () => {
             borderRadius: "24px",
           },
         }}>
+        <BreadCrumb items={items} />
         <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
           <Text as="h3">Recent Transactions</Text>
           <DashboardWithdrawSteps />
