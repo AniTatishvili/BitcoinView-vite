@@ -32,7 +32,7 @@ import { AdviserDashboardOverview } from "../pages/dashboards/adviser-dashboard/
 import { AdminDashboardOverview } from "../pages/dashboards/admin-dashboard/admin-dashboard-overview";
 import { Asset } from "../pages/dashboards/asset";
 import { Chart } from "../pages/dashboards/chart";
-import { PackageSelection } from "../pages/dashboards/package-selection";
+import { PackageSelection, PackageSelectionSuccess } from "../pages/dashboards/package-selection";
 
 export function RouterConfig() {
   return (
@@ -77,6 +77,7 @@ export function RouterConfig() {
           <Route path="transaction-history" element={<TransactionHistory />} />
           <Route path="add-payment-method" element={<AddPaymentMethod />} />
           <Route path="package-selection" element={<PackageSelection />} />
+          <Route path="package-selection-success" element={<PackageSelectionSuccess />} />
         </Route>
       </Route>
     </Routes>
