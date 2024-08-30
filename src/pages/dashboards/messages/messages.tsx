@@ -1,5 +1,6 @@
 import React from "react";
 import { Flex, Box, Button, VStack } from "@chakra-ui/react";
+import { BreadCrumb } from "../../../shared/ui/bread-crumb";
 
 interface MessagesProps {
   text: string;
@@ -23,13 +24,18 @@ export const Messages = () => {
     setOpenIndex((prevIndex) => (prevIndex === i ? null : i));
   };
 
+  const items = [
+    { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/messages", text: "Messages", isCurrentPage: true },
+  ];
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
         w={"100%"}
         h={"100%"}
         overflowY={"scroll"}
-        flexDir={{ base: "column", xl: "row" }}
+        flexDir={"column"}
         // flexWrap={"wrap"}
         p={"1rem"}
         gap={"1rem"}
@@ -45,6 +51,7 @@ export const Messages = () => {
             borderRadius: "24px",
           },
         }}>
+        <BreadCrumb items={items} />
         <VStack w={"100%"} gap={2}>
           {messagesArr.map((item, i) => {
             return (

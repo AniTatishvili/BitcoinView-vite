@@ -1,105 +1,95 @@
 import React from "react";
-import { Flex, Box, Button, Slider, SliderTrack, SliderFilledTrack, SliderThumb, SliderMark, Text, Stack, Tooltip } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+
+import { Flex, Box, Button, Tooltip, Text, Input } from "@chakra-ui/react";
 import { RiQuestionFill } from "react-icons/ri";
 
-interface SliderMarkPackageProps {
-  step: number;
-  marks: { value: number; label: string }[];
-}
+export const SliderMarkPackage = () => {
+  const navigate = useNavigate();
 
-export const SliderMarkPackage: React.FC<SliderMarkPackageProps> = ({ step, marks }) => {
-  const [value, setValue] = React.useState<number>(50000);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [input, setInput] = React.useState<number | null>(null);
 
-  const handleChange = (val: number | number[]) => {
-    console.log(val, 1432);
-    if (typeof val === "number") {
-      setValue(val);
-    }
+  const PRICE_POINTS = [
+    { value: 0, label: "Trail" },
+    { value: 5000, label: "Voyager" },
+    { value: 10000, label: "Elite" },
+    { value: 20000, label: "Pioneer" },
+    { value: 50000, label: "Quantum" },
+    { value: 80000, label: "Titan" },
+    { value: 100000, label: "Nexus" },
+    { value: 200000, label: "Platunium" },
+    {
+      value: (
+        <Input
+          min={200000}
+          placeholder="----"
+          w={"70px"}
+          h={"24px"}
+          textAlign={"center"}
+          border={0}
+          p={0}
+          onFocus={(e) => (e.target.style.borderColor = "transparent")}
+          onChange={(e) => setInput(Number(e.target.value))}
+        />
+      ),
+      label: "Orbit",
+    },
+  ];
+
+  const handleClick = (index: number) => {
+    setActiveIndex(index);
+    console.log(input);
+    console.log(PRICE_POINTS[index].value);
   };
 
-  // const getMarkPosition = (markValue: number) => {
-  //   const max = 200000;
-  //   const min = 0;
-  //   return ((markValue - min) / (max - min)) * 100;
-  // };
+  const handleMouseClick = () => {
+    navigate("/user-dashboard/package-selection-success");
+  };
 
   return (
-    <Flex w={"100%"} overflowX={{ base: "scroll", xl: "hidden" }}>
-      <Flex w={"700px"} flexDir={"column"} align={"end"} mx={"auto"} mt={"4"}>
-        <Stack w={"100%"} spacing={4}>
-          <Stack w={"100%"} direction="row" justify="space-between">
-            {marks.map((mark, index) => (
-              <Flex key={index} fontSize="sm" color="gray.500" gap={1}>
-                <Text color={"#fff"}>{mark.label}</Text>
-                <Tooltip
-                  label="3-digit code on the back of credit card."
-                  aria-label="A tooltip"
-                  placement="bottom"
-                  bg={"#1C1C1C"}
-                  color={"#fff"}
-                  borderRadius={"8px"}>
-                  <Box>
-                    <RiQuestionFill />
-                  </Box>
-                </Tooltip>
-              </Flex>
-            ))}
-          </Stack>
-
-          <Slider w={"100%"} min={0} max={200000} step={step} value={value} onChange={handleChange}>
-            <SliderTrack bg={"#939090"} h={"7px"}>
-              <SliderFilledTrack bg={"#3AAB41"} />
-              {marks.map((mark, index) => (
-                <SliderMark
-                  key={index}
-                  value={mark.value}
-                  textAlign={"center"}
-                  color={"#fff"}
-                  fontSize={"sm"}
-                  mt={"2"}
-                  mb={"2"}
-                  w={"24px"}
-                  ml={index === 0 ? "-12px" : "-12px"}
-                  transform={"translateX(-50%)"}>
-                  {mark.label}
-                </SliderMark>
-              ))}
-            </SliderTrack>
-            <SliderThumb w={"20px"} h={"20px"} />
-          </Slider>
-
-          <Stack w={"100%"} direction="row" justify="space-between">
-            {marks.map((mark, index) => (
-              <Text fontSize="sm" color="gray.500" key={index}>
-                {mark.value}
-              </Text>
-            ))}
-          </Stack>
-        </Stack>
-        <Button bg={"#3AAB41"} mt={4}>
-          Purchase
-        </Button>
+    <Flex w={"100%"} maxW={"1200px"} flexDir={"column"} align={"flex-end"} gap={2} overflowX={{ base: "scroll", xl: "hidden" }}>
+      <Flex w={"fit-content"} minW={"800px"} justify={"space-between"} align={"center"} pos={"relative"} zIndex={2}>
+        <Flex
+          w={"100%"}
+          h={"7px"}
+          bg={"#939090"}
+          borderRadius={"3.5px"}
+          pos={"absolute"}
+          top={"50%"}
+          left={"0"}
+          transform={"translateY(-50%)"}
+          zIndex={-1}></Flex>
+        {PRICE_POINTS.map((point, i) => (
+          <Flex key={i} flexDir={"column"} align={"center"} gap={4}>
+            <Flex>
+              <Text color={activeIndex === i ? "#EC9393" : "#fff"}>{point.label}</Text>
+              <Tooltip
+                label="3-digit code on the back of credit card."
+                aria-label="A tooltip"
+                placement="bottom"
+                bg={"#1C1C1C"}
+                color={"#fff"}
+                borderRadius={"8px"}>
+                <Box ms={"2px"}>
+                  <RiQuestionFill />
+                </Box>
+              </Tooltip>
+            </Flex>
+            <Flex
+              w={activeIndex === i ? "40px" : "17px"}
+              h={activeIndex === i ? "40px" : "17px"}
+              bg={"#D9D9D9"}
+              borderRadius={"50%"}
+              cursor={"pointer"}
+              onClick={() => handleClick(i)}></Flex>
+            <Text color={activeIndex === i ? "#EC9393" : "#fff"}>{point.value}</Text>
+          </Flex>
+        ))}
       </Flex>
+      <Button bg={"#3AAB41"} mt={4} onClick={handleMouseClick}>
+        Purchase
+      </Button>
     </Flex>
   );
 };
-
-{
-  /* <Box position="relative" w="100%">
-<Slider min={0} max={200000} step={step} value={value} onChange={handleChange} aria-label="slider" position="relative" zIndex={1}>
-  <SliderTrack bg={"#939090"} h={"7px"}>
-    <SliderFilledTrack bg={"#3AAB41"} />
-  </SliderTrack>
-  <SliderThumb w={"20px"} h={"20px"} />
-</Slider>
-
-{marks.map((mark, index) => (
-  <Box key={index} position="absolute" left={`${getMarkPosition(mark.value)}%`} transform="translateX(-50%)" zIndex={2}>
-    <Box w="10px" h="10px" borderRadius="50%" bg="#3AAB41" border="2px solid #fff" />
-    <Text fontSize="sm" color="#fff" textAlign="center">
-      {mark.label}
-    </Text>
-  </Box>
-))}
-</Box> */
-}

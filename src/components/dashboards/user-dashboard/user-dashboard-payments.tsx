@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
@@ -26,7 +26,7 @@ export const UserDashboardPayments = () => {
       <Flex flexDir={"column"} gap={4}>
         <Flex gap={4}>
           <Flex bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"}>
-            Silver
+            <Link to="/user-dashboard/package-selection">Voyager</Link>
           </Flex>
           <Flex alignItems={"center"} bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"} gap={2}>
             Account{" "}

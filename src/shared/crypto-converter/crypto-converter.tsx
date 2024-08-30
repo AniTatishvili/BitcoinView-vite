@@ -56,7 +56,7 @@ export const CryptoConverter = () => {
 
   return (
     <Flex w={"fit-content"} flexDir={"column"} color={"#fff"}>
-      <Text>Convert Balance</Text>
+      <Text mb={"5px"}>Convert Balance</Text>
 
       <Flex
         w={"200px"}

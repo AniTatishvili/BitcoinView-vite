@@ -1,7 +1,13 @@
 import { Flex } from "@chakra-ui/react";
 import { PackageSelectionContent } from "../../../components/dashboards/package-selection-content";
+import { BreadCrumb } from "../../../shared/ui/bread-crumb";
 
 export const PackageSelection = () => {
+  const items = [
+    { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/package-selection", text: "Package Selection Success", isCurrentPage: true },
+  ];
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
@@ -25,6 +31,7 @@ export const PackageSelection = () => {
           },
         }}>
         <Flex flexDir={"column"} gap={4}>
+          <BreadCrumb items={items} />
           <PackageSelectionContent />
         </Flex>
       </Flex>

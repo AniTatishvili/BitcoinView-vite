@@ -35,7 +35,7 @@ export const CurrentPackage = () => {
         </List>
         <Flex justify={"space-between"}>
           <Button bg={"#3AAB41"}>Claims</Button>
-          <Button bg={"#EC9393"}>Cancel</Button>
+          <Button bg={"#f7931a"}>Cancel</Button>
         </Flex>
       </Flex>
     </Box>

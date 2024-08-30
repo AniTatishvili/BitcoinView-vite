@@ -30,10 +30,16 @@ export const WalletContent = () => {
         gap={4}
         borderRadius={"8px"}
         p={"1rem"}>
-        <Box>
-          <Text>Estimated Balance</Text>
-          <Box>0.00 USD</Box>
-        </Box>
+        <Flex flexDir={"column"} gap={8}>
+          <Box>
+            <Text>Estimated Balance</Text>
+            <Box>0.00 USD</Box>
+          </Box>
+          <Box>
+            <Text>Current Balance</Text>
+            <Box color={"#6bd98f"}>$0.00 USD</Box>
+          </Box>
+        </Flex>
         <Flex flexDir={"column"} gap={4}>
           <Flex gap={4}>
             <Flex bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"}>

@@ -12,6 +12,7 @@ export const PercentageDoughnut = () => {
         data: [10, 15],
         backgroundColor: ["#373737", "#729E70"],
         borderColor: "transparent",
+        cutout: 20,
         hoverOffset: 2,
       },
     ],
@@ -24,8 +25,9 @@ export const PercentageDoughnut = () => {
         options={{
           responsive: true,
           layout: {
-            padding: 4,
+            padding: 2,
           },
+
           plugins: {
             legend: {
               display: true,

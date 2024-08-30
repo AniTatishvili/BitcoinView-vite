@@ -2,15 +2,21 @@ import { NavLink } from "react-router-dom";
 
 import { Flex, Image, Text } from "@chakra-ui/react";
 import image from "../../../assets/images/trophy-winner-cup.png";
+import { BreadCrumb } from "../../../shared/ui/bread-crumb";
 
 export const PackageSelectionSuccess = () => {
+  const items = [
+    { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/package-selection-success", text: "Package Selection Success", isCurrentPage: true },
+  ];
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
         w={"100%"}
         h={"100%"}
         overflowY={"scroll"}
-        flexDir={{ base: "column", xl: "row" }}
+        flexDir={"column"}
         // flexWrap={"wrap"}
         p={"1rem"}
         gap={"1rem"}
@@ -26,6 +32,7 @@ export const PackageSelectionSuccess = () => {
             borderRadius: "24px",
           },
         }}>
+        <BreadCrumb items={items} />
         <Flex w={"100%"} flexDir={"column"} justify={"center"} alignItems={"center"}>
           <Text as="h4" fontSize={"40px"} fontWeight={"600"} lineHeight={1}>
             Voyager

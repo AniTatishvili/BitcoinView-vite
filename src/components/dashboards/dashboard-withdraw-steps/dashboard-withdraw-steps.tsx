@@ -18,9 +18,18 @@ import { RiCloseCircleFill } from "react-icons/ri";
 import { TbClockHour4Filled } from "react-icons/tb";
 import { TbCircleCheckFilled } from "react-icons/tb";
 
+import { PButton } from "../../../shared/ui/buttons/PButton";
+
 export const DashboardWithdrawSteps = () => {
   const steps = [
-    { title: "Request", description: <Input type="text" placeholder="Enter Amount" bg={"#35363D"} color={"#fff"} borderRadius={"8px"} border={0} /> },
+    {
+      title: "Request",
+      description: (
+        <Flex gap={4}>
+          <Input type="text" placeholder="Enter Amount" bg={"#35363D"} color={"#fff"} borderRadius={"8px"} border={0} /> <PButton>Submit</PButton>
+        </Flex>
+      ),
+    },
     {
       title: "Check",
       description: (

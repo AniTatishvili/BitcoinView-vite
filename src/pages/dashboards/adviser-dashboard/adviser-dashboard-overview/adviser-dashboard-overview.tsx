@@ -1,7 +1,10 @@
 import { Flex } from "@chakra-ui/react";
 import { AdviserDashboardOverviewContent } from "../../../../components/dashboards/adviser-dashboard";
+import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 
 export const AdviserDashboardOverview = () => {
+  const items = [{ url: "/adviser-dashboard/adviser-dashboard-overview", text: "Home", isCurrentPage: true }];
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
@@ -25,6 +28,7 @@ export const AdviserDashboardOverview = () => {
           },
         }}>
         <Flex w={"100%"} flexDir={"column"} gap={4}>
+          <BreadCrumb items={items} />
           <AdviserDashboardOverviewContent />
         </Flex>
       </Flex>

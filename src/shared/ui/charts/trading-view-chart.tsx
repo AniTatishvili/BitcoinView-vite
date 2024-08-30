@@ -21,7 +21,6 @@ export const TradingViewChart: React.FC = () => {
     });
 
     document.querySelector(".tradingview-widget-container__widget")?.appendChild(script);
-    console.log(document.querySelector(".tradingview-widget-container__widget"), 88);
     return () => {
       const existingScript = document.querySelector(`script[src="${script.src}"]`);
       if (existingScript) {

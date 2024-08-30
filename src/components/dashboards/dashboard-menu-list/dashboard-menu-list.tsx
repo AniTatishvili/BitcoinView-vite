@@ -11,7 +11,7 @@ export const DashboardMenuList: React.FC<DashboardSideMenuProps> = ({ data }) =>
     <Flex flexDir={"column"} className="side-menu">
       {data.map((item, i) => (
         <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-          <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3}>
+          <Flex h={"44px"} color={"#fff"} align={"center"} gap={4}>
             <Flex fontSize={"18px"}>
               <Icon as={item.icon} />
             </Flex>

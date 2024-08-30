@@ -8,7 +8,6 @@ import { Menu, MenuButton, MenuList, MenuItem, Button, Avatar, Flex, Image } fro
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 import logo from "../../../assets/black-logo.svg";
-import { DashboardMenuList } from "../dashboard-side-menu";
 import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 // import { getUsersData } from "../../../services";
 // import { useUserSignupStore } from "../../../store/dashboard/user-auth";
@@ -81,7 +80,13 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
           </Flex>
         </MenuButton>
         <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
-          <DashboardMenuList data={data} />
+          {data.map((item, i) => (
+            <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
+              <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3} _hover={{ color: "#f7931a" }}>
+                {item.name}
+              </Flex>
+            </NavLink>
+          ))}
           <MenuItem onClick={signout}>{t("common:MENU.SIGN_OUT")}</MenuItem>
         </MenuList>
       </Menu>
