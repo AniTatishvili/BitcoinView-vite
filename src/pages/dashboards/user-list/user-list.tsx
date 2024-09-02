@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { PaymentTable } from "../../../shared/ui/payment-table/payment-table";
 import { BreadCrumb } from "../../../shared/ui/bread-crumb";
+import { UserListContent } from "../../../components/dashboards/user-list-content";
 
 export const UserList = () => {
   const items = [
@@ -32,9 +32,9 @@ export const UserList = () => {
         }}>
         <Flex w={"100%"} flexDir={"column"} gap={4}>
           <BreadCrumb items={items} />
-          <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
+          <Flex w={"100%"} h={"fit-content"} flexDir={"column"} gap={4}>
             <Text as="h2">Latest Users</Text>
-            <PaymentTable />
+            <UserListContent />
           </Flex>
         </Flex>
       </Flex>

@@ -8,7 +8,7 @@ export const SliderMarkPackage = () => {
 
   const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
   const [input, setInput] = React.useState<number | null>(null);
-  const [showInput] = React.useState<boolean>(true); // Input is always visible
+  const [showInput] = React.useState<boolean>(true);
 
   const PRICE_POINTS = [
     { value: 0, label: "Trail" },
@@ -19,13 +19,12 @@ export const SliderMarkPackage = () => {
     { value: 80000, label: "Titan" },
     { value: 100000, label: "Nexus" },
     { value: 200000, label: "Platinum" },
-    { value: "custom", label: "Orbit" }, // Placeholder for custom input
+    { value: "custom", label: "Orbit" },
   ];
 
   const handleClick = (index: number) => {
     setActiveIndex(index);
 
-    // If custom input is selected, handle it accordingly
     if (PRICE_POINTS[index].value === "custom") {
       console.log(input);
     } else {
@@ -38,9 +37,9 @@ export const SliderMarkPackage = () => {
   };
 
   return (
-    <Flex w={"100%"} flexDir={"column"} align={"flex-end"} gap={2}>
+    <Flex w={"100%"} flexDir={"column"} align={"flex-end"}>
       <Flex w={"100%"} overflowX={"auto"}>
-        <Flex w={"fit-content"} minW={`{base:"750px", 2xl:"800px"}`} justify={"space-between"} align={"center"} pos={"relative"} zIndex={2}>
+        <Flex w={`{base:"750px", 2xl:"800px"}`} h={"120px"} justify={"space-between"} align={"center"} pos={"relative"} zIndex={2}>
           <Flex
             w={"100%"}
             h={"7px"}
@@ -52,7 +51,7 @@ export const SliderMarkPackage = () => {
             transform={"translateY(-50%)"}
             zIndex={-1}></Flex>
           {PRICE_POINTS.map((point, i) => (
-            <Flex key={i} flexDir={"column"} align={"center"} gap={4}>
+            <Flex key={i} w={"80px"} flexDir={"column"} align={"center"} gap={4} fontSize={"14px"}>
               <Flex>
                 <Text color={activeIndex === i ? "#EC9393" : "#fff"}>{point.label}</Text>
                 <Tooltip
@@ -76,17 +75,20 @@ export const SliderMarkPackage = () => {
                 onClick={() => handleClick(i)}></Flex>
               {point.value === "custom" && showInput ? (
                 <Input
-                  min={200000}
-                  placeholder="----"
+                  type="number"
                   w={"70px"}
                   h={"24px"}
+                  color={"#EC9393"}
+                  fontSize={"14px"}
                   textAlign={"center"}
                   border={0}
                   p={0}
-                  onFocus={(e) => (e.target.style.borderColor = "transparent")}
+                  min={200000}
+                  placeholder="----"
+                  _focus={{ boxShadow: "none" }}
                   onChange={(e) => {
                     setInput(Number(e.target.value));
-                    setActiveIndex(i); // Make input active on change
+                    setActiveIndex(i);
                   }}
                 />
               ) : (

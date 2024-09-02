@@ -4,39 +4,43 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-import { Menu, MenuButton, MenuList, MenuItem, Button, Avatar, Flex, Image } from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 
 import logo from "../../../assets/black-logo.svg";
 import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
+import { UserAvatar } from "../../../shared/user-avatar";
 // import { getUsersData } from "../../../services";
 // import { useUserSignupStore } from "../../../store/dashboard/user-auth";
+// import { useQuery } from "@tanstack/react-query";
 
 export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const full_name = "Aleko Malxazishvili";
+  const username = "ako123";
   // const { updateUserFields } = useUserSignupStore();
 
   // const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
-  // const uid = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("UID") || "null") : null;
+  // // const uid = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("UID") || "null") : null;
   // const logged_in = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("LOGGED_IN") || "null") : null;
 
-  // const isUserLoggedIn = !!logged_in;
+  // const isUserLoggedIn = !!logged_in && auth;
 
-  // const { data } = useQuery({
+  // const { data1 } = useQuery({
   //   queryKey: ["getUsersData"],
   //   queryFn: async () => {
   //     const res = await getUsersData();
   //     console.log(res);
-  //     updateUserFields(res);
+  //     // updateUserFields(res);
   //     return res;
   //   },
   //   enabled: isUserLoggedIn,
   //   refetchOnWindowFocus: false,
   //   staleTime: Infinity,
   // });
-
+  // console.log(data1, 88);
   const signout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("LOGGED_IN");
@@ -58,26 +62,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
           _hover={{ backround: "transparent" }}
           _focus={{ backround: "transparent" }}
           _active={{ backround: "transparent" }}>
-          <Flex gap={3}>
-            <Avatar
-              name="Kola Tioluwani"
-              src="https://bit.ly/tioluwani-kolawole"
-              w={"40px"}
-              h={"40px"}
-              backgroundColor={"#79797D"}
-              color={"#141316"}
-              borderRadius={"50%"}
-            />
-
-            <Flex flexDir={"column"} lineHeight={1} gap={1}>
-              <Flex color={"#fff"} fontSize={"16px"}>
-                Kola Tioluwani
-              </Flex>
-              <Flex color={"#ccc"} fontSize={"14px"}>
-                kola
-              </Flex>
-            </Flex>
-          </Flex>
+          <UserAvatar full_name={full_name} username={username} />
         </MenuButton>
         <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
           {data.map((item, i) => (
