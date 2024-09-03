@@ -5,20 +5,29 @@ import { PiGridFourFill } from "react-icons/pi";
 import { useUserListFilterStore } from "../../../store/dashboard/user-list-flter-store";
 import { PackageFilter } from "../../../shared/package-filter";
 
-export const UserListFilter = () => {
+interface UserListFilterProps {
+  onSearch: (value: string) => void;
+  onSelectChange: (value: string) => void;
+}
+
+export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSelectChange }) => {
   const { save_user_filer_id } = useUserListFilterStore();
-  const [isActive, setIsActive] = React.useState<number | 1>(1);
+  const [isActive, setIsActive] = React.useState<number>(1);
 
   const handleClick = (indx: number) => {
-    console.log(11);
     setIsActive(indx);
     save_user_filer_id(indx);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onSearch(e.target.value);
+    console.log(e.target.value);
+  };
+
   return (
     <Flex alignItems={"center"} gap={4}>
-      <Input type="text" placeholder="Search..." w={"100%"} maxW={"380px"} />
-      <PackageFilter />
+      <Input type="text" placeholder="Search..." w={"100%"} maxW={"380px"} onChange={handleSearchChange} />
+      <PackageFilter onChange={onSelectChange} />
       <List display={"flex"} gap={2} fontSize={"28px"}>
         <ListItem color={isActive === 1 ? "#f7931a" : "#fff"} cursor={"pointer"} onClick={() => handleClick(1)}>
           <PiGridFourFill />

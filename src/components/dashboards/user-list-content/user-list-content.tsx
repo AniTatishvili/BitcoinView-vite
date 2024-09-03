@@ -1,3 +1,4 @@
+import React from "react";
 import { Flex, Box } from "@chakra-ui/react";
 import { useUserListFilterStore } from "../../../store/dashboard/user-list-flter-store";
 import { UserListContentItem } from "./user-list-content-item";
@@ -6,6 +7,8 @@ import { UserListItemLists } from "./user-list-item-lists";
 
 export const UserListContent = () => {
   const { user_list_filter_id } = useUserListFilterStore();
+  const [searchTerm, setSearchTerm] = React.useState("");
+  const [selectedPackage, setSelectedPackage] = React.useState("");
 
   const data = [
     {
@@ -17,7 +20,7 @@ export const UserListContent = () => {
       last_update: "12/05/2024",
     },
     {
-      current_package: "Active",
+      current_package: "Deactive",
       payment_package: "Voyager",
       start_time: "12/05/2024",
       expire_time: "12/05/2024",
@@ -41,7 +44,7 @@ export const UserListContent = () => {
       last_update: "12/05/2024",
     },
     {
-      current_package: "Active",
+      current_package: "Process",
       payment_package: "Nexus",
       start_time: "12/05/2024",
       expire_time: "12/05/2024",
@@ -50,11 +53,15 @@ export const UserListContent = () => {
     },
   ];
 
+  const filteredData = data.filter((item) => {
+    return item.current_package.toLowerCase().includes(searchTerm.toLowerCase()) && (selectedPackage === "" || item.payment_package === selectedPackage);
+  });
+
   return (
     <Flex flexDir={"column"} gap={4}>
-      <UserListFilter />
+      <UserListFilter onSearch={setSearchTerm} onSelectChange={setSelectedPackage} />
       <Flex w={"100%"} flexDir={{ base: "column", lg: "row" }} flexWrap={"wrap"} gap={4}>
-        {data.map((item, i) => (
+        {filteredData.map((item, i) => (
           <Box
             key={i}
             w={{ base: "100%", lg: user_list_filter_id === 1 ? "45%" : "100%", xl: user_list_filter_id === 1 ? "30%" : "100%" }}
