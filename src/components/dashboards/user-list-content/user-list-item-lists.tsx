@@ -7,6 +7,8 @@ import { UserAvatar } from "../../../shared/user-avatar";
 import { PercentageDoughnut } from "../../../shared/ui/charts";
 
 interface UserListContentItemProps {
+  full_name: string;
+  username: string;
   current_package: string;
   payment_package: string;
   start_time: string;
@@ -16,6 +18,8 @@ interface UserListContentItemProps {
 }
 
 export const UserListItemLists: React.FC<UserListContentItemProps> = ({
+  full_name,
+  username,
   current_package,
   payment_package,
   start_time,
@@ -23,26 +27,39 @@ export const UserListItemLists: React.FC<UserListContentItemProps> = ({
   monthly_profit,
   last_update,
 }) => {
-  const full_name = "Maka Areshidze";
-  const username = "Maka78";
-
   return (
-    <Flex w={"100%"} overflowX={"scroll"}>
+    <Flex
+      w={"100%"}
+      overflowX={"scroll"}
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "4px",
+          height: "4px",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "#f7931a",
+          borderRadius: "24px",
+        },
+      }}>
       <Flex w={"fit-content"} gap={4}>
         <UserAvatar full_name={full_name} username={username} />
-
-        <Flex justify={"space-between"} gap={10}>
+        <Flex justify={"space-between"} gap={4}>
           <Flex w={"125px"} justify={"space-between"} gap={"8px"}>
             <Text>{payment_package}</Text>
-            <Button h={"30px"} bg={"#0E4534"} color={"#218B3D"} p={"4px"} cursor={"revert"}>
+            <Button h={"30px"} bg={"#0E4534"} color={"#218B3D"} fontSize={"12px"} p={"4px"} cursor={"revert"}>
               {current_package}
             </Button>
           </Flex>
           <PercentageDoughnut />
         </Flex>
         <Flex gap={4}>
-          <Text fontWeight={"600"}>Package: Voyager</Text>
-          <List display={"flex"}>
+          <Text fontSize={"14px"} fontWeight={"600"}>
+            Package: Voyager
+          </Text>
+          <List display={"flex"} fontSize={"14px"} gap={4}>
             <ListItem display={"flex"} flexDir={"row"} whiteSpace={"nowrap"}>
               <ListIcon as={FaCircle} color="#44B96B" />
               <Text>Start Time: {start_time}</Text>
@@ -59,11 +76,11 @@ export const UserListItemLists: React.FC<UserListContentItemProps> = ({
               <Text>Last Update: {last_update}</Text>
             </ListItem>
           </List>
-          <Flex justify={"flex-end"} gap={4}>
-            <Button bg={"#3AAB41"}>
+          <Flex justify={"flex-end"} gap={2}>
+            <Button bg={"#3AAB41"} p={2}>
               <MdNotificationsNone />
             </Button>
-            <Button bg={"#f7931a"}>
+            <Button bg={"#f7931a"} p={2}>
               <FiMessageSquare />
             </Button>
           </Flex>

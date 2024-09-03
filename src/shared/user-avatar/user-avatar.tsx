@@ -1,4 +1,4 @@
-import { Avatar, Flex } from "@chakra-ui/react";
+import { Avatar, Box, Flex } from "@chakra-ui/react";
 
 interface UserAvatarProps {
   full_name: string;
@@ -6,7 +6,6 @@ interface UserAvatarProps {
 }
 
 export const UserAvatar: React.FC<UserAvatarProps> = ({ full_name, username }) => {
-  console.log(full_name);
   return (
     <Flex gap={3}>
       <Avatar
@@ -19,10 +18,10 @@ export const UserAvatar: React.FC<UserAvatarProps> = ({ full_name, username }) =
         borderRadius={"50%"}
       />
 
-      <Flex w={"130px"} flexDir={"column"} lineHeight={1} gap={1}>
-        <Flex color={"#fff"} fontSize={"16px"}>
+      <Flex flexDir={"column"} lineHeight={1} gap={1}>
+        <Box w={"120px"} display={"inline-block"} color={"#fff"} fontSize={"16px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
           {full_name}
-        </Flex>
+        </Box>
         <Flex color={"#ccc"} fontSize={"14px"}>
           {username}
         </Flex>

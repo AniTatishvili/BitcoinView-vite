@@ -8,6 +8,7 @@ import { PackageFilter } from "../../../shared/package-filter";
 interface UserListFilterProps {
   onSearch: (value: string) => void;
   onSelectChange: (value: string) => void;
+  isSearched: boolean;
 }
 
 export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSelectChange }) => {
@@ -21,12 +22,11 @@ export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSele
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
-    <Flex alignItems={"center"} gap={4}>
-      <Input type="text" placeholder="Search..." w={"100%"} maxW={"380px"} onChange={handleSearchChange} />
+    <Flex flexDir={{ base: "column", lg: "row" }} alignItems={{ base: "start", lg: "center" }} gap={4}>
+      <Input type="text" placeholder="Search..." w={"100%"} maxW={{ base: "100%", lg: "380px" }} onChange={handleSearchChange} />
       <PackageFilter onChange={onSelectChange} />
       <List display={"flex"} gap={2} fontSize={"28px"}>
         <ListItem color={isActive === 1 ? "#f7931a" : "#fff"} cursor={"pointer"} onClick={() => handleClick(1)}>

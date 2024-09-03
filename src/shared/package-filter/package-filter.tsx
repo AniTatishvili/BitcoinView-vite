@@ -7,10 +7,12 @@ interface PackageFilterProps {
 export const PackageFilter: React.FC<PackageFilterProps> = ({ onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(e.target.value);
+    console.log(e.target.value, 5555);
   };
 
   return (
-    <Select w={"155px"} onChange={handleChange}>
+    <Select w={{ base: "100%", lg: "155px" }} onChange={handleChange} defaultValue={"All"}>
+      <option value="All">Packages</option>
       <option value="Trali">Trali</option>
       <option value="Voyager">Voyager</option>
       <option value="Elite">Elite</option>
