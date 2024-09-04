@@ -7,7 +7,6 @@ interface PackageFilterProps {
 export const PackageFilter: React.FC<PackageFilterProps> = ({ onChange }) => {
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     onChange(e.target.value);
-    console.log(e.target.value, 5555);
   };
 
   return (

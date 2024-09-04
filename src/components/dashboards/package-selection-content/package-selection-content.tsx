@@ -1,11 +1,20 @@
-import { Box, Flex, List, ListItem, Text } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import { SliderMarkPackage } from "../../../shared/ui/slider-mark-package";
 import { CurrentPackage } from "../../../shared/current-package";
 import { VideoPlayer } from "../../../shared/videos";
 import videoSource from "../../../assets/videos/sign_up_video_webm.webm";
-import { NavLink } from "react-router-dom";
+
+import { FAQ } from "../../../shared/FAQ";
 
 export const PackageSelectionContent = () => {
+  const linksArr = [
+    { link: "", text: "Deposit hasn’t arrive?" },
+    { link: "", text: "Where is more information about packages?" },
+    { link: "", text: "Whats is the next step after Funding?" },
+    { link: "", text: "Why my package is not approve yet?" },
+    { link: "", text: "How can I pay by my Credit Visa/ Master Card?" },
+  ];
+
   return (
     <Flex w={"100%"} flexDir={"column"} gap={4}>
       <Flex w={"100%"} flexDir={{ base: "column", xl: "row" }} gap={4}>
@@ -24,23 +33,7 @@ export const PackageSelectionContent = () => {
           </Box>
           <Text>How to Deposit by Crypto Step-by-step Guide</Text>
         </Flex>
-        <List display={"flex"} flexDir={"column"} gap={1}>
-          <ListItem>
-            <NavLink to="/">Deposit hasn’t arrive?</NavLink>
-          </ListItem>
-          <ListItem>
-            <NavLink to="/">Where is more information about packages?</NavLink>
-          </ListItem>
-          <ListItem>
-            <NavLink to="/">Whats is the next step after Funding?</NavLink>
-          </ListItem>
-          <ListItem>
-            <NavLink to="/">Why my package is not approve yet?</NavLink>
-          </ListItem>
-          <ListItem>
-            <NavLink to="/">How can I pay by my Credit Visa/ Master Card?</NavLink>
-          </ListItem>
-        </List>
+        <FAQ linksArr={linksArr} />
       </Flex>
     </Flex>
   );

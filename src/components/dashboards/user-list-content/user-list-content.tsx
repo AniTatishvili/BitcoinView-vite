@@ -9,7 +9,7 @@ export const UserListContent = () => {
   const { user_list_filter_id } = useUserListFilterStore();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedPackage, setSelectedPackage] = React.useState("");
-
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const data = [
     {
       full_name: "Maka Areshidze",
@@ -74,21 +74,16 @@ export const UserListContent = () => {
     return searchMatch && packageMatch;
   });
 
-  // console.log(selectedPackage, 88);
-  // React.useEffect(() => {
-  //   if (searchTerm !== "") {
-  //     console.log(111, searchTerm);
-  //     setSelectedPackage("");
-  //   }
-  //   if (selectedPackage !== "") {
-  //     setIssearched(true);
-  //   }
-  //   console.log(selectedPackage, "selectedPackage");
-  // }, [isSearched, selectedPackage, data]);
+  React.useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+    setSearchTerm("");
+  }, [selectedPackage]);
 
   return (
     <Flex flexDir={"column"} gap={4}>
-      <UserListFilter onSearch={setSearchTerm} onSelectChange={setSelectedPackage} />
+      <UserListFilter onSearch={setSearchTerm} onSelectChange={setSelectedPackage} inputRef={inputRef} />
       <Flex w={"100%"} flexDir={{ base: "column", lg: "row" }} flexWrap={"wrap"} gap={4}>
         {filteredData.length > 0 ? (
           filteredData.map((item, i) => (

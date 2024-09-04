@@ -53,7 +53,7 @@ export const SliderMarkPackage = () => {
           {PRICE_POINTS.map((point, i) => (
             <Flex key={i} w={"80px"} flexDir={"column"} align={"center"} gap={4} fontSize={"14px"}>
               <Flex>
-                <Text color={activeIndex === i ? "#EC9393" : "#fff"}>{point.label}</Text>
+                <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.label}</Text>
                 <Tooltip
                   label="3-digit code on the back of credit card."
                   aria-label="A tooltip"
@@ -78,7 +78,7 @@ export const SliderMarkPackage = () => {
                   type="number"
                   w={"70px"}
                   h={"24px"}
-                  color={"#EC9393"}
+                  color={"#f7931a"}
                   fontSize={"14px"}
                   textAlign={"center"}
                   border={0}
@@ -92,7 +92,7 @@ export const SliderMarkPackage = () => {
                   }}
                 />
               ) : (
-                <Text color={activeIndex === i ? "#EC9393" : "#fff"}>{point.value}</Text>
+                <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.value}</Text>
               )}
             </Flex>
           ))}

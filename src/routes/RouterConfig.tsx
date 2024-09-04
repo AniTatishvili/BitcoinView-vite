@@ -33,6 +33,7 @@ import { AdminDashboardOverview } from "../pages/dashboards/admin-dashboard/admi
 import { Asset } from "../pages/dashboards/asset";
 import { Chart } from "../pages/dashboards/chart";
 import { PackageSelection, PackageSelectionSuccess } from "../pages/dashboards/package-selection";
+import { UserMonthlyProfile } from "../pages/dashboards/user-monthly-profile";
 
 export function RouterConfig() {
   return (
@@ -52,6 +53,7 @@ export function RouterConfig() {
         <Route path="asset" element={<Asset />} />
         <Route path="chart" element={<Chart />} />
         <Route path="user-list" element={<UserList />} />
+        <Route path="user-monthly-profile" element={<UserMonthlyProfile />} />
       </Route>
       {/* </Route> */}
 
