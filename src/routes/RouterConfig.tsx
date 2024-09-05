@@ -34,6 +34,7 @@ import { Asset } from "../pages/dashboards/asset";
 import { Chart } from "../pages/dashboards/chart";
 import { PackageSelection, PackageSelectionSuccess } from "../pages/dashboards/package-selection";
 import { UserMonthlyProfile } from "../pages/dashboards/user-monthly-profile";
+import { UserRequests } from "../pages/dashboards/user-requests";
 
 export function RouterConfig() {
   return (
@@ -54,6 +55,7 @@ export function RouterConfig() {
         <Route path="chart" element={<Chart />} />
         <Route path="user-list" element={<UserList />} />
         <Route path="user-monthly-profile" element={<UserMonthlyProfile />} />
+        <Route path="user-requests" element={<UserRequests />} />
       </Route>
       {/* </Route> */}
 
