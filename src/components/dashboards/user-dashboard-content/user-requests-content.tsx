@@ -1,60 +1,74 @@
 import React from "react";
-import { useReactTable, getCoreRowModel, getPaginationRowModel, getSortedRowModel, flexRender } from "@tanstack/react-table";
-import { Box, Button, Flex, Select, Table, Tbody, Td, Th, Thead, Tr, Checkbox } from "@chakra-ui/react";
+import {
+  useReactTable,
+  getCoreRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  ColumnDef,
+  ColumnFiltersState,
+  flexRender,
+  getFilteredRowModel,
+  Column,
+} from "@tanstack/react-table";
+import { Box, Button, Flex, Select, Table, Tbody, Td, Th, Thead, Tr, Checkbox, Text, Input } from "@chakra-ui/react";
 
 export const UserRequestsContent = () => {
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
   });
 
-  const ApproveCheckbox = ({ check }: any) => {
-    <Checkbox colorScheme="red" defaultChecked>
-      check
-    </Checkbox>;
-  };
-
-  const columns = React.useMemo(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const columns = React.useMemo<ColumnDef<any, any>[]>(
     () => [
       {
         id: "userName",
         accessorKey: "userName",
         header: "User Name",
+        meta: { filterVariant: "text" },
       },
       {
         id: "id",
-        header: "ID",
         accessorKey: "id",
+        header: "ID",
+        meta: { filterVariant: "number" },
       },
       {
         id: "package",
-        header: "Package",
         accessorKey: "package",
+        header: "Package",
+        meta: { filterVariant: "text" },
       },
       {
         id: "amount",
-        header: "Amount $",
         accessorKey: "amount",
+        header: "Amount $",
+        meta: { filterVariant: "number" },
       },
       {
         id: "requestDate",
-        header: "Req/Date",
         accessorKey: "requestDate",
+        header: "Req/Date",
+        meta: { filterVariant: "date" },
       },
       {
         id: "request",
-        header: "Request",
         accessorKey: "request",
+        header: "Request",
+        meta: { filterVariant: "text" },
       },
       {
         id: "approve",
-        header: "Approve",
         accessorKey: "approve",
+        header: "Approve",
+        meta: { filterVariant: "select" },
       },
       {
         id: "reject",
-        header: "Reject",
         accessorKey: "reject",
+        header: "Reject",
+        meta: { filterVariant: "select" },
       },
     ],
     []
@@ -65,63 +79,63 @@ export const UserRequestsContent = () => {
       {
         id: 1,
         userName: "USer1",
-        package: "package",
+        package: "Voyager",
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
-        approve: ApproveCheckbox(true),
-        reject: "reject",
+        approve: true,
+        reject: true,
       },
       {
         id: 2,
         userName: "USer1",
-        package: "package",
-        amount: 1200,
+        package: "Trail",
+        amount: 200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Trail",
         approve: false,
-        reject: "reject",
+        reject: true,
       },
       {
         id: 3,
         userName: "USer1",
-        package: "package",
-        amount: 1200,
+        package: "Trail",
+        amount: 15600,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Trail",
         approve: false,
-        reject: "reject",
+        reject: true,
       },
       {
         id: 4,
         userName: "USer1",
-        package: "package",
-        amount: 1200,
+        package: "Trail",
+        amount: 5200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Trail",
         approve: false,
-        reject: "reject",
+        reject: true,
       },
 
       {
         id: 5,
         userName: "USer1",
-        package: "package",
-        amount: 1200,
+        package: "Elite",
+        amount: 89200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Elite",
         approve: true,
-        reject: "reject",
+        reject: true,
       },
       {
         id: 6,
         userName: "USer1",
-        package: "package",
+        package: "Titan",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Titan",
         approve: true,
-        reject: "reject",
+        reject: true,
       },
       {
         id: 7,
@@ -131,7 +145,7 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: true,
       },
       {
         id: 8,
@@ -141,17 +155,17 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: true,
       },
       {
         id: 9,
         userName: "USer1",
         package: "package",
-        amount: 1200,
+        amount: 8200,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: true,
       },
       {
         id: 10,
@@ -161,87 +175,87 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 11,
         userName: "USer1",
-        package: "package",
+        package: "Orbit",
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 12,
         userName: "USer1",
         package: "package",
         amount: 1200,
-        requestDate: "10/2/2024",
+        requestDate: "1/12/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 13,
         userName: "USer1",
-        package: "package",
-        amount: 1200,
+        package: "Orbit",
+        amount: 99900,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 14,
         userName: "USer1",
-        package: "package",
+        package: "Orbit",
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 15,
         userName: "USer1",
-        package: "package",
+        package: "Orbit",
         amount: 1200,
-        requestDate: "10/2/2024",
+        requestDate: "20/8/2022",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 16,
-        userName: "USer1",
-        package: "package",
+        userName: "USer18",
+        package: "Orbit",
         amount: 1200,
-        requestDate: "10/2/2024",
+        requestDate: "10/10/2023",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 17,
-        userName: "USer1",
+        userName: "Alika",
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 18,
-        userName: "USer1",
+        userName: "Tako",
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 19,
@@ -251,7 +265,7 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 20,
@@ -261,17 +275,17 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 21,
-        userName: "USer1",
+        userName: "Makho",
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 22,
@@ -281,7 +295,7 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 23,
@@ -291,17 +305,17 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 24,
-        userName: "USer1",
+        userName: "Nitsa",
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 25,
@@ -309,9 +323,9 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Delete",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 26,
@@ -319,9 +333,9 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Add Amount",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 27,
@@ -331,7 +345,7 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 28,
@@ -341,7 +355,7 @@ export const UserRequestsContent = () => {
         requestDate: "10/2/2024",
         request: "request",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 29,
@@ -349,9 +363,9 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Cancel",
         approve: true,
-        reject: "reject",
+        reject: false,
       },
       {
         id: 30,
@@ -359,9 +373,9 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Withdraw Amount",
         approve: true,
-        reject: "reject",
+        reject: true,
       },
     ],
     []
@@ -370,24 +384,17 @@ export const UserRequestsContent = () => {
   const tableInstance = useReactTable({
     columns,
     data,
-    state: { pagination },
+    state: { columnFilters, pagination },
     onPaginationChange: setPagination,
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
 
   const { getHeaderGroups, getRowModel, getCanNextPage, getCanPreviousPage, getPageCount, nextPage, previousPage, setPageSize } = tableInstance;
-  console.log("tableInstance", tableInstance);
-  // {
-  //   data.map((item) => (
-  //     <div key={item.id}>
-  //       <span>
-  //         Approve: <ApproveCheckbox checked={item.approve} />
-  //       </span>
-  //     </div>
-  //   ));
-  // }
+
   return (
     <Box backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"}>
       <Table>
@@ -395,7 +402,10 @@ export const UserRequestsContent = () => {
           {getHeaderGroups().map((headerGroup) => (
             <Tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <Th key={header.id}>{flexRender(header.column.columnDef.header, header.getContext())}</Th>
+                <Th key={header.id}>
+                  {flexRender(header.column.columnDef.header, header.getContext())}
+                  {header.column.getCanFilter() ? <Filter column={header.column} /> : null}
+                </Th>
               ))}
             </Tr>
           ))}
@@ -404,26 +414,34 @@ export const UserRequestsContent = () => {
           {getRowModel().rows.map((row) => (
             <Tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <Td key={cell.id}>{flexRender(cell.column.columnDef.cell, cell.getContext())}</Td>
+                <Td key={cell.id}>
+                  {cell.column.id === "approve" ? (
+                    <Checkbox colorScheme="green" defaultChecked={cell.getValue()} />
+                  ) : cell.column.id === "reject" ? (
+                    <Checkbox colorScheme="red" defaultChecked={cell.getValue()} />
+                  ) : (
+                    flexRender(cell.column.columnDef.cell, cell.getContext())
+                  )}
+                </Td>
               ))}
             </Tr>
           ))}
         </Tbody>
       </Table>
-      <Flex className="pagination-controls" mt={4}>
+      <Flex className="pagination-controls" justify={"flex-end"} align={"center"} gap={4} mt={4}>
         <Button onClick={() => previousPage()} disabled={!getCanPreviousPage()}>
           Previous
         </Button>
         <Button onClick={() => nextPage()} disabled={!getCanNextPage()}>
           Next
         </Button>
-        <span>
-          Page{" "}
-          <strong>
+        <Flex as="span" gap={4}>
+          <Text>Page</Text>
+          <Text>
             {pagination.pageIndex + 1} of {getPageCount()}
-          </strong>
-        </span>
-        <Select value={pagination.pageSize} onChange={(e) => setPageSize(Number(e.target.value))}>
+          </Text>
+        </Flex>
+        <Select value={pagination.pageSize} onChange={(e) => setPageSize(Number(e.target.value))} w={"fit-content"}>
           {[10, 20, 30, 40].map((size) => (
             <option key={size} value={size}>
               Show {size}
@@ -433,4 +451,26 @@ export const UserRequestsContent = () => {
       </Flex>
     </Box>
   );
+};
+
+const Filter = ({ column }: { column: Column<any, unknown> }) => {
+  const columnFilterValue = column.getFilterValue();
+  const { filterVariant } = column.columnDef.meta ?? {};
+
+  switch (filterVariant) {
+    case "number":
+      return <Input type="number" value={columnFilterValue ?? ""} onChange={(e) => column.setFilterValue(e.target.value)} placeholder="Amount" mt={2} />;
+    case "select":
+      return (
+        <Select value={columnFilterValue?.toString() ?? ""} onChange={(e) => column.setFilterValue(e.target.value)}>
+          <option value="">All</option>
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </Select>
+      );
+    case "date":
+      return <Input placeholder="Select Date and Time" size="md" type="date" mt={2} />;
+    default:
+      return <Input value={columnFilterValue ?? ""} onChange={(e) => column.setFilterValue(e.target.value)} placeholder="Search..." mt={2} />;
+  }
 };

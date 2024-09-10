@@ -43,7 +43,7 @@ export const PackageSelectionSuccess = () => {
           </Text>
           <Text py={"10px"}>Your Payment was successful</Text>
           <Flex bg={"#292929"} fontSize={"14px"} borderRadius={"5px"} px={"10px"} py={"4px"}>
-            <NavLink to="/user-dshboard/overview">Go to Dashboard</NavLink>
+            <NavLink to="/user-dashboard/overview">Go to Dashboard</NavLink>
           </Flex>
         </Flex>
       </Flex>
