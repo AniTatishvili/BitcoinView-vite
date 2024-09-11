@@ -2,8 +2,13 @@ import { Button, Flex, List, ListItem, Text } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { MdArrowForwardIos } from "react-icons/md";
 
+interface LinkItem {
+  link: string;
+  text: string;
+}
+
 interface FAQProps {
-  linksArr: object;
+  linksArr: LinkItem[];
 }
 
 export const FAQ: React.FC<FAQProps> = ({ linksArr }) => {

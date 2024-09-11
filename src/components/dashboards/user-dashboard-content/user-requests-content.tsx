@@ -12,13 +12,27 @@ import {
 } from "@tanstack/react-table";
 import { Box, Button, Flex, Select, Table, Tbody, Td, Th, Thead, Tr, Checkbox, Text, Input } from "@chakra-ui/react";
 
+const filterFn = (row: { getValue: (arg0: any) => any }, columnId: any, filterValue: string | number | null) => {
+  if (filterValue == null || filterValue === "") return true; // Show all rows if no filter
+
+  const cellValue = row.getValue(columnId);
+  if (typeof cellValue === "number") {
+    return cellValue === filterValue;
+  }
+
+  return false;
+};
+
+// Main component
 export const UserRequestsContent = () => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
   });
+  // Example of a custom filter function
 
+  // Define table columns
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columns = React.useMemo<ColumnDef<any, any>[]>(
     () => [
@@ -56,7 +70,7 @@ export const UserRequestsContent = () => {
         id: "request",
         accessorKey: "request",
         header: "Request",
-        meta: { filterVariant: "text" },
+        meta: { filterVariant: "request-select" }, // request-select filter
       },
       {
         id: "approve",
@@ -81,8 +95,8 @@ export const UserRequestsContent = () => {
         userName: "USer1",
         package: "Voyager",
         amount: 1200,
-        requestDate: "10/2/2024",
-        request: "request",
+        requestDate: "2/10/2024",
+        request: "Withdraw amount",
         approve: true,
         reject: true,
       },
@@ -91,8 +105,8 @@ export const UserRequestsContent = () => {
         userName: "USer1",
         package: "Trail",
         amount: 200,
-        requestDate: "10/2/2024",
-        request: "Trail",
+        requestDate: "12/2/2024",
+        request: "Withdraw amount",
         approve: false,
         reject: true,
       },
@@ -102,7 +116,7 @@ export const UserRequestsContent = () => {
         package: "Trail",
         amount: 15600,
         requestDate: "10/2/2024",
-        request: "Trail",
+        request: "Withdraw amount",
         approve: false,
         reject: true,
       },
@@ -112,7 +126,7 @@ export const UserRequestsContent = () => {
         package: "Trail",
         amount: 5200,
         requestDate: "10/2/2024",
-        request: "Trail",
+        request: "Withdraw amount",
         approve: false,
         reject: true,
       },
@@ -123,7 +137,7 @@ export const UserRequestsContent = () => {
         package: "Elite",
         amount: 89200,
         requestDate: "10/2/2024",
-        request: "Elite",
+        request: "Withdraw amount",
         approve: true,
         reject: true,
       },
@@ -133,7 +147,7 @@ export const UserRequestsContent = () => {
         package: "Titan",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "Titan",
+        request: "Withdraw amount",
         approve: true,
         reject: true,
       },
@@ -143,7 +157,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Withdraw amount",
         approve: true,
         reject: true,
       },
@@ -153,7 +167,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Withdraw amount",
         approve: true,
         reject: true,
       },
@@ -163,7 +177,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 8200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Withdraw amount",
         approve: true,
         reject: true,
       },
@@ -173,7 +187,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Withdraw amount",
         approve: true,
         reject: false,
       },
@@ -183,7 +197,7 @@ export const UserRequestsContent = () => {
         package: "Orbit",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Add amount",
         approve: true,
         reject: false,
       },
@@ -193,7 +207,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "1/12/2024",
-        request: "request",
+        request: "Add amount",
         approve: true,
         reject: false,
       },
@@ -203,7 +217,7 @@ export const UserRequestsContent = () => {
         package: "Orbit",
         amount: 99900,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Add amount",
         approve: true,
         reject: false,
       },
@@ -213,7 +227,7 @@ export const UserRequestsContent = () => {
         package: "Orbit",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -223,7 +237,7 @@ export const UserRequestsContent = () => {
         package: "Orbit",
         amount: 1200,
         requestDate: "20/8/2022",
-        request: "request",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -233,7 +247,7 @@ export const UserRequestsContent = () => {
         package: "Orbit",
         amount: 1200,
         requestDate: "10/10/2023",
-        request: "request",
+        request: "Withdraw amount",
         approve: true,
         reject: false,
       },
@@ -243,7 +257,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Withdraw amount",
         approve: true,
         reject: false,
       },
@@ -253,7 +267,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -262,8 +276,8 @@ export const UserRequestsContent = () => {
         userName: "USer1",
         package: "package",
         amount: 1200,
-        requestDate: "10/2/2024",
-        request: "request",
+        requestDate: "10/12/2024",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -273,7 +287,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -283,7 +297,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -293,7 +307,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -303,7 +317,7 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
+        request: "Cancelation package",
         approve: true,
         reject: false,
       },
@@ -314,7 +328,7 @@ export const UserRequestsContent = () => {
         amount: 1200,
         requestDate: "10/2/2024",
         request: "request",
-        approve: true,
+        approve: "Not Approve",
         reject: false,
       },
       {
@@ -323,8 +337,8 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "Delete",
-        approve: true,
+        request: "Withdraw amount",
+        approve: "Not Approve",
         reject: false,
       },
       {
@@ -333,8 +347,8 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "Add Amount",
-        approve: true,
+        request: "Withdraw amount",
+        approve: "Not Approve",
         reject: false,
       },
       {
@@ -343,8 +357,8 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
-        approve: true,
+        request: "Cancelation package",
+        approve: "Approve",
         reject: false,
       },
       {
@@ -353,8 +367,8 @@ export const UserRequestsContent = () => {
         package: "package",
         amount: 1200,
         requestDate: "10/2/2024",
-        request: "request",
-        approve: true,
+        request: "Add amount",
+        approve: "Approve",
         reject: false,
       },
       {
@@ -364,7 +378,7 @@ export const UserRequestsContent = () => {
         amount: 1200,
         requestDate: "10/2/2024",
         request: "Cancel",
-        approve: true,
+        approve: "Approve",
         reject: false,
       },
       {
@@ -372,25 +386,30 @@ export const UserRequestsContent = () => {
         userName: "USer1",
         package: "package",
         amount: 1200,
-        requestDate: "10/2/2024",
+        requestDate: "10/02/2024",
         request: "Withdraw Amount",
-        approve: true,
+        approve: "Approve",
         reject: true,
       },
     ],
     []
   );
 
+  // Initialize table instance
   const tableInstance = useReactTable({
     columns,
     data,
     state: { columnFilters, pagination },
     onPaginationChange: setPagination,
     onColumnFiltersChange: setColumnFilters,
+    enableMultiRowSelection: true,
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    filterFns: {
+      number: filterFn,
+    },
   });
 
   const { getHeaderGroups, getRowModel, getCanNextPage, getCanPreviousPage, getPageCount, nextPage, previousPage, setPageSize } = tableInstance;
@@ -416,9 +435,9 @@ export const UserRequestsContent = () => {
               {row.getVisibleCells().map((cell) => (
                 <Td key={cell.id}>
                   {cell.column.id === "approve" ? (
-                    <Checkbox colorScheme="green" defaultChecked={cell.getValue()} />
+                    <Checkbox colorScheme="green" isChecked={cell.getValue() as boolean} />
                   ) : cell.column.id === "reject" ? (
-                    <Checkbox colorScheme="red" defaultChecked={cell.getValue()} />
+                    <Checkbox colorScheme="red" isChecked={cell.getValue() as boolean} />
                   ) : (
                     flexRender(cell.column.columnDef.cell, cell.getContext())
                   )}
@@ -453,24 +472,89 @@ export const UserRequestsContent = () => {
   );
 };
 
+// Filter component
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Filter = ({ column }: { column: Column<any, unknown> }) => {
-  const columnFilterValue = column.getFilterValue();
-  const { filterVariant } = column.columnDef.meta ?? {};
+  const [inputValue, setInputValue] = React.useState<string | boolean>("");
+  const [inputNumberValue, setInputNumberValue] = React.useState<number | undefined>(undefined);
 
-  switch (filterVariant) {
-    case "number":
-      return <Input type="number" value={columnFilterValue ?? ""} onChange={(e) => column.setFilterValue(e.target.value)} placeholder="Amount" mt={2} />;
-    case "select":
-      return (
-        <Select value={columnFilterValue?.toString() ?? ""} onChange={(e) => column.setFilterValue(e.target.value)}>
+  const { filterVariant } = column.columnDef.meta as { filterVariant: string };
+
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    const value = e.target.value;
+    console.log(value);
+    console.log(`Handling change for ${filterVariant}: ${value}`);
+    if (filterVariant === "number") {
+      const numValue = parseInt(value, 10);
+      if (!isNaN(numValue)) {
+        console.log(numValue);
+        console.log(`Parsed number value: ${numValue}`);
+        column.setFilterValue(numValue);
+      }
+    } else if (filterVariant === "date") {
+      const date = new Date(value);
+      const formattedDate = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
+      column.setFilterValue(formattedDate);
+    } else if (filterVariant === "select" || filterVariant === "request-select") {
+      if (filterVariant === "select") {
+        const val = value === "true" ? true : value === "false" ? false : value;
+        column.setFilterValue(val);
+      } else {
+        column.setFilterValue(value);
+      }
+    } else if (filterVariant === "boolean") {
+      column.setFilterValue(value === "true" ? true : value === "false" ? false : undefined);
+    } else {
+      column.setFilterValue(value);
+    }
+    setInputValue(value);
+
+    setInputNumberValue(Number(value));
+  };
+
+  React.useEffect(() => {
+    if (
+      filterVariant === "select" ||
+      filterVariant === "request-select" ||
+      filterVariant === "number" ||
+      filterVariant === "date" ||
+      filterVariant === "boolean"
+    ) {
+      const filterValue = column.getFilterValue();
+
+      if (filterVariant === "boolean") {
+        setInputValue(filterValue !== undefined ? String(filterValue) : "");
+      } else {
+        setInputValue(String(filterValue) ?? "");
+      }
+    }
+  }, [column, filterVariant]);
+
+  return (
+    <>
+      {filterVariant === "request-select" ? (
+        <Select value={inputValue?.toString()} onChange={handleChange} mt={2}>
+          <option value="">All</option>
+          <option value="withdraw amount">Withdraw Amount</option>
+          <option value="cancelation package">Cancellation Package</option>
+          <option value="add amount">Add Amount</option>
+        </Select>
+      ) : filterVariant === "select" ? (
+        <Select value={inputValue?.toString()} onChange={handleChange} mt={2}>
           <option value="">All</option>
           <option value="true">True</option>
           <option value="false">False</option>
         </Select>
-      );
-    case "date":
-      return <Input placeholder="Select Date and Time" size="md" type="date" mt={2} />;
-    default:
-      return <Input value={columnFilterValue ?? ""} onChange={(e) => column.setFilterValue(e.target.value)} placeholder="Search..." mt={2} />;
-  }
+      ) : filterVariant === "number" ? (
+        // <Input type="number" value={(inputValue as number) ?? ''} onChange={handleChange} placeholder="Amount" mt={2} />
+        <Input type="number" value={inputValue} onChange={handleChange} placeholder="Amount" mt={2} />
+      ) : filterVariant === "date" ? (
+        <Input type="date" value={inputValue?.toString()} onChange={handleChange} placeholder="Select Date" mt={2} />
+      ) : (
+        <Input value={inputValue?.toString()} onChange={handleChange} placeholder="Search..." mt={2} />
+      )}
+    </>
+  );
 };
+
+export default Filter;
