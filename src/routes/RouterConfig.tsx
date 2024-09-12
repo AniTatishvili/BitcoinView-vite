@@ -54,7 +54,6 @@ export function RouterConfig() {
         <Route path="asset" element={<Asset />} />
         <Route path="chart" element={<Chart />} />
         <Route path="user-list" element={<UserList />} />
-        <Route path="user-monthly-profile" element={<UserMonthlyProfile />} />
         <Route path="user-requests" element={<UserRequests />} />
       </Route>
       {/* </Route> */}
@@ -80,6 +79,7 @@ export function RouterConfig() {
           <Route path="withdraw" element={<Withdraw />} />
           <Route path="transaction-history" element={<TransactionHistory />} />
           <Route path="add-payment-method" element={<AddPaymentMethod />} />
+          <Route path="user-monthly-profile" element={<UserMonthlyProfile />} />
           <Route path="package-selection" element={<PackageSelection />} />
           <Route path="package-selection-success" element={<PackageSelectionSuccess />} />
         </Route>

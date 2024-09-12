@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { BreadCrumb } from "../../../shared/ui/bread-crumb/bread-crumb";
-import { UserRequestsContent } from "../../../components/dashboards/user-dashboard-content";
+import { UserRequestsContent } from "../../../components/dashboards/user-request-content";
 
 export const UserRequests = () => {
   const items = [
