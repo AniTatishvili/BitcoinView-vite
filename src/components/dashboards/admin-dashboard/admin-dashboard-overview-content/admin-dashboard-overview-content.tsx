@@ -1,4 +1,4 @@
-import { Flex, Text, Image } from "@chakra-ui/react";
+import { Flex, Text, Image, Box } from "@chakra-ui/react";
 import img from "../../../../assets/images/cards.png";
 
 export const AdminDashboardOverviewContent = () => {
@@ -23,16 +23,26 @@ export const AdminDashboardOverviewContent = () => {
           <Text pos={"absolute"} top={4} left={4}>
             Date
           </Text>
-          <Flex flexDir={"column"} justify={"center"} align={"center"} gap={4}>
-            <Flex fontSize={"22px"} fontWeight={500}>
-              257500 USD/USDT
+          <Flex flexDir={{ base: "column", lg: "row" }} justify={{ base: "center", lg: "space-around" }} gap={4}>
+            <Flex flexDir={"column"} justify={"center"} align={"center"} gap={4}>
+              <Flex fontSize={"22px"} fontWeight={500} mt={{ base: 4, lg: 0 }}>
+                257500 USD/USDT
+              </Flex>
+              <Flex>Balance</Flex>
             </Flex>
-            <Flex>Balance</Flex>
+            <Box>
+              <Box color={"green"} textAlign={"center"}>
+                Up $3000
+              </Box>
+              <Box color={"red"} textAlign={"center"}>
+                Loss $240
+              </Box>
+            </Box>
           </Flex>
         </Flex>
         <Flex
           w={{ base: "100%", md: "40%" }}
-          h={"fit-content"}
+          h={"100%"}
           flexDir={"column"}
           justify={"center"}
           align={"center"}
