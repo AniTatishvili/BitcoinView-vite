@@ -1,7 +1,8 @@
 import React from "react";
-import { Box, Button, Flex, Text, Tab, TabList, TabPanel, TabPanels, Tabs, Icon } from "@chakra-ui/react";
+import { Box, Button, Flex, Text, Textarea, Tab, TabList, TabPanel, TabPanels, Tabs, Icon } from "@chakra-ui/react";
 import { MdDelete } from "react-icons/md";
 import { FaCalendar } from "react-icons/fa";
+import { PButton } from "../../../shared/ui/buttons";
 
 interface MessagesProps {
   text: string;
@@ -158,7 +159,11 @@ export const DashboardMessagesContent = () => {
           {messagesArr.map((item, i) => {
             return (
               <TabPanel key={i} color={"#fff"} fontSize={"14px"} p={0}>
-                {item.text}
+                <Flex flexDir={"column"} gap={4}>
+                  <Text>{item.text}</Text>
+                  <Textarea w={"100%"} h={"100%"} minH={"100px"} placeholder="Send response" />
+                  <PButton>Send</PButton>
+                </Flex>
               </TabPanel>
             );
           })}

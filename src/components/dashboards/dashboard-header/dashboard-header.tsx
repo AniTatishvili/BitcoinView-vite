@@ -1,12 +1,13 @@
 // import { useQuery } from "@tanstack/react-query";
 
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate, NavLink, Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image, Text } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { IoNotifications } from "react-icons/io5";
+import { IoNotifications, IoClose } from "react-icons/io5";
+import { IoIosTime } from "react-icons/io";
 
 import logo from "../../../assets/black-logo.svg";
 import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
@@ -14,6 +15,15 @@ import { UserAvatar } from "../../../shared/user-avatar";
 
 // import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
+const messagesArr = [
+  { name: "Lorem ipsum1", message: "Message 1 lorem ipsum dolor amet", data: "10/12/2024", link: "/" },
+  { name: "Lorem ipsum2", message: "Message 2", data: "20/05/2024", link: "/" },
+  { name: "Lorem ipsum3", message: "Message 3", data: "18/12/2024", link: "/" },
+  { name: "Lorem ipsum4", message: "Message 4", data: "10/06/2024", link: "/" },
+  { name: "Lorem ipsum5", message: "Message 5", data: "15/12/2024", link: "/" },
+  { name: "Lorem ipsum6", message: "Message 6", data: "10/12/2024", link: "/" },
+  { name: "Lorem ipsum7", message: "Message 7", data: "10/09/2024", link: "/" },
+];
 export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -21,6 +31,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const full_name = "Aleko Malxazishvili";
   const username = "ako123";
   // const { updateUserFields } = useUserSignupStore();
+  const notificationsCount = 2;
 
   const signout = () => {
     localStorage.removeItem("token");
@@ -49,7 +60,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
               pos={"absolute"}
               top={"-10px"}
               right={0}>
-              2
+              {notificationsCount}
             </Flex>
             <MenuButton
               w={"fit-content"}
@@ -62,16 +73,50 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
               <IoNotifications />
             </MenuButton>
           </Box>
-          <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
-            {data.map((item, i) => (
+          <MenuList w={"300px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} py={"16px"} zIndex={10}>
+            <Text as="h4" w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"} gap={2} pb={4}>
+              <Flex>Notifications</Flex>
+              <Flex w={"15px"} h={"15px"} bg={"green"} justify={"center"} align={"center"} fontSize={"10px"} borderRadius={"50%"}>
+                {notificationsCount}
+              </Flex>
+            </Text>
+            {messagesArr.map((item, i) => (
               <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-                <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3} _hover={{ color: "#f7931a" }}>
-                  {item.name}
+                <Flex
+                  w={"100%"}
+                  h={"44px"}
+                  bg={"#79797D"}
+                  color={"#fff"}
+                  justify={"space-between"}
+                  align={"center"}
+                  borderBottom={"1px solid #1F2027"}
+                  gap={4}
+                  p={3}
+                  _hover={{ color: "#f7931a" }}>
+                  <Box fontSize={"14px"}>
+                    <Text as={"h5"}>{item.name}</Text>
+                    <Text fontSize={"12px"}>{item.message}</Text>
+                  </Box>
+                  <Flex align={"center"}>
+                    <Flex flexDir={"column"} align={"flex-end"} gap={1}>
+                      <Box w={"10px"} h={"10px"} bg={"#009951"} borderRadius={"50%"}></Box>
+                      <Flex align={"center"} justify={"flex-end"} gap={1} fontSize={"10px"}>
+                        <IoIosTime />
+                        <Text>2min</Text>
+                      </Flex>
+                    </Flex>
+                    <Box>
+                      <IoClose />
+                    </Box>
+                  </Flex>
                 </Flex>
               </NavLink>
             ))}
             <MenuItem>
-              See all messages <Button>Clear all</Button>
+              <Flex w={"100%"} justify={"space-between"} align={"center"}>
+                <Link to="/">See all messages</Link>
+                <Button>Clear all</Button>
+              </Flex>
             </MenuItem>
           </MenuList>
         </Menu>
