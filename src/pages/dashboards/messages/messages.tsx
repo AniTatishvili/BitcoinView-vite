@@ -1,7 +1,7 @@
 import { Flex, Text } from "@chakra-ui/react";
 import { BreadCrumb } from "../../../shared/ui/bread-crumb";
 
-import { DashboardMessagesContent } from "../../../components/dashboards/dashbaord-messages-content";
+import { DashboardMessagesContent } from "../../../components/dashboards/dashboard-messages-content";
 
 export const Messages = () => {
   const items = [

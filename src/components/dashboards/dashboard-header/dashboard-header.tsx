@@ -93,21 +93,25 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                   gap={4}
                   p={3}
                   _hover={{ color: "#f7931a" }}>
-                  <Box fontSize={"14px"}>
-                    <Text as={"h5"}>{item.name}</Text>
-                    <Text fontSize={"12px"}>{item.message}</Text>
-                  </Box>
-                  <Flex align={"center"}>
+                  <Flex gap={2}>
+                    <Box w={"10px"} h={"10px"} bg={"#009951"} borderRadius={"50%"}></Box>
+                    <Box fontSize={"14px"}>
+                      <Text as={"h5"} lineHeight={1}>
+                        {item.name}
+                      </Text>
+                      <Text fontSize={"12px"}>{item.message}</Text>
+                    </Box>
+                  </Flex>
+                  <Flex flexDir={"column"} align={"flex-end"}>
+                    <Box>
+                      <IoClose />
+                    </Box>
                     <Flex flexDir={"column"} align={"flex-end"} gap={1}>
-                      <Box w={"10px"} h={"10px"} bg={"#009951"} borderRadius={"50%"}></Box>
-                      <Flex align={"center"} justify={"flex-end"} gap={1} fontSize={"10px"}>
+                      <Flex align={"center"} justify={"flex-end"} gap={1} color={"#141316"} fontSize={"10px"}>
                         <IoIosTime />
                         <Text>2min</Text>
                       </Flex>
                     </Flex>
-                    <Box>
-                      <IoClose />
-                    </Box>
                   </Flex>
                 </Flex>
               </NavLink>
