@@ -401,9 +401,15 @@ export const UserRequestsContent = () => {
                   {row.getVisibleCells().map((cell) => (
                     <Td key={cell.id} px={2}>
                       {cell.column.id === "approve" ? (
-                        <Checkbox colorScheme="green" isChecked={cell.getValue() as boolean} />
+                        <Checkbox colorScheme="green" defaultChecked={cell.getValue() as boolean} />
                       ) : cell.column.id === "reject" ? (
-                        <Checkbox colorScheme="red" isChecked={cell.getValue() as boolean} />
+                        <Checkbox
+                          colorScheme="red"
+                          defaultChecked={cell.getValue() as boolean}
+                          onChange={(e) => {
+                            console.log(e.target.checked, 99);
+                          }}
+                        />
                       ) : (
                         flexRender(cell.column.columnDef.cell, cell.getContext())
                       )}

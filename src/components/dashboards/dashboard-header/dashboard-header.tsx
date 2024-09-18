@@ -12,6 +12,7 @@ import { IoIosTime } from "react-icons/io";
 import logo from "../../../assets/black-logo.svg";
 import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 import { UserAvatar } from "../../../shared/user-avatar";
+import React from "react";
 
 // import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
@@ -28,6 +29,8 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const [noteHoveredIndx, setNoteHoveredIndx] = React.useState<number>();
+
   const full_name = "Aleko Malxazishvili";
   const username = "ako123";
   // const { updateUserFields } = useUserSignupStore();
@@ -41,12 +44,24 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     console.log("signout");
   };
 
+  const handleMouseOver = (index: number) => {
+    setNoteHoveredIndx(index);
+  };
+
+  const handleMouseOut = (index: number) => {
+    setNoteHoveredIndx(index);
+  };
+
+  const handleClick = () => {
+    console.log(22);
+  };
+
   return (
-    <Flex w={"100%"} backgroundColor={"#1F2027"} justify={"space-between"} align={"center"} p={"1rem"}>
+    <Flex w={"100%"} backgroundColor={"#1F2027"} justify={"space-between"} align={"center"} p={"1rem"} gap={2}>
       <NavLink to="https://bitcoinview.org">
         <Image src={logo} alt="logo" w={"78px"} />
       </NavLink>
-      <Flex align={"center"} gap={4}>
+      <Flex align={"center"} gap={{ base: 2, sm: 4 }}>
         <Menu>
           <Box w={"24px"} pos={"relative"}>
             <Flex
@@ -92,18 +107,20 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                   borderBottom={"1px solid #1F2027"}
                   gap={4}
                   p={3}
-                  _hover={{ color: "#f7931a" }}>
+                  _hover={{ color: "#f7931a" }}
+                  onMouseOutCapture={() => handleMouseOver(i)}
+                  onMouseOut={() => handleMouseOut(i)}>
                   <Flex gap={2}>
                     <Box w={"10px"} h={"10px"} bg={"#009951"} borderRadius={"50%"}></Box>
                     <Box fontSize={"14px"}>
-                      <Text as={"h5"} lineHeight={1}>
+                      <Text as={"h5"} fontWeight={600} lineHeight={1}>
                         {item.name}
                       </Text>
                       <Text fontSize={"12px"}>{item.message}</Text>
                     </Box>
                   </Flex>
                   <Flex flexDir={"column"} align={"flex-end"}>
-                    <Box>
+                    <Box color={"red"} opacity={noteHoveredIndx === i ? 1 : 0} onClick={handleClick}>
                       <IoClose />
                     </Box>
                     <Flex flexDir={"column"} align={"flex-end"} gap={1}>
@@ -118,7 +135,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             ))}
             <MenuItem>
               <Flex w={"100%"} justify={"space-between"} align={"center"}>
-                <Link to="/">See all messages</Link>
+                <Link to="/user-dashboard/messages">See all messages</Link>
                 <Button>Clear all</Button>
               </Flex>
             </MenuItem>

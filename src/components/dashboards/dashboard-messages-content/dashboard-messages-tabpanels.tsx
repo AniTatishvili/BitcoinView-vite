@@ -83,7 +83,7 @@ const messagesArr: MessagesProps[] = [
 
 export const DashboardMessagesTabPanels = () => {
   return (
-    <TabPanels w={{ base: "100%", lg: "60%" }} h={"100%"} bg={"#35363d"} borderRadius={"8px"} p={4}>
+    <TabPanels w={{ base: "100%", lg: "60%" }} h={"100%"} bg={"#35363d"} borderRadius={"8px"} p={4} display={{ base: "none", lg: "block" }}>
       {messagesArr.map((item, i) => {
         return (
           <TabPanel key={i} color={"#fff"} fontSize={"14px"} p={0}>

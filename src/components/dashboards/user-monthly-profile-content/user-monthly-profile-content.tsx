@@ -54,16 +54,17 @@ export const UserMonthlyProfileContent = () => {
                 },
               }}>
               <Flex
-                minW={{ base: "470px", md: "100%" }}
-                w={"100%"}
+                minW={{ base: "470px", md: "70%" }}
+                w={"70%"}
                 justify={"space-between"}
                 align={"center"}
                 bg={"#1f2027"}
                 borderRadius={"8px"}
-                p={4}
+                px={4}
+                py={2}
                 gap={4}>
                 <Flex w={"fit-content"} justify={"space-between"} gap={{ base: 3, md: 8 }} fontSize={{ base: "16px", md: "20px" }}>
-                  <Box color={"#767474"} fontSize={{ base: "50px", sm: "70px", md: "96px" }} lineHeight={1}>
+                  <Box color={"#767474"} fontSize={{ base: "50px", sm: "70px", md: "86px" }} lineHeight={1}>
                     {i + 1}
                   </Box>
                   <Flex w={"fit-content"} flexDir={{ base: "column", lg: "row" }} justify={"space-between"} gap={{ base: 0, lg: 8 }}>
