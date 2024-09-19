@@ -10,7 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { login } from "../../../services";
 
 interface LoginFormValues {
-  username: string;
+  login: string;
   password: string;
 }
 

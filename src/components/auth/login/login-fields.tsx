@@ -19,7 +19,7 @@ export const LoginFields: React.FC<LoginFieldsProps> = ({ formik }) => {
   return (
     <Flex w={{ base: "100%", sm: "360px" }} flexDir={"column"} alignItems={"center"} gap={4}>
       <Flex w={"100%"} flexDir={"column"} gap={4}>
-        <FormikInput name="username" type="text" placeholder={t("common:USER.AUTH.USERNAME")} />
+        <FormikInput name="login" type="text" placeholder={t("common:USER.AUTH.USERNAME")} />
         <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
       </Flex>
       <PButton type="submit" w={"fit-content"}>

@@ -2,17 +2,17 @@ import * as Yup from "yup";
 
 export const validationSchema = Yup.object({
   username: Yup.string().required("Enter username"),
-  email: Yup.string().email("Invalid email format").required("Email is required field"),
-  phone_number: Yup.string().required("Enter your phone number"),
   password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
-  password_confirm: Yup.string()
+  password_confirmation: Yup.string()
     .required("Enter password")
     .min(9, "Password must be 9 characters or more")
     .oneOf([Yup.ref("password")], "Passwords must match"),
+  email: Yup.string().email("Invalid email format").required("Email is required field"),
+  mobile: Yup.string().required("Enter your phone number"),
 });
 
 export const authorizationValidationSchema = Yup.object({
-  username: Yup.string().required("Enter username"),
+  login: Yup.string().required("Enter username"),
   password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
 });
 

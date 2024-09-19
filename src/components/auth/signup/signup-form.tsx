@@ -17,9 +17,10 @@ import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 interface SignUpFormValues {
   username: string;
-  email: string;
   password: string;
-  phone_number: string;
+  password_confirmation: string;
+  email: string;
+  mobile: string;
 }
 
 export const SignupForm = () => {
@@ -63,7 +64,8 @@ export const SignupForm = () => {
       username: values.username,
       email: values.email,
       password: values.password,
-      phone_number: values.phone_number,
+      password_confirmation: values.password_confirmation,
+      mobile: values.mobile,
     };
 
     mutation.mutate(newUser);

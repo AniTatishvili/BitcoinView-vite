@@ -105,8 +105,10 @@ export const DashboardMessagesTabLists = () => {
   const readMessage = (indx: number) => {
     const newReadMessageIndexes = [...messageIndex, indx];
     setMessageIndex(newReadMessageIndexes);
-    window.localStorage.setItem("READ_MESSAGE_INDEX", JSON.stringify(newReadMessageIndexes));
     setShowTabPanel(true);
+    setSelectedTab(indx);
+    window.localStorage.setItem("READ_MESSAGE_INDEX", JSON.stringify(newReadMessageIndexes));
+    window.localStorage.setItem("ACTIVE_MESSAGE_INDEX", JSON.stringify(indx));
   };
 
   return (
@@ -129,8 +131,8 @@ export const DashboardMessagesTabLists = () => {
                 opacity={messageIndex.includes(i) ? "0.8" : 1}
                 p={2}
                 _selected={{ color: "#f7931a" }}
-                onClick={() => setSelectedTab(i)}>
-                <Box onClick={() => readMessage(i)}>
+                onClick={() => readMessage(i)}>
+                <Box>
                   <Flex align={"center"} gap={2}>
                     <Text w={"100%"} color={"#fff"} fontSize={"14px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
                       {item.text}
@@ -165,7 +167,6 @@ export const DashboardMessagesTabLists = () => {
                   p={2}
                   _selected={{ color: "#f7931a" }}
                   onClick={() => {
-                    setSelectedTab(i);
                     readMessage(i);
                   }}>
                   <Flex align={"center"} gap={2}>
