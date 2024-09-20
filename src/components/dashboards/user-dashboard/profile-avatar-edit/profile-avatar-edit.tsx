@@ -1,7 +1,10 @@
+// import ProfileAvatarPicture from "./profile-avatar-picture";
+
 export const ProfileAvatarEdit = () => {
   return (
-    <div>
-      profile-avatar-edit<></>
-    </div>
+    <>
+      edit avatar
+      {/* <ProfileAvatarPicture /> */}
+    </>
   );
 };

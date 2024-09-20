@@ -40,13 +40,10 @@ export function RouterConfig() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-
-      <Route path="user-login" element={<Login />} />
-      <Route path="user-signup" element={<SignUp />} />
-
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<SignUp />} />
       <Route path="*" element={<NotFoundPage />} />
-
-      {/* <Route element={<Protected allowedRoles={["Admin"]} />}> */}
+      {/* <Route element={<Protected allowedRoles={["admin"]} />}> */}
       <Route path="admin-dashboard" element={<AdminDashboard />}>
         <Route path="admin-dashboard-overview" element={<AdminDashboardOverview />} />
         <Route path="messages" element={<Messages />} />
@@ -55,10 +52,9 @@ export function RouterConfig() {
         <Route path="chart" element={<Chart />} />
         <Route path="user-list" element={<UserList />} />
         <Route path="user-requests" element={<UserRequests />} />
+        {/* </Route> */}
       </Route>
-      {/* </Route> */}
-
-      {/* <Route element={<Protected allowedRoles={["Adviser"]} />}> */}
+      /{/* <Route element={<Protected allowedRoles={["advisor"]} />}> */}
       <Route path="adviser-dashboard" element={<AdviserDashboard />}>
         <Route path="adviser-dashboard-overview" element={<AdviserDashboardOverview />} />
         <Route path="messages" element={<Messages />} />
@@ -66,10 +62,9 @@ export function RouterConfig() {
         <Route path="asset" element={<Asset />} />
         <Route path="chart" element={<Chart />} />
         <Route path="user-list" element={<UserList />} />
+        {/* </Route> */}
       </Route>
-      {/* </Route> */}
-
-      <Route element={<Protected allowedRoles={["Subscriber"]} />}>
+      <Route element={<Protected allowedRoles={["subscriber"]} />}>
         <Route path="user-dashboard" element={<UserDashboard />}>
           <Route path="overview" element={<Overview />} />
           <Route path="messages" element={<Messages />} />

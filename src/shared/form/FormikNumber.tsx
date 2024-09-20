@@ -9,9 +9,10 @@ import { Box } from "@chakra-ui/react";
 interface FormikNumberProps {
   name: string;
   placeholder?: string;
+  data_value?: string;
 }
 
-export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
+export const FormikNumber = ({ name, placeholder, data_value }: FormikNumberProps) => {
   const [country, setCountry] = React.useState<string>("us");
   const [field, , helpers] = useField(name);
   const { setValue } = helpers;
@@ -40,7 +41,7 @@ export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
     <Box w={"100%"}>
       <PhoneInput
         country={country}
-        value={field.value}
+        value={data_value || field.value}
         inputProps={{
           type: "tel",
         }}

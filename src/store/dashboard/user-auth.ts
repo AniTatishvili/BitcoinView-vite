@@ -2,19 +2,25 @@ import { create } from "zustand";
 
 type UserSignupStoreType = {
   username: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password: string;
-  phone_number: string;
-  role: ["Subscriber"];
+  password_confirmation: string;
+  mobile: string;
+  role: [];
   updateUserFields: (fields: Partial<UserSignupStoreType>) => void;
 };
 
 export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   username: "",
+  first_name: "",
+  last_name: "",
   email: "",
   password: "",
-  phone_number: "",
-  role: ["Subscriber"],
+  password_confirmation: "",
+  mobile: "",
+  role: [],
 
   updateUserFields: (fields: Partial<UserSignupStoreType>) => {
     set((state) => ({ ...state, ...fields }));

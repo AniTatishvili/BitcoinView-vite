@@ -12,7 +12,7 @@ export const FormikRegistrationCheckbox = ({ children }: FormCheckboxProps) => {
 
   return (
     <Flex alignItems="flex-start">
-      <Checkbox dir="flex" alignItems="flex-start" size="md" colorScheme="yellow" id="terms_accept" onChange={handlerAcceptUserTerms}>
+      <Checkbox dir="flex" alignItems="flex-start" size="md" colorScheme="yellow" onChange={handlerAcceptUserTerms}>
         <Text fontSize="xs">{children}</Text>
       </Checkbox>
     </Flex>

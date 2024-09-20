@@ -1,23 +1,37 @@
 import { useNavigate } from "react-router-dom";
 import { Form, Formik } from "formik";
-// import { login } from "../../../app/api/authapi";
+
 import { authorizationValues } from "../../../shared/form/FormikValues";
 import { authorizationValidationSchema } from "../../../shared/form/yup";
 import { LoginFields } from "./login-fields";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
-// import axios from "axios";
+
 import { useMutation } from "@tanstack/react-query";
 import { login } from "../../../services";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 interface LoginFormValues {
   login: string;
   password: string;
 }
 
+type UserRole = "admin" | "adviser" | "subscriber" | string;
+
 export const LoginForm = () => {
+  const { username, role }: { username: string; role: UserRole[] } = useUserSignupStore((state) => ({
+    username: state.username,
+    role: state.role,
+  }));
+
   const navigate = useNavigate();
 
   const showToast = useCustomToast();
+
+  const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+  //const uid = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("UID") || "null") : null;
+  const logged_in = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("LOGGED_IN") || "null") : null;
+
+  const isUserLoggedIn = !!logged_in && auth;
 
   const mutation = useMutation({
     mutationFn: async (formData: LoginFormValues) => {
@@ -27,7 +41,7 @@ export const LoginForm = () => {
     },
 
     onSuccess: (data) => {
-      console.log(data, 555);
+      console.log("data", data);
 
       const msg = "Login Successful!";
       showToast("success", msg);
@@ -35,8 +49,23 @@ export const LoginForm = () => {
       // const { user_id } = data;
       window.localStorage.setItem("USER_AUTH", JSON.stringify(data.token));
       window.localStorage.setItem("LOGGED_IN", JSON.stringify(true));
+      console.log("role", role);
+      if (isUserLoggedIn && username) {
+        console.log(12334444);
+        if (role.includes("admin")) {
+          navigate("/admin-dashboard/admin-dashboard-overview");
+        } else if (role.includes("advisor")) {
+          navigate("/adviser-dashboard/adviser-dashboard-overview");
+        } else if (role.includes("subscriber")) {
+          console.log(111116666);
+          navigate("/user-dashboard/overview");
+        } else {
+          console.log(111);
+          navigate("/login");
+        }
+      }
 
-      navigate("/user-dashboard/overview");
+      // navigate("/user-dashboard/overview");
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {

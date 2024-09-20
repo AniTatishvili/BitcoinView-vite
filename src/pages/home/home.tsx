@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 export const Home = () => {
   return (
     <Flex color="red">
-      <NavLink to="/user-login">Home</NavLink>
+      <NavLink to="/login">Home</NavLink>
     </Flex>
   );
 };

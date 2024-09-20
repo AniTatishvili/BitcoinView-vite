@@ -12,20 +12,24 @@ interface ProtectedProps {
 
 export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
   const location = useLocation();
-  const { username, role } = useUserSignupStore();
+  const { username, role } = useUserSignupStore((state) => ({
+    username: state.username,
+    role: state.role,
+  }));
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  console.log("isAuthenticated", isAuthenticated);
+  console.log("isAuthenticated", isAuthenticated, username);
   useEffect(() => {
     // const uid = JSON.parse(window.localStorage.getItem("UID") || '""');
     const logged_in = JSON.parse(window.localStorage.getItem("LOGGED_IN") || '""');
     const token = JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}");
-
+    console.log(token, logged_in, 8765);
     if (token && logged_in) {
       try {
         const tokenExpiration = jwtDecode<{ exp: number }>(token).exp;
         const dateNow = Math.floor(new Date().getTime() / 1000);
 
+        console.log("logged_in", dateNow);
         if (tokenExpiration < dateNow) {
           setIsAuthenticated(false);
         } else {
@@ -41,15 +45,17 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
 
   //   if (isAuthenticated === null) return <Loader />;
 
-  // if (isAuthenticated && username) {
-  if (role?.some((role) => allowedRoles.includes(role))) {
-    return <Outlet />;
-  } else {
-    return <Navigate to={"/404"} state={{ from: location }} />;
+  if (isAuthenticated && username) {
+    console.log(666);
+    if (role?.some((role) => allowedRoles.includes(role))) {
+      console.log(77);
+      return <Outlet />;
+    } else {
+      return <Navigate to={"/404"} state={{ from: location }} />;
+    }
+  } else if (!isAuthenticated) {
+    return <Navigate to={"/login"} state={{ from: location }} />;
   }
-  // } else if (!isAuthenticated) {
-  //   return <Navigate to={"/user-login"} state={{ from: location }} />;
-  // }
 
   return null;
 };

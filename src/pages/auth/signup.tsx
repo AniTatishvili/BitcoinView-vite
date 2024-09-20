@@ -28,7 +28,7 @@ export const SignUp = () => {
 
           <Flex justify={"center"} gap={4}>
             <Text color={"#ccc"}>Already have an account?</Text>
-            <Link to="/user-login" style={{ color: "#f7931a" }}>
+            <Link to="/login" style={{ color: "#f7931a" }}>
               {" "}
               {t("common:USER.AUTH.SIGNIN")}
             </Link>

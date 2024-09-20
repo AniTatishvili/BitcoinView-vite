@@ -1,17 +1,13 @@
 import axios from "axios";
 
+// const token = JSON.parse(localStorage.getItem("USER_AUTH") || "");
+
 export const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL,
   headers: {
-    Bearer: localStorage.getItem("USER_AUTH"),
-    "Content-Type": "application/x-www-form-urlencoded",
+    // Authorization: `Bearer ${token}`,
+    "Content-Type": "application/json",
+
+    "Access-Control-Allow-Origin": "*",
   },
 });
-
-// instance.interceptors.request.use((config) => {
-//   const token = localStorage.getItem("token");
-//   if (token) {
-//     config.headers.Authorization = `Bearer ${token}`;
-//   }
-//   return config;
-// });

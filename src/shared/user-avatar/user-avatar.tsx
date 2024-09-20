@@ -19,7 +19,7 @@ export const UserAvatar: React.FC<UserAvatarProps> = ({ full_name, username }) =
       />
 
       <Flex flexDir={"column"} lineHeight={1} gap={1}>
-        <Box w={"120px"} display={"inline-block"} color={"#fff"} fontSize={"16px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
+        <Box maxW={"120px"} display={"inline-block"} color={"#fff"} fontSize={"16px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
           {full_name}
         </Box>
         <Flex color={"#ccc"} fontSize={"14px"}>

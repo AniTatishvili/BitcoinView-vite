@@ -32,7 +32,7 @@ export const Login = () => {
               {/* <Link to="/forgot-password">{t("USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link> */}
               {/* {"/"} */}
               <Text color={"#ccc"}>Don't you have an account?</Text>
-              <Link to="/user-signup" style={{ color: "#f7931a" }}>
+              <Link to="/signup" style={{ color: "#f7931a" }}>
                 {t("common:USER.AUTH.SIGNUP")}
               </Link>
             </Flex>

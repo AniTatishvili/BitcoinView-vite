@@ -13,6 +13,7 @@ import logo from "../../../assets/black-logo.svg";
 import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 import { UserAvatar } from "../../../shared/user-avatar";
 import React from "react";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 // import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
@@ -29,10 +30,14 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const { username, first_name, last_name }: { username: string; first_name: string; last_name: string } = useUserSignupStore((state) => ({
+    username: state.username,
+    first_name: state.first_name,
+    last_name: state.last_name,
+  }));
+
   const [noteHoveredIndx, setNoteHoveredIndx] = React.useState<number>();
 
-  const full_name = "Aleko Malxazishvili";
-  const username = "ako123";
   // const { updateUserFields } = useUserSignupStore();
   const notificationsCount = 2;
 
@@ -40,7 +45,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("LOGGED_IN");
     localStorage.removeItem("USER_AUTH");
-    navigate("/user-login");
+    navigate("/login");
     console.log("signout");
   };
 
@@ -150,7 +155,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             _hover={{ backround: "transparent" }}
             _focus={{ backround: "transparent" }}
             _active={{ backround: "transparent" }}>
-            <UserAvatar full_name={full_name} username={username} />
+            <UserAvatar full_name={first_name + "" + last_name} username={username} />
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
             {data.map((item, i) => (

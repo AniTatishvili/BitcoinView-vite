@@ -3,13 +3,15 @@ import { Flex, Input } from "@chakra-ui/react";
 interface UploadInputProps {
   name: string;
   id: number;
-  accept: boolean;
+  accept: string;
+  isLoading: boolean;
+  cb: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const UploadInput = ({ name, id, accept, isLoading, cb, ...props }) => {
+export const UploadInput: React.FC<UploadInputProps> = ({ name, id, accept, isLoading, cb, ...props }) => {
   return (
     <>
-      <label htmlFor={id}>
+      <label htmlFor={`${id}`}>
         <Flex
           align={"center"}
           justify={"center"}
@@ -24,7 +26,7 @@ export const UploadInput = ({ name, id, accept, isLoading, cb, ...props }) => {
           fontWeight={"medium"}
           cursor={"pointer"}
           transition={"all 350ms ease"}
-          pointerEvents={isLoading ? false : true}
+          pointerEvents={isLoading ? "none" : "auto"}
           _hover={{
             background: "#dd9933",
             color: "#242424",
@@ -33,7 +35,7 @@ export const UploadInput = ({ name, id, accept, isLoading, cb, ...props }) => {
           {name}
         </Flex>
       </label>
-      <Input type={"file"} id={id} accept={accept} display={"none"} onChange={cb} disabled={isLoading ? true : false} />
+      <Input type={"file"} id={`${id}`} accept={accept} display={"none"} onChange={cb} disabled={isLoading} />
     </>
   );
 };

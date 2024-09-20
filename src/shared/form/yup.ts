@@ -26,20 +26,24 @@ export const forgotPasswordValidate = Yup.object({
 });
 
 export const updateUserProfileSchema = Yup.object({
-  name: Yup.string().required("Enter name"),
-  surname: Yup.string().required("Enter surname"),
+  first_name: Yup.string().required("Enter name"),
+  last_name: Yup.string().required("Enter name"),
   email: Yup.string().email("Invalid email format").required("Email is required field"),
-  phone_number: Yup.string().required("Enter your phone number"),
-  country: Yup.string().required("Select country"),
+  mobile: Yup.string().required("Enter your phone number"),
+  avatar: Yup.string(),
   employee: Yup.string().required("Select employee"),
+  country: Yup.string().required("Select country"),
+  currency: Yup.string().required("Select currency"),
   resource: Yup.string().required("Enter resource"),
   retention_status: Yup.string().required("Select retention_status"),
-  currency: Yup.string().required("Select currency"),
   custumer_status: Yup.string().required("Select custumer status"),
   password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
-  time_zone: Yup.string().required("Select time zone"),
+  deposit_notifications: Yup.string(),
+  chat_notifications: Yup.string(),
+  other_notifications: Yup.string(),
+  show_ftd: Yup.string(),
   tp_account_groups: Yup.string().required("Select tp account groups"),
-  passport_id: Yup.string().required("Enter your passport ID").min(6, "Passport ID must be 6 characters or more"),
+  time_zone: Yup.string().required("Select time zone"),
 });
 
 export const paymentMethodSchema = Yup.object({
