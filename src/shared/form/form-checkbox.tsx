@@ -10,6 +10,12 @@ export const FormikRegistrationCheckbox = ({ children }: FormCheckboxProps) => {
     console.log(e.target.checked);
   };
 
+  // const handleChangeCompanyConfidantCheckboxStatus = (e: ChangeEvent<HTMLInputElement>) => {
+  //   const checkboxValue = e.target.checked ? 1 : 0;
+  //   // setCheckbox(checkboxValue);
+  //   dispatch(setUpdatedUserData({ company_confidant_accept: checkboxValue }));
+  // };
+
   return (
     <Flex alignItems="flex-start">
       <Checkbox dir="flex" alignItems="flex-start" size="md" colorScheme="yellow" onChange={handlerAcceptUserTerms}>

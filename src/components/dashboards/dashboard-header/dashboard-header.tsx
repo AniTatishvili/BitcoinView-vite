@@ -35,7 +35,11 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     first_name: state.first_name,
     last_name: state.last_name,
   }));
-
+  // const { username, first_name, last_name } = useUserSignupStore((state) => ({
+  //   username: state.username,
+  //   first_name: state.first_name,
+  //   last_name: state.last_name,
+  // }));
   const [noteHoveredIndx, setNoteHoveredIndx] = React.useState<number>();
 
   // const { updateUserFields } = useUserSignupStore();
@@ -86,6 +90,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
               w={"fit-content"}
               h={"fit-content"}
               bg={"none"}
+              color={"#fff"}
               p={0}
               _hover={{ backround: "transparent" }}
               _focus={{ backround: "transparent" }}

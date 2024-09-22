@@ -21,7 +21,7 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
       </Text>
       <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} gap={4}>
         <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
-          <FormikInput name="name" type="text" placeholder="Name" />
+          <FormikInput name="first_name" type="text" placeholder="Name" />
           <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} />
           <CountrySelect />
           <FormikInput name="resource" type="text" placeholder="Resource" />
@@ -38,8 +38,8 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormikRegistrationCheckbox>Other notifications</FormikRegistrationCheckbox>
         </Flex>
         <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
-          <FormikInput name="surname" type="text" placeholder="Surname" />
-          <FormikNumber name="phone_number" placeholder={t("common:USER.AUTH.PHONE")} />
+          <FormikInput name="last_name" type="text" placeholder="Surname" />
+          <FormikNumber name="mobile" placeholder={t("common:USER.AUTH.PHONE")} />
           <FormSelect>
             <option>TP Account</option>
             <option>Account</option>
@@ -60,7 +60,7 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormikRegistrationCheckbox>Show FTD</FormikRegistrationCheckbox>
         </Flex>
       </Flex>
-      <PButton type="submit" isLoading={formik.isSubmitting} disabled={formik.isSubmitting || !formik.isValid || !formik.dirty} w={"fit-content"}>
+      <PButton type="submit" w={"fit-content"}>
         {formik.loading ? t("LOADING") : "Confirm"}
       </PButton>
     </Flex>

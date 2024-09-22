@@ -1,62 +1,55 @@
 import React from "react";
 import axios from "axios";
 
+import { updateUserProfile, updateUserProfileSchema } from "../../../../shared/form";
+import { useUserSignupStore } from "../../../../store/dashboard/user-auth";
 import { Form, Formik } from "formik";
 import { ProfileFormFields } from "./profile-form-fields";
-import { updateUserProfile, updateUserProfileSchema } from "../../../../shared/form";
-
-interface UpdateUserProfile {
-  first_name: string;
-  last_name: string;
-  surname: string;
-  email: string;
-  mobile: string;
-  avatar: string;
-  employee: string;
-  country: string;
-  currency: string;
-  resources: string;
-  retention_status: string;
-  customer_status: string;
-  password: string;
-  deposit_notifications: string;
-  chat_notifications: string;
-  other_notifications: string;
-  show_ftd: string;
-  tp_account_groups: string;
-  time_zone: string;
-}
+import { ProfileAvatarPicture } from "../profile-avatar-edit/profile-avatar-picture";
 
 export const ProfileForm = () => {
   const token = JSON.parse(localStorage.getItem("USER_AUTH") || "{}");
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user-information";
 
+  const userData = useUserSignupStore();
+
+  const [initialValues, setInitialValues] = React.useState({});
+
   React.useEffect(() => {
-    axios
-      .get(url, {
+    if (userData) {
+      const updateUserProfile: { [key: string]: any } = {};
+      Object.entries(userData).forEach(([key, value]) => {
+        updateUserProfile[key] = value;
+      });
+      setInitialValues(updateUserProfile);
+    }
+  }, [userData]);
+
+  // const { updateUserFields } = useUserSignupStore();
+
+  // React.useEffect(() => {
+  //   const userData = useUserSignupStore.getState(); // Get current user data
+  //   setInitialValues(userData);
+  // }, []);
+  const onFormSubmit = async (values: any) => {
+    console.log("vla", values);
+    try {
+      const response = await axios.post(url, values, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
         },
-      })
-      .then((response) => {
-        for (const key in response.data) {
-          if (key in updateUserProfile) {
-            updateUserProfile[key as keyof UpdateUserProfile] = response.data[key];
-            console.log(updateUserProfile[key as keyof UpdateUserProfile], response.data[key]);
-          }
-        }
-        console.log(response.data, response.data.id);
-      })
-      .catch((error) => {
-        console.error(error);
       });
-  }, []);
-
-  const onFormSubmit = () => {};
-
+      console.log("Profile updated successfully:", response.data);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
+  console.log(initialValues);
   return (
     <>
-      <Formik initialValues={updateUserProfile} validationSchema={updateUserProfileSchema} validateOnMount onSubmit={onFormSubmit}>
+      <ProfileAvatarPicture />
+      <Formik initialValues={initialValues} validateOnMount enableReinitialize onSubmit={onFormSubmit}>
         {(formik) => {
           const { isSubmitting, isValid, dirty } = formik;
           console.log(formik.values);

@@ -64,21 +64,32 @@ export function RouterConfig() {
         <Route path="user-list" element={<UserList />} />
         {/* </Route> */}
       </Route>
-      <Route element={<Protected allowedRoles={["subscriber"]} />}>
-        <Route path="user-dashboard" element={<UserDashboard />}>
-          <Route path="overview" element={<Overview />} />
-          <Route path="messages" element={<Messages />} />
-          <Route path="profile" element={<Profile />} />
-          <Route path="wallet" element={<Wallet />} />
-          <Route path="deposit" element={<Deposit />} />
-          <Route path="withdraw" element={<Withdraw />} />
-          <Route path="transaction-history" element={<TransactionHistory />} />
-          <Route path="add-payment-method" element={<AddPaymentMethod />} />
-          <Route path="user-monthly-profile" element={<UserMonthlyProfile />} />
-          <Route path="package-selection" element={<PackageSelection />} />
-          <Route path="package-selection-success" element={<PackageSelectionSuccess />} />
-        </Route>
+      {/* <Route element={<Protected allowedRoles={["subscriber"]} />}> */}
+      <Route path="user-dashboard" element={<UserDashboard />}>
+        <Route path="overview" element={<Overview />} />
+        <Route path="messages" element={<Messages />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="wallet" element={<Wallet />} />
+        <Route path="deposit" element={<Deposit />} />
+        <Route path="withdraw" element={<Withdraw />} />
+        <Route path="transaction-history" element={<TransactionHistory />} />
+        <Route path="add-payment-method" element={<AddPaymentMethod />} />
+        <Route path="user-monthly-profile" element={<UserMonthlyProfile />} />
+        <Route path="package-selection" element={<PackageSelection />} />
+        <Route path="package-selection-success" element={<PackageSelectionSuccess />} />
       </Route>
+      {/* </Route> */}
+      {/* <Route element={<Redirect />}>
+          <Route path="forgot-password" element={<ForgotPassword />} />
+        </Route>
+
+        <Route element={<Redirect />}>
+          <Route path="confirm-new-password" element={<ConfirmNewPassword />} />
+        </Route>
+
+        <Route element={<Redirect />}>
+          <Route path="signup" element={<Signup />} />
+        </Route> */}
     </Routes>
   );
 }

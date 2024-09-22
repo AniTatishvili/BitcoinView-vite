@@ -42,22 +42,14 @@ const App: React.FC = () => {
           },
         })
         .then((response) => {
-          updateUserFields({
-            username: response.data.username,
-            first_name: response.data.first_name,
-            last_name: response.data.last_name,
-            role: response.data.role_name,
-          });
-          // window.localStorage.setItem("UID", JSON.stringify(response.data.user.user_id));
-          console.log(response.data.role_name, 999);
+          console.log(response);
+          updateUserFields(response.data);
         })
         .catch((error) => {
           console.error(error);
         });
-
-      console.log(token, "token");
     }
-  }, [auth, logged_in]);
+  }, []);
 
   return (
     <div className="App">

@@ -27,7 +27,7 @@ export const forgotPasswordValidate = Yup.object({
 
 export const updateUserProfileSchema = Yup.object({
   first_name: Yup.string().required("Enter name"),
-  last_name: Yup.string().required("Enter name"),
+  last_name: Yup.string().required("Enter surname"),
   email: Yup.string().email("Invalid email format").required("Email is required field"),
   mobile: Yup.string().required("Enter your phone number"),
   avatar: Yup.string(),
