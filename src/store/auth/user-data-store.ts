@@ -4,7 +4,7 @@ type State = {
   username: string;
   name: string;
   surname: string;
-  role: string[];
+  role: string;
 };
 
 type Actions = {
@@ -16,7 +16,7 @@ export const useUserDataStore = create<State & Actions>((set) => ({
   username: "",
   name: "",
   surname: "",
-  role: [],
+  role: "",
 
   setUserData: (data) =>
     set((state) => ({
@@ -29,6 +29,6 @@ export const useUserDataStore = create<State & Actions>((set) => ({
       username: "",
       name: "",
       surname: "",
-      role: [],
+      role: "",
     })),
 }));

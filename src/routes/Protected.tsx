@@ -7,7 +7,7 @@ import { useUserSignupStore } from "../store/dashboard/user-auth";
 
 // Define types for props and user data
 interface ProtectedProps {
-  allowedRoles: string[];
+  allowedRoles: string;
 }
 
 export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
@@ -27,14 +27,11 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
     if (token && uid && logged_in) {
       try {
         const tokenExpiration = jwtDecode<{ exp: number }>(token).exp;
-        console.log("tokenExpiration", tokenExpiration);
         const dateNow = Math.floor(new Date().getTime() / 1000);
 
-        console.log("logged_in", dateNow);
         if (tokenExpiration < dateNow) {
           setIsAuthenticated(false);
         } else {
-          console.log("logged_in", 1121221212122);
           setIsAuthenticated(true);
         }
       } catch (e) {
@@ -43,19 +40,18 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
     } else {
       setIsAuthenticated(false);
     }
-  }, [username]);
+  }, []);
 
   //   if (isAuthenticated === null) return <Loader />;
 
-  if (isAuthenticated && username) {
-    console.log(666);
-    if (role?.some((role) => allowedRoles.includes(role))) {
-      console.log(77);
+  if (isAuthenticated) {
+    if (role.includes(allowedRoles)) {
       return <Outlet />;
     } else {
       return <Navigate to={"/404"} state={{ from: location }} />;
     }
   } else if (!isAuthenticated) {
+    console.log("redirecting");
     return <Navigate to={"/login"} state={{ from: location }} />;
   }
 

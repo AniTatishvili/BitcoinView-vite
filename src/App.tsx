@@ -49,7 +49,7 @@ const App: React.FC = () => {
           console.error(error);
         });
     }
-  }, []);
+  }, [token]);
 
   return (
     <div className="App">

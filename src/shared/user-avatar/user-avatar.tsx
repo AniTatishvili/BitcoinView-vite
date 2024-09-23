@@ -3,14 +3,15 @@ import { Avatar, Box, Flex } from "@chakra-ui/react";
 interface UserAvatarProps {
   full_name: string;
   username: string;
+  src: string;
 }
 
-export const UserAvatar: React.FC<UserAvatarProps> = ({ full_name, username }) => {
+export const UserAvatar: React.FC<UserAvatarProps> = ({ full_name, username, src }) => {
   return (
     <Flex gap={3}>
       <Avatar
         name={full_name}
-        src="https://bit.ly/tioluwani-kolawole"
+        src={src}
         w={"40px"}
         h={"40px"}
         backgroundColor={"#79797D"}

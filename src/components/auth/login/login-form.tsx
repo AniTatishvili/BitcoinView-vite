@@ -36,15 +36,14 @@ export const LoginForm = () => {
 
       window.localStorage.setItem("USER_AUTH", JSON.stringify(data.token));
       window.localStorage.setItem("LOGGED_IN", JSON.stringify(true));
-      window.localStorage.setItem("UID", JSON.stringify(data.user.id));
+      window.localStorage.setItem("UID", JSON.stringify(data.user.user_id));
 
       updateUserFields({
         username: data.user.username,
-        role: data.user.role.name, // E.g., "admin", "adviser", "subscriber"
+        role: data.user.role_name,
       });
 
-      // Redirect based on role
-      redirectUserByRole(data.user.role.name);
+      redirectUserByRole(data.user.role_name);
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
@@ -63,9 +62,10 @@ export const LoginForm = () => {
   const redirectUserByRole = (role: string) => {
     if (role === "admin") {
       navigate("/admin-dashboard/admin-dashboard-overview");
-    } else if (role === "adviser") {
+    } else if (role === "advisor") {
       navigate("/adviser-dashboard/adviser-dashboard-overview");
     } else if (role === "subscriber") {
+      console.log(1222222);
       navigate("/user-dashboard/overview");
     } else {
       navigate("/login");

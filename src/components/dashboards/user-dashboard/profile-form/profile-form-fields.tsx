@@ -25,37 +25,20 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} />
           <CountrySelect />
           <FormikInput name="resource" type="text" placeholder="Resource" />
-          <FormSelect>
-            <option>USD</option>
-            <option>EUR</option>
-          </FormSelect>
+          <FormSelect name="courency" label="Courancy" data={["USD", "EUR"]} />
           <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
-          <FormSelect>
-            <option>TP Account</option>
-            <option>Account</option>
-          </FormSelect>
+          <FormikInput name="confirm_password" type="password" placeholder="Confirm password" />
+          <FormSelect name="tp_account_groups" label="TP Account groups" data={["TP Account", "none"]} />
           <FormikRegistrationCheckbox>Deposit notifications</FormikRegistrationCheckbox>
           <FormikRegistrationCheckbox>Other notifications</FormikRegistrationCheckbox>
         </Flex>
         <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
           <FormikInput name="last_name" type="text" placeholder="Surname" />
           <FormikNumber name="mobile" placeholder={t("common:USER.AUTH.PHONE")} />
-          <FormSelect>
-            <option>TP Account</option>
-            <option>Account</option>
-          </FormSelect>
-          <FormSelect>
-            <option>TP Account</option>
-            <option>Account</option>
-          </FormSelect>
-          <FormSelect>
-            <option>Active</option>
-            <option>Deny</option>
-          </FormSelect>
-          <FormSelect>
-            <option>GMT+4</option>
-            <option>GMT+3</option>
-          </FormSelect>
+          <FormSelect name="employee" label="Employee" data={["Employee", "None"]} />
+          <FormSelect name="retention_status" label="Retention status" data={["true", "false"]} />
+          <FormSelect name="customer_status" label="Customer status" data={["Customer status", "EUR"]} />
+          <FormSelect name="time_zone" label="Time zone" data={["Time zone", "EUR"]} />
           <FormikRegistrationCheckbox>Support chat notifications</FormikRegistrationCheckbox>
           <FormikRegistrationCheckbox>Show FTD</FormikRegistrationCheckbox>
         </Flex>

@@ -9,3 +9,4 @@ export * from "./form-input.tsx";
 export * from "./country-select.tsx";
 export * from "./form-select.tsx";
 export * from "./form-checkbox.tsx";
+export * from "./FormikLabel.tsx";

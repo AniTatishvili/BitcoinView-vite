@@ -1,6 +1,7 @@
 import { create } from "zustand";
 
 type UserSignupStoreType = {
+  avatar: string;
   username: string;
   first_name: string;
   last_name: string;
@@ -8,7 +9,8 @@ type UserSignupStoreType = {
   password: string;
   password_confirmation: string;
   mobile: string;
-  role: any[];
+  country: string;
+  role: string;
   chat_notifications: boolean;
   account_status: string;
   created_at: string;
@@ -28,6 +30,7 @@ type UserSignupStoreType = {
 };
 
 export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
+  avatar: "",
   username: "",
   first_name: "",
   last_name: "",
@@ -35,7 +38,8 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   password: "",
   password_confirmation: "",
   mobile: "",
-  role: [],
+  country: "",
+  role: "",
   chat_notifications: false,
   account_status: "",
   created_at: "",

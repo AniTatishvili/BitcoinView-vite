@@ -17,6 +17,7 @@ export const ProfileForm = () => {
 
   React.useEffect(() => {
     if (userData) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const updateUserProfile: { [key: string]: any } = {};
       Object.entries(userData).forEach(([key, value]) => {
         updateUserProfile[key] = value;
@@ -25,16 +26,15 @@ export const ProfileForm = () => {
     }
   }, [userData]);
 
-  // const { updateUserFields } = useUserSignupStore();
-
-  // React.useEffect(() => {
-  //   const userData = useUserSignupStore.getState(); // Get current user data
-  //   setInitialValues(userData);
-  // }, []);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onFormSubmit = async (values: any) => {
-    console.log("vla", values);
+    // Filter out fields with no value
+    const filteredValues = Object.fromEntries(Object.entries(values).filter(([_, value]) => value !== ""));
+
+    console.log("Filtered values:", filteredValues);
+
     try {
-      const response = await axios.post(url, values, {
+      const response = await axios.post(url, filteredValues, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
@@ -42,17 +42,23 @@ export const ProfileForm = () => {
       });
       console.log("Profile updated successfully:", response.data);
     } catch (error) {
-      console.error("Error updating profile:", error);
+      if (axios.isAxiosError(error) && error.response) {
+        console.error("Error updating profile:", error.response.data);
+        console.error("Status code:", error.response.status);
+      } else {
+        console.error("Unexpected error:", error);
+      }
     }
   };
-  console.log(initialValues);
+
+  // console.log(initialValues);
   return (
     <>
       <ProfileAvatarPicture />
       <Formik initialValues={initialValues} validateOnMount enableReinitialize onSubmit={onFormSubmit}>
         {(formik) => {
           const { isSubmitting, isValid, dirty } = formik;
-          console.log(formik.values);
+          // console.log(formik.values);
           return (
             <Form>
               <ProfileFormFields

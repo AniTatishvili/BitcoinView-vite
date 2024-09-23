@@ -30,16 +30,23 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { username, first_name, last_name }: { username: string; first_name: string; last_name: string } = useUserSignupStore((state) => ({
-    username: state.username,
-    first_name: state.first_name,
-    last_name: state.last_name,
-  }));
-  // const { username, first_name, last_name } = useUserSignupStore((state) => ({
-  //   username: state.username,
-  //   first_name: state.first_name,
-  //   last_name: state.last_name,
-  // }));
+  const { username, first_name, last_name, avatar }: { username: string; first_name: string; last_name: string; avatar: string } = useUserSignupStore(
+    (state) => ({
+      avatar: state.avatar,
+      username: state.username,
+      first_name: state.first_name,
+      last_name: state.last_name,
+    })
+  );
+
+  const [profileImage, setProfileImage] = React.useState("");
+
+  React.useEffect(() => {
+    if (avatar) {
+      setProfileImage(avatar);
+    }
+  }, [username, first_name, last_name, avatar]);
+
   const [noteHoveredIndx, setNoteHoveredIndx] = React.useState<number>();
 
   // const { updateUserFields } = useUserSignupStore();
@@ -49,6 +56,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     localStorage.removeItem("token");
     localStorage.removeItem("LOGGED_IN");
     localStorage.removeItem("USER_AUTH");
+    localStorage.removeItem("UID");
     navigate("/login");
     console.log("signout");
   };
@@ -160,7 +168,11 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             _hover={{ backround: "transparent" }}
             _focus={{ backround: "transparent" }}
             _active={{ backround: "transparent" }}>
-            <UserAvatar full_name={first_name + "" + last_name} username={username} />
+            <UserAvatar
+              full_name={first_name + "" + last_name}
+              username={username}
+              src={"https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage}
+            />
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
             {data.map((item, i) => (
