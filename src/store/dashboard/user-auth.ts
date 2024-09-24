@@ -10,7 +10,7 @@ type UserSignupStoreType = {
   password_confirmation: string;
   mobile: string;
   country: string;
-  role: string;
+  role_name: string;
   chat_notifications: boolean;
   account_status: string;
   created_at: string;
@@ -20,10 +20,12 @@ type UserSignupStoreType = {
   employee: boolean;
   id: string;
   other_notifications: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resource: any;
   retention_status: boolean;
   show_ftd: boolean;
   time_zone: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   tp_account_groups: any[];
   user_id: string;
   updateUserFields: (fields: Partial<UserSignupStoreType>) => void;
@@ -39,7 +41,7 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   password_confirmation: "",
   mobile: "",
   country: "",
-  role: "",
+  role_name: "",
   chat_notifications: false,
   account_status: "",
   created_at: "",

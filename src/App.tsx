@@ -7,14 +7,14 @@ import { useUserSignupStore } from "./store/dashboard/user-auth";
 // import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
-  const { updateUserFields } = useUserSignupStore();
+  const { updateUserFields, avatar, username, email } = useUserSignupStore();
   // const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = React.useState(true);
   const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
-  //const uid = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("UID") || "null") : null;
+  const uid = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("UID") || "null") : null;
   const logged_in = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("LOGGED_IN") || "null") : null;
 
-  const isUserLoggedIn = !!logged_in && auth;
+  const isUserLoggedIn = !!logged_in && uid && auth;
 
   // const { data } = useQuery({
   //   queryKey: ["getUsersData"],
@@ -34,7 +34,7 @@ const App: React.FC = () => {
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user-information";
 
   React.useEffect(() => {
-    if (isUserLoggedIn) {
+    if (isUserLoggedIn && token) {
       axios
         .get(url, {
           headers: {
@@ -42,20 +42,25 @@ const App: React.FC = () => {
           },
         })
         .then((response) => {
-          console.log(response);
+          console.log("User data:", response.data);
           updateUserFields(response.data);
+          setIsLoading(false);
         })
         .catch((error) => {
-          console.error(error);
+          console.error("Error fetching user data:", error);
         });
     }
-  }, [token]);
+  }, [isUserLoggedIn, token, updateUserFields]);
 
-  return (
-    <div className="App">
-      <RouterConfig />
-    </div>
-  );
+  React.useEffect(() => {
+    console.log("Store values after API request:", { avatar, username, email });
+  }, [avatar, username, email]);
+
+  if (isLoading && !location.pathname.includes("signup")) {
+    return <div>Loading...</div>;
+  }
+
+  return <RouterConfig />;
 };
 
 export default App;

@@ -1,24 +1,31 @@
 import { Flex, Checkbox, Text } from "@chakra-ui/react";
+import { useUserSignupStore } from "../../store/dashboard/user-auth";
 
 interface FormCheckboxProps {
   children?: React.ReactNode;
+  name: string;
 }
 
-export const FormikRegistrationCheckbox = ({ children }: FormCheckboxProps) => {
+export const FormikRegistrationCheckbox = ({ children, name }: FormCheckboxProps) => {
+  const { updateUserFields } = useUserSignupStore();
+  const user_data = useUserSignupStore();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handlerAcceptUserTerms = (e: any) => {
     console.log(e.target.checked);
+    updateUserFields({ [name]: e.target.checked });
   };
-
-  // const handleChangeCompanyConfidantCheckboxStatus = (e: ChangeEvent<HTMLInputElement>) => {
-  //   const checkboxValue = e.target.checked ? 1 : 0;
-  //   // setCheckbox(checkboxValue);
-  //   dispatch(setUpdatedUserData({ company_confidant_accept: checkboxValue }));
-  // };
 
   return (
     <Flex alignItems="flex-start">
-      <Checkbox dir="flex" alignItems="flex-start" size="md" colorScheme="yellow" onChange={handlerAcceptUserTerms}>
+      <Checkbox
+        dir="flex"
+        alignItems="flex-start"
+        size="md"
+        colorScheme="yellow"
+        name={name}
+        onChange={handlerAcceptUserTerms}
+        isChecked={user_data[name as keyof typeof user_data]}>
         <Text fontSize="xs">{children}</Text>
       </Checkbox>
     </Flex>

@@ -29,8 +29,8 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
           <FormikInput name="confirm_password" type="password" placeholder="Confirm password" />
           <FormSelect name="tp_account_groups" label="TP Account groups" data={["TP Account", "none"]} />
-          <FormikRegistrationCheckbox>Deposit notifications</FormikRegistrationCheckbox>
-          <FormikRegistrationCheckbox>Other notifications</FormikRegistrationCheckbox>
+          <FormikRegistrationCheckbox name="deposit_notifications">Deposit notifications</FormikRegistrationCheckbox>
+          <FormikRegistrationCheckbox name="other_notifications">Other notifications</FormikRegistrationCheckbox>
         </Flex>
         <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
           <FormikInput name="last_name" type="text" placeholder="Surname" />
@@ -39,8 +39,8 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormSelect name="retention_status" label="Retention status" data={["true", "false"]} />
           <FormSelect name="customer_status" label="Customer status" data={["Customer status", "EUR"]} />
           <FormSelect name="time_zone" label="Time zone" data={["Time zone", "EUR"]} />
-          <FormikRegistrationCheckbox>Support chat notifications</FormikRegistrationCheckbox>
-          <FormikRegistrationCheckbox>Show FTD</FormikRegistrationCheckbox>
+          <FormikRegistrationCheckbox name="chat_notifications">Support chat notifications</FormikRegistrationCheckbox>
+          <FormikRegistrationCheckbox name="show_ftd">Show FTD</FormikRegistrationCheckbox>
         </Flex>
       </Flex>
       <PButton type="submit" w={"fit-content"}>

@@ -40,7 +40,7 @@ export const LoginForm = () => {
 
       updateUserFields({
         username: data.user.username,
-        role: data.user.role_name,
+        role_name: data.user.role_name,
       });
 
       redirectUserByRole(data.user.role_name);

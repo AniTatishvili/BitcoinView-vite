@@ -26,29 +26,37 @@ export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
 
   React.useEffect(() => {
     const fetchCountry = async () => {
-      try {
-        const response = await axios.get("https://ipapi.co/json/");
-        if (response.data && response.data.country_code) {
-          setCountry(response.data.country_code.toLowerCase());
+      if (!mobile) {
+        try {
+          const response = await axios.get("https://ipapi.co/json/");
+          if (response.data && response.data.country_code) {
+            setCountry(response.data.country_code.toLowerCase());
+          }
+        } catch (error) {
+          console.error("Error fetching country:", error);
         }
-      } catch (error) {
-        console.error("Error fetching country:", error);
       }
     };
 
     fetchCountry();
-  }, []);
+  }, [mobile]);
 
   React.useEffect(() => {
-    setValue(mobile);
-  }, [mobile, name, setValue]);
+    if (mobile && mobile !== field.value) {
+      setValue(mobile);
+    }
+  }, [mobile, field.value, setValue]);
+
+  const isValidNumber = (number: string) => {
+    return number ? isValidPhoneNumber(number) : true;
+  };
 
   return (
     <Flex w={"100%"} flexDir={"column"} gap={1}>
       <FormikLabel>Phone</FormikLabel>
       <PhoneInput
         country={country}
-        value={field.value || mobile}
+        value={field.value || ""}
         inputProps={{
           type: "tel",
         }}
@@ -56,7 +64,7 @@ export const FormikNumber = ({ name, placeholder }: FormikNumberProps) => {
         onChange={handleChangePhoneNumber}
         containerStyle={{ width: "100%", backgroundColor: "black", borderRadius: "8px" }}
       />
-      {field.value && !isValidPhoneNumber(field.value) ? <div style={{ color: "red", fontSize: "0.875rem" }}>Incorrect mobile number format</div> : null}
+      {!isValidNumber(field.value) ? <div style={{ color: "red", fontSize: "0.875rem" }}>Incorrect mobile number format</div> : null}
     </Flex>
   );
 };

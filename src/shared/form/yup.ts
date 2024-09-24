@@ -31,6 +31,7 @@ export const updateUserProfileSchema = Yup.object({
   email: Yup.string().email("Invalid email format").required("Email is required field"),
   mobile: Yup.string().required("Enter your phone number"),
   avatar: Yup.string(),
+  role_name: Yup.string(),
   employee: Yup.string().required("Select employee"),
   country: Yup.string().required("Select country"),
   currency: Yup.string().required("Select currency"),
