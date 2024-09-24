@@ -169,7 +169,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             _focus={{ backround: "transparent" }}
             _active={{ backround: "transparent" }}>
             <UserAvatar
-              full_name={first_name + "" + last_name}
+              full_name={first_name + " " + last_name}
               username={username}
               src={"https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage}
             />

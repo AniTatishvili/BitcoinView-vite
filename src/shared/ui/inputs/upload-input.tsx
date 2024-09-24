@@ -2,13 +2,14 @@ import { Flex, Input } from "@chakra-ui/react";
 
 interface UploadInputProps {
   name: string;
-  id: number;
+  id?: number;
   accept: string;
-  isLoading: boolean;
+  isLoading?: boolean;
   cb: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  w: string;
 }
 
-export const UploadInput: React.FC<UploadInputProps> = ({ name, id, accept, isLoading, cb, ...props }) => {
+export const UploadInput: React.FC<UploadInputProps> = ({ name, id, accept, isLoading, cb, w, ...props }) => {
   return (
     <>
       <label htmlFor={`${id}`}>
@@ -17,7 +18,7 @@ export const UploadInput: React.FC<UploadInputProps> = ({ name, id, accept, isLo
           justify={"center"}
           px={"4"}
           py={"2"}
-          w={"100%"}
+          w={w}
           whiteSpace={"nowrap"}
           border={"none"}
           borderRadius={"4"}

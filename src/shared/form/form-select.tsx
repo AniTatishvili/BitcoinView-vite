@@ -19,8 +19,8 @@ export const FormSelect = ({ data, name, label }: SelectProps) => {
   };
 
   return (
-    <Flex flexDir={"column"} gap={1}>
-      <FormikLabel>{label}</FormikLabel>
+    <Flex w={"100%"} flexDir={"column"} gap={1}>
+      {location.pathname.includes("profile") && <FormikLabel>{label}</FormikLabel>}
       <Select w={"100%"} bg={"#35363D"} color={"#fff"} fontSize={"14px"} border={0} name={name} onChange={handleSelectChange}>
         <option value="">{user_data[name as keyof typeof user_data] || "Select" + " " + label}</option>
         {data.map((item, i) => {

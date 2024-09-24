@@ -22,7 +22,6 @@ export const authorizationOtpVerifySchema = Yup.object({
 
 export const forgotPasswordValidate = Yup.object({
   email: Yup.string().email("Invalid email format").required("Email is required field"),
-  passport_id: Yup.string().required("Enter your passport ID").min(6, "Passport ID must be 6 characters or more"),
 });
 
 export const updateUserProfileSchema = Yup.object({

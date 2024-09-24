@@ -7,6 +7,7 @@ import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 export const AddPaymentMethod = () => {
   const items = [
     { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/wallet", text: "Wallet", isCurrentPage: false },
     { url: "/user-dashboard/deposit", text: "Deposit", isCurrentPage: false },
     { url: "/user-dashboard/add-payment-method", text: "Add Payment Method", isCurrentPage: true },
   ];

@@ -65,7 +65,6 @@ export const LoginForm = () => {
     } else if (role === "advisor") {
       navigate("/adviser-dashboard/adviser-dashboard-overview");
     } else if (role === "subscriber") {
-      console.log(1222222);
       navigate("/user-dashboard/overview");
     } else {
       navigate("/login");

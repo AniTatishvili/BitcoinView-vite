@@ -4,12 +4,19 @@ import { PButton } from "../buttons";
 
 export const TableFilter = () => {
   return (
-    <Flex flexDir={{ base: "column", lg: "row" }} gap={4}>
-      <FormSelect name="" data={["Deposit", "Withdraw", "Transfer"]} />
-      {/* <DatePicker selected={startDate} onChange={(date: any) => setStartDate(date)} /> */}
-      <FormSelect name="" data={["Deposit", "Withdraw", "Transfer"]} />
-      <FormSelect name="" data={["Deposit", "Withdraw", "Transfer"]} />
-      <FormSelect name="" data={["Deposit", "Withdraw", "Transfer"]} />
+    <Flex flexDir={{ base: "column", lg: "row" }} align={"center"} gap={4}>
+      <Flex w={"100%"}>
+        <FormSelect name="" label="Deposit" data={["Deposit", "Withdraw", "Transfer"]} />
+      </Flex>
+      <Flex w={"100%"}>
+        <FormSelect name="" label="Deposit" data={["Deposit", "Withdraw", "Transfer"]} />
+      </Flex>
+      <Flex w={"100%"}>
+        <FormSelect name="" label="Deposit" data={["Deposit", "Withdraw", "Transfer"]} />
+      </Flex>
+      <Flex w={"100%"}>
+        <FormSelect name="" label="Deposit" data={["Deposit", "Withdraw", "Transfer"]} />
+      </Flex>
       <Flex w={"100%"}>
         <Input type="text" placeholder="TxID" bg={"#35363D"} color={"#fff"} borderRadius={"8px"} border={0} />
       </Flex>

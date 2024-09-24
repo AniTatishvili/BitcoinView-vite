@@ -6,6 +6,7 @@ import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 export const TransactionHistory = () => {
   const items = [
     { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
+    { url: "/user-dashboard/wallet", text: "Wallet", isCurrentPage: false },
     { url: "/user-dashboard/deposit", text: "Deposit", isCurrentPage: false },
     { url: "/user-dashboard/transaction-history", text: "Transaction History", isCurrentPage: true },
   ];

@@ -18,7 +18,6 @@ const formik_values = {
 
   forgotPasswordValues: {
     email: "",
-    passport_id: "",
   },
 
   updateUserProfile: {

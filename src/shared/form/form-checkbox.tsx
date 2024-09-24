@@ -3,7 +3,8 @@ import { useUserSignupStore } from "../../store/dashboard/user-auth";
 
 interface FormCheckboxProps {
   children?: React.ReactNode;
-  name: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  name?: any;
 }
 
 export const FormikRegistrationCheckbox = ({ children, name }: FormCheckboxProps) => {

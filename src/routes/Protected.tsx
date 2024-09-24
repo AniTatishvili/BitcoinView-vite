@@ -45,50 +45,14 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
 
   //   if (isAuthenticated === null) return <Loader />;
 
-  // useEffect(() => {
-  //   const checkAuth = () => {
-  //     const uid = JSON.parse(window.localStorage.getItem("UID") || '""');
-  //     const logged_in = JSON.parse(window.localStorage.getItem("LOGGED_IN") || '""');
-  //     const token = JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}");
-
-  //     if (token && uid && logged_in) {
-  //       try {
-  //         const tokenExpiration = jwtDecode<{ exp: number }>(token).exp;
-  //         const dateNow = Math.floor(new Date().getTime() / 1000);
-
-  //         if (tokenExpiration < dateNow) {
-  //           setIsAuthenticated(false);
-  //         } else {
-  //           setIsAuthenticated(true);
-  //         }
-  //       } catch (e) {
-  //         setIsAuthenticated(false);
-  //       }
-  //     } else {
-  //       setIsAuthenticated(false);
-  //     }
-  //     setIsLoading(false);
-  //   };
-
-  //   checkAuth();
-
-  //   window.addEventListener("storage", checkAuth);
-
-  //   return () => {
-  //     window.removeEventListener("storage", checkAuth);
-  //   };
-  // }, [role_name, username, updateUserFields]);
-
   if (isLoading) {
     return <div>Loading...</div>;
   }
-  console.log(username, role_name, "role");
+
   if (isAuthenticated) {
     if (role_name && role_name.includes(allowedRoles)) {
-      console.log("qqqq", 54444);
       return <Outlet />;
     } else {
-      console.log("qqqq");
       return <Navigate to={"/404"} state={{ from: location }} />;
     }
   } else if (!isAuthenticated) {

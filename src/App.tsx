@@ -4,10 +4,11 @@ import { RouterConfig } from "./routes/RouterConfig";
 // import { useQuery } from "@tanstack/react-query";
 // import { getUsersData } from "./services";
 import { useUserSignupStore } from "./store/dashboard/user-auth";
+import { Flex } from "@chakra-ui/react";
 // import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
-  const { updateUserFields, avatar, username, email } = useUserSignupStore();
+  const { updateUserFields } = useUserSignupStore();
   // const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(true);
   const auth = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
@@ -52,12 +53,16 @@ const App: React.FC = () => {
     }
   }, [isUserLoggedIn, token, updateUserFields]);
 
-  React.useEffect(() => {
-    console.log("Store values after API request:", { avatar, username, email });
-  }, [avatar, username, email]);
+  // React.useEffect(() => {
+  //   console.log("Store values after API request:", { avatar, username, email });
+  // }, [avatar, username, email]);
 
-  if (isLoading && !location.pathname.includes("signup")) {
-    return <div>Loading...</div>;
+  if (isLoading && !/\/(login|signup)/.test(location.pathname)) {
+    return (
+      <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
+        <div>Loading..</div>.
+      </Flex>
+    );
   }
 
   return <RouterConfig />;

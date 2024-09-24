@@ -5,8 +5,9 @@ import { Flex, Text, Image } from "@chakra-ui/react";
 
 import { LoginForm } from "../../components/auth/login";
 import { VideoPlayer } from "../../shared/videos";
-import logo from "../../assets/logo.svg";
+
 import videoSource from "../../assets/videos/sign_up_video_webm.webm";
+import logo from "../../assets/logo.svg";
 
 export const Login = () => {
   const { t } = useTranslation();
@@ -28,10 +29,8 @@ export const Login = () => {
             </Text>
             <LoginForm />
 
-            <Flex justify={"center"} gap={4}>
-              {/* <Link to="/forgot-password">{t("USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link> */}
-              {/* {"/"} */}
-              <Text color={"#ccc"}>Don't you have an account?</Text>
+            <Flex justify={"center"} gap={2}>
+              <Link to="/forget-password">{t("common:USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link>/<Text color={"#ccc"}>Don't you have an account?</Text>
               <Link to="/signup" style={{ color: "#f7931a" }}>
                 {t("common:USER.AUTH.SIGNUP")}
               </Link>

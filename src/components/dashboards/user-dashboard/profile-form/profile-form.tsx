@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React from "react";
 import axios from "axios";
 
-import { updateUserProfile, updateUserProfileSchema } from "../../../../shared/form";
+// import { updateUserProfile, updateUserProfileSchema } from "../../../../shared/form";
 import { useUserSignupStore } from "../../../../store/dashboard/user-auth";
 import { Form, Formik } from "formik";
 import { ProfileFormFields } from "./profile-form-fields";
@@ -11,24 +12,13 @@ export const ProfileForm = () => {
   const token = JSON.parse(localStorage.getItem("USER_AUTH") || "{}");
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user-information";
 
+  const { updateUserFields } = useUserSignupStore();
   const userData = useUserSignupStore();
 
   const [initialValues, setInitialValues] = React.useState({});
 
-  React.useEffect(() => {
-    if (userData) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const updateUserProfile: { [key: string]: any } = {};
-      Object.entries(userData).forEach(([key, value]) => {
-        updateUserProfile[key] = value;
-      });
-      setInitialValues(updateUserProfile);
-    }
-  }, [userData]);
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onFormSubmit = async (values: any) => {
-    // Filter out fields with no value
     const filteredValues = Object.fromEntries(Object.entries(values).filter(([_, value]) => value !== ""));
 
     console.log("Filtered values:", filteredValues);
@@ -40,7 +30,8 @@ export const ProfileForm = () => {
           "Content-Type": "application/json",
         },
       });
-      console.log("Profile updated successfully:", response.data);
+      updateUserFields(filteredValues);
+      console.log("Profile updated successfully:", response.data, filteredValues);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
         console.error("Error updating profile:", error.response.data);
@@ -51,7 +42,18 @@ export const ProfileForm = () => {
     }
   };
 
-  // console.log(initialValues);
+  React.useEffect(() => {
+    if (userData) {
+      console.log(userData, "data");
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const updateUserProfile: { [key: string]: any } = {};
+      Object.entries(userData).forEach(([key, value]) => {
+        updateUserProfile[key] = value;
+      });
+      setInitialValues(updateUserProfile);
+    }
+  }, [userData]);
+
   return (
     <>
       <ProfileAvatarPicture />

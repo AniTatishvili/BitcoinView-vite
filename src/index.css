@@ -117,6 +117,24 @@ option {
   background: #fff !important;
 }
 
+.react-tel-input .flag-dropdown.open {
+  overflow: visible;
+  border-radius: 8px 0 0 8px;
+  z-index: 9999; 
+}
+
+.react-tel-input .country-list {
+  background-color: #35363D !important;
+  color: #fff !important
+}
+
+.react-tel-input .country-list .country.highlight {
+  background-color: #999 !important;
+}
+
+.react-tel-input .country-list .country:hover {
+  color: #213547;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
