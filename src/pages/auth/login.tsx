@@ -30,7 +30,7 @@ export const Login = () => {
             <LoginForm />
 
             <Flex justify={"center"} gap={2}>
-              <Link to="/forget-password">{t("common:USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link>/<Text color={"#ccc"}>Don't you have an account?</Text>
+              <Link to="/forget-password-email">{t("common:USER.AUTH.FORGOT_YOUR_PASSWORD")}</Link>/<Text color={"#ccc"}>Don't you have an account?</Text>
               <Link to="/signup" style={{ color: "#f7931a" }}>
                 {t("common:USER.AUTH.SIGNUP")}
               </Link>

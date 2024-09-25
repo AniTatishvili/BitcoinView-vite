@@ -20,6 +20,11 @@ const formik_values = {
     email: "",
   },
 
+  confirmNewPasswordValues: {
+    password: "",
+    password_confirmation: "",
+  },
+
   updateUserProfile: {
     account_status: "",
     chat_notifications: "",
@@ -53,4 +58,5 @@ const formik_values = {
     cvv: "",
   },
 };
-export const { initialValues, authorizationValues, otpValues, forgotPasswordValues, updateUserProfile, paymentMethodValues } = formik_values;
+export const { initialValues, authorizationValues, otpValues, forgotPasswordValues, confirmNewPasswordValues, updateUserProfile, paymentMethodValues } =
+  formik_values;

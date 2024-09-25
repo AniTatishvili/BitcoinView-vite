@@ -2,13 +2,13 @@ import { Link, NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 import { Flex, Text, Image } from "@chakra-ui/react";
-import { ConfirmNewPassword } from "../../components/auth/forget-password";
+import { ForgetPasswordWithEmailForm } from "../../components/auth/forget-password";
 import { VideoPlayer } from "../../shared/videos";
 
 import videoSource from "../../assets/videos/sign_up_video_webm.webm";
 import logo from "../../assets/logo.svg";
 
-export const ForgetPassword = () => {
+export const ForgetPasswordEmail = () => {
   const { t } = useTranslation();
 
   return (
@@ -25,7 +25,7 @@ export const ForgetPassword = () => {
           <Text as="h2" color={"#fff"} lineHeight={1}>
             Reset Password
           </Text>
-          <ConfirmNewPassword />
+          <ForgetPasswordWithEmailForm />
 
           <Flex justify={"center"} gap={2}>
             <Link to="/login" style={{ color: "#f7931a" }}>

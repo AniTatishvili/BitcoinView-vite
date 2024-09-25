@@ -24,6 +24,14 @@ export const forgotPasswordValidate = Yup.object({
   email: Yup.string().email("Invalid email format").required("Email is required field"),
 });
 
+export const confirmNewPasswordSchema = Yup.object({
+  password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
+  password_confirmation: Yup.string()
+    .required("Enter password")
+    .min(9, "Password must be 9 characters or more")
+    .oneOf([Yup.ref("password")], "Passwords must match"),
+});
+
 export const updateUserProfileSchema = Yup.object({
   first_name: Yup.string().required("Enter name"),
   last_name: Yup.string().required("Enter surname"),

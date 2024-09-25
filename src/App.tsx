@@ -57,7 +57,7 @@ const App: React.FC = () => {
   //   console.log("Store values after API request:", { avatar, username, email });
   // }, [avatar, username, email]);
 
-  if (isLoading && !/\/(login|signup)/.test(location.pathname)) {
+  if (isLoading && !/\/(login|signup|forget-password)/.test(location.pathname)) {
     return (
       <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
         <div>Loading..</div>.
