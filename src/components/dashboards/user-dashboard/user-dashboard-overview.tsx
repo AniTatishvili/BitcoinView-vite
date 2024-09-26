@@ -19,11 +19,25 @@ export const UserDashboardOverview = () => {
           </Tab>
         </TabList>
 
-        <TabPanels>
-          <TabPanel>
+        <TabPanels
+          overflowX={"scroll"}
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "4px",
+              height: "4px",
+            },
+            "&::-webkit-scrollbar-track": {
+              width: "6px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#f7931a",
+              borderRadius: "24px",
+            },
+          }}>
+          <TabPanel minW={"500px"}>
             <UserDashboardChart />
           </TabPanel>
-          <TabPanel>
+          <TabPanel minW={"500px"}>
             <TradingViewChart />
           </TabPanel>
         </TabPanels>

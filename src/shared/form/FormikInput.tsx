@@ -11,16 +11,17 @@ interface FormikInputProps {
   type: string;
   placeholder: string;
   name: string;
+  disabled?: boolean;
 }
 
-export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, name }) => {
+export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, name, disabled }) => {
   const [show, setShow] = React.useState(false);
 
   return (
     <Flex w={"100%"} flexDir={"column"} gap={2}>
       {type === "password" ? (
         <InputGroup display={"flex"} flexDir={"column"} gap={1}>
-          {/* <FormikLabel>{placeholder}</FormikLabel> */}
+          <FormikLabel>{placeholder}</FormikLabel>
           <InputGroup>
             <Field
               name={name}
@@ -61,11 +62,13 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
             name={name}
             type={type}
             placeholder={placeholder}
+            disabled={disabled}
             style={{
               height: "40px",
               background: "#35363D",
               color: "#fff",
               fontSize: "16px",
+              textTransform: "capitalize",
               lineHeight: 1,
               border: 0,
               borderRadius: "8px",
