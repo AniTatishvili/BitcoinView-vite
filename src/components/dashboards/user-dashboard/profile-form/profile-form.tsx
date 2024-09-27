@@ -21,8 +21,6 @@ export const ProfileForm = () => {
   const onFormSubmit = async (values: any) => {
     const filteredValues = Object.fromEntries(Object.entries(values).filter(([_, value]) => value !== ""));
 
-    console.log("Filtered values:", filteredValues);
-
     try {
       const response = await axios.post(url, filteredValues, {
         headers: {
@@ -44,7 +42,6 @@ export const ProfileForm = () => {
 
   React.useEffect(() => {
     if (userData) {
-      console.log(userData, "data");
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const updateUserProfile: { [key: string]: any } = {};
       Object.entries(userData).forEach(([key, value]) => {

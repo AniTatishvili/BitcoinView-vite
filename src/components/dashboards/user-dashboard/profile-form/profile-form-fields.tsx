@@ -39,7 +39,7 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormikInput name="last_name" type="text" placeholder="Surname" />
           <FormikNumber name="mobile" placeholder={t("common:USER.AUTH.PHONE")} />
           <FormikInput name="role_name" type="text" placeholder="Employee" disabled={true} />
-          <FormikInput name="retention_status" type="text" placeholder="Retention status" disabled={true} />
+          <FormikInput name="account_status" type="text" placeholder="Status" disabled={true} />
           {/* <FormSelect name="customer_status" label="Customer status" data={[]} /> */}
           <FormikInput name="time_zone" type="text" placeholder="Time zone" disabled={true} />
           {/* <FormikRegistrationCheckbox name="chat_notifications">Support chat notifications</FormikRegistrationCheckbox> */}

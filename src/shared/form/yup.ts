@@ -41,7 +41,7 @@ export const updateUserProfileSchema = Yup.object({
   role_name: Yup.string(),
   country: Yup.string().required("Select country"),
   currency: Yup.string().required("Select currency"),
-  retention_status: Yup.string().required("Select retention_status"),
+  account_status: Yup.string(),
   custumer_status: Yup.string().required("Select custumer status"),
   password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
   time_zone: Yup.string().required("Select time zone"),

@@ -57,7 +57,7 @@ export const ProfileAvatarPicture: React.FC<ProfileAvatarPictureProps> = () => {
       fd.append("avatar", file);
       const objectUrl = URL.createObjectURL(file);
       setProfileImage(objectUrl);
-      console.log(fd, "fd");
+
       try {
         const response = await axios.post(url, fd, {
           headers: {
@@ -75,7 +75,6 @@ export const ProfileAvatarPicture: React.FC<ProfileAvatarPictureProps> = () => {
   };
 
   useEffect(() => {
-    console.log(454545);
     if (avatar) {
       setProfileImage("https://phplaravel-1309375-4888543.cloudwaysapps.com" + avatar);
       setUserName(username);

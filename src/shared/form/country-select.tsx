@@ -11,7 +11,6 @@ export const CountrySelect = () => {
   const [detectCountry, setDetectCountry] = React.useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const changeCountry = (e: any) => {
-    console.log(e.target.value);
     updateUserFields({ country: e.target.value });
   };
 
@@ -29,7 +28,7 @@ export const CountrySelect = () => {
 
     fetchCountry();
   }, []);
-  console.log("detectCountry", detectCountry);
+
   return (
     <Flex flexDir={"column"} gap={1}>
       <FormikLabel>Country</FormikLabel>

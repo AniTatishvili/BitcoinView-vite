@@ -18,7 +18,7 @@ export const PackageSelectionContent = () => {
   return (
     <Flex w={"100%"} flexDir={"column"} gap={4}>
       <Flex w={"100%"} flexDir={{ base: "column", xl: "row" }} gap={4}>
-        <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
+        <Flex w={"100%"} h={"100%"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
           <SliderMarkPackage />
         </Flex>
         <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>

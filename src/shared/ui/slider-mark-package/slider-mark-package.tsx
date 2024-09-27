@@ -6,7 +6,7 @@ import { RiQuestionFill } from "react-icons/ri";
 export const SliderMarkPackage = () => {
   const navigate = useNavigate();
 
-  const [activeIndex, setActiveIndex] = React.useState<number | null>(null);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(0);
   const [input, setInput] = React.useState<number | null>(null);
   const [showInput] = React.useState<boolean>(true);
 

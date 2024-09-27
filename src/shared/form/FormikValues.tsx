@@ -36,7 +36,6 @@ const formik_values = {
     id: "",
     last_name: "",
     mobile: "",
-    retention_status: "",
     role_id: "",
     role_name: "",
     time_zone: "",

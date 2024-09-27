@@ -20,11 +20,12 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
   return (
     <Flex w={"100%"} flexDir={"column"} gap={2}>
       {type === "password" ? (
-        <InputGroup display={"flex"} flexDir={"column"} gap={1}>
+        <Flex flexDir={"column"} gap={1}>
           <FormikLabel>{placeholder}</FormikLabel>
           <InputGroup>
             <Field
-              name={name}
+              value=""
+              // name={name}
               type={show ? "text" : "password"}
               placeholder={placeholder}
               style={{
@@ -54,7 +55,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
               </Button>
             </InputRightElement>
           </InputGroup>
-        </InputGroup>
+        </Flex>
       ) : (
         <InputGroup display={"flex"} flexDir={"column"} gap={1}>
           <FormikLabel>{placeholder}</FormikLabel>
