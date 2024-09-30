@@ -82,17 +82,6 @@ export function RouterConfig() {
           <Route path="package-selection-success" element={<PackageSelectionSuccess />} />
         </Route>
       </Route>
-      {/* <Route element={<Redirect />}>
-          <Route path="forgot-password" element={<ForgotPassword />} />
-        </Route>
-
-        <Route element={<Redirect />}>
-          <Route path="confirm-new-password" element={<ConfirmNewPassword />} />
-        </Route>
-
-        <Route element={<Redirect />}>
-          <Route path="signup" element={<Signup />} />
-        </Route> */}
     </Routes>
   );
 }

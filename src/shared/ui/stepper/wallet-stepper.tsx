@@ -1,17 +1,17 @@
-import { Stepper, Step, StepIndicator, StepStatus, StepIcon, StepNumber, StepTitle, StepDescription, StepSeparator, useSteps, Box } from "@chakra-ui/react";
+import { Stepper, Step, StepIndicator, StepStatus, StepIcon, StepNumber, StepSeparator, Box } from "@chakra-ui/react";
+import { ReactNode } from "react";
 
-export const WalletStepper = () => {
-  const steps = [
-    { title: "", description: "" },
-    { title: "", description: "" },
-    { title: "", description: "" },
-  ];
+interface Step {
+  content: ReactNode;
+}
 
-  const { activeStep } = useSteps({
-    index: 1,
-    count: steps.length,
-  });
+interface WalletStepperProps {
+  steps: Step[];
+  activeStep: number;
+}
 
+export const WalletStepper: React.FC<WalletStepperProps> = ({ steps, activeStep }) => {
+  console.log(activeStep);
   return (
     <Stepper index={activeStep} orientation="vertical" height="400px" gap="0">
       {steps.map((step, index) => (
@@ -20,9 +20,8 @@ export const WalletStepper = () => {
             <StepStatus complete={<StepIcon />} incomplete={<StepNumber />} active={<StepNumber />} />
           </StepIndicator>
 
-          <Box flexShrink="0">
-            <StepTitle>{step.title}</StepTitle>
-            <StepDescription>{step.description}</StepDescription>
+          <Box flexShrink="0" mt={4}>
+            {step.content}
           </Box>
 
           <StepSeparator />
@@ -31,5 +30,3 @@ export const WalletStepper = () => {
     </Stepper>
   );
 };
-
-// render(<Example />)

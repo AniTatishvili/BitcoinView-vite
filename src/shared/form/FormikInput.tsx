@@ -24,8 +24,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
           <FormikLabel>{placeholder}</FormikLabel>
           <InputGroup>
             <Field
-              value=""
-              // name={name}
+              name={name}
               type={show ? "text" : "password"}
               placeholder={placeholder}
               style={{
