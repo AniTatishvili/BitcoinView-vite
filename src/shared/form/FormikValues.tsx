@@ -48,6 +48,18 @@ const formik_values = {
     exp_date: "",
     cvv: "",
   },
+
+  sendAmointValues: {
+    amount_usd: "",
+  },
 };
-export const { initialValues, authorizationValues, otpValues, forgotPasswordValues, confirmNewPasswordValues, updateUserProfile, paymentMethodValues } =
-  formik_values;
+export const {
+  initialValues,
+  authorizationValues,
+  otpValues,
+  forgotPasswordValues,
+  confirmNewPasswordValues,
+  updateUserProfile,
+  paymentMethodValues,
+  sendAmointValues,
+} = formik_values;

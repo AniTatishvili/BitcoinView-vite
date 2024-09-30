@@ -151,12 +151,10 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                 </Flex>
               </NavLink>
             ))}
-            <MenuItem>
-              <Flex w={"100%"} justify={"space-between"} align={"center"}>
-                <Link to="/user-dashboard/messages">See all messages</Link>
-                <Button>Clear all</Button>
-              </Flex>
-            </MenuItem>
+            <Flex w={"100%"} justify={"space-between"} align={"center"} px={3} mt={2}>
+              <Link to="/user-dashboard/messages">See all messages</Link>
+              <Button>Clear all</Button>
+            </Flex>
           </MenuList>
         </Menu>
         <Menu>
@@ -171,7 +169,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             <UserAvatar
               full_name={first_name + " " + last_name}
               username={username}
-              src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : "https://bit.ly/broken-link"}
+              src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : ""}
             />
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>

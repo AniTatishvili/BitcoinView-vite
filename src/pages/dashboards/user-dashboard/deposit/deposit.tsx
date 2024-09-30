@@ -6,6 +6,7 @@ import { TableFilter } from "../../../../shared/ui/table-filter";
 // import card_img from "../../../../assets/images/cards.png";
 import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 import { DashboardDepositSteps } from "../../../../components/dashboards/dashboard-deposit-steps";
+import { DashboardPaymentMethods } from "../../../../components/dashboards/dashboard-payment-methods";
 
 export const Deposit = () => {
   const items = [
@@ -40,19 +41,22 @@ export const Deposit = () => {
           <BreadCrumb items={items} />
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Cards & Payment method</Text>
-            <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} justify={"space-between"} align={"center"} gap={4}>
+            <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} justify={"space-between"} gap={4}>
               {/* <Box w={"50%"} borderRadius={"8px"} overflow={"hidden"}>
                 <Image src={card_img} alt="cards" w={"100%"} h={"100%"} objectFit={"cover"} />
               </Box> */}
-              <DashboardDepositSteps />
-              <Flex flexDir={{ base: "column", lg: "row" }} fontSize={"14px"} gap={4}>
-                <Box bg={"#3C3C3C"} borderRadius={"8px"} p={"5px"}>
-                  <Link to="/user-dashboard/transaction-history">Transactions history</Link>
-                </Box>
-                <Box bg={"#3C3C3C"} borderRadius={"8px"} p={"5px"}>
-                  <Link to="/user-dashboard/add-payment-method">Add new payment method</Link>
-                </Box>
-              </Flex>
+              <DashboardDepositSteps amount_usd={undefined} />
+              <Box>
+                <Flex flexDir={{ base: "column", lg: "row" }} fontSize={"14px"} gap={4} mb={"1rem"}>
+                  <Box bg={"#3C3C3C"} borderRadius={"8px"} p={"5px"}>
+                    <Link to="/user-dashboard/transaction-history">Transactions history</Link>
+                  </Box>
+                  <Box bg={"#3C3C3C"} borderRadius={"8px"} p={"5px"}>
+                    <Link to="/user-dashboard/add-payment-method">Add new payment method</Link>
+                  </Box>
+                </Flex>
+                <DashboardPaymentMethods />
+              </Box>
             </Flex>
           </Flex>
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>

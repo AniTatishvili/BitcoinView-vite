@@ -17,7 +17,7 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
 
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
 
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const uid = JSON.parse(window.localStorage.getItem("UID") || '""');
@@ -40,12 +40,12 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
     } else {
       setIsAuthenticated(false);
     }
-    setIsLoading(false);
+    // setIsLoading(false);
   }, [role_name, username, updateUserFields]);
 
   //   if (isAuthenticated === null) return <Loader />;
 
-  if (isLoading) {
+  if (isAuthenticated === null) {
     return <div>Loading...</div>;
   }
 

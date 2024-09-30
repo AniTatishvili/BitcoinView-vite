@@ -11,7 +11,6 @@ interface WalletStepperProps {
 }
 
 export const WalletStepper: React.FC<WalletStepperProps> = ({ steps, activeStep }) => {
-  console.log(activeStep);
   return (
     <Stepper index={activeStep} orientation="vertical" height="400px" gap="0">
       {steps.map((step, index) => (
@@ -20,9 +19,7 @@ export const WalletStepper: React.FC<WalletStepperProps> = ({ steps, activeStep 
             <StepStatus complete={<StepIcon />} incomplete={<StepNumber />} active={<StepNumber />} />
           </StepIndicator>
 
-          <Box flexShrink="0" mt={4}>
-            {step.content}
-          </Box>
+          <Box flexShrink="0">{step.content}</Box>
 
           <StepSeparator />
         </Step>

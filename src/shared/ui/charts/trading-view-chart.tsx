@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 
 export const TradingViewChart = () => {
   const container = useRef<HTMLDivElement>(null);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [showChart, setShowChart] = useState(true);
+
+  const [showChart] = useState(true);
 
   useEffect(() => {
     const script = document.createElement("script");
