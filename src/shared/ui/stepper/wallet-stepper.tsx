@@ -15,7 +15,7 @@ export const WalletStepper: React.FC<WalletStepperProps> = ({ steps, activeStep 
     <Stepper index={activeStep} orientation="vertical" height="400px" gap="0">
       {steps.map((step, index) => (
         <Step key={index}>
-          <StepIndicator>
+          <StepIndicator bg={"#ccc"} color={"#1a202c"} border={0}>
             <StepStatus complete={<StepIcon />} incomplete={<StepNumber />} active={<StepNumber />} />
           </StepIndicator>
 

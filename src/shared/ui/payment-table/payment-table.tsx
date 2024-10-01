@@ -1,6 +1,24 @@
 import { TableContainer, Table, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react";
+import moment from "moment";
 
-export const PaymentTable = () => {
+interface PaymentData {
+  time: string;
+  transaction_type: string;
+  btc_wallet: string;
+  currency: string;
+  amount_currency: string;
+  amount_usd: number;
+  destination: string;
+  txid: string;
+  transaction_status: string;
+  created_at: string;
+}
+
+interface PaymentTableProps {
+  data: PaymentData[];
+}
+
+export const PaymentTable = ({ data }: PaymentTableProps) => {
   return (
     <TableContainer>
       <Table variant="simple">
@@ -10,43 +28,31 @@ export const PaymentTable = () => {
             <Th>Type</Th>
             <Th>Deposit wallet</Th>
             <Th>Coin</Th>
-            <Th isNumeric>Amount</Th>
+            <Th>Amount $</Th>
+            <Th>Amount currency</Th>
             <Th>Destination</Th>
             <Th>TxID</Th>
             <Th>status</Th>
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>2023-08-22 10:10:48</Td>
-            <Td>deposit</Td>
-            <Td>trust wallet</Td>
-            <Td>-502</Td>
-            <Td isNumeric>120</Td>
-            <Td>trust wallet</Td>
-            <Td>trust wallet</Td>
-            <Td>Successful</Td>
-          </Tr>
-          <Tr>
-            <Td>2023-08-22 10:10:48</Td>
-            <Td>deposit</Td>
-            <Td>trust wallet</Td>
-            <Td>-502</Td>
-            <Td isNumeric>120</Td>
-            <Td>trust wallet</Td>
-            <Td>trust wallet</Td>
-            <Td>Successful</Td>
-          </Tr>
-          <Tr>
-            <Td>2023-08-22 10:10:48</Td>
-            <Td>deposit</Td>
-            <Td>trust wallet</Td>
-            <Td>-502</Td>
-            <Td isNumeric>120</Td>
-            <Td>trust wallet</Td>
-            <Td>trust wallet</Td>
-            <Td>Successful</Td>
-          </Tr>
+          {data.map((item, i) => (
+            <Tr key={i}>
+              <Td>{moment(item.created_at).format("DD/MM/yyyy h:mm:ss")}</Td>
+              <Td>{item.transaction_type}</Td>
+              <Td maxW={"150px"} whiteSpace={"nowrap"} overflow={"hidden"} textOverflow={"ellipsis"}>
+                {item.btc_wallet}
+              </Td>
+              <Td>{item.currency}</Td>
+              <Td>{item.amount_usd}</Td>
+              <Td> {item.amount_currency ? parseFloat(item.amount_currency).toFixed(5) : "N/A"}</Td>
+              <Td>{item.currency}</Td>
+              <Td maxW={"150px"} whiteSpace={"nowrap"} overflow={"hidden"} textOverflow={"ellipsis"}>
+                {item.txid}
+              </Td>
+              <Td>{item.transaction_status}</Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>

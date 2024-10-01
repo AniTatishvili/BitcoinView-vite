@@ -44,7 +44,7 @@ export const Withdraw = () => {
             <Link to="/">Deposit hasn't arrived?</Link>
           </Box>
           <Box>
-            <PaymentTable />
+            <PaymentTable data={[]} />
           </Box>
         </Flex>
       </Flex>

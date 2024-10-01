@@ -16,10 +16,14 @@ export const DashboardPaymentMethods = () => {
 
   return (
     <Flex flexDir={"column"} gap={4}>
-      <Text as="h3">Pay by Crypto Coin</Text>
-      <Flex flexDir={"column"}>
-        <Text>Bitcoin BTC</Text>
-        <PaymentMethodModal />
+      <Text as="h3" fontSize={"18px"}>
+        Pay by Crypto Coin
+      </Text>
+      <Flex flexDir={"column"} gap={2}>
+        <Flex w={"160px"} justify={"space-between"} align={"center"}>
+          <Text fontSize={"14px"}>Bitcoin BTC</Text>
+          <PaymentMethodModal />
+        </Flex>
         <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"}>
           <Text>{referralLink}</Text>
           <Button h={"fit-content"} bg={"none"} color={"#fff"} p={0} _hover={{ bg: "none" }} onClick={() => copyToClipboard(referralLink)}>
@@ -27,9 +31,11 @@ export const DashboardPaymentMethods = () => {
           </Button>
         </Flex>
       </Flex>
-      <Flex flexDir={"column"}>
-        <Text>USTD TRC20</Text>
-        <PaymentMethodModal />
+      <Flex flexDir={"column"} gap={2}>
+        <Flex w={"160px"} justify={"space-between"} align={"center"}>
+          <Text fontSize={"14px"}>USTD TRC20</Text>
+          <PaymentMethodModal />
+        </Flex>
         <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"}>
           <Text>{referralLink}</Text>
           <Button h={"fit-content"} bg={"none"} color={"#fff"} p={0} _hover={{ bg: "none" }} onClick={() => copyToClipboard(referralLink)}>

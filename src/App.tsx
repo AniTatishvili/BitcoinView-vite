@@ -32,7 +32,7 @@ const App: React.FC = () => {
   // console.log(data, 88);
 
   const token = JSON.parse(localStorage.getItem("USER_AUTH") || "{}");
-  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user-information";
+  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/me";
 
   React.useEffect(() => {
     if (isUserLoggedIn && token) {

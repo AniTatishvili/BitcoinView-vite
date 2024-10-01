@@ -38,7 +38,7 @@ export const TransactionHistory = () => {
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Recent Transactions</Text>
             <TableFilter />
-            <PaymentTable />
+            <PaymentTable data={[]} />
           </Flex>
         </Flex>
       </Flex>

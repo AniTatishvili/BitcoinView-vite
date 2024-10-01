@@ -87,7 +87,7 @@ export const WalletContent = () => {
         <Box color={"#f7931a"} fontSize={"14px"} textDecoration={"underline"}>
           <Link to="/">Deposit hasn't arrived?</Link>
         </Box>
-        <PaymentTable />
+        <PaymentTable data={[]} />
       </Flex>
     </Flex>
   );
