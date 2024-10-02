@@ -1,9 +1,11 @@
 import axios from "axios";
-import { QRCodeSVG } from "qrcode.react";
+// import { QRCodeSVG } from "qrcode.react";
 import { useState, useEffect } from "react";
 
 import { Field, Form, Formik } from "formik";
-import { Box, Input, List, ListItem, Image, useSteps, Flex, Text, Button, InputGroup, InputLeftElement } from "@chakra-ui/react";
+import { Box, Input, List, ListItem, Image, useSteps, Flex, Text, Button, InputGroup, InputLeftElement, Spinner } from "@chakra-ui/react";
+
+import { useUserDepositStore } from "../../../store/dashboard/user-deposit-payment-store";
 
 import { WalletStepper } from "../../../shared/ui/stepper";
 import { PButton } from "../../../shared/ui/buttons";
@@ -25,6 +27,7 @@ const coins = [
 ];
 
 export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () => {
+  const { setUserDepositData } = useUserDepositStore();
   const [userData, setUserData] = useState<{ qr_code: string; btc_wallet: string } | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const { activeStep, setActiveStep } = useSteps({
@@ -34,16 +37,16 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
 
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/deposit";
 
   const filteredCoins = coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm.toLowerCase()));
-  console.log("userData", userData);
+
   useEffect(() => {
     if (searchTerm !== "") {
-      console.log(666);
       setActiveStep(1);
       setShowSecond(true);
     }
@@ -56,9 +59,9 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   };
 
   const sendAmount = async (values: DashboardDepositStepsProps) => {
-    console.log(values, 111);
     setActiveStep(2);
     setShowThird(true);
+    setLoading(true);
 
     try {
       const response = await axios.post(url, values, {
@@ -71,9 +74,12 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
         transaction: { btc_wallet },
       } = response.data;
       setUserData({ qr_code, btc_wallet });
+      setUserDepositData({ qr_code, btc_wallet });
       console.log("Sent successfully:", response.data);
     } catch (error) {
       console.error("Error updating avatar:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -123,9 +129,9 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
               {() => {
                 return (
                   <Form>
-                    <Flex gap={3}>
+                    <Flex flexDir={{ base: "column", sm: "row" }} gap={3}>
                       <InputGroup>
-                        <InputLeftElement pointerEvents="none" color="gray.300" fontSize="1.2em">
+                        <InputLeftElement pointerEvents={"none"} color={"##fff"} fontSize={"1.2em"}>
                           $
                         </InputLeftElement>
                         <Field
@@ -133,7 +139,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
                           name="amount_usd"
                           placeholder="Type amount"
                           style={{
-                            with: "229px !important",
+                            width: "229px",
                             height: "40px",
                             background: "transparent",
                             color: "#fff",
@@ -141,8 +147,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
                             lineHeight: 1,
                             border: "1px solid rgb(118, 118, 118)",
                             borderRadius: "8px",
-                            padding: "0.75rem 1rem",
-                            width: "100%",
+                            padding: "0.75rem 1rem 0.75rem 1.8rem",
                             boxSizing: "border-box",
                             outline: 0,
                           }}
@@ -152,7 +157,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
                         </InputRightElement> */}
                       </InputGroup>
 
-                      <PButton type="submit">Send</PButton>
+                      <PButton type="submit">Apply</PButton>
                     </Flex>
                   </Form>
                 );
@@ -169,11 +174,19 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
             Deposit Address
           </Text>
           {showThird && (
-            <Flex justify={"space-between"} align={"center"} border={"1px solid rgb(118, 118, 118)"} borderRadius={"8px"} p={4} gap={4}>
-              <Box>
-                {/* <img src={userData?.qr_code || ""} /> */}
-                <QRCodeSVG value={userData?.qr_code || ""} />
-              </Box>
+            <Flex
+              flexDir={{ base: "column", sm: "row" }}
+              justify={"space-between"}
+              align={"center"}
+              border={"1px solid rgb(118, 118, 118)"}
+              borderRadius={"8px"}
+              p={4}
+              gap={4}>
+              <Flex w={"128px"} h={"128px"} justify={"center"} align={"center"}>
+                {loading ? <Spinner size={"xl"} color={"#f7931a"} /> : <Image src={userData?.qr_code || ""} w={"100%"} h={"100%"} objectFit={"contain"} />}
+
+                {/* <QRCodeSVG value={userData?.qr_code || ""} /> */}
+              </Flex>
               <Box>
                 <Text color={"#fff"} lineHeight={1}>
                   Adress

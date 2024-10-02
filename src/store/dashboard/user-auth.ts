@@ -15,6 +15,7 @@ type UserSignupStoreType = {
   account_status: string;
   created_at: string;
   currency: string;
+  current_balance: string;
   customer_status: string;
   deposit_notifications: boolean;
   employee: boolean;
@@ -46,6 +47,7 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   account_status: "",
   created_at: "",
   currency: "",
+  current_balance: "",
   customer_status: "",
   deposit_notifications: false,
   employee: false,

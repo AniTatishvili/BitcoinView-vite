@@ -1,19 +1,44 @@
 import React from "react";
 import axios from "axios";
-
 import { Link } from "react-router-dom";
 import { Flex, Box, Text } from "@chakra-ui/react";
 import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table";
 import { TableFilter } from "../../../../shared/ui/table-filter";
-
-// import card_img from "../../../../assets/images/cards.png";
 import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
 import { DashboardDepositSteps } from "../../../../components/dashboards/dashboard-deposit-steps";
 import { DashboardPaymentMethods } from "../../../../components/dashboards/dashboard-payment-methods";
 
-export const Deposit = () => {
-  const [data, setData] = React.useState();
-  const [isLoading, setIsLoading] = React.useState(true);
+interface FilterState {
+  created_at: string;
+  transaction_type: string;
+  currency: string;
+  transaction_status: string;
+  amount_usd: number;
+}
+
+interface TransactionData {
+  time: string;
+  transaction_type: string;
+  btc_wallet: string;
+  currency: string;
+  amount_currency: string;
+  amount_usd: number;
+  destination: string;
+  txid: string;
+  transaction_status: string;
+  created_at: string;
+}
+
+export const Deposit: React.FC = () => {
+  const [data, setData] = React.useState<TransactionData[]>([]);
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [filters, setFilters] = React.useState<FilterState>({
+    created_at: "",
+    transaction_type: "All",
+    currency: "All",
+    transaction_status: "All",
+    amount_usd: 0,
+  });
 
   const items = [
     { url: "/user-dashboard/overview", text: "Home", isCurrentPage: false },
@@ -22,12 +47,11 @@ export const Deposit = () => {
   ];
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
-
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/transactions";
 
   React.useEffect(() => {
     axios
-      .get(url, {
+      .get<TransactionData[]>(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,6 +67,24 @@ export const Deposit = () => {
       });
   }, []);
 
+  const filteredData = data.filter((item) => {
+    const itemDate = new Date(item.created_at).toISOString().slice(0, 10);
+    const filterDate = filters.created_at ? new Date(filters.created_at).toISOString().slice(0, 10) : "";
+
+    return (
+      (filterDate ? itemDate === filterDate : true) &&
+      (filters.transaction_type !== "All" ? item.transaction_type === filters.transaction_type : true) &&
+      (filters.currency !== "All" ? item.currency === filters.currency : true) &&
+      (filters.transaction_status !== "All" ? item.transaction_status === filters.transaction_status : true) &&
+      (filters.amount_usd ? item.amount_usd.toString().includes(filters.amount_usd.toString()) : true)
+    );
+  });
+
+  console.log(filteredData, "filteredData");
+  const handleFilterChange = (name: keyof FilterState, value: string) => {
+    setFilters((prev) => ({ ...prev, [name]: value }));
+  };
+
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
       <Flex
@@ -50,7 +92,6 @@ export const Deposit = () => {
         h={"100%"}
         overflowY={"scroll"}
         flexDir={{ base: "column", xl: "row" }}
-        // flexWrap={"wrap"}
         p={"1rem"}
         gap={"1rem"}
         css={{
@@ -70,9 +111,6 @@ export const Deposit = () => {
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Cards & Payment method</Text>
             <Flex w={"100%"} flexDir={{ base: "column", lg: "row" }} justify={"space-between"} gap={4}>
-              {/* <Box w={"50%"} borderRadius={"8px"} overflow={"hidden"}>
-                <Image src={card_img} alt="cards" w={"100%"} h={"100%"} objectFit={"cover"} />
-              </Box> */}
               <DashboardDepositSteps amount_usd={undefined} />
               <Box>
                 <Flex flexDir={{ base: "column", lg: "row" }} fontSize={"14px"} gap={4} mb={"1rem"}>
@@ -89,31 +127,29 @@ export const Deposit = () => {
           </Flex>
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Recent Transactions</Text>
-            <TableFilter />
+            <TableFilter filters={filters} onFilterChange={handleFilterChange} />
             {isLoading ? (
               <Flex justify={"center"} align={"center"} h={"100%"}>
                 <div>Loading..</div>
               </Flex>
             ) : (
-              data && (
-                <Flex
-                  overflowX={"scroll"}
-                  css={{
-                    "&::-webkit-scrollbar": {
-                      width: "4px",
-                      height: "4px",
-                    },
-                    "&::-webkit-scrollbar-track": {
-                      width: "6px",
-                    },
-                    "&::-webkit-scrollbar-thumb": {
-                      background: "#f7931a",
-                      borderRadius: "24px",
-                    },
-                  }}>
-                  <PaymentTable data={data} />
-                </Flex>
-              )
+              <Flex
+                overflowX={"scroll"}
+                css={{
+                  "&::-webkit-scrollbar": {
+                    width: "4px",
+                    height: "4px",
+                  },
+                  "&::-webkit-scrollbar-track": {
+                    width: "6px",
+                  },
+                  "&::-webkit-scrollbar-thumb": {
+                    background: "#f7931a",
+                    borderRadius: "24px",
+                  },
+                }}>
+                <PaymentTable data={filteredData} />
+              </Flex>
             )}
           </Flex>
         </Flex>

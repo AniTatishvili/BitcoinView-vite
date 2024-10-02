@@ -4,7 +4,7 @@ import { useNavigate, NavLink, Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image, Text } from "@chakra-ui/react";
+import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image, Text, Divider, Stack } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { IoNotifications, IoClose } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
@@ -30,14 +30,19 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { username, first_name, last_name, avatar }: { username: string; first_name: string; last_name: string; avatar: string } = useUserSignupStore(
-    (state) => ({
-      avatar: state.avatar,
-      username: state.username,
-      first_name: state.first_name,
-      last_name: state.last_name,
-    })
-  );
+  const {
+    username,
+    first_name,
+    last_name,
+    avatar,
+    current_balance,
+  }: { username: string; first_name: string; last_name: string; avatar: string; current_balance: string } = useUserSignupStore((state) => ({
+    avatar: state.avatar,
+    username: state.username,
+    first_name: state.first_name,
+    last_name: state.last_name,
+    current_balance: state.current_balance,
+  }));
 
   const [profileImage, setProfileImage] = React.useState("");
 
@@ -166,11 +171,15 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             _hover={{ backround: "transparent" }}
             _focus={{ backround: "transparent" }}
             _active={{ backround: "transparent" }}>
-            <UserAvatar
-              full_name={first_name + " " + last_name}
-              username={username}
-              src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : ""}
-            />
+            <Stack direction={"row"} p={4}>
+              <UserAvatar
+                full_name={first_name + " " + last_name}
+                username={username}
+                src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : ""}
+              />
+              <Divider orientation={"vertical"} h={"20px"} />
+              <Box>{current_balance}</Box>
+            </Stack>
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
             {data.map((item, i) => (

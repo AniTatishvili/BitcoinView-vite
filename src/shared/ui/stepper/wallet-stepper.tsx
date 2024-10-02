@@ -12,7 +12,7 @@ interface WalletStepperProps {
 
 export const WalletStepper: React.FC<WalletStepperProps> = ({ steps, activeStep }) => {
   return (
-    <Stepper index={activeStep} orientation="vertical" height="400px" gap="0">
+    <Stepper index={activeStep} orientation={"vertical"} minH={"420px"} h={"100%"} gap={0}>
       {steps.map((step, index) => (
         <Step key={index}>
           <StepIndicator bg={"#ccc"} color={"#1a202c"} border={0}>

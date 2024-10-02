@@ -1,7 +1,12 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Button, useDisclosure, Flex } from "@chakra-ui/react";
-import { QRCodeSVG } from "qrcode.react";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalCloseButton, Button, useDisclosure, Flex, Image } from "@chakra-ui/react";
+import React from "react";
+// import { QRCodeSVG } from "qrcode.react";
 
-export const PaymentMethodModal = () => {
+interface PaymentMethodModalPops {
+  src: string;
+}
+
+export const PaymentMethodModal: React.FC<PaymentMethodModalPops> = ({ src }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -15,7 +20,8 @@ export const PaymentMethodModal = () => {
         _hover={{ backround: "transparent" }}
         _focus={{ backround: "transparent" }}
         _active={{ backround: "transparent" }}>
-        <QRCodeSVG value="https://example.com" />
+        <Image src={src} alt="QR Code" />
+        {/* <QRCodeSVG value="https://example.com" /> */}
       </Button>
 
       <Modal isCentered isOpen={isOpen} onClose={onClose}>
@@ -27,7 +33,8 @@ export const PaymentMethodModal = () => {
           <ModalCloseButton />
           <ModalBody bg={"#1F2027"} borderRadius={"0 0 8px 8px"} pb={6}>
             <Flex justify={"center"} align={"center"}>
-              <QRCodeSVG value="https://example.com" />
+              <Image src={src} alt="QR Code" />
+              {/* <QRCodeSVG value="https://example.com" /> */}
             </Flex>
           </ModalBody>
         </ModalContent>

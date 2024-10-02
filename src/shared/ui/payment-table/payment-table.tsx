@@ -38,7 +38,7 @@ export const PaymentTable = ({ data }: PaymentTableProps) => {
         <Tbody>
           {data.map((item, i) => (
             <Tr key={i}>
-              <Td>{moment(item.created_at).format("DD/MM/yyyy h:mm:ss")}</Td>
+              <Td>{moment(item.created_at).format("DD/MM/yyyy h:mm:ss a")}</Td>
               <Td>{item.transaction_type}</Td>
               <Td maxW={"150px"} whiteSpace={"nowrap"} overflow={"hidden"} textOverflow={"ellipsis"}>
                 {item.btc_wallet}
