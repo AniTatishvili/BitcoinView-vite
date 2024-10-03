@@ -14,6 +14,7 @@ import { TbCopyPlusFilled } from "react-icons/tb";
 
 import usdt_logo from "../../../assets/images/wallet-logos/tether-usdt-logo.svg";
 import btc from "../../../assets/images/wallet-logos/bitcoin-btc-logo.svg";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
 // import { CheckIcon } from "@chakra-ui/icons";
 
 interface DashboardDepositStepsProps {
@@ -28,6 +29,7 @@ const coins = [
 
 export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () => {
   const { setUserDepositData } = useUserDepositStore();
+  const showToast = useCustomToast();
   const [userData, setUserData] = useState<{ qr_code: string; btc_wallet: string } | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const { activeStep, setActiveStep } = useSteps({
@@ -86,6 +88,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
+      showToast("success", "Copied to clipboard!");
       console.log("Copied to clipboard!");
     } catch (err) {
       console.error("Failed to copy: ", err);
@@ -122,7 +125,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
       content: (
         <Box>
           <Text as={"h4"} mb={2}>
-            Select Network
+            Select Amount
           </Text>
           {showSecond && (
             <Formik initialValues={sendAmointValues} onSubmit={sendAmount}>
@@ -192,7 +195,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
                   Adress
                 </Text>
                 <Flex align={"center"}>
-                  <Text maxW={{ base: "100px", md: "150px", lg: "250px" }} w={"100%"} whiteSpace={"nowrap"} overflow={"hidden"} textOverflow={"ellipsis"}>
+                  <Text maxW={{ base: "100px", md: "150px", lg: "250px" }} w={"100%"}>
                     {userData?.btc_wallet || ""}
                   </Text>
                   <Button bg={"none"} p={0} color={"#fff"} _hover={{ bg: "none" }} onClick={() => copyToClipboard(userData?.btc_wallet || "")}>

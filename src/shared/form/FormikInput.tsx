@@ -1,5 +1,5 @@
 import React from "react";
-import { Field, ErrorMessage } from "formik";
+import { Field, ErrorMessage, useField } from "formik";
 import { Box, Button, Flex, InputGroup, InputRightElement } from "@chakra-ui/react";
 
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -16,10 +16,35 @@ interface FormikInputProps {
 
 export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, name, disabled }) => {
   const [show, setShow] = React.useState(false);
+  const [field] = useField(name);
 
   return (
     <Flex w={"100%"} flexDir={"column"} gap={2}>
-      {type === "password" ? (
+      {name === "account_status" ? (
+        <InputGroup display={"flex"} flexDir={"column"} gap={1}>
+          <Field
+            name={name}
+            type="text"
+            placeholder={placeholder}
+            value={field.value === 1 ? "Active" : "Deactive"}
+            disabled={true}
+            style={{
+              height: "40px",
+              background: "#35363D",
+              color: "#fff",
+              fontSize: "16px",
+              textTransform: "capitalize",
+              lineHeight: 1,
+              border: 0,
+              borderRadius: "8px",
+              padding: "0.75rem 1rem",
+              width: "100%",
+              boxSizing: "border-box",
+              outline: 0,
+            }}
+          />
+        </InputGroup>
+      ) : type === "password" ? (
         <Flex flexDir={"column"} gap={1}>
           <FormikLabel>{placeholder}</FormikLabel>
           <InputGroup>

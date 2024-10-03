@@ -58,7 +58,9 @@ export const DashboardPaymentMethods = () => {
           <PaymentMethodModal src={"https://phplaravel-1309375-4888543.cloudwaysapps.com/" + data?.btcQr || ""} />
         </Flex>
         <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"}>
-          <Text>{data?.btcAddress || ""}</Text>
+          <Text w={"100%"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
+            {data?.btcAddress || ""}
+          </Text>
           <Button h={"fit-content"} bg={"none"} color={"#fff"} p={0} _hover={{ bg: "none" }} onClick={() => copyToClipboard(data?.btcAddress || "")}>
             <TbCopyPlusFilled />
           </Button>
@@ -70,7 +72,9 @@ export const DashboardPaymentMethods = () => {
           <PaymentMethodModal src={"https://phplaravel-1309375-4888543.cloudwaysapps.com/" + data?.btcQr || ""} />
         </Flex>
         <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"}>
-          <Text>{data?.btcAddress || ""}</Text>
+          <Text w={"100%"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
+            {data?.btcAddress || ""}
+          </Text>
           <Button h={"fit-content"} bg={"none"} color={"#fff"} p={0} _hover={{ bg: "none" }} onClick={() => copyToClipboard(data?.btcAddress || "")}>
             <TbCopyPlusFilled />
           </Button>

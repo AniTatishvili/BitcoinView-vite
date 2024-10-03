@@ -28,7 +28,7 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} />
           <CountrySelect />
           {/* <FormikInput name="resource" type="text" placeholder="Resource" /> */}
-          <FormSelect name="courency" label="Courancy" data={["USD", "EUR"]} />
+          <FormSelect name="currency" label="Currency" data={["USD", "EUR"]} />
           <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
           <FormikInput name="confirm_password" type="password" placeholder="Confirm password" />
           {/* <FormSelect name="tp_account_groups" label="TP Account groups" data={["TP Account"]} /> */}

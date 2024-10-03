@@ -1,7 +1,6 @@
 import { Flex, Text } from "@chakra-ui/react";
-import { TableFilter } from "../../../../shared/ui/table-filter";
-import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table";
 import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
+import { MoneyTransferDetailsTable } from "../money-transfer-details-table";
 
 export const TransactionHistory = () => {
   const items = [
@@ -33,12 +32,11 @@ export const TransactionHistory = () => {
             borderRadius: "24px",
           },
         }}>
-        <Flex flexDir={"column"} gap={4}>
+        <Flex w={"100%"} flexDir={"column"} gap={4}>
           <BreadCrumb items={items} />
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Recent Transactions</Text>
-            <TableFilter />
-            <PaymentTable data={[]} />
+            <MoneyTransferDetailsTable />
           </Flex>
         </Flex>
       </Flex>

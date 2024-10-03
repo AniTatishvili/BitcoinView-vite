@@ -1,10 +1,9 @@
 import { Button, Flex, Select, Input } from "@chakra-ui/react";
-import { PButton } from "../buttons";
 
 interface Filters {
   amount_usd: string | number | readonly string[] | undefined;
   created_at: string;
-  transaction_type: string;
+  payment_system: string;
   currency: string;
   transaction_status: string;
 }
@@ -31,16 +30,16 @@ export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChang
       </Flex>
       <Flex w={"100%"}>
         <Select
-          name="depositType"
+          name="payment_system"
           bg={"#35363D"}
           color={"#fff"}
           borderRadius={"8px"}
           border={0}
-          value={filters.transaction_type}
-          onChange={(e) => onFilterChange("transaction_type", e.target.value)}>
+          value={filters.payment_system}
+          onChange={(e) => onFilterChange("payment_system", e.target.value)}>
           <option value="All">All</option>
-          <option value="Wallet">Wallet</option>
-          <option value="Card">Card</option>
+          <option value="wallet">Wallet</option>
+          <option value="card">Card</option>
         </Select>
       </Flex>
       <Flex w={"100%"}>
@@ -58,21 +57,6 @@ export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChang
         </Select>
       </Flex>
       <Flex w={"100%"}>
-        <Select
-          name="transaction_status"
-          bg={"#35363D"}
-          color={"#fff"}
-          borderRadius={"8px"}
-          border={0}
-          value={filters.transaction_status}
-          onChange={(e) => onFilterChange("transaction_status", e.target.value)}>
-          <option value="All">All</option>
-          <option value="Pending">Pending</option>
-          <option value="Processing">Processing</option>
-          <option value="Successful">Successful</option>
-        </Select>
-      </Flex>
-      <Flex w={"100%"}>
         <Input
           type="text"
           name="amount_usd"
@@ -85,9 +69,21 @@ export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChang
           onChange={(e) => onFilterChange("amount_usd", e.target.value)}
         />
       </Flex>
-      <PButton w={{ base: "fit-content", lg: "50%" }} onClick={() => {}}>
-        Search
-      </PButton>
+      <Flex w={"100%"}>
+        <Select
+          name="transaction_status"
+          bg={"#35363D"}
+          color={"#fff"}
+          borderRadius={"8px"}
+          border={0}
+          value={filters.transaction_status}
+          onChange={(e) => onFilterChange("transaction_status", e.target.value)}>
+          <option value="All">All</option>
+          <option value="pending">Pending</option>
+          <option value="processing">Processing</option>
+          <option value="successful">Successful</option>
+        </Select>
+      </Flex>
       <Button
         w={{ base: "fit-content", lg: "50%" }}
         bg={"none"}
@@ -96,7 +92,7 @@ export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChang
         _focus={{ border: 0 }}
         onClick={() => {
           onFilterChange("created_at", "");
-          onFilterChange("transaction_type", "All");
+          onFilterChange("payment_system", "All");
           onFilterChange("currency", "All");
           onFilterChange("transaction_status", "All");
           onFilterChange("amount_usd", "");
