@@ -66,7 +66,7 @@ export const DashboardPaymentMethods = () => {
           </Button>
         </Flex>
       </Flex>
-      <Flex flexDir={"column"} gap={2}>
+      {/* <Flex flexDir={"column"} gap={2}>
         <Flex w={"160px"} justify={"space-between"} align={"center"}>
           <Text fontSize={"14px"}>USTD TRC20</Text>
           <PaymentMethodModal src={"https://phplaravel-1309375-4888543.cloudwaysapps.com/" + data?.btcQr || ""} />
@@ -79,7 +79,7 @@ export const DashboardPaymentMethods = () => {
             <TbCopyPlusFilled />
           </Button>
         </Flex>
-      </Flex>
+      </Flex> */}
     </Flex>
   );
 };

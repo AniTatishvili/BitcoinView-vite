@@ -12,9 +12,9 @@ import { PButton } from "../../../shared/ui/buttons";
 import { sendAmointValues } from "../../../shared/form";
 import { TbCopyPlusFilled } from "react-icons/tb";
 
-import usdt_logo from "../../../assets/images/wallet-logos/tether-usdt-logo.svg";
 import btc from "../../../assets/images/wallet-logos/bitcoin-btc-logo.svg";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
+import credit_logo from "../../../assets/images/wallet-logos/credit-card.png";
 // import { CheckIcon } from "@chakra-ui/icons";
 
 interface DashboardDepositStepsProps {
@@ -23,7 +23,7 @@ interface DashboardDepositStepsProps {
 }
 
 const coins = [
-  { name: "USDT", logo: usdt_logo },
+  { name: "Credit", logo: credit_logo },
   { name: "BTC", logo: btc },
 ];
 

@@ -1,10 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { Flex, Box, Button, Tooltip, Text, Input } from "@chakra-ui/react";
 import { RiQuestionFill } from "react-icons/ri";
 
 export const SliderMarkPackage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [activeIndex, setActiveIndex] = React.useState<number | null>(0);
   const [input, setInput] = React.useState<number | null>(null);
@@ -33,7 +33,15 @@ export const SliderMarkPackage = () => {
   };
 
   const handleMouseClick = () => {
-    navigate("/user-dashboard/package-selection-success");
+    // navigate("/user-dashboard/package-selection-success");PRICE_POINTS[activeIndex]?.value;
+    if (activeIndex !== null) {
+      const activePackage = PRICE_POINTS[activeIndex];
+      if (activePackage.value === "custom") {
+        console.log("activePackage", { value: input, label: "Orbit" });
+      } else {
+        console.log("activePackage", activePackage);
+      }
+    }
   };
 
   return (

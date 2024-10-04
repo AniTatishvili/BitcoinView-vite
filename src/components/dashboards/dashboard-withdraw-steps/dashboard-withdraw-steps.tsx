@@ -75,9 +75,9 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
             Amount
           </Text>
 
-          <Flex flexDir={{ base: "column", sm: "row" }} gap={3}>
+          <Flex flexDir={{ base: "column", sm: "row" }} align={"center"} gap={3}>
             <InputGroup>
-              <InputLeftElement pointerEvents={"none"} color={"##fff"} fontSize={"1.2em"}>
+              <InputLeftElement pointerEvents={"none"} color={"#fff"} fontSize={"1.2em"}>
                 $
               </InputLeftElement>
               <Input
@@ -104,7 +104,7 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
                 }}
               />
             </InputGroup>
-            <Text>BTC</Text>
+            <Text>USD</Text>
             {/* <PButton type="submit">Apply</PButton> */}
           </Flex>
         </Box>

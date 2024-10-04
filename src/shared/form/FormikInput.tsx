@@ -22,6 +22,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
     <Flex w={"100%"} flexDir={"column"} gap={2}>
       {name === "account_status" ? (
         <InputGroup display={"flex"} flexDir={"column"} gap={1}>
+          <FormikLabel>{placeholder}</FormikLabel>
           <Field
             name={name}
             type="text"
@@ -33,7 +34,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
               background: "#35363D",
               color: "#fff",
               fontSize: "16px",
-              textTransform: "capitalize",
+              textTransform: "none",
               lineHeight: 1,
               border: 0,
               borderRadius: "8px",
@@ -93,7 +94,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
               background: "#35363D",
               color: "#fff",
               fontSize: "16px",
-              textTransform: "capitalize",
+              textTransform: "none",
               lineHeight: 1,
               border: 0,
               borderRadius: "8px",

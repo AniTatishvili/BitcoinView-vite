@@ -1,12 +1,14 @@
 import { Box, Button, Flex, List, ListItem } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
+
 import { FaBtc } from "react-icons/fa";
 import { LiaEthereum } from "react-icons/lia";
-
 import { SiTether } from "react-icons/si";
 import { CryptoConverter } from "../../../shared/crypto-converter";
-import { useNavigate } from "react-router-dom";
 
 export const UserDashboardDetails = () => {
+  const { current_balance } = useUserSignupStore();
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -41,7 +43,7 @@ export const UserDashboardDetails = () => {
           <Box>
             <Box color={"#fff"}>Toltal Balance</Box>
             <Box color={"#f7931a"} fontSize={"22px"} pt={"3px"}>
-              $168,785.32
+              {"$" + " " + current_balance}
             </Box>
           </Box>
           <CryptoConverter />

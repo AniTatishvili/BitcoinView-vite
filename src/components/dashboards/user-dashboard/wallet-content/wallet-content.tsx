@@ -4,8 +4,10 @@ import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
 import { PButton } from "../../../../shared/ui/buttons";
 import { MoneyTransferDetailsTable } from "../../../../pages/dashboards/user-dashboard/money-transfer-details-table";
+import { useUserSignupStore } from "../../../../store/dashboard/user-auth";
 
 export const WalletContent = () => {
+  const { current_balance } = useUserSignupStore();
   const referralLink = "https://CPa_erefff";
   const referralId = "CPa_erefff";
 
@@ -32,11 +34,11 @@ export const WalletContent = () => {
         <Flex flexDir={"column"} gap={8}>
           <Box>
             <Text>Estimated Balance</Text>
-            <Box>0.00 USD</Box>
+            <Box>{"$" + " " + current_balance}</Box>
           </Box>
           <Box>
             <Text>Current Balance</Text>
-            <Box color={"#6bd98f"}>$0.00 USD</Box>
+            <Box color={"#6bd98f"}>{"$" + " " + current_balance}</Box>
           </Box>
         </Flex>
         <Flex flexDir={"column"} gap={4}>

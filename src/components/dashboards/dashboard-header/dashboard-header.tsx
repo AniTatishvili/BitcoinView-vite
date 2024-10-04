@@ -178,7 +178,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                 src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : ""}
               />
               <Divider orientation={"vertical"} h={"20px"} />
-              <Box>{current_balance}</Box>
+              <Box>{"$" + " " + current_balance}</Box>
             </Stack>
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>

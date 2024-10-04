@@ -6,6 +6,7 @@ import { DashboardSideMenu } from "../../../components/dashboards/dashboard-side
 
 import { TiHome } from "react-icons/ti";
 import { FaUserAlt, FaWallet, FaFacebookMessenger } from "react-icons/fa";
+import { FiPackage } from "react-icons/fi";
 import { MdCalendarMonth } from "react-icons/md";
 
 export const UserDashboard = () => {
@@ -15,6 +16,7 @@ export const UserDashboard = () => {
     { link: "/user-dashboard/profile", name: "Profile", icon: FaUserAlt },
     { link: "/user-dashboard/wallet", name: "Wallet", icon: FaWallet },
     { link: "/user-dashboard/user-monthly-profile", name: "Monthly Profile", icon: MdCalendarMonth },
+    { link: "/user-dashboard/package-selection", name: "Select Package", icon: FiPackage },
   ];
 
   return (

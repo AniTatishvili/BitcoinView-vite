@@ -25,7 +25,7 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
       <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} gap={4}>
         <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
           <FormikInput name="first_name" type="text" placeholder="Name" />
-          <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} />
+          <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} disabled={true} />
           <CountrySelect />
           {/* <FormikInput name="resource" type="text" placeholder="Resource" /> */}
           <FormSelect name="currency" label="Currency" data={["USD", "EUR"]} />
@@ -35,20 +35,22 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           {/* <FormikRegistrationCheckbox name="deposit_notifications">Deposit notifications</FormikRegistrationCheckbox> */}
           {/* <FormikRegistrationCheckbox name="other_notifications">Other notifications</FormikRegistrationCheckbox> */}
         </Flex>
-        <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
-          <FormikInput name="last_name" type="text" placeholder="Surname" />
-          <FormikNumber name="mobile" placeholder={t("common:USER.AUTH.PHONE")} />
-          <FormikInput name="role_name" type="text" placeholder="Employee" disabled={true} />
-          <FormikInput name="account_status" type="text" placeholder="Status" disabled={true} />
-          {/* <FormSelect name="customer_status" label="Customer status" data={[]} /> */}
-          <FormikInput name="time_zone" type="text" placeholder="Time zone" disabled={true} />
-          {/* <FormikRegistrationCheckbox name="chat_notifications">Support chat notifications</FormikRegistrationCheckbox> */}
-          {/* <FormikRegistrationCheckbox name="show_ftd">Show FTD</FormikRegistrationCheckbox> */}
+        <Flex flexDir={"column"} gap={4}>
+          <Flex w={{ base: "100%", md: "360px" }} flexDir={"column"} gap={4}>
+            <FormikInput name="last_name" type="text" placeholder="Surname" />
+            <FormikNumber name="mobile" placeholder={t("common:USER.AUTH.PHONE")} />
+            <FormikInput name="role_name" type="text" placeholder="Employee" disabled={true} />
+            <FormikInput name="account_status" type="text" placeholder="Status" disabled={true} />
+            {/* <FormSelect name="customer_status" label="Customer status" data={[]} /> */}
+            <FormikInput name="time_zone" type="text" placeholder="Time zone" disabled={true} />
+            {/* <FormikRegistrationCheckbox name="chat_notifications">Support chat notifications</FormikRegistrationCheckbox> */}
+            {/* <FormikRegistrationCheckbox name="show_ftd">Show FTD</FormikRegistrationCheckbox> */}
+          </Flex>
+          <PButton type="submit" w={"fit-content"}>
+            {formik.loading ? t("LOADING") : "Confirm"}
+          </PButton>
         </Flex>
       </Flex>
-      <PButton type="submit" w={"fit-content"}>
-        {formik.loading ? t("LOADING") : "Confirm"}
-      </PButton>
     </Flex>
   );
 };
