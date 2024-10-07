@@ -1,46 +1,80 @@
 import React from "react";
-// import { useNavigate } from "react-router-dom";
-import { Flex, Box, Button, Tooltip, Text, Input } from "@chakra-ui/react";
+import axios from "axios";
+
+import { useNavigate } from "react-router-dom";
+
+import { Flex, Box, Button, Tooltip, Text, Input, cookieStorageManager } from "@chakra-ui/react";
+import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selected-package-store";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
+
 import { RiQuestionFill } from "react-icons/ri";
 
 export const SliderMarkPackage = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
+  const showToast = useCustomToast();
 
+  const { setUserPackageData } = useUserSelectedPackageStore();
   const [activeIndex, setActiveIndex] = React.useState<number | null>(0);
   const [input, setInput] = React.useState<number | null>(null);
   const [showInput] = React.useState<boolean>(true);
+  const [data, setData] = React.useState([]);
 
-  const PRICE_POINTS = [
-    { value: 0, label: "Trail" },
-    { value: 5000, label: "Voyager" },
-    { value: 10000, label: "Elite" },
-    { value: 20000, label: "Pioneer" },
-    { value: 50000, label: "Quantum" },
-    { value: 80000, label: "Titan" },
-    { value: 100000, label: "Nexus" },
-    { value: 200000, label: "Platinum" },
-    { value: "custom", label: "Orbit" },
-  ];
+  // const PRICE_POINTS = [
+  //   { value: 0, label: "Trail" },
+  //   { value: 5000, label: "Voyager" },
+  //   { value: 10000, label: "Elite" },
+  //   { value: 20000, label: "Pioneer" },
+  //   { value: 50000, label: "Quantum" },
+  //   { value: 80000, label: "Titan" },
+  //   { value: 100000, label: "Nexus" },
+  //   { value: 200000, label: "Platinum" },
+  //   { value: "custom", label: "Orbit" },
+  // ];
+
+  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+
+  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/packages";
+
+  React.useEffect(() => {
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setData(response.data.packages);
+        console.log("User package data:", response.data);
+      })
+      .catch((error) => {
+        showToast("error", error.response.data.message);
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
 
   const handleClick = (index: number) => {
+    console.log(data, "data");
     setActiveIndex(index);
-
-    if (PRICE_POINTS[index].value === "custom") {
-      console.log(input);
-    } else {
-      console.log(PRICE_POINTS[index].value);
-    }
+    // if (data[index].value === "custom") {
+    //   console.log(input);
+    // } else {
+    //   console.log(data[index].value);
+    // }
   };
 
   const handleMouseClick = () => {
     // navigate("/user-dashboard/package-selection-success");PRICE_POINTS[activeIndex]?.value;
     if (activeIndex !== null) {
-      const activePackage = PRICE_POINTS[activeIndex];
-      if (activePackage.value === "custom") {
-        console.log("activePackage", { value: input, label: "Orbit" });
-      } else {
-        console.log("activePackage", activePackage);
-      }
+      const activePackage = data[activeIndex];
+      // if (activePackage.value === "custom") {
+      //   console.log("activePackage", { value: input, label: "Orbit" });
+      //   setUserPackageData({ value: input as number, label: "Orbit" });
+      // } else {
+      //   console.log("activePackage", activePackage);
+      //   setUserPackageData(activePackage as { value: number; label: string });
+      // }
+
+      // navigate("/user-dashboard/deposit");
     }
   };
 
@@ -58,14 +92,15 @@ export const SliderMarkPackage = () => {
             left={"0"}
             transform={"translateY(-50%)"}
             zIndex={-1}></Flex>
-          {PRICE_POINTS.map((point, i) => (
+          {data.map((point, i) => (
             <Flex key={i} w={"80px"} flexDir={"column"} align={"center"} gap={4} fontSize={"14px"}>
               <Flex>
-                <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.label}</Text>
+                <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.package_name}</Text>
                 <Tooltip
-                  label="3-digit code on the back of credit card."
+                  hasArrow
+                  label="You will Fund 5000$ and claim Voyager Package, it have monthly profit max 2% of your fund, your amount will be hold for min 6 month and Bitcoin View pay monthly your profit,you can cancel any time your subscription but for cancellation fee you have to pay 25% of your package."
                   aria-label="A tooltip"
-                  placement="bottom"
+                  placement="start-end"
                   bg={"#1C1C1C"}
                   color={"#fff"}
                   borderRadius={"8px"}>
@@ -81,7 +116,7 @@ export const SliderMarkPackage = () => {
                 borderRadius={"50%"}
                 cursor={"pointer"}
                 onClick={() => handleClick(i)}></Flex>
-              {point.value === "custom" && showInput ? (
+              {point.amount === "custom" && showInput ? (
                 <Input
                   type="number"
                   w={"70px"}
@@ -100,7 +135,7 @@ export const SliderMarkPackage = () => {
                   }}
                 />
               ) : (
-                <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.value}</Text>
+                <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.amount}</Text>
               )}
             </Flex>
           ))}

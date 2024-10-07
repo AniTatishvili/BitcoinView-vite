@@ -8,6 +8,8 @@ import { Box, Input, List, ListItem, Image, useSteps, Flex, Text, Button, InputG
 import { useUserDepositStore } from "../../../store/dashboard/user-deposit-payment-store";
 
 import { WalletStepper } from "../../../shared/ui/stepper";
+
+import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selected-package-store";
 import { PButton } from "../../../shared/ui/buttons";
 import { sendAmointValues } from "../../../shared/form";
 import { TbCopyPlusFilled } from "react-icons/tb";
@@ -29,6 +31,10 @@ const coins = [
 
 export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () => {
   const { setUserDepositData } = useUserDepositStore();
+  // const { userPackageData } = useUserSelectedPackageStore();
+  const { userPackageData: userDepositAmount } = useUserSelectedPackageStore();
+
+  const [packageValues, setPackageValues] = useState({ amount_usd: userDepositAmount });
   const showToast = useCustomToast();
   const [userData, setUserData] = useState<{ qr_code: string; btc_wallet: string } | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -53,6 +59,10 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
       setShowSecond(true);
     }
   }, [searchTerm]);
+
+  useEffect(() => {
+    setPackageValues({ amount_usd: userDepositAmount.value });
+  }, [userDepositAmount]);
 
   const handleClick = (coinName: string) => {
     setSearchTerm(coinName);
@@ -128,7 +138,8 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
             Select Amount
           </Text>
           {showSecond && (
-            <Formik initialValues={sendAmointValues} onSubmit={sendAmount}>
+            // { ...packageValues, amount_usd: '' }
+            <Formik initialValues={packageValues} onSubmit={sendAmount}>
               {() => {
                 return (
                   <Form>
@@ -141,6 +152,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
                           type="number"
                           name="amount_usd"
                           placeholder="Type amount"
+                          // value={userPackageData?.value || ""}
                           style={{
                             width: "229px",
                             height: "40px",
