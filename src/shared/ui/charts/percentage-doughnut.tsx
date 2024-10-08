@@ -19,6 +19,9 @@ export const PercentageDoughnut = () => {
   };
 
   return (
+  //   <CircularProgress value={40} color={"#729E70"} thickness={"20px"}>
+  //   <CircularProgressLabel>40%</CircularProgressLabel>
+  // </CircularProgress>
     <Box w={"80px"} h={"80px"} pos={"relative"}>
       <Doughnut
         data={data}

@@ -11,7 +11,7 @@ import { WalletStepper } from "../../../shared/ui/stepper";
 
 import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selected-package-store";
 import { PButton } from "../../../shared/ui/buttons";
-import { sendAmointValues } from "../../../shared/form";
+// import { sendAmointValues } from "../../../shared/form";
 import { TbCopyPlusFilled } from "react-icons/tb";
 
 import btc from "../../../assets/images/wallet-logos/bitcoin-btc-logo.svg";
@@ -34,7 +34,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   // const { userPackageData } = useUserSelectedPackageStore();
   const { userPackageData: userDepositAmount } = useUserSelectedPackageStore();
 
-  const [packageValues, setPackageValues] = useState({ amount_usd: userDepositAmount });
+  const [packageValues, setPackageValues] = useState({ amount_usd: userDepositAmount?.amount || 0 });
   const showToast = useCustomToast();
   const [userData, setUserData] = useState<{ qr_code: string; btc_wallet: string } | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -61,7 +61,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   }, [searchTerm]);
 
   useEffect(() => {
-    setPackageValues({ amount_usd: userDepositAmount.value });
+    setPackageValues({ amount_usd: userDepositAmount?.amount });
   }, [userDepositAmount]);
 
   const handleClick = (coinName: string) => {

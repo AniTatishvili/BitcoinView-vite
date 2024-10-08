@@ -1,11 +1,11 @@
 import create from "zustand";
 
 export interface UserSelectedPackageStore {
-  userPackageData: { value: number; label: string } | 0;
-  setUserPackageData: (data: { value: number; label: string }) => void;
+  userPackageData: { amount: number; package_name: string };
+  setUserPackageData: (data: { amount: number; package_name: string }) => void;
 }
 
 export const useUserSelectedPackageStore = create<UserSelectedPackageStore>((set) => ({
-  userPackageData: 0,
+  userPackageData: { amount: 0, package_name: "" },
   setUserPackageData: (data) => set({ userPackageData: data }),
 }));
