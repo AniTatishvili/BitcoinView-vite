@@ -9,10 +9,13 @@ import useCustomToast from "../../../shared/hooks/useCustomToast";
 
 import { RiQuestionFill } from "react-icons/ri";
 import { OrbitPackageModal } from "../modal/orbit-package-modal";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 interface UserData {
   amount: number;
   package_name: string;
+  is_purchase: boolean;
+  purchase_id: number;
   id: number;
 }
 
@@ -21,9 +24,12 @@ export const SliderMarkPackage = () => {
   const showToast = useCustomToast();
 
   const { setUserPackageData } = useUserSelectedPackageStore();
+  const { current_balance, active_package } = useUserSignupStore();
+  const package_id = active_package - 2;
   const [data, setData] = React.useState<UserData[]>([]);
-  const [activeIndex, setActiveIndex] = React.useState<number | null>(0);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(package_id ?? current_balance ?? 0);
   const [isOrbitSelected, setIsOrbitSelected] = React.useState(false);
+  // const [userBalance, setUserBalance] = React.useState();
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
@@ -43,8 +49,13 @@ export const SliderMarkPackage = () => {
       })
       .catch((error) => {
         showToast("error", error.response.data.message);
+        setActiveIndex(2);
         console.error("Error fetching user data:", error);
       });
+  }, []);
+
+  React.useEffect(() => {
+    // setUserBalance()
   }, []);
 
   const handleClick = (index: number) => {
@@ -62,7 +73,12 @@ export const SliderMarkPackage = () => {
       if (activePackage.package_name !== "Orbit") {
         const package_id = data[activeIndex].id;
 
-        setUserPackageData(activePackage as { amount: number; package_name: string });
+        setUserPackageData({
+          amount: activePackage.amount,
+          package_name: activePackage.package_name,
+          is_purchase: true,
+          purchase_id: activePackage.id,
+        });
 
         try {
           const response = await axios.post(
@@ -76,7 +92,10 @@ export const SliderMarkPackage = () => {
           );
           if (response.data.purchase.status == "Inactive") {
             navigate("/user-dashboard/deposit");
+          } else {
+            console.log(111);
           }
+
           console.log("Package updated successfully:", response.data);
         } catch (error) {
           console.error("Error updating avatar:", error);
@@ -129,7 +148,7 @@ export const SliderMarkPackage = () => {
                   {point.package_name === "Orbit" ? (
                     <Text opacity={0}>Contact</Text>
                   ) : (
-                    <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.amount}</Text>
+                    <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{i === 0 ? current_balance : point.amount}</Text>
                   )}
 
                   {/* {point.amount === "custom" && showInput ? (

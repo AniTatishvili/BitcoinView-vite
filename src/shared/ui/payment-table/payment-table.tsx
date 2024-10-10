@@ -24,6 +24,7 @@ export const PaymentTable = ({ data }: PaymentTableProps) => {
   const [selectedData, setSelectedData] = React.useState<PaymentData | null>(null);
 
   const handleRowClick = (item: PaymentData) => {
+    console.log(item, 98);
     setSelectedData(item);
   };
 
@@ -57,7 +58,7 @@ export const PaymentTable = ({ data }: PaymentTableProps) => {
               <Th>Coin</Th>
               <Th>Amount $</Th>
               <Th>Amount currency</Th>
-              <Th>Destination</Th>
+              {/* <Th>Destination</Th> */}
               <Th>Adviser</Th>
               <Th>Status</Th>
             </Tr>
@@ -73,7 +74,7 @@ export const PaymentTable = ({ data }: PaymentTableProps) => {
                 <Td>{item.currency}</Td>
                 <Td>{item.amount_usd}</Td>
                 <Td> {item.amount_currency ? parseFloat(item.amount_currency).toFixed(5) : "N/A"}</Td>
-                <Td>{item.currency}</Td>
+                {/* <Td>{item.currency}</Td> */}
                 <Td maxW={"150px"} whiteSpace={"nowrap"} overflow={"hidden"} textOverflow={"ellipsis"}>
                   {item.txid}
                 </Td>

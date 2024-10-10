@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
 import { Box, Button, Flex, List, ListIcon, ListItem, Text } from "@chakra-ui/react";
 import { PercentageDoughnut } from "../ui/charts";
 import { FaCircle } from "react-icons/fa";
@@ -14,12 +15,14 @@ interface CurrentPackageProps {
   remaining_time: string;
   monthly_profit: string;
   status: string;
+  time_left_percentage: number;
+  id: number;
 }
 
 export const CurrentPackage = () => {
+  const navigate = useNavigate();
   const showToast = useCustomToast();
-  const [data, setData] = React.useState<CurrentPackageProps[]>([]);
-  const [loading, setLoading] = React.useState(true);
+  const [data, setData] = React.useState<CurrentPackageProps | null>(null);
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
@@ -33,10 +36,7 @@ export const CurrentPackage = () => {
         },
       })
       .then((response) => {
-        // if (Array.isArray(response.data.active_purchase)) {
-        setData(response.data.active_purchase);
-        setLoading(false);
-        // }
+        setData(response.data.active_purchase || null);
         console.log("User package data:", response.data.active_purchase);
       })
       .catch((error) => {
@@ -45,7 +45,6 @@ export const CurrentPackage = () => {
       });
   }, []);
 
-  console.log(typeof data, 23);
   return (
     <Box>
       <Flex justify={"space-between"} align={"center"} gap={10}>
@@ -55,39 +54,35 @@ export const CurrentPackage = () => {
             Active
           </Button>
         </Flex>
-        <PercentageDoughnut />
+        <PercentageDoughnut percentage={data?.time_left_percentage ?? 0} />
       </Flex>
       <Flex flexDir={"column"} gap={4}>
-        {loading ? (
-          data.map((item, i) => {
-            console.log(222);
-            console.log(item, 9999);
-            return (
-              <Flex flexDir={"column"} gap={4} key={i}>
-                <Text fontWeight={"600"}>Package: {item.package_name}</Text>
-                <List>
-                  <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
-                    <ListIcon as={FaCircle} color="#44B96B" />
-                    <Text>Start Time: {item.start_time}</Text>
-                  </ListItem>
-                  <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
-                    <ListIcon as={FaCircle} color="#C05768" />
-                    <Box>
-                      <Text>Expire Time: {item.expire_time}</Text>
-                      <Text>Profit/ Monthly: {item.monthly_profit}</Text>
-                      <Text>Reamining Time: {item.remaining_time}</Text>
-                    </Box>
-                  </ListItem>
-                </List>
-              </Flex>
-            );
-          })
+        {data ? (
+          <>
+            <Text fontWeight={"600"}>Package: {data.package_name}</Text>
+            <List>
+              <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
+                <ListIcon as={FaCircle} color="#44B96B" />
+                <Text>Start Time: {data.start_time}</Text>
+              </ListItem>
+              <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
+                <ListIcon as={FaCircle} color="#C05768" />
+                <Box>
+                  <Text>Expire Time: {data.expire_time}</Text>
+                  <Text>Profit/ Monthly: {data.monthly_profit}</Text>
+                  <Text>Remaining Time: {data.remaining_time}</Text>
+                </Box>
+              </ListItem>
+            </List>
+          </>
         ) : (
-          <Text>Loading</Text>
+          <Text>No active packages found.</Text>
         )}
         <Flex justify={"space-between"}>
-          <Button bg={"#3AAB41"}>Claims</Button>
-          <CurrentPackageCancelModal />
+          <Button bg={"#3AAB41"} onClick={() => navigate("/user-dashboard/user-monthly-profile")}>
+            Claims
+          </Button>
+          <CurrentPackageCancelModal purchase_id={data?.id ?? 0} />
         </Flex>
       </Flex>
     </Box>

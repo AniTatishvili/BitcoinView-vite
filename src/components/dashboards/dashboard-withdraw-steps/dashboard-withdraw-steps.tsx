@@ -29,7 +29,7 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
   const [showSecond, setShowSecond] = useState(false);
 
   const [showThird, setShowThird] = useState(false);
-  const [showForth, setShowForth] = useState(false);
+  // const [showForth, setShowForth] = useState(false);
   const [loading, setLoading] = useState(false);
   console.log(loading);
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
@@ -41,7 +41,7 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
       setActiveStep(1);
       setShowSecond(true);
 
-      setShowForth(false);
+      // setShowForth(false);
     }
   }, [searchTerm]);
 
@@ -179,17 +179,17 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
         </Box>
       ),
     },
-    {
-      content: (
-        <Box>
-          <Text as={"h4"} mb={2}>
-            Result
-          </Text>
-          {showForth && <Flex fontSize={"22px"}>Failed</Flex>}
-        </Box>
-      ),
-    },
+    // {
+    //   content: (
+    //     <Box>
+    //       <Text as={"h4"} mb={2}>
+    //         Result
+    //       </Text>
+    //       {showForth && <Flex fontSize={"22px"}>Failed</Flex>}
+    //     </Box>
+    //   ),
+    // },
   ];
 
-  return <WalletStepper steps={steps} activeStep={activeStep} />;
+  return <WalletStepper steps={steps} activeStep={activeStep} color={"#f7931a"} />;
 };

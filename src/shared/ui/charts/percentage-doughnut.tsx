@@ -4,12 +4,16 @@ import { Doughnut } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const PercentageDoughnut = () => {
+interface PercentageDoughnutProps {
+  percentage: number;
+}
+
+export const PercentageDoughnut: React.FC<PercentageDoughnutProps> = ({ percentage }) => {
   const data = {
     datasets: [
       {
         label: "My First Dataset",
-        data: [10, 15],
+        data: [100 - percentage, percentage],
         backgroundColor: ["#373737", "#729E70"],
         borderColor: "transparent",
         cutout: 20,
@@ -19,9 +23,9 @@ export const PercentageDoughnut = () => {
   };
 
   return (
-  //   <CircularProgress value={40} color={"#729E70"} thickness={"20px"}>
-  //   <CircularProgressLabel>40%</CircularProgressLabel>
-  // </CircularProgress>
+    //   <CircularProgress value={40} color={"#729E70"} thickness={"20px"}>
+    //   <CircularProgressLabel>40%</CircularProgressLabel>
+    // </CircularProgress>
     <Box w={"80px"} h={"80px"} pos={"relative"}>
       <Doughnut
         data={data}
@@ -43,7 +47,7 @@ export const PercentageDoughnut = () => {
           },
         }}></Doughnut>
       <Box pos={"absolute"} top={"45%"} left={"50%"} transform={"translate(-45%, -50%)"} fontSize={"12px"}>
-        45%
+        {percentage}%
       </Box>
     </Box>
   );

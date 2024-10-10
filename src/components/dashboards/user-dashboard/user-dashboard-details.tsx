@@ -1,3 +1,5 @@
+import React from "react";
+
 import { Box, Button, Flex, List, ListItem } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
@@ -10,6 +12,24 @@ import { CryptoConverter } from "../../../shared/crypto-converter";
 export const UserDashboardDetails = () => {
   const { current_balance } = useUserSignupStore();
   const navigate = useNavigate();
+
+  const [userBalance, setUserBalance] = React.useState("");
+
+  const fetchBalance = () => {
+    if (current_balance) {
+      setUserBalance(current_balance);
+    }
+  };
+
+  React.useEffect(() => {
+    fetchBalance();
+
+    const interval = setInterval(() => {
+      fetchBalance();
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [current_balance]);
 
   const handleClick = () => {
     navigate("/user-dashboard/package-selection");
@@ -43,7 +63,7 @@ export const UserDashboardDetails = () => {
           <Box>
             <Box color={"#fff"}>Toltal Balance</Box>
             <Box color={"#f7931a"} fontSize={"22px"} pt={"3px"}>
-              {"$" + " " + current_balance}
+              {"$" + " " + userBalance}
             </Box>
           </Box>
           <CryptoConverter />

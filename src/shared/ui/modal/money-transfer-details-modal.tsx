@@ -10,6 +10,7 @@ interface MoneyTransferdetailsModalProps {
 }
 
 export const MoneyTransferdetailsModal: React.FC<MoneyTransferdetailsModalProps> = ({ isOpen, onClose, data }) => {
+  console.log(data, 875);
   return (
     <Modal size={"xl"} isCentered isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />

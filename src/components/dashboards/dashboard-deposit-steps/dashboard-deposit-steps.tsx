@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import axios from "axios";
 // import { QRCodeSVG } from "qrcode.react";
 import { useState, useEffect } from "react";
@@ -22,6 +23,8 @@ import credit_logo from "../../../assets/images/wallet-logos/credit-card.png";
 interface DashboardDepositStepsProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   amount_usd: any;
+  is_purchase: boolean;
+  purchase_id: number;
 }
 
 const coins = [
@@ -34,7 +37,11 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   // const { userPackageData } = useUserSelectedPackageStore();
   const { userPackageData: userDepositAmount } = useUserSelectedPackageStore();
 
-  const [packageValues, setPackageValues] = useState({ amount_usd: userDepositAmount?.amount || 0 });
+  const [packageValues, setPackageValues] = useState({
+    amount_usd: userDepositAmount?.amount || 0,
+    is_purchase: userDepositAmount?.is_purchase || false,
+    purchase_id: userDepositAmount?.purchase_id || 0,
+  });
   const showToast = useCustomToast();
   const [userData, setUserData] = useState<{ qr_code: string; btc_wallet: string } | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -46,7 +53,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   const [showSecond, setShowSecond] = useState(false);
   const [showThird, setShowThird] = useState(false);
   const [loading, setLoading] = useState(false);
-
+  const qrCodeRef = useRef<HTMLImageElement | null>(null);
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/deposit";
@@ -61,7 +68,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   }, [searchTerm]);
 
   useEffect(() => {
-    setPackageValues({ amount_usd: userDepositAmount?.amount });
+    setPackageValues({ amount_usd: userDepositAmount?.amount, is_purchase: userDepositAmount?.is_purchase, purchase_id: userDepositAmount?.purchase_id });
   }, [userDepositAmount]);
 
   const handleClick = (coinName: string) => {
@@ -102,6 +109,31 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
       console.log("Copied to clipboard!");
     } catch (err) {
       console.error("Failed to copy: ", err);
+    }
+  };
+
+  const handleDownloadQRCode = () => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    const qrCodeImage = userData?.qr_code;
+    if (qrCodeImage && ctx) {
+      const img = new window.Image();
+      img.crossOrigin = "Anonymous";
+      img.src = qrCodeImage;
+      img.onload = () => {
+        canvas.width = img.width;
+        canvas.height = img.height;
+        ctx.drawImage(img, 0, 0);
+        const link = document.createElement("a");
+        link.href = canvas.toDataURL("image/png");
+        link.download = "qr_code.png";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      };
+    } else {
+      showToast("error", "QR code not available for download.");
     }
   };
 
@@ -152,7 +184,6 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
                           type="number"
                           name="amount_usd"
                           placeholder="Type amount"
-                          // value={userPackageData?.value || ""}
                           style={{
                             width: "229px",
                             height: "40px",
@@ -184,37 +215,57 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
     },
     {
       content: (
-        <Box>
+        <Box w={"100%"}>
           <Text as={"h4"} mb={2}>
             Deposit Address
           </Text>
           {showThird && (
-            <Flex
-              flexDir={{ base: "column", sm: "row" }}
-              justify={"space-between"}
-              align={"center"}
-              border={"1px solid rgb(118, 118, 118)"}
-              borderRadius={"8px"}
-              p={4}
-              gap={4}>
-              <Flex w={"128px"} h={"128px"} justify={"center"} align={"center"}>
-                {loading ? <Spinner size={"xl"} color={"#f7931a"} /> : <Image src={userData?.qr_code || ""} w={"100%"} h={"100%"} objectFit={"contain"} />}
+            <Flex flexDir={{ base: "column", xl: "row" }} gap={4}>
+              <Flex
+                flexDir={{ base: "column", sm: "row" }}
+                justify={"space-between"}
+                align={"center"}
+                border={"1px solid rgb(118, 118, 118)"}
+                borderRadius={"8px"}
+                p={4}
+                gap={4}>
+                <Flex w={"128px"} h={"128px"} justify={"center"} align={"center"}>
+                  {loading ? (
+                    <Spinner size={"xl"} color={"#f7931a"} />
+                  ) : (
+                    <Image src={userData?.qr_code || ""} w={"100%"} h={"100%"} objectFit={"contain"} ref={qrCodeRef} />
+                  )}
 
-                {/* <QRCodeSVG value={userData?.qr_code || ""} /> */}
-              </Flex>
-              <Box>
-                <Text color={"#fff"} lineHeight={1}>
-                  Adress
-                </Text>
-                <Flex align={"center"}>
-                  <Text maxW={{ base: "100px", md: "150px", lg: "250px" }} w={"100%"}>
-                    {userData?.btc_wallet || ""}
-                  </Text>
-                  <Button bg={"none"} p={0} color={"#fff"} _hover={{ bg: "none" }} onClick={() => copyToClipboard(userData?.btc_wallet || "")}>
-                    <TbCopyPlusFilled />
-                  </Button>
+                  {/* <QRCodeSVG value={userData?.qr_code || ""} /> */}
                 </Flex>
-              </Box>
+                <Box>
+                  <Text color={"#fff"} lineHeight={1}>
+                    Adress
+                  </Text>
+                  <Flex align={"center"}>
+                    <Text maxW={{ base: "100px", md: "150px", lg: "250px" }} w={"100%"}>
+                      {userData?.btc_wallet || ""}
+                    </Text>
+                    <Button bg={"none"} p={0} color={"#fff"} _hover={{ bg: "none" }} onClick={() => copyToClipboard(userData?.btc_wallet || "")}>
+                      <TbCopyPlusFilled />
+                    </Button>
+                  </Flex>
+                  <Button bg={"#3AAB41"} mt={2} float={"right"} onClick={handleDownloadQRCode}>
+                    Download QR
+                  </Button>
+                </Box>
+              </Flex>
+              <Flex maxW={{ base: "200px", sm: "400px" }} flexDir={"column"}>
+                <Text>Next Step</Text>
+                <Box w={"100%"} overflow={"hidden"}>
+                  <Box w={"100%"} whiteSpace={"wrap"}>
+                    1- You can copy the wallet address and paste om your bitcoin wallet to transfer amount to your Bitcoinview wallet or using QR code for
+                    Bitcoin Machine to pay and transfer amount to your bitcoinview wallet
+                  </Box>
+                  <Box>2- waiting for transaction to Successful status</Box>
+                  <Box>3- system Automatically active your packag</Box>
+                </Box>
+              </Flex>
             </Flex>
           )}
         </Box>

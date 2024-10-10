@@ -16,10 +16,12 @@ type UserSignupStoreType = {
   created_at: string;
   currency: string;
   current_balance: string;
+  estimated_balance: string;
   customer_status: string;
   deposit_notifications: boolean;
   employee: boolean;
   id: string;
+  active_package: number;
   other_notifications: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resource: any;
@@ -48,10 +50,12 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   created_at: "",
   currency: "",
   current_balance: "",
+  estimated_balance: "",
   customer_status: "",
   deposit_notifications: false,
   employee: false,
   id: "",
+  active_package: 0,
   other_notifications: false,
   resource: {},
   retention_status: false,
