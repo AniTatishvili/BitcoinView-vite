@@ -51,7 +51,7 @@ export const CurrentPackage = () => {
         <Flex align={"center"} gap={"8px"}>
           <Text>Current Package</Text>
           <Button h={"30px"} bg={"#0E4534"} color={"#218B3D"} p={"4px"} cursor={"revert"}>
-            Active
+            {data?.status ?? ""}
           </Button>
         </Flex>
         <PercentageDoughnut percentage={data?.time_left_percentage ?? 0} />

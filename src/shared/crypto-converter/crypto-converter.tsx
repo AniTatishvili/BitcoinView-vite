@@ -2,8 +2,12 @@ import { Box, Flex, Select, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React from "react";
 
-export const CryptoConverter = () => {
-  const amount = 1;
+interface CryptoConverterProps {
+  userBalance: string;
+}
+
+export const CryptoConverter: React.FC<CryptoConverterProps> = ({ userBalance }) => {
+  const amount = userBalance;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const fromCurrency = "usd";
   const [toCurrency, setToCurrency] = React.useState("bitcoin");
@@ -47,7 +51,7 @@ export const CryptoConverter = () => {
     if (loading) return "Loading...";
     const rate = conversionRates[toCurrency];
     if (!rate) return `${toCurrency.toUpperCase()}: N/A`;
-    return (rate * amount).toFixed(2);
+    return (rate * Number(amount)).toFixed(2);
   };
 
   const handleToCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

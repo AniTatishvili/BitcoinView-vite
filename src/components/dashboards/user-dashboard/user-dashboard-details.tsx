@@ -66,7 +66,7 @@ export const UserDashboardDetails = () => {
               {"$" + " " + userBalance}
             </Box>
           </Box>
-          <CryptoConverter />
+          <CryptoConverter userBalance={userBalance} />
         </Flex>
       </Flex>
     </Flex>

@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 export interface UserDepositPaymentStore {
   userData: { qr_code: string; btc_wallet: string } | null;

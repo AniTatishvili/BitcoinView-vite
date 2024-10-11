@@ -1,4 +1,4 @@
-import create from "zustand";
+import { create } from "zustand";
 
 export interface UserSelectedPackageStore {
   userPackageData: { amount: number; package_name: string; purchase_id: number; is_purchase: boolean };

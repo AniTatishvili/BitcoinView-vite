@@ -73,13 +73,6 @@ export const SliderMarkPackage = () => {
       if (activePackage.package_name !== "Orbit") {
         const package_id = data[activeIndex].id;
 
-        setUserPackageData({
-          amount: activePackage.amount,
-          package_name: activePackage.package_name,
-          is_purchase: true,
-          purchase_id: activePackage.id,
-        });
-
         try {
           const response = await axios.post(
             purckageUlr,
@@ -91,9 +84,17 @@ export const SliderMarkPackage = () => {
             }
           );
           if (response.data.purchase.status == "Inactive") {
+            setUserPackageData({
+              amount: activePackage.amount - Number(current_balance),
+              package_name: activePackage.package_name,
+              is_purchase: true,
+              purchase_id: activePackage.id,
+            });
+
             navigate("/user-dashboard/deposit");
           } else {
             console.log(111);
+            navigate("/user-dashboard/package-selection-success");
           }
 
           console.log("Package updated successfully:", response.data);
