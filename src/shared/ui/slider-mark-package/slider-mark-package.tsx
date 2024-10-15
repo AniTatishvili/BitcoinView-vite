@@ -10,6 +10,7 @@ import useCustomToast from "../../../shared/hooks/useCustomToast";
 import { RiQuestionFill } from "react-icons/ri";
 import { OrbitPackageModal } from "../modal/orbit-package-modal";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
+import useUserBalance from "../../hooks/useUserBalance";
 
 interface UserData {
   amount: number;
@@ -24,12 +25,14 @@ export const SliderMarkPackage = () => {
   const showToast = useCustomToast();
 
   const { setUserPackageData } = useUserSelectedPackageStore();
-  const { current_balance, active_package } = useUserSignupStore();
+  const { active_package } = useUserSignupStore();
+
+  const { userBalance } = useUserBalance();
   const package_id = active_package - 2;
+  console.log(package_id, "package_id", active_package);
   const [data, setData] = React.useState<UserData[]>([]);
-  const [activeIndex, setActiveIndex] = React.useState<number | null>(package_id ?? current_balance ?? 0);
+  const [activeIndex, setActiveIndex] = React.useState<number | null>(package_id ?? userBalance ?? 0);
   const [isOrbitSelected, setIsOrbitSelected] = React.useState(false);
-  // const [userBalance, setUserBalance] = React.useState();
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
@@ -85,12 +88,13 @@ export const SliderMarkPackage = () => {
           );
           if (response.data.purchase.status == "Inactive") {
             setUserPackageData({
-              amount: activePackage.amount - Number(current_balance),
+              amount: activePackage.amount - Number(userBalance),
               package_name: activePackage.package_name,
               is_purchase: true,
-              purchase_id: activePackage.id,
+              purchase_id: response.data.purchase.id,
             });
 
+            setActiveIndex(response.data.purchase.id - 2);
             navigate("/user-dashboard/deposit");
           } else {
             console.log(111);
@@ -149,7 +153,7 @@ export const SliderMarkPackage = () => {
                   {point.package_name === "Orbit" ? (
                     <Text opacity={0}>Contact</Text>
                   ) : (
-                    <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{i === 0 ? current_balance : point.amount}</Text>
+                    <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{i === 0 ? userBalance : point.amount}</Text>
                   )}
 
                   {/* {point.amount === "custom" && showInput ? (

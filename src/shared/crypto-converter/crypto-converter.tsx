@@ -1,4 +1,4 @@
-import { Box, Flex, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, Select, Spinner, Text } from "@chakra-ui/react";
 import axios from "axios";
 import React from "react";
 
@@ -48,7 +48,12 @@ export const CryptoConverter: React.FC<CryptoConverterProps> = ({ userBalance })
   }, [cache, fromCurrency, toCurrency]);
 
   const getConvertedAmount = () => {
-    if (loading) return "Loading...";
+    if (loading)
+      return (
+        <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
+          <Spinner size={"xl"} color={"#f7931a"} />
+        </Flex>
+      );
     const rate = conversionRates[toCurrency];
     if (!rate) return `${toCurrency.toUpperCase()}: N/A`;
     return (rate * Number(amount)).toFixed(2);
@@ -59,11 +64,11 @@ export const CryptoConverter: React.FC<CryptoConverterProps> = ({ userBalance })
   };
 
   return (
-    <Flex w={"fit-content"} flexDir={"column"} color={"#fff"}>
+    <Flex w={"100%"} flexDir={"column"} color={"#fff"}>
       <Text mb={"5px"}>Convert Balance</Text>
 
       <Flex
-        w={"200px"}
+        w={"100%"}
         h={"fit-content"}
         flexDir={"row"}
         justify={"space-between"}
@@ -71,10 +76,11 @@ export const CryptoConverter: React.FC<CryptoConverterProps> = ({ userBalance })
         bg={"#35363D"}
         borderRadius={"8px"}
         p={1}
+        maxW={"500px"}
         minWidth={"200px"}>
-        <Text w={"50%"} h={"20px"} fontSize={"14px"} borderRight={"1px solid #ccc"} px={2} minWidth={"100px"} textAlign={"right"}>
+        <Box w={"50%"} h={"20px"} fontSize={"12px"} borderRight={"1px solid #ccc"} px={2} minWidth={"100px"} textAlign={"left"}>
           {getConvertedAmount()}
-        </Text>
+        </Box>
 
         <Box w={"50%"} px={2}>
           <Select

@@ -4,7 +4,7 @@ import { RouterConfig } from "./routes/RouterConfig";
 // import { useQuery } from "@tanstack/react-query";
 // import { getUsersData } from "./services";
 import { useUserSignupStore } from "./store/dashboard/user-auth";
-import { Flex } from "@chakra-ui/react";
+import { Flex, Spinner } from "@chakra-ui/react";
 // import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -48,6 +48,7 @@ const App: React.FC = () => {
           setIsLoading(false);
         })
         .catch((error) => {
+          setIsLoading(true);
           console.error("Error fetching user data:", error);
         });
     }
@@ -60,7 +61,7 @@ const App: React.FC = () => {
   if (isLoading && !/\/(login|signup|forget-password)/.test(location.pathname)) {
     return (
       <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
-        <div>Loading..</div>.
+        <Spinner size={"xl"} color={"#f7931a"} />
       </Flex>
     );
   }

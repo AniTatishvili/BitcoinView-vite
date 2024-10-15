@@ -14,6 +14,7 @@ import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 import { UserAvatar } from "../../../shared/user-avatar";
 import React from "react";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
+import useUserBalance from "../../../shared/hooks/useUserBalance";
 
 // import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
@@ -30,31 +31,23 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const {
-    username,
-    first_name,
-    last_name,
-    avatar,
-    current_balance,
-  }: { username: string; first_name: string; last_name: string; avatar: string; current_balance: string } = useUserSignupStore((state) => ({
-    avatar: state.avatar,
-    username: state.username,
-    first_name: state.first_name,
-    last_name: state.last_name,
-    current_balance: state.current_balance,
-  }));
+  const { username, first_name, last_name, avatar }: { username: string; first_name: string; last_name: string; avatar: string; current_balance: string } =
+    useUserSignupStore((state) => ({
+      avatar: state.avatar,
+      username: state.username,
+      first_name: state.first_name,
+      last_name: state.last_name,
+      current_balance: state.current_balance,
+    }));
 
+  const userBalance = useUserBalance();
   const [profileImage, setProfileImage] = React.useState("");
-  const [userBalance, setUserBalance] = React.useState("");
 
   React.useEffect(() => {
     if (avatar) {
       setProfileImage(avatar);
     }
-    if (current_balance) {
-      setUserBalance(current_balance);
-    }
-  }, [username, first_name, last_name, avatar, current_balance]);
+  }, [username, first_name, last_name, avatar]);
 
   const [noteHoveredIndx, setNoteHoveredIndx] = React.useState<number>();
 
@@ -182,7 +175,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                 src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : ""}
               />
               <Divider orientation={"vertical"} h={"20px"} />
-              <Box>{"$" + " " + userBalance}</Box>
+              <Box>{"$" + " " + userBalance.userBalance}</Box>
             </Stack>
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>

@@ -1,118 +1,46 @@
 import { Text, Td, Tr } from "@chakra-ui/react";
-import { FaArrowTrendUp, FaArrowTrendDown } from "react-icons/fa6";
+import { FaArrowTrendUp } from "react-icons/fa6";
 import { FaBtc } from "react-icons/fa";
 import { LiaEthereum } from "react-icons/lia";
-import { SiCardano } from "react-icons/si";
-import { SiPolkadot } from "react-icons/si";
-import { SiTether } from "react-icons/si";
 
-export const DashboardTableItem = () => {
+interface UserData {
+  coin: string;
+  date: string;
+  utc: string;
+  position: string;
+  market_entry: string;
+  tp: string;
+  sl: string;
+  rr: string;
+  risk_percentage: string;
+}
+
+interface DashboardTableItemProps {
+  userData: UserData;
+}
+
+export const DashboardTableItem: React.FC<DashboardTableItemProps> = ({ userData }) => {
   return (
     <>
       <Tr color={"#fff"} fontSize={"14px"}>
         <Td display={"flex"} alignItems={"center"} gap={4}>
-          <FaBtc /> Bitcoin{" "}
-          <Text as="span" color={"#999"}>
-            BTC
-          </Text>
+          {userData.coin}
         </Td>
-        <Td>
-          0.000255{" "}
-          <Text as="span" color={"#999"}>
-            ($47.3%)
-          </Text>
-        </Td>
-        <Td>$21,3543.00</Td>
-        <Td color={"green"}>+8.97%</Td>
-        <Td color={"green"}>
-          <FaArrowTrendUp />
-        </Td>
-      </Tr>
-      <Tr color={"#fff"} fontSize={"14px"}>
+        <Td>{userData.date}</Td>
+        <Td>{userData.utc}</Td>
+        <Td color={"green"}>{userData.position}</Td>
         <Td display={"flex"} alignItems={"center"} gap={4}>
-          <LiaEthereum />
-          Ethereum{" "}
-          <Text as="span" color={"#999"}>
-            ETH
-          </Text>
+          {userData.market_entry}
         </Td>
-        <Td>
-          {" "}
-          0.000255{" "}
-          <Text as="span" color={"#999"}>
-            ($47.3%)
-          </Text>
-        </Td>
-        <Td>$21,3543.00</Td>
-        <Td color={"red"}>-8.97%</Td>
-        <Td color={"red"}>
-          <FaArrowTrendDown />
-        </Td>
-      </Tr>
-      <Tr color={"#fff"} fontSize={"14px"}>
+        <Td>{userData.tp}</Td>
+        <Td>{userData.sl}</Td>
+        <Td color={"red"}>{userData.rr}</Td>
         <Td display={"flex"} alignItems={"center"} gap={4}>
-          <SiCardano />
-          Cardano{" "}
-          <Text as="span" color={"#999"}>
-            ADA
-          </Text>
-        </Td>
-        <Td>
-          {" "}
-          0.000255{" "}
-          <Text as="span" color={"#999"}>
-            ($47.3%)
-          </Text>
-        </Td>
-        <Td>$21,3543.00</Td>
-        <Td color={"green"}>+8.97%</Td>
-        <Td color={"green"}>
-          <FaArrowTrendUp />
+          {userData.risk_percentage}
         </Td>
       </Tr>
-      <Tr color={"#fff"} fontSize={"14px"}>
-        <Td display={"flex"} alignItems={"center"} gap={4}>
-          <SiPolkadot />
-          Pilkadot{" "}
-          <Text as="span" color={"#999"}>
-            DOT
-          </Text>
-        </Td>
-        <Td>
-          {" "}
-          0.000255{" "}
-          <Text as="span" color={"#999"}>
-            ($47.3%)
-          </Text>
-        </Td>
-        <Td>$21,3543.00</Td>
-        <Td color={"green"}>+8.97%</Td>
-        <Td color={"green"}>
-          <FaArrowTrendUp />
-        </Td>
-      </Tr>
-      <Tr color={"#fff"} fontSize={"14px"}>
-        <Td display={"flex"} alignItems={"center"} gap={4}>
-          <SiTether />
-          Tether{" "}
-          <Text as="span" color={"#999"}>
-            USDT
-          </Text>
-        </Td>
-        <Td>
-          {" "}
-          0.000255{" "}
-          <Text as="span" color={"#999"}>
-            ($47.3%)
-          </Text>
-        </Td>
-        <Td>$21,3543.00</Td>
-        <Td color={"green"}>+8.97%</Td>
-        <Td color={"green"}>
-          <FaArrowTrendUp />
-        </Td>
-      </Tr>
-      <Tr color={"#fff"} fontSize={"14px"}>
+
+      {/* <Tr color={"#fff"} fontSize={"14px"}>
         <Td display={"flex"} alignItems={"center"} gap={4}>
           <SiTether />
           Bitcoin{" "}
@@ -132,28 +60,7 @@ export const DashboardTableItem = () => {
         <Td color={"red"}>
           <FaArrowTrendDown />
         </Td>
-      </Tr>
-      <Tr color={"#fff"} fontSize={"14px"}>
-        <Td display={"flex"} alignItems={"center"} gap={4}>
-          <SiTether />
-          Bitcoin{" "}
-          <Text as="span" color={"#999"}>
-            BTC
-          </Text>
-        </Td>
-        <Td>
-          {" "}
-          0.000255{" "}
-          <Text as="span" color={"#999"}>
-            ($47.3%)
-          </Text>
-        </Td>
-        <Td>$21,3543.00</Td>
-        <Td color={"red"}>-8.97%</Td>
-        <Td color={"red"}>
-          <FaArrowTrendDown />
-        </Td>
-      </Tr>
+      </Tr> */}
     </>
   );
 };

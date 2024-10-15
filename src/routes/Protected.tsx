@@ -4,6 +4,7 @@ import { Outlet, useLocation, Navigate } from "react-router-dom";
 
 // import { Loader } from "shared/ui/loader";
 import { useUserSignupStore } from "../store/dashboard/user-auth";
+import { Flex, Spinner } from "@chakra-ui/react";
 
 // Define types for props and user data
 interface ProtectedProps {
@@ -46,7 +47,11 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
   //   if (isAuthenticated === null) return <Loader />;
 
   if (isAuthenticated === null) {
-    return <div>Loading...</div>;
+    return (
+      <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
+        <Spinner size={"xl"} color={"#f7931a"} />
+      </Flex>
+    );
   }
 
   if (isAuthenticated) {
@@ -56,7 +61,6 @@ export const Protected: React.FC<ProtectedProps> = ({ allowedRoles }) => {
       return <Navigate to={"/404"} state={{ from: location }} />;
     }
   } else if (!isAuthenticated) {
-    console.log("redirecting");
     return <Navigate to={"/login"} state={{ from: location }} />;
   }
 

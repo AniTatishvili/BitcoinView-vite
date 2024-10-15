@@ -1,25 +1,16 @@
-import React from "react";
-
 import { Link } from "react-router-dom";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
 import { PButton } from "../../../../shared/ui/buttons";
 import { MoneyTransferDetailsTable } from "../../../../pages/dashboards/user-dashboard/money-transfer-details-table";
-import { useUserSignupStore } from "../../../../store/dashboard/user-auth";
+import useUserBalance from "../../../../shared/hooks/useUserBalance";
 
 export const WalletContent = () => {
-  const { estimated_balance, current_balance } = useUserSignupStore();
-  const [userBalance, setUserBalance] = React.useState("");
-
   const referralLink = "https://CPa_erefff";
   const referralId = "CPa_erefff";
 
-  React.useEffect(() => {
-    if (current_balance) {
-      setUserBalance(current_balance);
-    }
-  }, [current_balance]);
+  const { userBalance, estimatedBalance } = useUserBalance();
 
   const copyToClipboard = async (text: string) => {
     try {
@@ -44,7 +35,7 @@ export const WalletContent = () => {
         <Flex flexDir={"column"} gap={8}>
           <Box>
             <Text>Estimated Balance</Text>
-            <Box>{"$" + " " + estimated_balance}</Box>
+            <Box>{"$" + " " + estimatedBalance}</Box>
           </Box>
           <Box>
             <Text>Current Balance</Text>

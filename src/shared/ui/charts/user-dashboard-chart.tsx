@@ -31,7 +31,11 @@ export const UserDashboardChart = () => {
         },
       })
       .then((response) => {
-        setData(response.data || null);
+        const transformedData = response.data.map((item: { total_deposits: any }) => ({
+          ...item,
+          amt: item.total_deposits,
+        }));
+        setData(transformedData || null);
         console.log("User chart data:", response.data);
       })
       .catch((error) => {
