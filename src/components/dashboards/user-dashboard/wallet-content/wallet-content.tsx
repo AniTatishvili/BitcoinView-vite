@@ -15,7 +15,7 @@ export const WalletContent = () => {
   const { active_package_name } = useUserSignupStore();
   const { userBalance, estimatedBalance } = useUserBalance();
   const { userPackageNameData } = useUserPackageNameStore();
-  console.log(userPackageNameData.package_name, "userPackageNameData");
+
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);

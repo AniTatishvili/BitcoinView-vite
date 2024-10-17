@@ -25,8 +25,8 @@ export const UserDashboardPayments = () => {
   return (
     <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"column"} borderRadius={"8px"} p={"1rem"} gap={4}>
       <Flex flexDir={"row"} alignItems={"center"} gap={4} color={"#fff"}>
-        <NavLink to="/deposit">Deposit</NavLink>
-        <NavLink to="/withdraw">Withdraw</NavLink>
+        <NavLink to="/user-dashboard/deposit">Deposit</NavLink>
+        <NavLink to="/user-dashboard/withdraw">Withdraw</NavLink>
       </Flex>
       <Flex flexDir={"column"} gap={4}>
         <Flex gap={4}>

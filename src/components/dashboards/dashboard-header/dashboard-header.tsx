@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 
 import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image, Text, Divider, Stack } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
-import { IoNotifications, IoClose } from "react-icons/io5";
+import { IoNotifications } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
 
 import logo from "../../../assets/black-logo.svg";
@@ -27,6 +27,7 @@ const messagesArr = [
   { name: "Lorem ipsum6", message: "Message 6", data: "10/12/2024", link: "/" },
   { name: "Lorem ipsum7", message: "Message 7", data: "10/09/2024", link: "/" },
 ];
+
 export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -49,9 +50,6 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     }
   }, [username, first_name, last_name, avatar]);
 
-  const [noteHoveredIndx, setNoteHoveredIndx] = React.useState<number>();
-
-  // const { updateUserFields } = useUserSignupStore();
   const notificationsCount = 2;
 
   const signout = () => {
@@ -63,21 +61,9 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     console.log("signout");
   };
 
-  const handleMouseOver = (index: number) => {
-    setNoteHoveredIndx(index);
-  };
-
-  const handleMouseOut = (index: number) => {
-    setNoteHoveredIndx(index);
-  };
-
-  const handleClick = () => {
-    console.log(22);
-  };
-
   return (
     <Flex w={"100%"} backgroundColor={"#1F2027"} justify={"space-between"} align={"center"} p={"1rem"} gap={2}>
-      <NavLink to="https://bitcoinview.org">
+      <NavLink to="/user-dashboard/overview">
         <Image src={logo} alt="logo" w={"78px"} />
       </NavLink>
       <Flex align={"center"} gap={{ base: 2, sm: 4 }}>
@@ -108,7 +94,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
               <IoNotifications />
             </MenuButton>
           </Box>
-          <MenuList w={"300px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} py={"16px"} zIndex={10}>
+          <MenuList w={"300px"} backgroundColor={"#141316"} color={"#fff"} borderRadius={"8px"} py={"16px"} zIndex={10}>
             <Text as="h4" w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"} gap={2} pb={4}>
               <Flex>Notifications</Flex>
               <Flex w={"15px"} h={"15px"} bg={"green"} justify={"center"} align={"center"} fontSize={"10px"} borderRadius={"50%"}>
@@ -120,16 +106,14 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                 <Flex
                   w={"100%"}
                   h={"44px"}
-                  bg={"#79797D"}
+                  bg={"#1F2027"}
                   color={"#fff"}
                   justify={"space-between"}
                   align={"center"}
-                  borderBottom={"1px solid #1F2027"}
+                  borderBottom={"3px solid #141316"}
                   gap={4}
                   p={3}
-                  _hover={{ color: "#f7931a" }}
-                  onMouseOutCapture={() => handleMouseOver(i)}
-                  onMouseOut={() => handleMouseOut(i)}>
+                  _hover={{ color: "#f7931a" }}>
                   <Flex gap={2}>
                     <Box w={"10px"} h={"10px"} bg={"#009951"} borderRadius={"50%"}></Box>
                     <Box fontSize={"14px"}>
@@ -140,11 +124,8 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                     </Box>
                   </Flex>
                   <Flex flexDir={"column"} align={"flex-end"}>
-                    <Box color={"red"} opacity={noteHoveredIndx === i ? 1 : 0} onClick={handleClick}>
-                      <IoClose />
-                    </Box>
                     <Flex flexDir={"column"} align={"flex-end"} gap={1}>
-                      <Flex align={"center"} justify={"flex-end"} gap={1} color={"#141316"} fontSize={"10px"}>
+                      <Flex align={"center"} justify={"flex-end"} gap={1} color={"#fff"} fontSize={"10px"}>
                         <IoIosTime />
                         <Text>2min</Text>
                       </Flex>

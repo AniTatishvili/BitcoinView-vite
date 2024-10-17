@@ -31,7 +31,7 @@ export const PackageSelectionContent = () => {
           <Box w={"130px"} h={"72px"} borderRadius={"8px"} overflow={"hidden"}>
             <VideoPlayer videoSource={videoSource} />
           </Box>
-          <Text>How to Deposit by Crypto Step-by-step Guide</Text>
+          <Text>How to Deposit by Crypto Step-by-step Guide?</Text>
         </Flex>
         <FAQ linksArr={linksArr} />
       </Flex>

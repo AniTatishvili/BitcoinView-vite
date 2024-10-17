@@ -26,7 +26,7 @@ export const UserDashboardDetails = () => {
         </Flex>
         <Flex flexDir={"column"} justify={"space-between"} gap={3}>
           <Box>
-            <Box color={"#fff"}>Toltal Balance</Box>
+            <Box color={"#fff"}>Total Balance</Box>
             <Box color={"#f7931a"} fontSize={"22px"} pt={"3px"}>
               {"$" + " " + userBalance.userBalance}
             </Box>

@@ -27,7 +27,7 @@ export const SliderMarkPackage = () => {
 
   const { setUserPackageData } = useUserSelectedPackageStore();
   const { active_package } = useUserSignupStore();
-  const { userBalance } = useUserBalance();
+  const { userBalance, estimatedBalance } = useUserBalance();
   const package_id = active_package - 2;
 
   const [data, setData] = React.useState<UserData[]>([]);
@@ -84,7 +84,7 @@ export const SliderMarkPackage = () => {
           );
           if (response.data.purchase.status == "Inactive") {
             setUserPackageData({
-              amount: activePackage.amount - Number(userBalance),
+              amount: activePackage.amount - Number(userBalance) - Number(estimatedBalance),
               package_name: activePackage.package_name,
               is_purchase: true,
               purchase_id: response.data.purchase.id,

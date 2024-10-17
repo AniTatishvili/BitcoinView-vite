@@ -15,7 +15,9 @@ export const DashboardMenuList: React.FC<DashboardSideMenuProps> = ({ data }) =>
             <Flex fontSize={"18px"}>
               <Icon as={item.icon} />
             </Flex>
-            <Text>{user_dashboard_menu_visibility ? item.name : null}</Text>
+            <Text fontSize={"16px"} whiteSpace={"nowrap"}>
+              {user_dashboard_menu_visibility ? item.name : null}
+            </Text>
           </Flex>
         </NavLink>
       ))}

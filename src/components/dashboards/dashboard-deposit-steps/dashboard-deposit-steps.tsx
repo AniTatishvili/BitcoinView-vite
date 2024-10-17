@@ -154,7 +154,14 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
 
           <List display={"flex"} gap={3} mt={2}>
             {filteredCoins.map((coin) => (
-              <ListItem key={coin.name} display="flex" alignItems="center" fontSize={"14px"} cursor="pointer" onClick={() => handleClick(coin.name)}>
+              <ListItem
+                key={coin.name}
+                display="flex"
+                alignItems="center"
+                fontSize={"14px"}
+                opacity={coin.name === "Credit" ? 0.5 : 1}
+                cursor={coin.name === "Credit" ? "not-allowed" : "pointer"}
+                onClick={() => coin.name !== "Credit" && handleClick(coin.name)}>
                 <Image src={coin.logo} alt={`${coin.name} logo`} boxSize="20px" mr={1} />
                 {coin.name}
               </ListItem>
@@ -259,11 +266,11 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
                 <Text>Next Step</Text>
                 <Box w={"100%"} overflow={"hidden"}>
                   <Box w={"100%"} whiteSpace={"wrap"}>
-                    1- You can copy the wallet address and paste om your bitcoin wallet to transfer amount to your Bitcoinview wallet or using QR code for
+                    1- You can copy the wallet address and paste on your bitcoin wallet to transfer amount to your Bitcoinview wallet or using QR code for
                     Bitcoin Machine to pay and transfer amount to your bitcoinview wallet
                   </Box>
-                  <Box>2- waiting for transaction to Successful status</Box>
-                  <Box>3- system Automatically active your packag</Box>
+                  <Box>2- You can waiting for transaction to Successful status</Box>
+                  <Box>3- System Automatically active your package</Box>
                 </Box>
               </Flex>
             </Flex>
