@@ -24,7 +24,6 @@ export const PaymentTable = ({ data }: PaymentTableProps) => {
   const [selectedData, setSelectedData] = React.useState<PaymentData | null>(null);
 
   const handleRowClick = (item: PaymentData) => {
-    console.log(item, 98);
     setSelectedData(item);
   };
 

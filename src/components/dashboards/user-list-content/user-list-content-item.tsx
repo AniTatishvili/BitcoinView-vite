@@ -39,7 +39,7 @@ export const UserListContentItem: React.FC<UserListContentItemProps> = ({
             {current_package}
           </Button>
         </Flex>
-        <PercentageDoughnut />
+        <PercentageDoughnut percentage={0} />
       </Flex>
       <Flex flexDir={"column"} gap={4} fontSize={"14px"}>
         <Text fontWeight={"600"}>Package: Voyager</Text>

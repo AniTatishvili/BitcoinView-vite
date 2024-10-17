@@ -5,13 +5,17 @@ import { TbCopyPlusFilled } from "react-icons/tb";
 import { PButton } from "../../../../shared/ui/buttons";
 import { MoneyTransferDetailsTable } from "../../../../pages/dashboards/user-dashboard/money-transfer-details-table";
 import useUserBalance from "../../../../shared/hooks/useUserBalance";
+import { useUserPackageNameStore } from "../../../../store/dashboard/user-package-name-store";
+import { useUserSignupStore } from "../../../../store/dashboard/user-auth";
 
 export const WalletContent = () => {
   const referralLink = "https://CPa_erefff";
   const referralId = "CPa_erefff";
 
+  const { active_package_name } = useUserSignupStore();
   const { userBalance, estimatedBalance } = useUserBalance();
-
+  const { userPackageNameData } = useUserPackageNameStore();
+  console.log(userPackageNameData.package_name, "userPackageNameData");
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
@@ -45,7 +49,7 @@ export const WalletContent = () => {
         <Flex flexDir={"column"} gap={4}>
           <Flex gap={4}>
             <Flex bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"}>
-              Silver
+              {userPackageNameData.package_name === "" ? active_package_name : Object.values(userPackageNameData)}
             </Flex>
             <Flex alignItems={"center"} bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"} gap={2}>
               Account{" "}

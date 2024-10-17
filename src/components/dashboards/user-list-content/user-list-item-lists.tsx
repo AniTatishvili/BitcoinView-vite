@@ -53,7 +53,7 @@ export const UserListItemLists: React.FC<UserListContentItemProps> = ({
               {current_package}
             </Button>
           </Flex>
-          <PercentageDoughnut />
+          <PercentageDoughnut percentage={0} />
         </Flex>
         <Flex gap={4}>
           <Text fontSize={"14px"} fontWeight={"600"}>

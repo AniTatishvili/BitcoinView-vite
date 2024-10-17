@@ -22,6 +22,7 @@ type UserSignupStoreType = {
   employee: boolean;
   id: string;
   active_package: number;
+  active_package_name: string;
   other_notifications: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resource: any;
@@ -56,6 +57,7 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   employee: false,
   id: "",
   active_package: 0,
+  active_package_name: "",
   other_notifications: false,
   resource: {},
   retention_status: false,

@@ -29,7 +29,7 @@ export const DashboardTable = () => {
       .get(url)
       .then((response) => {
         setData(response.data || null);
-        console.log("User traiding signals:", response.data);
+        // console.log("User traiding signals:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -45,10 +45,11 @@ export const DashboardTable = () => {
         <TableContainer
           w={"100%"}
           h={"250px"}
-          overflowY={"scroll"}
+          overflow={"scroll"}
           css={{
             "&::-webkit-scrollbar": {
-              width: "3px",
+              width: "4px",
+              height: "4px",
             },
             "&::-webkit-scrollbar-track": {
               width: "4px",
@@ -61,39 +62,39 @@ export const DashboardTable = () => {
           <Table variant="simple" size={"md"} w={"100%"}>
             <Thead>
               <Tr>
-                <Th textAlign={"start"}>
+                <Th textAlign={"start"} p={1}>
                   <PText>Coins</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
+                <Th textAlign={"start"} p={1}>
                   <PText>Date</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
+                <Th textAlign={"start"} p={1}>
                   <PText>UTC</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
+                <Th textAlign={"start"} p={1}>
                   <PText>Position</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
+                <Th textAlign={"start"} p={1}>
                   <PText>Market Entry</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
+                <Th textAlign={"start"} p={1}>
                   <PText>TP</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
+                <Th textAlign={"start"} p={1}>
                   <PText>SL</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
+                <Th textAlign={"start"} p={1}>
                   <PText>RR</PText>
                 </Th>
-                <Th textAlign={"start"} isNumeric>
-                  <PText>Risk Percentage</PText>
+                <Th textAlign={"start"} p={1}>
+                  <PText>Risk</PText>
                 </Th>
               </Tr>
             </Thead>
             <Tbody>
               {data instanceof Array &&
-                data.map((items) => {
-                  return <DashboardTableItem userData={items} />;
+                data.map((items, i) => {
+                  return <DashboardTableItem key={i} userData={items} />;
                 })}
             </Tbody>
           </Table>

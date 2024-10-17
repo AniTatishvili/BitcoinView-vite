@@ -41,7 +41,7 @@ export const Deposit: React.FC = () => {
           <Flex w={"100%"} h={"fit-content"} flexDir={"column"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"} gap={4}>
             <Text as="h3">Cards & Payment method</Text>
             <Flex w={"100%"} flexDir={{ base: "column", lg: "row" }} justify={"space-between"} gap={4}>
-              <DashboardDepositSteps amount_usd={undefined} />
+              <DashboardDepositSteps amount_usd={undefined} is_purchase={false} purchase_id={0} />
               <Box>
                 <Flex flexDir={{ base: "column", lg: "row" }} fontSize={"14px"} gap={4} mb={"1rem"}>
                   <Box bg={"#3C3C3C"} borderRadius={"8px"} p={"5px"}>

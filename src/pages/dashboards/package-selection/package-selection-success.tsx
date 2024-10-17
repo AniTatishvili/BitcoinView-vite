@@ -1,8 +1,8 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 import { Flex, Image, Text } from "@chakra-ui/react";
-import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selected-package-store";
+
 import image from "../../../assets/images/trophy-winner-cup.png";
 import { BreadCrumb } from "../../../shared/ui/bread-crumb";
 
@@ -12,16 +12,7 @@ export const PackageSelectionSuccess = () => {
     { url: "/user-dashboard/package-selection-success", text: "Package Selection Success", isCurrentPage: true },
   ];
 
-  const {
-    userPackageData: { package_name },
-  } = useUserSelectedPackageStore();
-  const [packageName, setPackageName] = React.useState("");
-
-  React.useEffect(() => {
-    if (package_name) {
-      setPackageName(package_name);
-    }
-  }, [package_name]);
+  const { active_package_name } = useUserSignupStore();
 
   return (
     <Flex w={"100%"} h={"calc(100vh - 90px)"} overflow={"hidden"} pb={"1rem"}>
@@ -48,7 +39,7 @@ export const PackageSelectionSuccess = () => {
         <BreadCrumb items={items} />
         <Flex w={"100%"} flexDir={"column"} justify={"center"} alignItems={"center"}>
           <Text as="h4" fontSize={"40px"} fontWeight={"600"} lineHeight={1}>
-            {packageName}
+            {active_package_name}
           </Text>
           <Image src={image} alt="trophy" />
           <Text fontSize={"40px"} fontWeight={"600"}>

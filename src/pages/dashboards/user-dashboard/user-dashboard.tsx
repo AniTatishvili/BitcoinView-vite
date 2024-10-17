@@ -15,8 +15,8 @@ export const UserDashboard = () => {
     { link: "/user-dashboard/messages", name: "Messages", icon: FaFacebookMessenger },
     { link: "/user-dashboard/profile", name: "Profile", icon: FaUserAlt },
     { link: "/user-dashboard/wallet", name: "Wallet", icon: FaWallet },
-    { link: "/user-dashboard/user-monthly-profile", name: "Monthly Profile", icon: MdCalendarMonth },
     { link: "/user-dashboard/package-selection", name: "Select Package", icon: FiPackage },
+    { link: "/user-dashboard/user-monthly-profile", name: "Monthly Profile", icon: MdCalendarMonth },
   ];
 
   return (

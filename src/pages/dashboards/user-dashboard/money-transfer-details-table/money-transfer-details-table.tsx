@@ -64,7 +64,7 @@ export const MoneyTransferDetailsTable = () => {
         }
         setData(filteredData);
         setIsLoading(false);
-        console.log("User data:", response.data);
+        // console.log("User data:", response.data);
       })
       .catch((error) => {
         setIsLoading(false);

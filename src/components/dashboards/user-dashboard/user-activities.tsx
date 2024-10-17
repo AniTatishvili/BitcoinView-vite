@@ -25,7 +25,7 @@ export const UserActivities = () => {
       })
       .then((response) => {
         setData(response.data.activities || null);
-        console.log("User chart data:", response.data);
+        // console.log("User chart data:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -37,24 +37,35 @@ export const UserActivities = () => {
       <Text as="h2" color="#fff" fontSize={"24px"} fontWeight={"600"} pb={"1rem"}>
         Activities
       </Text>
-      <Flex flexDir={"column"} gap={"10px"}>
+      <Flex
+        maxH={"158px"}
+        flexDir={"column"}
+        gap={"10px"}
+        overflowY={"scroll"}
+        css={{
+          "&::-webkit-scrollbar": {
+            width: "4px",
+            height: "4px",
+          },
+          "&::-webkit-scrollbar-track": {
+            width: "4px",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "#f7931a",
+            borderRadius: "24px",
+          },
+        }}>
         {Array.isArray(data) &&
-          data.slice(-2).map((item, i) => {
+          data.slice(-5).map((item, i) => {
             return (
               <Flex key={i} w={"100%"} justify={"space-between"} align={"center"} backgroundColor={"#141316"} borderRadius={"8px"} p={"10px"}>
-                <Flex align={"center"} gap={4}>
-                  <Box color={"#fff"} fontSize={"24px"}>
-                    {i}
+                <Flex align={"center"} gap={2}>
+                  <Box color={"#fff"} fontSize={"20px"} lineHeight={1.2}>
+                    {i + 1}
                   </Box>
-                  <Box lineHeight={1}>
-                    <Box color={"#fff"}>{item.description}</Box>
-                    {/* <Box color={"#999"}>Sold</Box> */}
-                  </Box>
+                  <Box color={"#fff"}>{item.description}</Box>
                 </Flex>
-                <Box lineHeight={1}>
-                  {/* <Box color={"#fff"}>-25.29 ETH</Box> */}
-                  <Box color={"#999"}>{item.date}</Box>
-                </Box>
+                <Box color={"#999"}>{item.date}</Box>
               </Flex>
             );
           })}

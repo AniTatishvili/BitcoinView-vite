@@ -3,8 +3,13 @@ import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
 import { PButton } from "../../../shared/ui/buttons";
+import { useUserPackageNameStore } from "../../../store/dashboard/user-package-name-store";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 export const UserDashboardPayments = () => {
+  const { userPackageNameData } = useUserPackageNameStore();
+  const { active_package_name } = useUserSignupStore();
+
   const referralLink = "https://CPa_erefff";
   const referralId = "CPa_erefff";
 
@@ -26,7 +31,9 @@ export const UserDashboardPayments = () => {
       <Flex flexDir={"column"} gap={4}>
         <Flex gap={4}>
           <Flex bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"}>
-            <Link to="/user-dashboard/package-selection">Voyager</Link>
+            <Link to="/user-dashboard/package-selection">
+              {userPackageNameData.package_name === "" ? active_package_name : Object.values(userPackageNameData)}
+            </Link>
           </Flex>
           <Flex alignItems={"center"} bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"} gap={2}>
             Account{" "}

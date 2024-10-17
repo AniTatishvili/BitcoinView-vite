@@ -38,7 +38,7 @@ export const DashboardPaymentMethods = () => {
       .then((response) => {
         const { btcQr, btcAddress } = response.data;
         setData({ btcQr, btcAddress });
-        console.log("User data:", response.data);
+        // console.log("User data:", response.data);
       })
       .catch((error) => {
         showToast("error", error.response.data.message);

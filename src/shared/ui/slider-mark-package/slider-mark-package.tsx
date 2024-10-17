@@ -11,6 +11,7 @@ import { RiQuestionFill } from "react-icons/ri";
 import { OrbitPackageModal } from "../modal/orbit-package-modal";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 import useUserBalance from "../../hooks/useUserBalance";
+import { TermsAndConditionsModal } from "../modal";
 
 interface UserData {
   amount: number;
@@ -26,13 +27,13 @@ export const SliderMarkPackage = () => {
 
   const { setUserPackageData } = useUserSelectedPackageStore();
   const { active_package } = useUserSignupStore();
-
   const { userBalance } = useUserBalance();
   const package_id = active_package - 2;
-  console.log(package_id, "package_id", active_package);
+
   const [data, setData] = React.useState<UserData[]>([]);
   const [activeIndex, setActiveIndex] = React.useState<number | null>(package_id ?? userBalance ?? 0);
   const [isOrbitSelected, setIsOrbitSelected] = React.useState(false);
+  const [isCheckboxChecked, setIsCheckboxChecked] = React.useState(false);
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
@@ -48,17 +49,12 @@ export const SliderMarkPackage = () => {
       })
       .then((response) => {
         setData(response.data.packages);
-        // console.log("User package data:", response.data);
       })
       .catch((error) => {
         showToast("error", error.response.data.message);
         setActiveIndex(2);
         console.error("Error fetching user data:", error);
       });
-  }, []);
-
-  React.useEffect(() => {
-    // setUserBalance()
   }, []);
 
   const handleClick = (index: number) => {
@@ -97,16 +93,15 @@ export const SliderMarkPackage = () => {
             setActiveIndex(response.data.purchase.id - 2);
             navigate("/user-dashboard/deposit");
           } else {
-            console.log(111);
+            setActiveIndex(activeIndex);
             navigate("/user-dashboard/package-selection-success");
           }
 
-          console.log("Package updated successfully:", response.data);
+          // console.log("Package updated successfully:", response.data);
         } catch (error) {
           console.error("Error updating avatar:", error);
         }
       }
-      console.log("activePackage.value");
     }
   };
 
@@ -181,9 +176,12 @@ export const SliderMarkPackage = () => {
               ))}
           </Flex>
         </Flex>
-        <Button bg={"#3AAB41"} mt={4} onClick={handleMouseClick}>
-          Purchase
-        </Button>
+        <Flex flexDir={{ base: "column", sm: "row" }} gap={4} mt={4}>
+          <TermsAndConditionsModal isChecked={isCheckboxChecked} onCheckboxChange={setIsCheckboxChecked} />
+          <Button bg={"#3AAB41"} onClick={handleMouseClick} disabled={!isCheckboxChecked}>
+            Purchase
+          </Button>
+        </Flex>
       </Flex>
 
       {isOrbitSelected && <OrbitPackageModal isOpen={!!isOrbitSelected} onClose={() => setIsOrbitSelected(false)} />}

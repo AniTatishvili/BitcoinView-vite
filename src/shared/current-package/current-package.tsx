@@ -7,6 +7,8 @@ import { PercentageDoughnut } from "../ui/charts";
 import { FaCircle } from "react-icons/fa";
 import useCustomToast from "../hooks/useCustomToast";
 import { CurrentPackageCancelModal } from "../ui/modal";
+import { useUserPackageNameStore } from "../../store/dashboard/user-package-name-store";
+import { useUserSignupStore } from "../../store/dashboard/user-auth";
 
 interface CurrentPackageProps {
   package_name: string;
@@ -22,6 +24,8 @@ interface CurrentPackageProps {
 export const CurrentPackage = () => {
   const navigate = useNavigate();
   const showToast = useCustomToast();
+  const { setUserPackageNameData } = useUserPackageNameStore();
+  const { updateUserFields } = useUserSignupStore();
   const [data, setData] = React.useState<CurrentPackageProps | null>(null);
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
@@ -37,7 +41,9 @@ export const CurrentPackage = () => {
       })
       .then((response) => {
         setData(response.data.active_purchase || null);
-        console.log("User package data:", response.data.active_purchase);
+        setUserPackageNameData(response.data.active_purchase.package_name);
+        updateUserFields({ active_package: response.data.active_purchase.package_id });
+        // console.log("User package data:", response.data.active_purchase);
       })
       .catch((error) => {
         showToast("error", error.response.data.message);
