@@ -38,7 +38,7 @@ export const UserActivities = () => {
         Activities
       </Text>
       <Flex
-        maxH={"158px"}
+        maxH={"228px"}
         flexDir={"column"}
         gap={"10px"}
         overflowY={"scroll"}
@@ -60,7 +60,7 @@ export const UserActivities = () => {
             return (
               <Flex key={i} w={"100%"} justify={"space-between"} align={"center"} backgroundColor={"#141316"} borderRadius={"8px"} p={"10px"}>
                 <Flex align={"center"} gap={2}>
-                  <Box color={"#fff"} fontSize={"20px"} lineHeight={1.2}>
+                  <Box color={"#fff"} fontSize={"24px"} lineHeight={1.2}>
                     {i + 1}
                   </Box>
                   <Box color={"#fff"}>{item.description}</Box>

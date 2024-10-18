@@ -1,4 +1,6 @@
 // import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import axios from "axios";
 
 import { useNavigate, NavLink, Link } from "react-router-dom";
 
@@ -12,21 +14,16 @@ import { IoIosTime } from "react-icons/io";
 import logo from "../../../assets/black-logo.svg";
 import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 import { UserAvatar } from "../../../shared/user-avatar";
-import React from "react";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 import useUserBalance from "../../../shared/hooks/useUserBalance";
 
-// import { useUserSignupStore } from "../../../store/dashboard/user-auth";
-
-const messagesArr = [
-  { name: "Lorem ipsum1", message: "Message 1 lorem ipsum dolor amet", data: "10/12/2024", link: "/" },
-  { name: "Lorem ipsum2", message: "Message 2", data: "20/05/2024", link: "/" },
-  { name: "Lorem ipsum3", message: "Message 3", data: "18/12/2024", link: "/" },
-  { name: "Lorem ipsum4", message: "Message 4", data: "10/06/2024", link: "/" },
-  { name: "Lorem ipsum5", message: "Message 5", data: "15/12/2024", link: "/" },
-  { name: "Lorem ipsum6", message: "Message 6", data: "10/12/2024", link: "/" },
-  { name: "Lorem ipsum7", message: "Message 7", data: "10/09/2024", link: "/" },
-];
+interface MessagesProps {
+  id: number;
+  subject: string;
+  message_text: string;
+  created_at: string;
+  status: string;
+}
 
 export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
@@ -50,7 +47,49 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     }
   }, [username, first_name, last_name, avatar]);
 
-  const notificationsCount = 2;
+  const [messagesData, setMessagesData] = React.useState<MessagesProps | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [messagesCountData, setMessagesCountData] = React.useState<any>();
+  const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
+  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+
+  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages";
+  const countUrl = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/count";
+
+  React.useEffect(() => {
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setMessagesData(response.data || null);
+        if (Array.isArray(response.data)) {
+          const readIndexes = response.data.map((message, index) => (message.status === "read" ? index : null)).filter((index) => index !== null);
+          setMessageIndex(readIndexes);
+        }
+        console.log("User messages data:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+
+    axios
+      .get(countUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setMessagesCountData(response.data.unread_messages_count || null);
+
+        console.log("User messages data:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
 
   const signout = () => {
     localStorage.removeItem("token");
@@ -80,7 +119,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
               pos={"absolute"}
               top={"-10px"}
               right={0}>
-              {notificationsCount}
+              {messagesCountData}
             </Flex>
             <MenuButton
               w={"fit-content"}
@@ -98,42 +137,64 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             <Text as="h4" w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"} gap={2} pb={4}>
               <Flex>Notifications</Flex>
               <Flex w={"15px"} h={"15px"} bg={"green"} justify={"center"} align={"center"} fontSize={"10px"} borderRadius={"50%"}>
-                {notificationsCount}
+                {messagesCountData}
               </Flex>
             </Text>
-            {messagesArr.map((item, i) => (
-              <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-                <Flex
-                  w={"100%"}
-                  h={"44px"}
-                  bg={"#1F2027"}
-                  color={"#fff"}
-                  justify={"space-between"}
-                  align={"center"}
-                  borderBottom={"3px solid #141316"}
-                  gap={4}
-                  p={3}
-                  _hover={{ color: "#f7931a" }}>
-                  <Flex gap={2}>
-                    <Box w={"10px"} h={"10px"} bg={"#009951"} borderRadius={"50%"}></Box>
-                    <Box fontSize={"14px"}>
-                      <Text as={"h5"} fontWeight={600} lineHeight={1}>
-                        {item.name}
-                      </Text>
-                      <Text fontSize={"12px"}>{item.message}</Text>
-                    </Box>
-                  </Flex>
-                  <Flex flexDir={"column"} align={"flex-end"}>
-                    <Flex flexDir={"column"} align={"flex-end"} gap={1}>
-                      <Flex align={"center"} justify={"flex-end"} gap={1} color={"#fff"} fontSize={"10px"}>
-                        <IoIosTime />
-                        <Text>2min</Text>
+            <Box
+              maxH={"360px"}
+              overflowY={"scroll"}
+              css={{
+                "&::-webkit-scrollbar": {
+                  width: "4px",
+                  height: "4px",
+                },
+                "&::-webkit-scrollbar-track": {
+                  width: "4px",
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  background: "#f7931a",
+                  borderRadius: "24px",
+                },
+              }}>
+              {Array.isArray(messagesData) &&
+                messagesData?.map((item, i) => {
+                  const date = new Date(item.created_at);
+                  const formatted = date.toISOString().slice(0, 16).replace("T", " ");
+                  console.log(i, messageIndex);
+                  return (
+                    <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
+                      <Flex
+                        w={"100%"}
+                        h={"44px"}
+                        bg={"#1F2027"}
+                        color={"#fff"}
+                        justify={"space-between"}
+                        align={"center"}
+                        borderBottom={"3px solid #141316"}
+                        gap={4}
+                        p={3}
+                        _hover={{ color: "#f7931a" }}>
+                        <Flex gap={2}>
+                          {!messageIndex.includes(i) ? <Box w={"10px"} h={"10px"} bg={"#009951"} borderRadius={"50%"}></Box> : null}
+                          <Box fontSize={"14px"}>
+                            <Text as={"h5"} w={"140px"} overflow={"hidden"} whiteSpace={"nowrap"} textOverflow={"elipsis"} fontWeight={600} lineHeight={1}>
+                              {item.subject}
+                            </Text>
+                          </Box>
+                        </Flex>
+                        <Flex flexDir={"column"} align={"flex-end"}>
+                          <Flex flexDir={"column"} align={"flex-end"} gap={1}>
+                            <Flex align={"center"} justify={"flex-end"} gap={1} color={"#fff"} fontSize={"10px"}>
+                              <IoIosTime />
+                              <Text>{formatted}</Text>
+                            </Flex>
+                          </Flex>
+                        </Flex>
                       </Flex>
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </NavLink>
-            ))}
+                    </NavLink>
+                  );
+                })}
+            </Box>
             <Flex w={"100%"} justify={"space-between"} align={"center"} px={3} mt={2}>
               <Link to="/user-dashboard/messages">See all messages</Link>
               <Button>Clear all</Button>

@@ -81,7 +81,7 @@ export const UserDashboardChart: React.FC = () => {
       });
   }, []);
 
-  const maxYAxisValue = Math.max(50000, ...data.map((item) => Math.round(item.total_deposits)));
+  const maxYAxisValue = Math.max(50000, ...data.map((item) => Math.round(item.total_deposits * 1.2)));
 
   if (!data.length) {
     return (

@@ -1,4 +1,5 @@
-import { Button, Flex, Select, Input } from "@chakra-ui/react";
+import { Button, Flex, Box, Select, Input } from "@chakra-ui/react";
+import { GrRefresh } from "react-icons/gr";
 
 interface Filters {
   amount_usd: string | number | readonly string[] | undefined;
@@ -14,6 +15,10 @@ interface TableFilterProps {
 }
 
 export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChange }) => {
+  const refreshTableData = () => {
+    console.log("click");
+  };
+
   return (
     <Flex flexDir={{ base: "column", lg: "row" }} align={"center"} gap={4}>
       <Flex w={"100%"}>
@@ -84,9 +89,15 @@ export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChang
           <option value="successful">Successful</option>
         </Select>
       </Flex>
+      <Button onClick={refreshTableData}>
+        <Box as={"span"} color={"#fff"} fontSize={"20px"}>
+          <GrRefresh />
+        </Box>
+      </Button>
       <Button
         w={{ base: "fit-content", lg: "50%" }}
         bg={"none"}
+        p={0}
         m={"auto"}
         _hover={{ background: "none" }}
         _focus={{ border: 0 }}

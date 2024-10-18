@@ -1,158 +1,94 @@
 import React from "react";
+import axios from "axios";
+
+import useCustomToast from "../../../shared/hooks/useCustomToast";
 import { Box, Flex, Text, Tab, TabList, Hide, Show, Textarea, Button } from "@chakra-ui/react";
 import { FaCalendar } from "react-icons/fa";
 import { PButton } from "../../../shared/ui/buttons/PButton";
 
 interface MessagesProps {
-  text: string;
-  date: string;
+  id: number;
+  message_text: string;
+  created_at: string;
+  status: string;
 }
 
-const messagesArr: MessagesProps[] = [
-  {
-    text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Riatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident2.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.3",
-    date: "12/02/2024",
-  },
-  {
-    text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Riatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident2.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.3",
-    date: "12/02/2024",
-  },
-  {
-    text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident89.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Riatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident2.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.3",
-    date: "12/02/2024",
-  },
-  {
-    text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Riatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident2.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.3",
-    date: "12/02/2024",
-  },
-  {
-    text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Riatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident2.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.3",
-    date: "12/02/2024",
-  },
-  {
-    text: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Riatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident2.",
-    date: "12/02/2024",
-  },
-  {
-    text: "Pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.3",
-    date: "12/02/2024",
-  },
-];
-
 export const DashboardMessagesTabLists = () => {
-  const storedReadMessageIndexes = window.localStorage.getItem("READ_MESSAGE_INDEX");
-  let initialReadMessageIndexes = [];
+  const showToast = useCustomToast();
 
-  try {
-    if (storedReadMessageIndexes) {
-      initialReadMessageIndexes = JSON.parse(storedReadMessageIndexes);
-      if (!Array.isArray(initialReadMessageIndexes)) {
-        initialReadMessageIndexes = [];
-      }
-    }
-  } catch (e) {
-    console.error("Failed to parse READ_MESSAGE_INDEX from localStorage", e);
-  }
-
-  const [messageIndex, setMessageIndex] = React.useState<number[]>(initialReadMessageIndexes);
+  const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [showTabPanel, setShowTabPanel] = React.useState<boolean>(false);
 
-  const readMessage = (indx: number) => {
+  const [data, setData] = React.useState<MessagesProps | null>(null);
+  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+
+  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages";
+
+  React.useEffect(() => {
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setData(response.data || null);
+        if (Array.isArray(response.data)) {
+          const readIndexes = response.data.map((message, index) => (message.status === "read" ? index : null)).filter((index) => index !== null);
+          setMessageIndex(readIndexes);
+        }
+        console.log("User messages data:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
+  const readMessage = async (indx: number) => {
     const newReadMessageIndexes = [...messageIndex, indx];
+    console.log(indx, "index");
     setMessageIndex(newReadMessageIndexes);
-    setShowTabPanel(true);
-    setSelectedTab(indx);
-    window.localStorage.setItem("READ_MESSAGE_INDEX", JSON.stringify(newReadMessageIndexes));
-    window.localStorage.setItem("ACTIVE_MESSAGE_INDEX", JSON.stringify(indx));
+
+    const newSelectedTab = indx + 1;
+    setSelectedTab(newSelectedTab);
+
+    const readUrl = `https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/${newSelectedTab}/read`;
+
+    try {
+      const response = await axios.post(
+        readUrl,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Read message:", response.data);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        showToast("error", error.response.data.message);
+        console.error("Error:", error.response.data);
+        console.error("Status code:", error.response.status);
+      } else {
+        console.error("Unexpected error:", error);
+      }
+    }
   };
 
   return (
     <>
       <Hide below="lg">
         <TabList w={"100%"} display={"flex"} flexDir={"column"} alignItems={"center"} gap={4} mb={"10px"} color={"#fff"} borderBottom={0}>
-          {messagesArr.map((item, i) => {
-            return (
-              <Tab
-                key={i}
-                w={"100%"}
-                display={"inline-block"}
-                bg={"#79797D"}
-                color={messageIndex.includes(i) ? "#35363d" : "#3AAB41"}
-                textAlign={"start"}
-                borderLeft={"2px solid red"}
-                borderBottom={0}
-                borderColor={messageIndex.includes(i) ? "#35363d" : "#3AAB41"}
-                borderRadius={"8px"}
-                opacity={messageIndex.includes(i) ? "0.8" : 1}
-                p={2}
-                _selected={{ color: "#f7931a" }}
-                onClick={() => readMessage(i)}>
-                <Box>
-                  <Flex align={"center"} gap={2}>
-                    <Text w={"100%"} color={"#fff"} fontSize={"14px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
-                      {item.text}
-                    </Text>
-                  </Flex>
-                  <Flex alignItems={"center"} gap={1}>
-                    <FaCalendar />
-                    <Text lineHeight={1}>{item.date}</Text>
-                  </Flex>
-                </Box>
-              </Tab>
-            );
-          })}
-        </TabList>
-      </Hide>
-      <Show below="lg">
-        <Box w={"100%"}>
-          {!showTabPanel && (
-            <TabList w={"100%"} display={"flex"} flexDir={"column"} alignItems={"center"} gap={4} mb={"10px"} color={"#fff"} borderBottom={0}>
-              {messagesArr.map((item, i) => (
+          {Array.isArray(data) &&
+            data?.map((item, i) => {
+              const date = new Date(item.created_at);
+              const formatted = date.toISOString().slice(0, 16).replace("T", " ");
+
+              return (
                 <Tab
                   key={i}
                   w={"100%"}
@@ -161,25 +97,67 @@ export const DashboardMessagesTabLists = () => {
                   color={messageIndex.includes(i) ? "#35363d" : "#3AAB41"}
                   textAlign={"start"}
                   borderLeft={"2px solid red"}
+                  borderBottom={0}
                   borderColor={messageIndex.includes(i) ? "#35363d" : "#3AAB41"}
                   borderRadius={"8px"}
                   opacity={messageIndex.includes(i) ? "0.8" : 1}
                   p={2}
                   _selected={{ color: "#f7931a" }}
-                  onClick={() => {
-                    readMessage(i);
-                  }}>
-                  <Flex align={"center"} gap={2}>
-                    <Text w={"100%"} color={"#fff"} fontSize={"14px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
-                      {item.text}
-                    </Text>
-                  </Flex>
-                  <Flex alignItems={"center"} gap={1}>
-                    <FaCalendar />
-                    <Text lineHeight={1}>{item.date}</Text>
-                  </Flex>
+                  onClick={() => readMessage(i)}>
+                  <Box>
+                    <Flex align={"center"} gap={2}>
+                      <Text w={"100%"} color={"#fff"} fontSize={"14px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
+                        {item.message_text}
+                      </Text>
+                    </Flex>
+                    <Flex alignItems={"center"} gap={1}>
+                      <FaCalendar />
+                      <Text lineHeight={1}>{formatted}</Text>
+                    </Flex>
+                  </Box>
                 </Tab>
-              ))}
+              );
+            })}
+        </TabList>
+      </Hide>
+      <Show below="lg">
+        <Box w={"100%"}>
+          {!showTabPanel && (
+            <TabList w={"100%"} display={"flex"} flexDir={"column"} alignItems={"center"} gap={4} mb={"10px"} color={"#fff"} borderBottom={0}>
+              {Array.isArray(data) &&
+                data?.map((item, i) => {
+                  const date = new Date(item.created_at);
+                  const formatted = date.toISOString().slice(0, 16).replace("T", " ");
+
+                  return (
+                    <Tab
+                      key={i}
+                      w={"100%"}
+                      display={"inline-block"}
+                      bg={"#79797D"}
+                      color={messageIndex.includes(i) ? "#35363d" : "#3AAB41"}
+                      textAlign={"start"}
+                      borderLeft={"2px solid red"}
+                      borderColor={messageIndex.includes(i) ? "#35363d" : "#3AAB41"}
+                      borderRadius={"8px"}
+                      opacity={messageIndex.includes(i) ? "0.8" : 1}
+                      p={2}
+                      _selected={{ color: "#f7931a" }}
+                      onClick={() => {
+                        readMessage(i);
+                      }}>
+                      <Flex align={"center"} gap={2}>
+                        <Text w={"100%"} color={"#fff"} fontSize={"14px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
+                          {item.message_text}
+                        </Text>
+                      </Flex>
+                      <Flex alignItems={"center"} gap={1}>
+                        <FaCalendar />
+                        <Text lineHeight={1}>{formatted}</Text>
+                      </Flex>
+                    </Tab>
+                  );
+                })}
             </TabList>
           )}
           {showTabPanel && selectedTab !== null && (
@@ -187,7 +165,7 @@ export const DashboardMessagesTabLists = () => {
               <Button w={"fit-content"} pos={"absolute"} top={0} right={0} p={0} onClick={() => setShowTabPanel(false)}>
                 X
               </Button>
-              <Text mt={4}>{messagesArr[selectedTab].text}</Text>
+              <Text mt={4}>(data as MessagesProps[])[selectedTab].message_text</Text>
               <Textarea w={"100%"} h={"100%"} minH={"100px"} placeholder="Send response" />
               <PButton>Send</PButton>
             </Flex>
