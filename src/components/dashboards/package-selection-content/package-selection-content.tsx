@@ -8,7 +8,7 @@ import { FAQ } from "../../../shared/FAQ";
 
 export const PackageSelectionContent = () => {
   const linksArr = [
-    { link: "", text: "Deposit hasn’t arrive?" },
+    { link: "", text: "Deposit hasn’t arrived?" },
     { link: "", text: "Where is more information about packages?" },
     { link: "", text: "Whats is the next step after Funding?" },
     { link: "", text: "Why my package is not approve yet?" },

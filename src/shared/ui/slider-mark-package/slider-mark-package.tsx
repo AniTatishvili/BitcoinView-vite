@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-import { Flex, Box, Button, Tooltip, Text } from "@chakra-ui/react";
+import { Flex, Box, Button, Tooltip, Text, List, ListItem } from "@chakra-ui/react";
 import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selected-package-store";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 
@@ -39,6 +39,377 @@ export const SliderMarkPackage = () => {
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/packages";
   const purckageUlr = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/purchase";
+
+  const tooltipContent = [
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Trial
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box h={"22px"}>$50</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Profit:</Text>{" "}
+              <Box h={"22px"} textAlign={"start"}>
+                Guaranteed 1.3% in 2 weeks
+              </Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Purpose:</Text>{" "}
+              <Flex h={"22px"} textAlign={"start"} alignItems={"start"} justifyContent={"start"}>
+                Test platform capabilities
+              </Flex>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Restrictions:</Text>{" "}
+              <Box h={"22px"} textAlign={"start"} alignItems={"start"} justifyContent={"start"}>
+                Only available once per client and per IP address
+              </Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Voyager
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$5,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>1.6%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> <Box>3 months</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Flex textAlign={"start"} alignItems={"start"} justifyContent={"start"}>
+                20% to withdraw initial investment before contract matures
+              </Flex>
+            </ListItem>
+            <ListItem display={"flex"} alignItems={"start"} justifyContent={"start"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text>
+              <Flex textAlign={"start"} alignItems={"start"} justifyContent={"start"}>
+                Monthly profits can be withdrawn without penalties.
+              </Flex>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Elite
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$8,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>1.9%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> 3 months
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Box>23% to withdraw initial investment before contract matures</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text> <Box>Monthly profits can be withdrawn without penalties</Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Pioneer
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$16,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>2.2%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> 6 months
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Box>23% to withdraw initial investment before contract matures</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text> <Box>Monthly profits can be withdrawn without penalties</Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Quantum
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$32,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>2.5%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> 6 months
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Box>26% to withdraw initial investment before contract matures</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text> <Box>Monthly profits can be withdrawn without penalties</Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Titan
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$64,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>2.8%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> 9 months
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Box>26% to withdraw initial investment before contract matures</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text> <Box>Monthly profits can be withdrawn without penalties</Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Nexus
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$128,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>3.0%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> 12 months
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Box>29% to withdraw initial investment before contract matures</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text> <Box>Monthly profits can be withdrawn without penalties</Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Platinum
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$163,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>3.3%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> 18 months
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Box>29% to withdraw initial investment before contract matures</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text> <Box>Monthly profits can be withdrawn without penalties</Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Orbit
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$216,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>3.5%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> 24 months
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Box>30% to withdraw initial investment before contract matures</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text> <Box>Monthly profits can be withdrawn without penalties</Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+  ];
 
   React.useEffect(() => {
     axios
@@ -127,7 +498,7 @@ export const SliderMarkPackage = () => {
                     <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.package_name}</Text>
                     <Tooltip
                       hasArrow
-                      label="You will Fund 5000$ and claim Voyager Package, it have monthly profit max 2% of your fund, your amount will be hold for min 6 month and Bitcoin View pay monthly your profit,you can cancel any time your subscription but for cancellation fee you have to pay 25% of your package."
+                      label={tooltipContent[i]?.label}
                       aria-label="A tooltip"
                       placement="start-end"
                       bg={"#1C1C1C"}

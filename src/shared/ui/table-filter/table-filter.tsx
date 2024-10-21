@@ -12,10 +12,12 @@ interface Filters {
 interface TableFilterProps {
   filters: Filters;
   onFilterChange: (name: keyof Filters, value: string) => void;
+  onRefresh: () => void;
 }
 
-export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChange }) => {
+export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChange, onRefresh }) => {
   const refreshTableData = () => {
+    onRefresh();
     console.log("click");
   };
 

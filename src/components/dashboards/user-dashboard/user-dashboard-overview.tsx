@@ -37,10 +37,10 @@ export const UserDashboardOverview = () => {
               borderRadius: "24px",
             },
           }}>
-          <TabPanel minW={"500px"}>
+          <TabPanel p={0}>
             <UserDashboardChart />
           </TabPanel>
-          <TabPanel minW={"500px"}>
+          <TabPanel p={0}>
             <TradingViewChart />
           </TabPanel>
         </TabPanels>

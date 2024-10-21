@@ -30,7 +30,7 @@ const useUserBalance = () => {
 
     const interval = setInterval(() => {
       fetchBalance();
-    }, 10000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, [userBalance, estimatedBalance]);

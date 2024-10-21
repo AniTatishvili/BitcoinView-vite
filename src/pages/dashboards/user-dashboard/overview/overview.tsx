@@ -1,4 +1,4 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Hide } from "@chakra-ui/react";
 import { UserDashboardDetails, UserDashboardOverview, UserActivities, UserDashboardPayments } from "../../../../components/dashboards/user-dashboard";
 import { DashboardTable } from "../../../../components/dashboards/dashboard-table";
 import { BreadCrumb } from "../../../../shared/ui/bread-crumb";
@@ -37,7 +37,9 @@ export const Overview = () => {
           <Flex w={{ base: "100%", xl: "40%" }} flexDir={"column"} gap={"1rem"} order={{ base: 1, lg: 2 }}>
             <UserDashboardDetails />
             <UserDashboardPayments />
-            <UserActivities />
+            <Hide below={"sm"}>
+              <UserActivities />
+            </Hide>
           </Flex>
         </Flex>
       </Flex>

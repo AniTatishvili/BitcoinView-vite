@@ -16,6 +16,7 @@ import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 import { UserAvatar } from "../../../shared/user-avatar";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 import useUserBalance from "../../../shared/hooks/useUserBalance";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
 
 interface MessagesProps {
   id: number;
@@ -28,6 +29,7 @@ interface MessagesProps {
 export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const showToast = useCustomToast();
 
   const { username, first_name, last_name, avatar }: { username: string; first_name: string; last_name: string; avatar: string; current_balance: string } =
     useUserSignupStore((state) => ({
@@ -48,9 +50,10 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   }, [username, first_name, last_name, avatar]);
 
   const [messagesData, setMessagesData] = React.useState<MessagesProps | null>(null);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [messagesCountData, setMessagesCountData] = React.useState<any>();
+
+  const [messagesCountData, setMessagesCountData] = React.useState<number>(0);
   const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
+
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages";
@@ -69,7 +72,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
           const readIndexes = response.data.map((message, index) => (message.status === "read" ? index : null)).filter((index) => index !== null);
           setMessageIndex(readIndexes);
         }
-        console.log("User messages data:", response.data);
+        // console.log("User messages data:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -84,12 +87,39 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
       .then((response) => {
         setMessagesCountData(response.data.unread_messages_count || null);
 
-        console.log("User messages data:", response.data);
+        // console.log("User messages data:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
-  }, []);
+  }, [messagesCountData]);
+
+  const clearAllMessages = async () => {
+    const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/markAll";
+
+    try {
+      const response = await axios.post(
+        url,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setMessagesCountData(0);
+      console.log("Read all message:", response.data);
+    } catch (error) {
+      if (axios.isAxiosError(error) && error.response) {
+        showToast("error", error.response.data.message);
+        console.error("Error:", error.response.data);
+        console.error("Status code:", error.response.status);
+      } else {
+        console.error("Unexpected error:", error);
+      }
+    }
+  };
 
   const signout = () => {
     localStorage.removeItem("token");
@@ -119,7 +149,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
               pos={"absolute"}
               top={"-10px"}
               right={0}>
-              {messagesCountData}
+              {messagesCountData || 0}
             </Flex>
             <MenuButton
               w={"fit-content"}
@@ -137,7 +167,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             <Text as="h4" w={"100%"} display={"flex"} alignItems={"center"} justifyContent={"center"} gap={2} pb={4}>
               <Flex>Notifications</Flex>
               <Flex w={"15px"} h={"15px"} bg={"green"} justify={"center"} align={"center"} fontSize={"10px"} borderRadius={"50%"}>
-                {messagesCountData}
+                {messagesCountData || 0}
               </Flex>
             </Text>
             <Box
@@ -160,9 +190,12 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                 messagesData?.map((item, i) => {
                   const date = new Date(item.created_at);
                   const formatted = date.toISOString().slice(0, 16).replace("T", " ");
-                  console.log(i, messageIndex);
                   return (
-                    <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
+                    <NavLink
+                      key={i}
+                      // to={`/user-dashboard/messages?id=${item.id}`}
+                      to={`/user-dashboard/messages?tab=${i}&id=${item.id}`}
+                      className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
                       <Flex
                         w={"100%"}
                         h={"44px"}
@@ -197,7 +230,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             </Box>
             <Flex w={"100%"} justify={"space-between"} align={"center"} px={3} mt={2}>
               <Link to="/user-dashboard/messages">See all messages</Link>
-              <Button>Clear all</Button>
+              <Button onClick={clearAllMessages}>Clear all</Button>
             </Flex>
           </MenuList>
         </Menu>

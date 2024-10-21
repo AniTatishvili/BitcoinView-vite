@@ -1,8 +1,9 @@
 import React from "react";
 import axios from "axios";
 
-import useCustomToast from "../../../shared/hooks/useCustomToast";
+import { useLocation } from "react-router-dom";
 import { Box, Flex, Text, Tab, TabList, Hide, Show, Textarea, Button } from "@chakra-ui/react";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
 import { FaCalendar } from "react-icons/fa";
 import { PButton } from "../../../shared/ui/buttons/PButton";
 
@@ -15,12 +16,15 @@ interface MessagesProps {
 
 export const DashboardMessagesTabLists = () => {
   const showToast = useCustomToast();
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const initialTab = params.get("tab");
 
   const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [showTabPanel, setShowTabPanel] = React.useState<boolean>(false);
 
-  const [data, setData] = React.useState<MessagesProps | null>(null);
+  const [data, setData] = React.useState<MessagesProps[] | null>(null);
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages";
@@ -38,23 +42,42 @@ export const DashboardMessagesTabLists = () => {
           const readIndexes = response.data.map((message, index) => (message.status === "read" ? index : null)).filter((index) => index !== null);
           setMessageIndex(readIndexes);
         }
-        console.log("User messages data:", response.data);
+        // console.log("User messages data:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
   }, []);
 
+  React.useEffect(() => {
+    if (initialTab) {
+      const tabIndex = Number(initialTab);
+      if (Array.isArray(data) && tabIndex >= 0 && tabIndex < data.length) {
+        const fetchMessage = async () => {
+          await readMessage(tabIndex);
+        };
+        fetchMessage();
+      }
+    }
+  }, [initialTab, data]);
+
   const readMessage = async (indx: number) => {
+    if (data && data[indx].status === "read") {
+      return;
+    }
+
+    setShowTabPanel(true);
+
     const newReadMessageIndexes = [...messageIndex, indx];
-    console.log(indx, "index");
     setMessageIndex(newReadMessageIndexes);
 
     const newSelectedTab = indx + 1;
     setSelectedTab(newSelectedTab);
-
-    const readUrl = `https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/${newSelectedTab}/read`;
-
+    window.localStorage.setItem("ACTIVE_MESSAGE_INDEX", newSelectedTab.toString());
+    let readUrl = "";
+    if (data) {
+      readUrl = `https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/${data[indx].id}/read`;
+    }
     try {
       const response = await axios.post(
         readUrl,

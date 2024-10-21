@@ -21,7 +21,7 @@ export const UserDashboardDetails = () => {
             Select package
           </Button>
           <Button backgroundColor={"#f7931a"} borderRadius={"8px"} px={3} py={2} cursor={"pointer"}>
-            Connect wallet
+            Wallet
           </Button>
         </Flex>
         <Flex flexDir={"column"} justify={"space-between"} gap={3}>

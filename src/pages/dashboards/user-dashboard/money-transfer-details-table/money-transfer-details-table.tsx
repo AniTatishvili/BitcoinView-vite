@@ -45,7 +45,7 @@ export const MoneyTransferDetailsTable = () => {
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/transactions";
 
-  React.useEffect(() => {
+  const fetchData = () => {
     axios
       .get<TransactionData[]>(url, {
         headers: {
@@ -70,6 +70,10 @@ export const MoneyTransferDetailsTable = () => {
         setIsLoading(false);
         console.error("Error fetching user data:", error);
       });
+  };
+
+  React.useEffect(() => {
+    fetchData();
   }, [userData, url]);
 
   const filteredData = data.filter((item) => {
@@ -91,7 +95,7 @@ export const MoneyTransferDetailsTable = () => {
 
   return (
     <Box>
-      <TableFilter filters={filters} onFilterChange={handleFilterChange} />
+      <TableFilter filters={filters} onFilterChange={handleFilterChange} onRefresh={fetchData} />
       {/withdraw|wallet/.test(location.pathname) && (
         <Box color={"#f7931a"} fontSize={"14px"} textDecoration={"underline"} mt={2}>
           <Link to="/">Deposit hasn't arrived?</Link>
