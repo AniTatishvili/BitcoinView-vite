@@ -78,6 +78,11 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
         console.error("Error fetching user data:", error);
       });
 
+    unreadMessage();
+    // if (refreshMessages)
+  }, [messagesCountData]);
+
+  const unreadMessage = async () => {
     axios
       .get(countUrl, {
         headers: {
@@ -92,7 +97,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
       .catch((error) => {
         console.error("Error fetching user data:", error);
       });
-  }, [messagesCountData]);
+  };
 
   const clearAllMessages = async () => {
     const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/markAll";
@@ -195,7 +200,11 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
                       key={i}
                       // to={`/user-dashboard/messages?id=${item.id}`}
                       to={`/user-dashboard/messages?tab=${i}&id=${item.id}`}
-                      className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
+                      className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}
+                      onClick={() => {
+                        unreadMessage();
+                        setMessageIndex([...messageIndex, i]);
+                      }}>
                       <Flex
                         w={"100%"}
                         h={"44px"}

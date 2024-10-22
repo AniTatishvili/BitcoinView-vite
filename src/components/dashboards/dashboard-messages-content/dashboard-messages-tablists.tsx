@@ -23,7 +23,7 @@ export const DashboardMessagesTabLists = () => {
   const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [showTabPanel, setShowTabPanel] = React.useState<boolean>(false);
-
+  const { setClickedTabIndex, setRefreshMessages } = useMessagesStore();/
   const [data, setData] = React.useState<MessagesProps[] | null>(null);
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
@@ -65,7 +65,9 @@ export const DashboardMessagesTabLists = () => {
     if (data && data[indx].status === "read") {
       return;
     }
-
+ // Update Zustand store
+//  setClickedTabIndex(indx);
+//  setRefreshMessages(true);
     setShowTabPanel(true);
 
     const newReadMessageIndexes = [...messageIndex, indx];
