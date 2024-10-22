@@ -11,6 +11,7 @@ export const CountrySelect = () => {
   const [detectCountry, setDetectCountry] = React.useState<string>("");
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const changeCountry = (e: any) => {
+    console.log(e.target.value, " e.target.value");
     updateUserFields({ country: e.target.value });
   };
 
@@ -18,6 +19,7 @@ export const CountrySelect = () => {
     const fetchCountry = async () => {
       try {
         const response = await axios.get("https://ipapi.co/json/");
+        console.log(response.data, "response data");
         if (response.data && response.data.country_name) {
           setDetectCountry(response.data.country_name);
         }
@@ -28,7 +30,7 @@ export const CountrySelect = () => {
 
     fetchCountry();
   }, []);
-
+  console.log(detectCountry, "detectCountry", country);
   return (
     <Flex flexDir={"column"} gap={1}>
       <FormikLabel>Country</FormikLabel>
@@ -43,10 +45,10 @@ export const CountrySelect = () => {
           color={"#fff"}
           fontSize={"14px"}
           border={0}>
-          {countries.map((country) => {
+          {countries.map((country_item, i) => {
             return (
-              <option key={country.id} value={country.name}>
-                {country.name}
+              <option key={i} value={country_item.name}>
+                {country_item.name}
               </option>
             );
           })}

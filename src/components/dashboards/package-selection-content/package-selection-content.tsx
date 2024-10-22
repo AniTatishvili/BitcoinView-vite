@@ -8,11 +8,11 @@ import { FAQ } from "../../../shared/FAQ";
 
 export const PackageSelectionContent = () => {
   const linksArr = [
-    { link: "", text: "Deposit hasn’t arrived?" },
-    { link: "", text: "Where is more information about packages?" },
-    { link: "", text: "Whats is the next step after Funding?" },
-    { link: "", text: "Why my package is not approve yet?" },
-    { link: "", text: "How can I pay by my Credit Visa/ Master Card?" },
+    { link: "https://bitcoinview.org/faq/deposit-hasnt-arrived/", text: "Deposit hasn’t arrived?" },
+    { link: "https://bitcoinview.org/faq/where-is-more-information-about-packages/", text: "Where is more information about packages?" },
+    { link: "https://bitcoinview.org/faq/whats-the-next-step-after-funding/", text: "What's is the next step after Funding?" },
+    { link: "https://bitcoinview.org/faq/why-my-package-is-not-approved-yet/", text: "Why my package is not approve yet?" },
+    { link: "https://bitcoinview.org/faq/how-can-i-pay-by-my-credit-visa-master-card/", text: "How can I pay by my Credit Visa/ Master Card?" },
   ];
 
   return (

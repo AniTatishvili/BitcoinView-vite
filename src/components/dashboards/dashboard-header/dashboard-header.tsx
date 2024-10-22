@@ -11,12 +11,13 @@ import { ChevronDownIcon } from "@chakra-ui/icons";
 import { IoNotifications } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
 
-import logo from "../../../assets/black-logo.svg";
-import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
-import { UserAvatar } from "../../../shared/user-avatar";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 import useUserBalance from "../../../shared/hooks/useUserBalance";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
+import { useMessagesStore } from "../../../store/dashboard/messages-store";
+import logo from "../../../assets/black-logo.svg";
+import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
+import { UserAvatar } from "../../../shared/user-avatar";
 
 interface MessagesProps {
   id: number;
@@ -50,7 +51,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   }, [username, first_name, last_name, avatar]);
 
   const [messagesData, setMessagesData] = React.useState<MessagesProps | null>(null);
-
+  const { refreshMessages } = useMessagesStore();
   const [messagesCountData, setMessagesCountData] = React.useState<number>(0);
   const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
 
@@ -79,8 +80,10 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
       });
 
     unreadMessage();
-    // if (refreshMessages)
-  }, [messagesCountData]);
+    if (refreshMessages) {
+      unreadMessage();
+    }
+  }, [messagesCountData, refreshMessages]);
 
   const unreadMessage = async () => {
     axios

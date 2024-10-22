@@ -3,6 +3,7 @@ import axios from "axios";
 
 import { useLocation } from "react-router-dom";
 import { Box, Flex, Text, Tab, TabList, Hide, Show, Textarea, Button } from "@chakra-ui/react";
+import { useMessagesStore } from "../../../store/dashboard/messages-store";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 import { FaCalendar } from "react-icons/fa";
 import { PButton } from "../../../shared/ui/buttons/PButton";
@@ -23,8 +24,9 @@ export const DashboardMessagesTabLists = () => {
   const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [showTabPanel, setShowTabPanel] = React.useState<boolean>(false);
-  const { setClickedTabIndex, setRefreshMessages } = useMessagesStore();/
+  const { setClickedTabIndex, setRefreshMessages } = useMessagesStore();
   const [data, setData] = React.useState<MessagesProps[] | null>(null);
+  const mgsIndex = JSON.parse(window.localStorage.getItem("ACTIVE_MESSAGE_INDEX") ?? "0");
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages";
@@ -50,7 +52,7 @@ export const DashboardMessagesTabLists = () => {
   }, []);
 
   React.useEffect(() => {
-    if (initialTab) {
+    if (initialTab || mgsIndex !== undefined) {
       const tabIndex = Number(initialTab);
       if (Array.isArray(data) && tabIndex >= 0 && tabIndex < data.length) {
         const fetchMessage = async () => {
@@ -59,15 +61,15 @@ export const DashboardMessagesTabLists = () => {
         fetchMessage();
       }
     }
-  }, [initialTab, data]);
+  }, [initialTab, mgsIndex, data]);
 
   const readMessage = async (indx: number) => {
     if (data && data[indx].status === "read") {
       return;
     }
- // Update Zustand store
-//  setClickedTabIndex(indx);
-//  setRefreshMessages(true);
+
+    setClickedTabIndex(indx);
+    setRefreshMessages(true);
     setShowTabPanel(true);
 
     const newReadMessageIndexes = [...messageIndex, indx];
@@ -76,7 +78,9 @@ export const DashboardMessagesTabLists = () => {
     const newSelectedTab = indx + 1;
     setSelectedTab(newSelectedTab);
     window.localStorage.setItem("ACTIVE_MESSAGE_INDEX", newSelectedTab.toString());
+
     let readUrl = "";
+
     if (data) {
       readUrl = `https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/${data[indx].id}/read`;
     }
@@ -112,7 +116,6 @@ export const DashboardMessagesTabLists = () => {
             data?.map((item, i) => {
               const date = new Date(item.created_at);
               const formatted = date.toISOString().slice(0, 16).replace("T", " ");
-
               return (
                 <Tab
                   key={i}
@@ -153,7 +156,6 @@ export const DashboardMessagesTabLists = () => {
                 data?.map((item, i) => {
                   const date = new Date(item.created_at);
                   const formatted = date.toISOString().slice(0, 16).replace("T", " ");
-
                   return (
                     <Tab
                       key={i}

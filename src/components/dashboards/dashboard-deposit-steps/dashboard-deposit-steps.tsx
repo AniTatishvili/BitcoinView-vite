@@ -68,7 +68,11 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   }, [searchTerm]);
 
   useEffect(() => {
-    setPackageValues({ amount_usd: userDepositAmount?.amount, is_purchase: userDepositAmount?.is_purchase, purchase_id: userDepositAmount?.purchase_id });
+    setPackageValues({
+      amount_usd: Number(userDepositAmount?.amount.toFixed(2)),
+      is_purchase: userDepositAmount?.is_purchase,
+      purchase_id: userDepositAmount?.purchase_id,
+    });
   }, [userDepositAmount]);
 
   const handleClick = (coinName: string) => {
@@ -77,7 +81,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
     setShowSecond(true);
   };
 
-  const sendAmount = async (values: DashboardDepositStepsProps) => {
+  const sendAmount = async (values: DashboardDepositStepsProps, actions: any) => {
     setActiveStep(2);
     setShowThird(true);
     setLoading(true);
@@ -94,6 +98,13 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
       } = response.data;
       setUserData({ qr_code, btc_wallet });
       setUserDepositData({ qr_code, btc_wallet });
+      setPackageValues({
+        amount_usd: 0,
+        is_purchase: false,
+        purchase_id: 0,
+      });
+      console.log(packageValues, 8777);
+      actions.resetForm({ amount_usd: "", is_purchase: false, purchase_id: 0 });
       console.log("Sent successfully:", response.data);
     } catch (error) {
       console.error("Error updating avatar:", error);

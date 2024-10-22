@@ -18,9 +18,9 @@ export const UserMonthlyProfileContent = () => {
   const [requestStatus, setRequestStatus] = React.useState<string[]>([]);
 
   const linksArr = [
-    { link: "/", text: "What’s next step after Claim?" },
-    { link: "/", text: "What’s Duration time of claimed?" },
-    { link: "/", text: "How can I get more claims?" },
+    { link: "https://bitcoinview.org/faq/whats-next-step-after-claim/", text: "What’s next step after Claim?" },
+    { link: "https://bitcoinview.org/faq/whats-duration-time-of-claimed/", text: "What’s Duration time of claimed?" },
+    { link: "https://bitcoinview.org/faq/how-can-i-get-more-claims/", text: "How can I get more claims?" },
   ];
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};

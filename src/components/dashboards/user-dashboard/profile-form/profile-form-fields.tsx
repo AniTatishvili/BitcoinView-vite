@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { Flex, Text } from "@chakra-ui/react";
 import { PButton } from "../../../../shared/ui/buttons";
-import { CountrySelect, FormikInput, FormikNumber, FormSelect } from "../../../../shared/form";
+import { CountrySelect, FormikInput, FormikNumber } from "../../../../shared/form";
 
 interface ProfileFieldsProps {
   formik: {
@@ -28,7 +28,7 @@ export const ProfileFormFields: React.FC<ProfileFieldsProps> = ({ formik }) => {
           <FormikInput name="email" type="email" placeholder={t("common:USER.AUTH.EMAIL")} disabled={true} />
           <CountrySelect />
           {/* <FormikInput name="resource" type="text" placeholder="Resource" /> */}
-          <FormSelect name="currency" label="Currency" />
+          <FormikInput name="currency" type="text" placeholder={"Currency"} disabled={true} />
           <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
           <FormikInput name="confirm_password" type="password" placeholder="Confirm password" />
           {/* <FormSelect name="tp_account_groups" label="TP Account groups" data={["TP Account"]} /> */}
