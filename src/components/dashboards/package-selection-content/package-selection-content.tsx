@@ -8,6 +8,7 @@ import { FAQ } from "../../../shared/FAQ";
 
 export const PackageSelectionContent = () => {
   const linksArr = [
+    { link: "https://bitcoinview.org/faq/how-to-deposit-by-crypto-step-by-step-guide/", text: "How to Deposit by Crypto Step-by-step Guide?" },
     { link: "https://bitcoinview.org/faq/deposit-hasnt-arrived/", text: "Deposit hasn’t arrived?" },
     { link: "https://bitcoinview.org/faq/where-is-more-information-about-packages/", text: "Where is more information about packages?" },
     { link: "https://bitcoinview.org/faq/whats-the-next-step-after-funding/", text: "What's is the next step after Funding?" },
@@ -31,7 +32,6 @@ export const PackageSelectionContent = () => {
           <Box w={"130px"} h={"72px"} borderRadius={"8px"} overflow={"hidden"}>
             <VideoPlayer videoSource={videoSource} />
           </Box>
-          <Text>How to Deposit by Crypto Step-by-step Guide?</Text>
         </Flex>
         <FAQ linksArr={linksArr} />
       </Flex>

@@ -91,6 +91,7 @@ export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChang
         </Select>
       </Flex>
       <Button
+        w={"40px"}
         bg={"#f7931a"}
         onClick={refreshTableData}
         _hover={{ transform: "rotate(360deg)", bg: "#ff9800" }}

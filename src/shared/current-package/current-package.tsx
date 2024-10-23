@@ -8,6 +8,7 @@ import { FaCircle } from "react-icons/fa";
 import useCustomToast from "../hooks/useCustomToast";
 import { CurrentPackageCancelModal } from "../ui/modal";
 import { useUserPackageNameStore } from "../../store/dashboard/user-package-name-store";
+import { useUserPackageCancelStore } from "../../store/dashboard/user-package-cancel-store";
 import { useUserSignupStore } from "../../store/dashboard/user-auth";
 
 interface CurrentPackageProps {
@@ -25,6 +26,7 @@ export const CurrentPackage = () => {
   const navigate = useNavigate();
   const showToast = useCustomToast();
   const { setUserPackageNameData } = useUserPackageNameStore();
+  const { setUserPackageCancelData, userPackageCancelData } = useUserPackageCancelStore();
   const { updateUserFields } = useUserSignupStore();
   const [data, setData] = React.useState<CurrentPackageProps | null>(null);
 
@@ -49,7 +51,7 @@ export const CurrentPackage = () => {
         showToast("error", error.response.data.message);
         console.error("Error fetching user data:", error);
       });
-  }, []);
+  }, [setUserPackageCancelData, userPackageCancelData]);
 
   return (
     <Box>

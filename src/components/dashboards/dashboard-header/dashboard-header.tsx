@@ -44,7 +44,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
 
   const { userBalance, fetchBalance } = useUserBalance();
   const [profileImage, setProfileImage] = React.useState("");
-  const [loading, setLoading] = React.useState(false);
+  // const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (avatar) {

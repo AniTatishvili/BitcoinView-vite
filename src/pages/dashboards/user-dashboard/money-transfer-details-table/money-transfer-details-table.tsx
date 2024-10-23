@@ -4,9 +4,11 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { Flex, Box, Spinner } from "@chakra-ui/react";
 
+import { useUserDepositStore } from "../../../../store/dashboard/user-deposit-payment-store";
 import { PaymentTable } from "../../../../shared/ui/payment-table/payment-table";
 import { TableFilter } from "../../../../shared/ui/table-filter";
-import { useUserDepositStore } from "../../../../store/dashboard/user-deposit-payment-store";
+import useCustomToast from "../../../../shared/hooks/useCustomToast";
+import { useUserWithdrawStore } from "../../../../store/dashboard/user-withdraw-payment-store";
 
 interface FilterState {
   created_at: string;
@@ -31,7 +33,9 @@ interface TransactionData {
 }
 
 export const MoneyTransferDetailsTable = () => {
+  const showToast = useCustomToast();
   const { userData } = useUserDepositStore();
+  const { userWithdrawData } = useUserWithdrawStore();
   const [data, setData] = React.useState<TransactionData[]>([]);
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [filters, setFilters] = React.useState<FilterState>({
@@ -68,13 +72,14 @@ export const MoneyTransferDetailsTable = () => {
       })
       .catch((error) => {
         setIsLoading(false);
+        showToast("error", error.response.data.message);
         console.error("Error fetching user data:", error);
       });
   };
 
   React.useEffect(() => {
     fetchData();
-  }, [userData, url]);
+  }, [userData, userWithdrawData, url]);
 
   const filteredData = data.filter((item) => {
     const itemDate = new Date(item.created_at).toISOString().slice(0, 10);
@@ -98,7 +103,9 @@ export const MoneyTransferDetailsTable = () => {
       <TableFilter filters={filters} onFilterChange={handleFilterChange} onRefresh={fetchData} />
       {/withdraw|wallet/.test(location.pathname) && (
         <Box color={"#f7931a"} fontSize={"14px"} textDecoration={"underline"} mt={2}>
-          <Link to="/">Deposit hasn't arrived?</Link>
+          <Link to="https://bitcoinview.org/faq/deposit-hasnt-arrived/" target="_blank">
+            Deposit hasn't arrived?
+          </Link>
         </Box>
       )}
       {isLoading ? (

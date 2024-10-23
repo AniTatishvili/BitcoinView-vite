@@ -1,8 +1,10 @@
 import axios from "axios";
 
-import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Button, useDisclosure, Flex } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
+import { useUserPackageCancelStore } from "../../../store/dashboard/user-package-cancel-store";
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalBody, ModalFooter, ModalCloseButton, Button, useDisclosure, Flex, Text } from "@chakra-ui/react";
 import useCustomToast from "../../hooks/useCustomToast";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 interface CurrentPackageCancelProps {
   purchase_id: number;
@@ -11,7 +13,8 @@ interface CurrentPackageCancelProps {
 export const CurrentPackageCancelModal: React.FC<CurrentPackageCancelProps> = ({ purchase_id }) => {
   const navigate = useNavigate();
   const showToast = useCustomToast();
-
+  const { setUserPackageCancelData } = useUserPackageCancelStore();
+  const { updateUserFields } = useUserSignupStore();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/purchase/cancel";
@@ -28,7 +31,15 @@ export const CurrentPackageCancelModal: React.FC<CurrentPackageCancelProps> = ({
           },
         }
       );
+
+      setUserPackageCancelData({
+        package_cancled: true,
+      });
+
       showToast("success", response.data.message);
+      onClose();
+
+      updateUserFields({ active_package: 0 });
       console.log("Package cancelled successfully:", response.data);
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
@@ -42,7 +53,6 @@ export const CurrentPackageCancelModal: React.FC<CurrentPackageCancelProps> = ({
       <Button
         onClick={() => {
           onOpen();
-          handleCancelPackage();
         }}
         bg={"#f7931a"}
         _hover={{ backround: "transparent" }}
@@ -55,19 +65,25 @@ export const CurrentPackageCancelModal: React.FC<CurrentPackageCancelProps> = ({
         <ModalOverlay />
         <ModalContent>
           <ModalHeader bg={"#1F2027"} borderRadius={"8px 8px 0 0"}>
-            {/* Current package */}
+            Are you sure?
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody bg={"#1F2027"} pb={6}>
-            <Flex justify={"center"} align={"center"}>
-              Are you sure?
+            <Flex flexDir={"column"} gap={2}>
+              <Text>Purchase has been canceled and 75% of the amount refunded.</Text>
+              <Text>Are you sure do you want to cancel this package?</Text>
             </Flex>
           </ModalBody>
           <ModalFooter justifyContent={"space-between"} bg={"#1F2027"} borderRadius={"0 0 8px 8px"}>
-            <Button variant="ghost" onClick={() => navigate("/user-dashboard/user-monthly-profile")}>
+            <Button
+              colorScheme="red"
+              onClick={() => {
+                navigate("/user-dashboard/package-selection");
+                handleCancelPackage();
+              }}>
               Yes, I'm sure
             </Button>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button mr={3} onClick={onClose}>
               No
             </Button>
           </ModalFooter>

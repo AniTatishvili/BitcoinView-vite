@@ -114,7 +114,7 @@ export const DashboardMessagesTabLists = () => {
     <>
       <Hide below="lg">
         <TabList w={"100%"} display={"flex"} flexDir={"column"} alignItems={"center"} gap={4} mb={"10px"} color={"#fff"} borderBottom={0}>
-          {Array.isArray(data) &&
+          {Array.isArray(data) ? (
             data?.map((item, i) => {
               const date = new Date(item.created_at);
               const formatted = date.toISOString().slice(0, 16).replace("T", " ");
@@ -147,7 +147,10 @@ export const DashboardMessagesTabLists = () => {
                   </Box>
                 </Tab>
               );
-            })}
+            })
+          ) : (
+            <Text>You don't have any message yet.</Text>
+          )}
         </TabList>
       </Hide>
       <Show below="lg">

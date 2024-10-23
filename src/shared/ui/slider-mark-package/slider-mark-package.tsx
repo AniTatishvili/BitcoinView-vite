@@ -10,6 +10,8 @@ import useCustomToast from "../../../shared/hooks/useCustomToast";
 import { RiQuestionFill } from "react-icons/ri";
 import { OrbitPackageModal } from "../modal/orbit-package-modal";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
+import { useUserPackageCancelStore } from "../../../store/dashboard/user-package-cancel-store";
+import { useUserPackageNameStore } from "../../../store/dashboard/user-package-name-store";
 import useUserBalance from "../../hooks/useUserBalance";
 import { TermsAndConditionsModal } from "../modal";
 
@@ -28,9 +30,12 @@ export const SliderMarkPackage = () => {
   const { setUserPackageData } = useUserSelectedPackageStore();
   const { active_package } = useUserSignupStore();
   const { userBalance, estimatedBalance } = useUserBalance();
+  const { setUserPackageNameData } = useUserPackageNameStore();
+  
   const package_id = active_package - 2;
 
   const [data, setData] = React.useState<UserData[]>([]);
+  const { setUserPackageCancelData, userPackageCancelData } = useUserPackageCancelStore();
   const [activeIndex, setActiveIndex] = React.useState<number | null>(package_id ?? userBalance ?? 0);
   const [isOrbitSelected, setIsOrbitSelected] = React.useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = React.useState(false);
@@ -426,7 +431,7 @@ export const SliderMarkPackage = () => {
         setActiveIndex(2);
         console.error("Error fetching user data:", error);
       });
-  }, []);
+  }, [setUserPackageCancelData, userPackageCancelData]);
 
   const handleClick = (index: number) => {
     // console.log(index, "index");
@@ -440,6 +445,9 @@ export const SliderMarkPackage = () => {
     // navigate("/user-dashboard/package-selection-success");PRICE_POINTS[activeIndex]?.value;
     if (activeIndex !== null) {
       const activePackage = data[activeIndex];
+
+      setUserPackageNameData({ package_name: activePackage.package_name });
+
       if (activePackage.package_name !== "Orbit") {
         const package_id = data[activeIndex].id;
 

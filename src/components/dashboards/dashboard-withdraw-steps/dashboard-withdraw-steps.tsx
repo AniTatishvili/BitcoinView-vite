@@ -13,6 +13,7 @@ import { sendWithdrawAmointValues } from "../../../shared/form";
 import { TbClockHour4Filled } from "react-icons/tb";
 
 import btc from "../../../assets/images/wallet-logos/bitcoin-btc-logo.svg";
+import { useUserWithdrawStore } from "../../../store/dashboard/user-withdraw-payment-store";
 // import { RiCloseCircleFill } from "react-icons/ri";
 
 interface DashboardDepositStepsProps {
@@ -25,6 +26,8 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
     index: 0,
     count: 4,
   });
+
+  const { setUserWithdrawData } = useUserWithdrawStore();
 
   const [showSecond, setShowSecond] = useState(false);
 
@@ -47,7 +50,7 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
 
   const sendAmount = async (values: DashboardDepositStepsProps) => {
     setActiveStep(2);
-    setShowSecond(true);
+    setShowThird(true);
     setLoading(true);
 
     const WithdrawData = { amount_usd: Number(searchTerm), btc_address: values.btc_address };
@@ -58,13 +61,15 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
           Authorization: `Bearer ${token}`,
         },
       });
-      setShowThird(true);
+
+      setUserWithdrawData({ amount_usd: searchTerm, btc_wallet: values.btc_address });
       console.log("Withdraw sent successfully:", response.data);
     } catch (error) {
       console.error("Error updating avatar:", error);
-    } finally {
-      setLoading(false);
     }
+    // finally {
+    //   setLoading(false);
+    // }
   };
 
   const steps = [

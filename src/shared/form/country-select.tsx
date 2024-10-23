@@ -9,7 +9,6 @@ import countries from "../../shared/data/countries.json";
 export const CountrySelect = () => {
   const { updateUserFields, country } = useUserSignupStore();
   const [detectCountry, setDetectCountry] = React.useState<string>("");
-  const countryObj = countries.find((item) => item.code === country);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const changeCountry = (e: any) => {
@@ -37,16 +36,7 @@ export const CountrySelect = () => {
     <Flex flexDir={"column"} gap={1}>
       <FormikLabel>Country</FormikLabel>
       {detectCountry && (
-        <Select
-          name="country"
-          defaultValue={country !== "" ? countryObj?.name : detectCountry}
-          onChange={changeCountry}
-          w={"100%"}
-          h={"40px"}
-          bg={"#35363D"}
-          color={"#fff"}
-          fontSize={"14px"}
-          border={0}>
+        <Select name="country" defaultValue={country} onChange={changeCountry} w={"100%"} h={"40px"} bg={"#35363D"} color={"#fff"} fontSize={"14px"} border={0}>
           {countries.map((country_item, i) => {
             return (
               <option key={i} value={country_item.name}>

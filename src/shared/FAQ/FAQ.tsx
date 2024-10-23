@@ -1,5 +1,5 @@
 import { Button, Flex, List, ListItem, Text } from "@chakra-ui/react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import { MdArrowForwardIos } from "react-icons/md";
 
 interface LinkItem {
@@ -12,25 +12,25 @@ interface FAQProps {
 }
 
 export const FAQ: React.FC<FAQProps> = ({ linksArr }) => {
-  const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <Flex w={"fit-content"} flexDir={"column"} gap={4}>
-      <Text as="h4">FAQ</Text>
+      {location.pathname.includes("user-monthly-profile") && <Text as="h4">FAQ</Text>}
       <List display={"flex"} flexDir={"column"} gap={1}>
         {linksArr.map((item, i) => (
           <ListItem key={i}>
-            <NavLink to={item.link}>{item.text}</NavLink>
+            <NavLink to={item.link} target="_blank">
+              {item.text}
+            </NavLink>
           </ListItem>
         ))}
       </List>
-      <Button
-        w={"fit-content"}
-        onClick={() => {
-          navigate("/");
-        }}>
-        <Text mr={2}>More</Text> <MdArrowForwardIos />
-      </Button>
+      <Link to="https://bitcoinview.org/faq/" target="_blank">
+        <Button w={"fit-content"}>
+          <Text mr={2}>More</Text> <MdArrowForwardIos />
+        </Button>
+      </Link>
     </Flex>
   );
 };
