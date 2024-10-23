@@ -18,7 +18,7 @@ const useUserBalance = () => {
       .then((response) => {
         setUserBalance(response.data.current_balance);
         setEstimateBalance(response.data.estimated_balance);
-        // console.log("User balanse:", response.data.current_balance);
+        // console.log("User balance:", response.data.current_balance);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -27,15 +27,9 @@ const useUserBalance = () => {
 
   useEffect(() => {
     fetchBalance();
+  }, []);
 
-    const interval = setInterval(() => {
-      fetchBalance();
-    }, 20000);
-
-    return () => clearInterval(interval);
-  }, [userBalance, estimatedBalance]);
-
-  return { userBalance, estimatedBalance };
+  return { userBalance, estimatedBalance, fetchBalance };
 };
 
 export default useUserBalance;

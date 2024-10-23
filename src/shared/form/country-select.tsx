@@ -9,6 +9,8 @@ import countries from "../../shared/data/countries.json";
 export const CountrySelect = () => {
   const { updateUserFields, country } = useUserSignupStore();
   const [detectCountry, setDetectCountry] = React.useState<string>("");
+  const countryObj = countries.find((item) => item.code === country);
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const changeCountry = (e: any) => {
     console.log(e.target.value, " e.target.value");
@@ -19,7 +21,7 @@ export const CountrySelect = () => {
     const fetchCountry = async () => {
       try {
         const response = await axios.get("https://ipapi.co/json/");
-        console.log(response.data, "response data");
+        // console.log(response.data, "response data");
         if (response.data && response.data.country_name) {
           setDetectCountry(response.data.country_name);
         }
@@ -30,14 +32,14 @@ export const CountrySelect = () => {
 
     fetchCountry();
   }, []);
-  console.log(detectCountry, "detectCountry", country);
+
   return (
     <Flex flexDir={"column"} gap={1}>
       <FormikLabel>Country</FormikLabel>
       {detectCountry && (
         <Select
           name="country"
-          defaultValue={country !== "" ? country : detectCountry}
+          defaultValue={country !== "" ? countryObj?.name : detectCountry}
           onChange={changeCountry}
           w={"100%"}
           h={"40px"}

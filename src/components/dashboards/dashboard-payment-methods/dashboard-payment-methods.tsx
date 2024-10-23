@@ -18,6 +18,7 @@ export const DashboardPaymentMethods = () => {
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
+      showToast("success", "Copied to clipboard!");
       console.log("Copied to clipboard!");
     } catch (err) {
       console.error("Failed to copy: ", err);

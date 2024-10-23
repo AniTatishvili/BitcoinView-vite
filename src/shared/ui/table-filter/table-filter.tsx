@@ -18,7 +18,6 @@ interface TableFilterProps {
 export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChange, onRefresh }) => {
   const refreshTableData = () => {
     onRefresh();
-    console.log("click");
   };
 
   return (
@@ -91,11 +90,21 @@ export const TableFilter: React.FC<TableFilterProps> = ({ filters, onFilterChang
           <option value="successful">Successful</option>
         </Select>
       </Flex>
-      <Button onClick={refreshTableData}>
+      <Button
+        bg={"#f7931a"}
+        onClick={refreshTableData}
+        _hover={{ transform: "rotate(360deg)", bg: "#ff9800" }}
+        transition="all 0.5s ease"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        borderRadius="full"
+        p={4}>
         <Box as={"span"} color={"#fff"} fontSize={"20px"}>
           <GrRefresh />
         </Box>
       </Button>
+
       <Button
         w={{ base: "fit-content", lg: "50%" }}
         bg={"none"}

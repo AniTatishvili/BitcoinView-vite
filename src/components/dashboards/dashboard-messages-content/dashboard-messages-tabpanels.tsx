@@ -75,7 +75,7 @@ export const DashboardMessagesTabPanels = () => {
             <TabPanel key={i} color={"#fff"} fontSize={"14px"} p={0}>
               <Formik onSubmit={sendResponse} initialValues={{ message: "" }}>
                 {(formik) => {
-                  console.log(formik.values);
+                  // console.log(formik.values);
                   return (
                     <Form>
                       <Flex flexDir={"column"} gap={4}>

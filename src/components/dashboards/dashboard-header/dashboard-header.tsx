@@ -18,6 +18,7 @@ import { useMessagesStore } from "../../../store/dashboard/messages-store";
 import logo from "../../../assets/black-logo.svg";
 import { DashboardSideMenuProps } from "../../../utils/types/dashboard-types";
 import { UserAvatar } from "../../../shared/user-avatar";
+import { GrRefresh } from "react-icons/gr";
 
 interface MessagesProps {
   id: number;
@@ -41,8 +42,9 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
       current_balance: state.current_balance,
     }));
 
-  const userBalance = useUserBalance();
+  const { userBalance, fetchBalance } = useUserBalance();
   const [profileImage, setProfileImage] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
 
   React.useEffect(() => {
     if (avatar) {
@@ -51,7 +53,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   }, [username, first_name, last_name, avatar]);
 
   const [messagesData, setMessagesData] = React.useState<MessagesProps | null>(null);
-  const { refreshMessages } = useMessagesStore();
+  const { refreshMessages, setRefreshMessages } = useMessagesStore();
   const [messagesCountData, setMessagesCountData] = React.useState<number>(0);
   const [messageIndex, setMessageIndex] = React.useState<number[]>([]);
 
@@ -59,6 +61,15 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages";
   const countUrl = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/count";
+
+  React.useEffect(() => {
+    unreadMessage();
+
+    if (refreshMessages) {
+      unreadMessage();
+      setRefreshMessages(false);
+    }
+  }, [refreshMessages]);
 
   React.useEffect(() => {
     axios
@@ -143,7 +154,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
       <NavLink to="/user-dashboard/overview">
         <Image src={logo} alt="logo" w={"78px"} />
       </NavLink>
-      <Flex align={"center"} gap={{ base: 2, sm: 4 }}>
+      <Flex align={"center"} gap={{ base: 2, sm: 3 }}>
         <Menu>
           <Box w={"24px"} pos={"relative"}>
             <Flex
@@ -249,20 +260,20 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
         <Menu>
           <MenuButton
             as={Button}
-            rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} />}
+            rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} marginTop={"-20px"} />}
             bg={"transparent"}
             p={0}
             _hover={{ backround: "transparent" }}
             _focus={{ backround: "transparent" }}
             _active={{ backround: "transparent" }}>
-            <Stack direction={"row"} p={4}>
+            <Stack direction={"row"}>
               <UserAvatar
                 full_name={first_name + " " + last_name}
                 username={username}
                 src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : ""}
               />
               <Divider orientation={"vertical"} h={"20px"} />
-              <Box>{"$" + " " + userBalance.userBalance}</Box>
+              <Box>{"$" + " " + userBalance}</Box>
             </Stack>
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
@@ -276,6 +287,22 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             <MenuItem onClick={signout}>{t("common:MENU.SIGN_OUT")}</MenuItem>
           </MenuList>
         </Menu>
+        <Button
+          maxW={"fit-content"}
+          h={"fit-content"}
+          bg={"none"}
+          onClick={fetchBalance}
+          _hover={{ transform: "rotate(360deg)", bg: "none" }}
+          transition="all 0.5s ease"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          borderRadius="full"
+          p={0}>
+          <Box as={"span"} color={"#ff9800"} fontSize={"20px"}>
+            <GrRefresh />
+          </Box>
+        </Button>
       </Flex>
     </Flex>
   );

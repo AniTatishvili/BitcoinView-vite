@@ -10,6 +10,7 @@ import { PButton } from "../../../shared/ui/buttons/PButton";
 
 interface MessagesProps {
   id: number;
+  subject: string;
   message_text: string;
   created_at: string;
   status: string;
@@ -96,6 +97,7 @@ export const DashboardMessagesTabLists = () => {
         }
       );
 
+      setRefreshMessages(true);
       console.log("Read message:", response.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -135,7 +137,7 @@ export const DashboardMessagesTabLists = () => {
                   <Box>
                     <Flex align={"center"} gap={2}>
                       <Text w={"100%"} color={"#fff"} fontSize={"14px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
-                        {item.message_text}
+                        {item.subject}
                       </Text>
                     </Flex>
                     <Flex alignItems={"center"} gap={1}>
@@ -175,7 +177,7 @@ export const DashboardMessagesTabLists = () => {
                       }}>
                       <Flex align={"center"} gap={2}>
                         <Text w={"100%"} color={"#fff"} fontSize={"14px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
-                          {item.message_text}
+                          {item.subject}
                         </Text>
                       </Flex>
                       <Flex alignItems={"center"} gap={1}>

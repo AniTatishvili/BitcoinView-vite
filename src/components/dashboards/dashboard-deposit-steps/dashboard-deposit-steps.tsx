@@ -81,6 +81,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
     setShowSecond(true);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sendAmount = async (values: DashboardDepositStepsProps, actions: any) => {
     setActiveStep(2);
     setShowThird(true);
@@ -98,14 +99,15 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
       } = response.data;
       setUserData({ qr_code, btc_wallet });
       setUserDepositData({ qr_code, btc_wallet });
+
       setPackageValues({
         amount_usd: 0,
         is_purchase: false,
         purchase_id: 0,
       });
-      console.log(packageValues, 8777);
-      actions.resetForm({ amount_usd: "", is_purchase: false, purchase_id: 0 });
-      console.log("Sent successfully:", response.data);
+
+      actions.resetForm();
+      // console.log("Sent successfully:", response.data);
     } catch (error) {
       console.error("Error updating avatar:", error);
     } finally {
@@ -188,8 +190,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
             Select Amount
           </Text>
           {showSecond && (
-            // { ...packageValues, amount_usd: '' }
-            <Formik initialValues={packageValues} onSubmit={sendAmount}>
+            <Formik initialValues={packageValues} enableReinitialize={true} onSubmit={sendAmount}>
               {() => {
                 return (
                   <Form>

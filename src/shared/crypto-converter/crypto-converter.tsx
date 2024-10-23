@@ -56,7 +56,7 @@ export const CryptoConverter: React.FC<CryptoConverterProps> = ({ userBalance })
       );
     const rate = conversionRates[toCurrency];
     if (!rate) return `${toCurrency.toUpperCase()}: N/A`;
-    return (rate * Number(amount)).toFixed(2);
+    return (Number(amount) / rate).toFixed(5);
   };
 
   const handleToCurrencyChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

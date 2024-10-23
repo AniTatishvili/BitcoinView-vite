@@ -54,10 +54,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                 },
               }}>
               <Flex flexDir={"column"}>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Trial
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $50
                   </ListItem>
@@ -71,10 +71,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Restrictions:</Text> Only available once per client and per IP address
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Voyager
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $5,000
                   </ListItem>
@@ -94,10 +94,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties.
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Elite
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $8,000
                   </ListItem>
@@ -117,10 +117,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Pioneer
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $16,000
                   </ListItem>
@@ -140,10 +140,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Quantum
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $32,000
                   </ListItem>
@@ -163,10 +163,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Titan
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $64,000
                   </ListItem>
@@ -186,10 +186,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Nexus
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $128,000
                   </ListItem>
@@ -209,10 +209,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Platinum
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $163,000
                   </ListItem>
@@ -232,10 +232,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Orbit
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Minimum Deposit:</Text> $216,000
                   </ListItem>
@@ -255,10 +255,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Withdrawals:</Text> Monthly profits can be withdrawn without penalties
                   </ListItem>
                 </List>
-                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Additional Terms
                 </Text>
-                <List fontSize={"12px"}>
+                <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>•</Text> Terms are subject to change in favor of the client based on feedback and progress.
                   </ListItem>
