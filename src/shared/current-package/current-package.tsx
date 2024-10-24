@@ -27,7 +27,7 @@ export const CurrentPackage = () => {
   const showToast = useCustomToast();
   const { setUserPackageNameData } = useUserPackageNameStore();
   const { setUserPackageCancelData, userPackageCancelData } = useUserPackageCancelStore();
-  const { updateUserFields } = useUserSignupStore();
+  const { updateUserFields, advisor_username } = useUserSignupStore();
   const [data, setData] = React.useState<CurrentPackageProps | null>(null);
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
@@ -67,7 +67,17 @@ export const CurrentPackage = () => {
       <Flex flexDir={"column"} gap={4}>
         {data ? (
           <>
-            <Text fontWeight={"600"}>Package: {data.package_name}</Text>
+            <Flex gap={4}>
+              <Text fontWeight={"600"}>Package: {data.package_name}</Text>
+              {advisor_username && (
+                <Flex flexDir={"column"}>
+                  <Text fontSize={{ base: "11px", sm: "14px" }} fontWeight={600}>
+                    Advisor:
+                  </Text>
+                  <Text fontSize={{ base: "12px", sm: "16px" }}>{advisor_username}</Text>
+                </Flex>
+              )}
+            </Flex>
             <List>
               <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
                 <ListIcon as={FaCircle} color="#44B96B" />

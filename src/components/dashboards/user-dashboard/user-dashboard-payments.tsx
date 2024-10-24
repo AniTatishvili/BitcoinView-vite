@@ -1,14 +1,16 @@
-import React from "react";
+// import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
 import { PButton } from "../../../shared/ui/buttons";
 import { useUserPackageNameStore } from "../../../store/dashboard/user-package-name-store";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 
 export const UserDashboardPayments = () => {
   const { userPackageNameData } = useUserPackageNameStore();
-  const [packageName, setPackageName] = React.useState<string>("");
+  const { active_package_name, advisor_username } = useUserSignupStore();
+  // const [packageName, setPackageName] = React.useState<string>("");
 
   const referralLink = "https://CPa_erefff";
   const referralId = "CPa_erefff";
@@ -22,11 +24,11 @@ export const UserDashboardPayments = () => {
     }
   };
 
-  React.useEffect(() => {
-    if (userPackageNameData) {
-      setPackageName(userPackageNameData.package_name);
-    }
-  }, [userPackageNameData]);
+  // React.useEffect(() => {
+  //   if (userPackageNameData) {
+  //     setPackageName(userPackageNameData.package_name);
+  //   }
+  // }, [userPackageNameData]);
 
   return (
     <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"column"} borderRadius={"8px"} p={"1rem"} gap={4}>
@@ -36,8 +38,11 @@ export const UserDashboardPayments = () => {
       </Flex>
       <Flex flexDir={"column"} gap={4}>
         <Flex gap={4}>
-          <Flex bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"}>
-            <Link to="/user-dashboard/package-selection">{userPackageNameData.package_name === "" ? packageName : Object.values(userPackageNameData)}</Link>
+          <Flex bg={"#79797D"} alignItems={"center"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"}>
+            <Link to="/user-dashboard/package-selection">
+              {userPackageNameData.package_name === "" ? active_package_name : Object.values(userPackageNameData)}
+            </Link>
+            {/* <Link to="/user-dashboard/package-selection">{userPackageNameData.package_name === "" ? packageName : Object.values(userPackageNameData)}</Link> */}
           </Flex>
           <Flex alignItems={"center"} bg={"#79797D"} borderRadius={"8px"} color={"#fff"} fontWeight={"600"} px={"0.5rem"} py={"0.4rem"} gap={2}>
             Account{" "}
@@ -45,6 +50,14 @@ export const UserDashboardPayments = () => {
               <MdOutlineDoneOutline />
             </Box>
           </Flex>
+          {advisor_username && (
+            <Flex flexDir={"column"}>
+              <Text fontSize={{ base: "11px", sm: "14px" }} fontWeight={600}>
+                Advisor:
+              </Text>
+              <Text fontSize={{ base: "12px", sm: "16px" }}>{advisor_username}</Text>
+            </Flex>
+          )}
         </Flex>
         <Flex flexDir={"column"} gap={2}>
           <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"}>

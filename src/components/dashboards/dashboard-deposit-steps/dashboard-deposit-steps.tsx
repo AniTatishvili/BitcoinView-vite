@@ -1,5 +1,6 @@
-import { useRef } from "react";
 import axios from "axios";
+import { useRef } from "react";
+import { useLocation } from "react-router-dom";
 // import { QRCodeSVG } from "qrcode.react";
 import { useState, useEffect } from "react";
 
@@ -18,6 +19,7 @@ import { TbCopyPlusFilled } from "react-icons/tb";
 import btc from "../../../assets/images/wallet-logos/bitcoin-btc-logo.svg";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 import credit_logo from "../../../assets/images/wallet-logos/credit-card.png";
+
 // import { CheckIcon } from "@chakra-ui/icons";
 
 interface DashboardDepositStepsProps {
@@ -33,15 +35,16 @@ const coins = [
 ];
 
 export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () => {
+  const location = useLocation();
   const { setUserDepositData } = useUserDepositStore();
-  // const { userPackageData } = useUserSelectedPackageStore();
-  const { userPackageData: userDepositAmount } = useUserSelectedPackageStore();
+  const { userPackageData: userDepositAmount, resetUserPackageData } = useUserSelectedPackageStore();
 
   const [packageValues, setPackageValues] = useState({
     amount_usd: userDepositAmount?.amount || 0,
     is_purchase: userDepositAmount?.is_purchase || false,
     purchase_id: userDepositAmount?.purchase_id || 0,
   });
+
   const showToast = useCustomToast();
   const [userData, setUserData] = useState<{ qr_code: string; btc_wallet: string } | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
@@ -59,6 +62,7 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/deposit";
 
   const filteredCoins = coins.filter((coin) => coin.name.toLowerCase().includes(searchTerm.toLowerCase()));
+  const hasReset = useRef(false);
 
   useEffect(() => {
     if (searchTerm !== "") {
@@ -67,13 +71,21 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
     }
   }, [searchTerm]);
 
+  const previousPath = location.state?.from;
+
   useEffect(() => {
-    setPackageValues({
-      amount_usd: Number(userDepositAmount?.amount.toFixed(2)),
-      is_purchase: userDepositAmount?.is_purchase,
-      purchase_id: userDepositAmount?.purchase_id,
-    });
-  }, [userDepositAmount]);
+    if (previousPath !== "/package-selection" && !hasReset.current) {
+      resetUserPackageData();
+      hasReset.current = true;
+    } else if (previousPath === "/package-selection") {
+      hasReset.current = false;
+      setPackageValues({
+        amount_usd: Number(userDepositAmount?.amount.toFixed(2)),
+        is_purchase: userDepositAmount?.is_purchase,
+        purchase_id: userDepositAmount?.purchase_id,
+      });
+    }
+  }, [previousPath, userDepositAmount, resetUserPackageData]);
 
   const handleClick = (coinName: string) => {
     setSearchTerm(coinName);

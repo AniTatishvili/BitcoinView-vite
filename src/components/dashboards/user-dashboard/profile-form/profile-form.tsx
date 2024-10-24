@@ -3,12 +3,14 @@ import React from "react";
 import axios from "axios";
 
 // import { updateUserProfile, updateUserProfileSchema } from "../../../../shared/form";
+import useCustomToast from "../../../../shared/hooks/useCustomToast";
 import { useUserSignupStore } from "../../../../store/dashboard/user-auth";
 import { Form, Formik } from "formik";
 import { ProfileFormFields } from "./profile-form-fields";
 import { ProfileAvatarPicture } from "../profile-avatar-edit/profile-avatar-picture";
 
 export const ProfileForm = () => {
+  const showToast = useCustomToast();
   const token = JSON.parse(localStorage.getItem("USER_AUTH") || "{}");
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user-information";
 
@@ -29,9 +31,11 @@ export const ProfileForm = () => {
         },
       });
       updateUserFields(filteredValues);
+      showToast("success", "Profile updated successfully");
       console.log("Profile updated successfully:", response.data, filteredValues);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
+        showToast("error", error.response.data);
         console.error("Error updating profile:", error.response.data);
         console.error("Status code:", error.response.status);
       } else {

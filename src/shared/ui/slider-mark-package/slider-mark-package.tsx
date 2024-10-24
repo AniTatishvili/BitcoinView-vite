@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-import { Flex, Box, Button, Tooltip, Text, List, ListItem } from "@chakra-ui/react";
+import { Flex, Box, Button, Tooltip, Text, List, ListItem, Spinner } from "@chakra-ui/react";
 import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selected-package-store";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 
@@ -27,11 +27,11 @@ export const SliderMarkPackage = () => {
   const navigate = useNavigate();
   const showToast = useCustomToast();
 
-  const { setUserPackageData } = useUserSelectedPackageStore();
+  const { setUserPackageData, resetUserPackageData } = useUserSelectedPackageStore();
   const { active_package } = useUserSignupStore();
   const { userBalance, estimatedBalance } = useUserBalance();
   const { setUserPackageNameData } = useUserPackageNameStore();
-  
+
   const package_id = active_package - 2;
 
   const [data, setData] = React.useState<UserData[]>([]);
@@ -417,6 +417,10 @@ export const SliderMarkPackage = () => {
   ];
 
   React.useEffect(() => {
+    setActiveIndex(package_id < 0 ? 0 : package_id);
+  }, [package_id]);
+
+  React.useEffect(() => {
     axios
       .get(url, {
         headers: {
@@ -434,7 +438,7 @@ export const SliderMarkPackage = () => {
   }, [setUserPackageCancelData, userPackageCancelData]);
 
   const handleClick = (index: number) => {
-    // console.log(index, "index");
+    resetUserPackageData();
     setActiveIndex(index);
     if (data[index].package_name === "Orbit") {
       setIsOrbitSelected(true);
@@ -442,7 +446,6 @@ export const SliderMarkPackage = () => {
   };
 
   const handleMouseClick = async () => {
-    // navigate("/user-dashboard/package-selection-success");PRICE_POINTS[activeIndex]?.value;
     if (activeIndex !== null) {
       const activePackage = data[activeIndex];
 
@@ -499,7 +502,7 @@ export const SliderMarkPackage = () => {
               left={"0"}
               transform={"translateY(-50%)"}
               zIndex={-1}></Flex>
-            {Array.isArray(data) &&
+            {Array.isArray(data) ? (
               data.map((point, i) => (
                 <Flex key={i} w={"80px"} flexDir={"column"} align={"center"} gap={4} fontSize={"14px"}>
                   <Flex>
@@ -552,7 +555,12 @@ export const SliderMarkPackage = () => {
                 <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.amount}</Text>
               )} */}
                 </Flex>
-              ))}
+              ))
+            ) : (
+              <Flex w={"100%"} h={"100%"} justify={"center"} align={"center"}>
+                <Spinner size={"xl"} color={"#f7931a"} />
+              </Flex>
+            )}
           </Flex>
         </Flex>
         <Flex flexDir={{ base: "column", sm: "row" }} gap={4} mt={4}>

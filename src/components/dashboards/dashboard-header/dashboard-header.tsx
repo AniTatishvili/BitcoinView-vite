@@ -260,20 +260,20 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
         <Menu>
           <MenuButton
             as={Button}
-            rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} marginTop={"-20px"} />}
+            rightIcon={<ChevronDownIcon color={"#fff"} fontSize={"25px"} marginTop={{ base: "-25px", md: "-20px" }} />}
             bg={"transparent"}
             p={0}
             _hover={{ backround: "transparent" }}
             _focus={{ backround: "transparent" }}
             _active={{ backround: "transparent" }}>
-            <Stack direction={"row"}>
+            <Stack direction={{ base: "column", sm: "row" }} fontSize={{ base: "12px", md: "16px" }}>
               <UserAvatar
                 full_name={first_name + " " + last_name}
                 username={username}
                 src={profileImage ? "https://phplaravel-1309375-4888543.cloudwaysapps.com" + profileImage : ""}
               />
-              <Divider orientation={"vertical"} h={"20px"} />
-              <Box>{"$" + " " + userBalance}</Box>
+              <Divider orientation={"vertical"} h={"20px"} display={{ base: "none", sm: "block" }} />
+              <Box textAlign={"end"}>{"$" + " " + userBalance}</Box>
             </Stack>
           </MenuButton>
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>

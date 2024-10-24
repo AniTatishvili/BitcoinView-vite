@@ -8,14 +8,21 @@ interface UserAvatarProps {
 
 export const UserAvatar: React.FC<UserAvatarProps> = ({ full_name, username, src }) => {
   return (
-    <Flex gap={3}>
-      <Avatar src={src} w={"40px"} h={"40px"} backgroundColor={"#79797D"} color={"#141316"} borderRadius={"50%"} />
+    <Flex gap={{ base: 2, sm: 3 }}>
+      <Avatar src={src} w={{ base: "30px", md: "40px" }} h={{ base: "30px", md: "40px" }} backgroundColor={"#79797D"} color={"#141316"} borderRadius={"50%"} />
 
       <Flex flexDir={"column"} lineHeight={1} gap={1}>
-        <Box maxW={"120px"} display={"inline-block"} color={"#fff"} fontSize={"16px"} whiteSpace={"nowrap"} textOverflow={"ellipsis"} overflow={"hidden"}>
+        <Box
+          maxW={"120px"}
+          display={full_name.length > 1 ? "inline-block" : "none"}
+          color={"#fff"}
+          fontSize={{ base: "12px", sm: "16px" }}
+          whiteSpace={"nowrap"}
+          textOverflow={"ellipsis"}
+          overflow={"hidden"}>
           {full_name}
         </Box>
-        <Flex color={"#ccc"} fontSize={"14px"}>
+        <Flex justify={{ base: "end", sm: "start" }} color={"#ccc"} fontSize={{ base: "11px", md: "14px" }}>
           {username}
         </Flex>
       </Flex>
