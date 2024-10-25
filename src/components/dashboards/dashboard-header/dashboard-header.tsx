@@ -72,6 +72,10 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   }, [refreshMessages]);
 
   React.useEffect(() => {
+    fetchMessagesData();
+  }, [messagesCountData, refreshMessages]);
+
+  const fetchMessagesData = async () => {
     axios
       .get(url, {
         headers: {
@@ -94,8 +98,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
     if (refreshMessages) {
       unreadMessage();
     }
-  }, [messagesCountData, refreshMessages]);
-
+  };
   const unreadMessage = async () => {
     axios
       .get(countUrl, {
@@ -112,6 +115,13 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
         console.error("Error fetching user data:", error);
       });
   };
+
+  React.useEffect(() => {
+    const intervalId = setInterval(fetchMessagesData, 5 * 60 * 1000);
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, []);
 
   const clearAllMessages = async () => {
     const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/user/messages/markAll";

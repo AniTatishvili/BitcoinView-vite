@@ -20,7 +20,7 @@ export const UserDashboardDetails = () => {
           <Button backgroundColor={"#3AAB41"} borderRadius={"8px"} px={3} py={2} cursor={"pointer"} onClick={handleClick}>
             Select package
           </Button>
-          <Button backgroundColor={"#f7931a"} borderRadius={"8px"} px={3} py={2} cursor={"pointer"}>
+          <Button backgroundColor={"#f7931a"} borderRadius={"8px"} px={3} py={2} cursor={"pointer"} onClick={() => navigate("/user-dashboard/wallet")}>
             Wallet
           </Button>
         </Flex>

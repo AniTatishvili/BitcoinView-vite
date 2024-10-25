@@ -78,8 +78,12 @@ export const DashboardMessagesTabPanels = () => {
               {/* {sender_id?show then} */}
               <Flex flexDir={"column"} gap={4}>
                 <Text>{item.message_text}</Text>
-                <Textarea w={"100%"} h={"100%"} minH={"100px"} name="message" placeholder="Send response" value={text} onChange={handleChange} />
-                <PButton onClick={sendResponse}>Send</PButton>
+                {item.sender_id && (
+                  <Flex flexDir={"column"} gap={4}>
+                    <Textarea w={"100%"} h={"100%"} minH={"100px"} name="message" placeholder="Send response" value={text} onChange={handleChange} />
+                    <PButton onClick={sendResponse}>Send</PButton>
+                  </Flex>
+                )}
               </Flex>
             </TabPanel>
           );

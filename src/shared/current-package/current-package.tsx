@@ -74,7 +74,9 @@ export const CurrentPackage = () => {
                   <Text fontSize={{ base: "11px", sm: "14px" }} fontWeight={600}>
                     Advisor:
                   </Text>
-                  <Text fontSize={{ base: "12px", sm: "16px" }}>{advisor_username}</Text>
+                  <Text color={"#4caf50"} fontSize={{ base: "12px", sm: "16px" }} lineHeight={1}>
+                    {advisor_username}
+                  </Text>
                 </Flex>
               )}
             </Flex>

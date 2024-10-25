@@ -33,6 +33,7 @@ export const OrbitPackageModal: React.FC<OrbitPackageModalProps> = ({ isOpen, on
         }
       );
       showToast("success", response.data.success);
+      onClose();
       console.log("Amount sent:", response.data);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {

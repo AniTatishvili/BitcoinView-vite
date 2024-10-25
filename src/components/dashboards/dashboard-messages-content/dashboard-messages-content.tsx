@@ -37,6 +37,7 @@ export const DashboardMessagesContent = () => {
         onChange={handleTabChange}>
         <Box
           w={{ base: "100%", lg: "40%" }}
+          h={"100%"}
           overflowY={"scroll"}
           css={{
             "&::-webkit-scrollbar": {
@@ -50,7 +51,7 @@ export const DashboardMessagesContent = () => {
               borderRadius: "24px",
             },
           }}>
-          <Box pr={2}>
+          <Box w={"100%"} h={"100%"} pr={2}>
             <DashboardMessagesTabLists />
           </Box>
         </Box>
