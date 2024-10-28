@@ -17,6 +17,15 @@ interface FormikInputProps {
 export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, name, disabled }) => {
   const [show, setShow] = React.useState(false);
   const [field] = useField(name);
+  const [referralLink, setReferralLink] = React.useState<string>("");
+  const params = new URLSearchParams(window.location.search);
+
+  React.useEffect(() => {
+    if (params.has("referralLink")) {
+      setReferralLink(params.get("referralLink") || "");
+      console.log(referralLink);
+    }
+  }, []);
 
   return (
     <Flex w={"100%"} flexDir={"column"} gap={2}>
@@ -28,6 +37,31 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
             type="text"
             placeholder={placeholder}
             value={field.value === 1 ? "Active" : "Deactive"}
+            disabled={true}
+            style={{
+              height: "40px",
+              background: "#35363D",
+              color: "#fff",
+              fontSize: "16px",
+              textTransform: "none",
+              lineHeight: 1,
+              border: 0,
+              borderRadius: "8px",
+              padding: "0.75rem 1rem",
+              width: "100%",
+              boxSizing: "border-box",
+              outline: 0,
+            }}
+          />
+        </InputGroup>
+      ) : name === "referer_code" ? (
+        <InputGroup display={"flex"} flexDir={"column"} gap={1}>
+          <FormikLabel>{placeholder}</FormikLabel>
+          <Field
+            name={name}
+            type="text"
+            placeholder={placeholder}
+            value={params.has("referralLink") ? referralLink : null}
             disabled={true}
             style={{
               height: "40px",

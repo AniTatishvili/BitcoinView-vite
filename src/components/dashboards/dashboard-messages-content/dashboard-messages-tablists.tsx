@@ -61,7 +61,7 @@ export const DashboardMessagesTabLists = () => {
   }, [token]);
 
   React.useEffect(() => {
-    if (initialTab || mgsIndex !== undefined) {
+    if (initialTab && mgsIndex !== undefined) {
       const tabIndex = Number(initialTab);
       if (Array.isArray(data) && tabIndex >= 0 && tabIndex < data.length) {
         const fetchMessage = async () => {
@@ -90,7 +90,6 @@ export const DashboardMessagesTabLists = () => {
     if (data) {
       const params = new URLSearchParams(window.location.search);
       if (params.has("tab")) {
-        console.log(params);
         params.set("tab", indx.toString());
         params.set("id", data[indx].id.toString());
         navigate(`?${params.toString()}`);

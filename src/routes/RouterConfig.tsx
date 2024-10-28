@@ -2,11 +2,10 @@ import { Routes, Route } from "react-router-dom";
 
 // global
 import { Protected } from "./Protected";
-// import { Redirect } from "./Redirect";
+import { Redirect } from "./Redirect";
 
 // login/signup
-// import { ConfirmNewPassword } from "pages/auth/forgot-password/confirm-new-password";
-// import { ForgotPassword } from "pages/auth/forgot-password/forgot-password";
+
 import { Login, ForgetPassword, SignUp, ForgetPasswordEmail } from "../pages/auth";
 
 // import { Signup } from "../../pages/auth/signup";
@@ -42,8 +41,12 @@ export function RouterConfig() {
       <Route path="/" element={<Home />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
-      <Route path="forget-password-email" element={<ForgetPasswordEmail />} />
-      <Route path="forget-password" element={<ForgetPassword />} />
+      <Route element={<Redirect />}>
+        <Route path="forget-password-email" element={<ForgetPasswordEmail />} />
+      </Route>
+      <Route element={<Redirect />}>
+        <Route path="forget-password" element={<ForgetPassword />} />
+      </Route>
       <Route path="*" element={<NotFoundPage />} />
       <Route element={<Protected allowedRoles="admin" />}>
         <Route path="admin-dashboard" element={<AdminDashboard />}>

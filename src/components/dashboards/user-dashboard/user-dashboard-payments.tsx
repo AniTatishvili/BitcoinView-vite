@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
@@ -6,29 +6,41 @@ import { TbCopyPlusFilled } from "react-icons/tb";
 import { PButton } from "../../../shared/ui/buttons";
 import { useUserPackageNameStore } from "../../../store/dashboard/user-package-name-store";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
 
 export const UserDashboardPayments = () => {
+  const showToast = useCustomToast();
   const { userPackageNameData } = useUserPackageNameStore();
-  const { active_package_name, advisor_username } = useUserSignupStore();
-  // const [packageName, setPackageName] = React.useState<string>("");
+  const { active_package_name, advisor_username, referral_code } = useUserSignupStore();
 
-  const referralLink = "https://CPa_erefff";
-  const referralId = "CPa_erefff";
+  const [referralLink, setReferralLink] = React.useState<string>("");
+
+  const params = new URLSearchParams(window.location.search);
+  params.set("referralLink", referralLink);
+  const referralUrl = `${window.location.origin}${"/app/signup"}?${params.toString()}`;
+
+  React.useEffect(() => {
+    if (referral_code) {
+      setReferralLink(referral_code);
+    }
+  }, [referral_code]);
+
+  React.useEffect(() => {
+    if (referral_code) {
+      setReferralLink(referral_code);
+    }
+  }, [referral_code]);
 
   const copyToClipboard = async (text: string) => {
     try {
       await navigator.clipboard.writeText(text);
-      console.log("Copied to clipboard!");
+      showToast("success", "Copied to clipboard!");
+      // console.log("Copied to clipboard!");
     } catch (err) {
+      showToast("error", "Failed to copy");
       console.error("Failed to copy: ", err);
     }
   };
-
-  // React.useEffect(() => {
-  //   if (userPackageNameData) {
-  //     setPackageName(userPackageNameData.package_name);
-  //   }
-  // }, [userPackageNameData]);
 
   return (
     <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"column"} borderRadius={"8px"} p={"1rem"} gap={4}>
@@ -62,20 +74,24 @@ export const UserDashboardPayments = () => {
           )}
         </Flex>
         <Flex flexDir={"column"} gap={2}>
-          <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"}>
+          <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"} gap={2}>
             <Text>Lite Referral ID</Text>
             <Flex alignItems={"center"}>
-              <Text>{referralId}</Text>
-              <Button bg={"none"} color={"#fff"} p={0} _hover={{ bg: "none" }} onClick={() => copyToClipboard(referralId)}>
+              <Text maxW={"120px"} display={"inline-block"} overflow={"hidden"} whiteSpace={"nowrap"} textOverflow={"ellipsis"}>
+                {referralLink}
+              </Text>
+              <Button bg={"none"} color={"#fff"} p={0} _hover={{ bg: "none" }} onClick={() => copyToClipboard(referralLink)}>
                 <TbCopyPlusFilled />
               </Button>
             </Flex>
           </Flex>
-          <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"}>
+          <Flex justify={"space-between"} align={"center"} bg={"#35363D"} borderRadius={"8px"} color={"#fff"} p={"0.5rem"} gap={2}>
             <Text>Lite Referral Link</Text>
             <Flex alignItems={"center"}>
-              <Text>{referralLink}</Text>
-              <Button bg={"none"} p={0} color={"#fff"} _hover={{ bg: "none" }} onClick={() => copyToClipboard(referralLink)}>
+              <Text maxW={"120px"} display={"inline-block"} overflow={"hidden"} whiteSpace={"nowrap"} textOverflow={"ellipsis"}>
+                {referralUrl}
+              </Text>
+              <Button bg={"none"} p={0} color={"#fff"} _hover={{ bg: "none" }} onClick={() => copyToClipboard(referralUrl)}>
                 <TbCopyPlusFilled />
               </Button>
             </Flex>

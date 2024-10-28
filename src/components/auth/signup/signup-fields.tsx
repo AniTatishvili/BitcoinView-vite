@@ -12,7 +12,6 @@ interface SignupFieldsProps {
   };
 }
 
-
 export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
   const { t } = useTranslation();
   return (
@@ -22,6 +21,7 @@ export const SignupFields: React.FC<SignupFieldsProps> = ({ formik }) => {
       <FormikNumber name="mobile" placeholder={t("common:USER.AUTH.PHONE")} />
       <FormikInput name="password" type="password" placeholder={t("common:USER.AUTH.PASSWORD")} />
       <FormikInput name="password_confirmation" type="password" placeholder={t("Confirm password")} />
+      <FormikInput name="referer_code" type="referer_code" placeholder={"Referral Code"} />
       <PButton type="submit" isLoading={formik.isSubmitting} disabled={formik.isSubmitting || !formik.isValid || !formik.dirty} w={"fit-content"}>
         {formik.loading ? t("LOADING") : t("common:USER.AUTH.SIGNUP")}
       </PButton>
