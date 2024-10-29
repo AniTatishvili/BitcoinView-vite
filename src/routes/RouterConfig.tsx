@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 // global
 import { Protected } from "./Protected";
-import { Redirect } from "./Redirect";
+// import { Redirect } from "./Redirect";
 
 // login/signup
 
@@ -41,12 +41,12 @@ export function RouterConfig() {
       <Route path="/" element={<Home />} />
       <Route path="login" element={<Login />} />
       <Route path="signup" element={<SignUp />} />
-      <Route element={<Redirect />}>
-        <Route path="forget-password-email" element={<ForgetPasswordEmail />} />
-      </Route>
-      <Route element={<Redirect />}>
-        <Route path="forget-password" element={<ForgetPassword />} />
-      </Route>
+      {/* <Route element={<Redirect />}> */}
+      <Route path="forget-password-email" element={<ForgetPasswordEmail />} />
+      {/* </Route>
+      <Route element={<Redirect />}> */}
+      <Route path="forget-password" element={<ForgetPassword />} />
+      {/* </Route> */}
       <Route path="*" element={<NotFoundPage />} />
       <Route element={<Protected allowedRoles="admin" />}>
         <Route path="admin-dashboard" element={<AdminDashboard />}>
