@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
-import { PButton } from "../../../../shared/ui/buttons";
+// import { PButton } from "../../../../shared/ui/buttons";
 import { MoneyTransferDetailsTable } from "../../../../pages/dashboards/user-dashboard/money-transfer-details-table";
 import useUserBalance from "../../../../shared/hooks/useUserBalance";
 import { useUserPackageNameStore } from "../../../../store/dashboard/user-package-name-store";
@@ -95,7 +95,7 @@ export const WalletContent = () => {
                 </Button>
               </Flex>
             </Flex>
-            <PButton w={"100%"}>Invite Friends</PButton>
+            {/* <PButton w={"100%"}>Invite Friends</PButton> */}
           </Flex>
         </Flex>
         <Flex h={"fit-content"} flexDir={"row"} gap={4} color={"#fff"}>

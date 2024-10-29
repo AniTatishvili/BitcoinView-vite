@@ -5,7 +5,7 @@ import { RouterConfig } from "./routes/RouterConfig";
 // import { getUsersData } from "./services";
 import { useUserSignupStore } from "./store/dashboard/user-auth";
 import { Flex, Spinner } from "@chakra-ui/react";
-// import { jwtDecode } from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 // import { useNavigate } from "react-router-dom";
 
 const App: React.FC = () => {
@@ -58,15 +58,20 @@ const App: React.FC = () => {
   // React.useEffect(() => {
   //   console.log("Store values after API request:", { avatar, username, email });
   // }, [avatar, username, email]);
-
-  if (isLoading && !/\/(login|signup|forget-password)/.test(location.pathname)) {
-    return (
-      <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
-        <Spinner size={"xl"} color={"#f7931a"} />
-      </Flex>
-    );
+  if (isUserLoggedIn && token) {
+    const tokenExpiration = jwtDecode<{ exp: number }>(token).exp;
+    const dateNow = Math.floor(new Date().getTime() / 1000);
+    // console.log(!(tokenExpiration < dateNow), "tokenExpiration < dateNow", isLoading, token);
+    if (!(tokenExpiration < dateNow) && isLoading && !/\/(login|signup|forget-password)/.test(location.pathname)) {
+      return (
+        <Flex w={"100%"} h={"100vh"} justify={"center"} align={"center"}>
+          <Spinner size={"xl"} color={"#f7931a"} />
+        </Flex>
+      );
+    } else {
+      console.log("loading");
+    }
   }
-
   return <RouterConfig />;
 };
 

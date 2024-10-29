@@ -23,7 +23,8 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
   React.useEffect(() => {
     if (params.has("referralLink")) {
       setReferralLink(params.get("referralLink") || "");
-      console.log(referralLink);
+    } else {
+      setReferralLink("");
     }
   }, []);
 
@@ -61,7 +62,7 @@ export const FormikInput: React.FC<FormikInputProps> = ({ type, placeholder, nam
             name={name}
             type="text"
             placeholder={placeholder}
-            value={params.has("referralLink") ? referralLink : null}
+            value={referralLink}
             disabled={true}
             style={{
               height: "40px",

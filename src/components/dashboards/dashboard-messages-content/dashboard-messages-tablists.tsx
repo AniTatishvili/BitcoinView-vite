@@ -83,7 +83,7 @@ export const DashboardMessagesTabLists = () => {
     const newSelectedTab = indx + 1;
     setSelectedTab(newSelectedTab);
     window.localStorage.setItem("ACTIVE_MESSAGE_INDEX", newSelectedTab.toString());
-    console.log(newSelectedTab, 99, indx);
+    // console.log(newSelectedTab, 99, indx);
 
     let readUrl = "";
 
@@ -249,7 +249,9 @@ export const DashboardMessagesTabLists = () => {
                   <Button w={"fit-content"} pos={"absolute"} top={0} right={0} p={0} onClick={() => setShowTabPanel(false)}>
                     X
                   </Button>
-                  <Text mt={4}>{data?.[selectedTab - 1]?.message_text}</Text>
+                  <Text mt={4}>
+                    <div dangerouslySetInnerHTML={{ __html: `<p>${data?.[selectedTab - 1]?.message_text}</p>` }} />
+                  </Text>
 
                   {(data?.[selectedTab - 1] as any)?.sender_id && (
                     <Flex flexDir={"column"} gap={4}>

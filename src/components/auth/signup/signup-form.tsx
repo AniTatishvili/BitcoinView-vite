@@ -21,6 +21,7 @@ interface SignUpFormValues {
   password_confirmation: string;
   email: string;
   mobile: string;
+  referer_code: string;
 }
 
 export const SignupForm = () => {
@@ -60,12 +61,12 @@ export const SignupForm = () => {
   });
 
   const onFormSubmit = async (values: SignUpFormValues) => {
+    const params = new URLSearchParams(window.location.search);
+    const referralCode = params.get("referralLink") || "";
+
     const newUser = {
-      username: values.username,
-      email: values.email,
-      password: values.password,
-      password_confirmation: values.password_confirmation,
-      mobile: values.mobile,
+      ...values,
+      referer_code: referralCode,
     };
 
     mutation.mutate(newUser);

@@ -27,9 +27,9 @@ export const DashboardTableItem: React.FC<DashboardTableItemProps> = ({ userData
         <Td color={userData.position === "Buy" ? "green" : "red"} display={"flex"} alignItems={"center"} gap={1}>
           {userData.position} {userData.position === "Buy" ? <FaArrowTrendUp /> : <FaArrowTrendDown />}
         </Td>
-        <Td p={1}>{Number(userData.market_entry).toFixed(2)}</Td>
-        <Td p={1}>{Number(userData.tp).toFixed(2)}</Td>
-        <Td p={1}>{Number(userData.sl).toFixed(2)}</Td>
+        <Td p={1}>{Number(userData.market_entry).toFixed(6)}</Td>
+        <Td p={1}>{Number(userData.tp).toFixed(6)}</Td>
+        <Td p={1}>{Number(userData.sl).toFixed(6)}</Td>
         <Td p={1}>{Number(userData.rr).toFixed(2)}</Td>
         <Td p={1}>{userData.risk_percentage}%</Td>
       </Tr>

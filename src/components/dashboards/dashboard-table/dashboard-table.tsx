@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
 
+import { useNavigate } from "react-router-dom";
 import { Box, Table, TableContainer, Tbody, Th, Thead, Tr, Text, Flex } from "@chakra-ui/react";
+import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 import { DashboardTableItem } from "./dashboard-table-item";
 import { PText } from "../../../shared/typography";
-
-// import { TAssets } from "shared/types";
+import { PButton } from "../../../shared/ui/buttons";
 
 interface UserData {
   coin: string;
@@ -20,6 +21,9 @@ interface UserData {
 }
 
 export const DashboardTable = () => {
+  const navigate = useNavigate();
+  const { current_balance, active_package_name } = useUserSignupStore();
+
   const [data, setData] = React.useState<UserData[]>([]);
 
   const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/signals";
@@ -41,7 +45,7 @@ export const DashboardTable = () => {
       <Text as="h2" color="#fff" fontSize={"24px"} fontWeight={"600"} pb={"1rem"}>
         Trading Signals
       </Text>
-      <Box>
+      <Box pos={"relative"} zIndex={1}>
         <TableContainer
           w={"100%"}
           h={"250px"}
@@ -99,6 +103,21 @@ export const DashboardTable = () => {
             </Tbody>
           </Table>
         </TableContainer>
+        {active_package_name !== "Trail" && Number(current_balance) > 0 ? (
+          <Flex
+            w={"100%"}
+            h={"calc(100% - 76px)"}
+            bg={"rgba(20,19,22,.96)"}
+            // filter={"blur(4px)"}
+            justify={"center"}
+            align={"center"}
+            pos={"absolute"}
+            left={0}
+            bottom={0}
+            zIndex={1}>
+            <PButton onClick={() => navigate("/user-dashboard/package-selection")}>Activate</PButton>
+          </Flex>
+        ) : null}
       </Box>
     </Flex>
   );

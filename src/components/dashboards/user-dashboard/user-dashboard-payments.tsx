@@ -3,7 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 import { MdOutlineDoneOutline } from "react-icons/md";
 import { TbCopyPlusFilled } from "react-icons/tb";
-import { PButton } from "../../../shared/ui/buttons";
+// import { PButton } from "../../../shared/ui/buttons";
 import { useUserPackageNameStore } from "../../../store/dashboard/user-package-name-store";
 import { useUserSignupStore } from "../../../store/dashboard/user-auth";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
@@ -96,7 +96,7 @@ export const UserDashboardPayments = () => {
               </Button>
             </Flex>
           </Flex>
-          <PButton w={"100%"}>Invite Friends</PButton>
+          {/* <PButton w={"100%"}>Invite Friends</PButton> */}
         </Flex>
       </Flex>
     </Flex>

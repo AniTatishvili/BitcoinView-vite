@@ -5,6 +5,7 @@ const formik_values = {
     password_confirmation: "",
     email: "",
     mobile: "",
+    referer_code: "",
   },
 
   authorizationValues: {

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { Flex, Text, Textarea, TabPanel, TabPanels } from "@chakra-ui/react";
+import { Flex, Textarea, TabPanel, TabPanels } from "@chakra-ui/react";
 import { PButton } from "../../../shared/ui/buttons";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 
@@ -77,7 +77,7 @@ export const DashboardMessagesTabPanels = () => {
             <TabPanel key={i} color={"#fff"} fontSize={"14px"} p={0}>
               {/* {sender_id?show then} */}
               <Flex flexDir={"column"} gap={4}>
-                <Text>{item.message_text}</Text>
+                <div dangerouslySetInnerHTML={{ __html: `<p>${item.message_text}</p>` }} />
                 {item.sender_id && (
                   <Flex flexDir={"column"} gap={4}>
                     <Textarea w={"100%"} h={"100%"} minH={"100px"} name="message" placeholder="Send response" value={text} onChange={handleChange} />
