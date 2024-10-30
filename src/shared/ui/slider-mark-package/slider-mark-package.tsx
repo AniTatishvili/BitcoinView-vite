@@ -3,7 +3,7 @@ import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
 
-import { Flex, Box, Button, Tooltip, Text, List, ListItem, Spinner } from "@chakra-ui/react";
+import { Flex, Box, Button, Tooltip, Text, List, ListItem, Spinner, Input } from "@chakra-ui/react";
 import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selected-package-store";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 
@@ -39,6 +39,7 @@ export const SliderMarkPackage = () => {
   const [activeIndex, setActiveIndex] = React.useState<number | null>(package_id ?? userBalance ?? 0);
   const [isOrbitSelected, setIsOrbitSelected] = React.useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = React.useState(false);
+  const [input, setInput] = React.useState<number | null>(null);
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
@@ -448,7 +449,7 @@ export const SliderMarkPackage = () => {
   const handleMouseClick = async () => {
     if (activeIndex !== null) {
       const activePackage = data[activeIndex];
-
+      console.log(activePackage, "activePackage");
       setUserPackageNameData({ package_name: activePackage.package_name });
 
       if (activePackage.package_name !== "Orbit") {
@@ -464,9 +465,12 @@ export const SliderMarkPackage = () => {
               },
             }
           );
+
+          const packageAmount = input ? input : activePackage.amount;
+
           if (response.data.purchase.status == "Inactive") {
             setUserPackageData({
-              amount: activePackage.amount - Number(userBalance) - Number(estimatedBalance),
+              amount: packageAmount - Number(userBalance) - Number(estimatedBalance),
               package_name: activePackage.package_name,
               is_purchase: true,
               purchase_id: response.data.purchase.id,
@@ -484,6 +488,27 @@ export const SliderMarkPackage = () => {
           console.error("Error updating avatar:", error);
         }
       }
+    }
+  };
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputAmount = Number(e.target.value);
+    setInput(inputAmount);
+
+    const filteredPackages = data.filter(({ amount }) => amount <= inputAmount);
+    console.log("Input Amount:", inputAmount);
+    console.log("Filtered Packages:", filteredPackages);
+
+    if (filteredPackages.length > 0) {
+      const maxAmount = Math.max(...filteredPackages.map((pkg) => pkg.amount));
+      const closestPackage = data.findIndex((pkg) => Math.abs(pkg.amount - maxAmount) < 0.01);
+
+      console.log(closestPackage, "closestPackage", maxAmount);
+
+      if (closestPackage) {
+        setActiveIndex(closestPackage);
+      }
+    } else {
+      setActiveIndex(null);
     }
   };
 
@@ -532,28 +557,6 @@ export const SliderMarkPackage = () => {
                   ) : (
                     <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{i === 0 ? userBalance : point.amount}</Text>
                   )}
-
-                  {/* {point.amount === "custom" && showInput ? (
-                <Input
-                  type="number"
-                  w={"70px"}
-                  h={"24px"}
-                  color={"#f7931a"}
-                  fontSize={"14px"}
-                  textAlign={"center"}
-                  border={0}
-                  p={0}
-                  min={200000}
-                  placeholder="----"
-                  _focus={{ boxShadow: "none" }}
-                  onChange={(e) => {
-                    setInput(Number(e.target.value));
-                    setActiveIndex(i);
-                  }}
-                />
-              ) : (
-                <Text color={activeIndex === i ? "#f7931a" : "#fff"}>{point.amount}</Text>
-              )} */}
                 </Flex>
               ))
             ) : (
@@ -563,11 +566,22 @@ export const SliderMarkPackage = () => {
             )}
           </Flex>
         </Flex>
-        <Flex flexDir={{ base: "column", sm: "row" }} gap={4} mt={4}>
-          <TermsAndConditionsModal isChecked={isCheckboxChecked} onCheckboxChange={setIsCheckboxChecked} />
-          <Button bg={"#3AAB41"} onClick={handleMouseClick} disabled={!isCheckboxChecked}>
-            Purchase
-          </Button>
+        <Flex w={"100%"} flexDir={{ base: "column", md: "row" }} justify={"space-between"} align={"center"} gap={4} mt={4}>
+          <Input
+            type="number"
+            w={{ base: "100%", md: "fit-content" }}
+            color={"#f7931a"}
+            fontSize={"14px"}
+            placeholder="Type amount"
+            _focus={{ boxShadow: "none" }}
+            onChange={handleInputChange}
+          />
+          <Flex flexDir={{ base: "column", sm: "row" }} gap={4}>
+            <TermsAndConditionsModal isChecked={isCheckboxChecked} onCheckboxChange={setIsCheckboxChecked} />
+            <Button bg={"#3AAB41"} onClick={handleMouseClick} disabled={!isCheckboxChecked}>
+              Purchase
+            </Button>
+          </Flex>
         </Flex>
       </Flex>
 

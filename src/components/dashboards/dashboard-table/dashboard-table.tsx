@@ -107,15 +107,15 @@ export const DashboardTable = () => {
           <Flex
             w={"100%"}
             h={"calc(100% - 76px)"}
-            bg={"rgba(20,19,22,.96)"}
-            // filter={"blur(4px)"}
+            bg={"rgba(20,19,22,.6)"}
+            backdropFilter={"blur(8px)"}
             justify={"center"}
             align={"center"}
             pos={"absolute"}
             left={0}
             bottom={0}
             zIndex={1}>
-            <PButton onClick={() => navigate("/user-dashboard/package-selection")}>Activate</PButton>
+            <PButton onClick={() => navigate("/user-dashboard/package-selection")}>Upgrade Account</PButton>
           </Flex>
         ) : null}
       </Box>
