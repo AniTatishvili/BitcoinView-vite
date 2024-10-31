@@ -34,6 +34,7 @@ import { Chart } from "../pages/dashboards/chart";
 import { PackageSelection, PackageSelectionSuccess } from "../pages/dashboards/package-selection";
 import { UserMonthlyProfile } from "../pages/dashboards/user-monthly-profile";
 import { UserRequests } from "../pages/dashboards/user-requests";
+import { HostReffer } from "../pages/dashboards/user-dashboard/host-reffer";
 
 export function RouterConfig() {
   return (
@@ -83,6 +84,7 @@ export function RouterConfig() {
           <Route path="user-monthly-profile" element={<UserMonthlyProfile />} />
           <Route path="package-selection" element={<PackageSelection />} />
           <Route path="package-selection-success" element={<PackageSelectionSuccess />} />
+          <Route path="host-reffer" element={<HostReffer />} />
         </Route>
       </Route>
     </Routes>

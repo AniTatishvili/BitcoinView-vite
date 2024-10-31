@@ -426,7 +426,7 @@ export const UserRequestsContent = () => {
             <Button onClick={() => nextPage()} disabled={!getCanNextPage()}>
               Next
             </Button>
-            <Flex as="span" gap={4}>
+            <Flex as="span" gap={1}>
               <Text>Page</Text>
               <Text>
                 {pagination.pageIndex + 1} of {getPageCount()}

@@ -72,7 +72,7 @@ export const CurrentPackage = () => {
               {advisor_username && (
                 <Flex flexDir={"column"}>
                   <Text fontSize={{ base: "11px", sm: "14px" }} fontWeight={600}>
-                    Advisor:
+                    Adviser:
                   </Text>
                   <Text color={"#4caf50"} fontSize={{ base: "12px", sm: "16px" }} lineHeight={1}>
                     {advisor_username}
