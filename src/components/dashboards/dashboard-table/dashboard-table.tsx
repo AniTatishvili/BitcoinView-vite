@@ -22,7 +22,7 @@ interface UserData {
 
 export const DashboardTable = () => {
   const navigate = useNavigate();
-  const { estimated_balance, active_package_name } = useUserSignupStore();
+  const { active_package_name } = useUserSignupStore();
 
   const [data, setData] = React.useState<UserData[]>([]);
 
@@ -103,7 +103,7 @@ export const DashboardTable = () => {
             </Tbody>
           </Table>
         </TableContainer>
-        {active_package_name !== "Trial" && Number(estimated_balance) > 0 ? (
+        {active_package_name === "Trial" ? (
           <Flex
             w={"100%"}
             h={"calc(100% - 76px)"}

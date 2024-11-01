@@ -44,21 +44,35 @@ export const ProfileForm = () => {
     }
   };
 
+  // React.useEffect(() => {
+  //   if (userData) {
+  //     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  //     const updateUserProfile: { [key: string]: any } = {};
+  //     Object.entries(userData)?.forEach(([key, value]) => {
+  //       updateUserProfile[key] = value;
+  //     });
+  //     setInitialValues(updateUserProfile);
+  //   }
+  // }, [userData]);
+
   React.useEffect(() => {
     if (userData) {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const updateUserProfile: { [key: string]: any } = {};
-      Object.entries(userData).forEach(([key, value]) => {
-        updateUserProfile[key] = value;
-      });
+      const updateUserProfile = { ...userData };
       setInitialValues(updateUserProfile);
     }
+  }, []);
+
+  const memoizedInitialValues = React.useMemo(() => {
+    if (userData) {
+      return { ...userData };
+    }
+    return {};
   }, [userData]);
 
   return (
     <>
       <ProfileAvatarPicture />
-      <Formik initialValues={initialValues} validateOnMount enableReinitialize onSubmit={onFormSubmit}>
+      <Formik initialValues={memoizedInitialValues} validateOnMount enableReinitialize onSubmit={onFormSubmit}>
         {(formik) => {
           const { isSubmitting, isValid, dirty } = formik;
           // console.log(formik.values);
