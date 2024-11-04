@@ -55,7 +55,11 @@ export const SignupForm = () => {
     },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     onError: (error: any) => {
-      showToast("error", error.response.data.message || "Sign up failed!");
+      const errorMessages = Object.entries(error.response.data)
+        .map(([key, value]) => `${key}: ${(value as string[])[0]}`)
+        .join("\n");
+
+      showToast("error", errorMessages || "Sign up failed!");
       console.log(error.response.data);
     },
   });

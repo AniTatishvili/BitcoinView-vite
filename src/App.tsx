@@ -68,8 +68,6 @@ const App: React.FC = () => {
           <Spinner size={"xl"} color={"#f7931a"} />
         </Flex>
       );
-    } else {
-      console.log("loading");
     }
   }
   return <RouterConfig />;

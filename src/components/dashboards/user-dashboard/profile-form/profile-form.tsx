@@ -17,7 +17,7 @@ export const ProfileForm = () => {
   const { updateUserFields } = useUserSignupStore();
   const userData = useUserSignupStore();
 
-  const [initialValues, setInitialValues] = React.useState({});
+  const [, setInitialValues] = React.useState({});
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onFormSubmit = async (values: any) => {
@@ -60,7 +60,7 @@ export const ProfileForm = () => {
       const updateUserProfile = { ...userData };
       setInitialValues(updateUserProfile);
     }
-  }, []);
+  }, [userData]);
 
   const memoizedInitialValues = React.useMemo(() => {
     if (userData) {

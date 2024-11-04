@@ -138,28 +138,30 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   };
 
   const handleDownloadQRCode = () => {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
+    // const canvas = document.createElement("canvas");
+    // const ctx = canvas.getContext("2d");
 
     const qrCodeImage = userData?.qr_code;
-    if (qrCodeImage && ctx) {
-      const img = new window.Image();
-      img.crossOrigin = "Anonymous";
-      img.src = qrCodeImage;
-      img.onload = () => {
-        canvas.width = img.width;
-        canvas.height = img.height;
-        ctx.drawImage(img, 0, 0);
-        const link = document.createElement("a");
-        link.href = canvas.toDataURL("image/png");
-        link.download = "qr_code.png";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      };
-    } else {
-      showToast("error", "QR code not available for download.");
-    }
+    window.open(`${qrCodeImage}`, "_blank");
+
+    // if (qrCodeImage && ctx) {
+    //   const img = new window.Image();
+    //   img.crossOrigin = "Anonymous";
+    //   img.src = qrCodeImage;
+    //   img.onload = () => {
+    //     canvas.width = img.width;
+    //     canvas.height = img.height;
+    //     ctx.drawImage(img, 0, 0);
+    //     const link = document.createElement("a");
+    //     link.href = canvas.toDataURL("image/png");
+    //     link.download = "qr_code.png";
+    //     document.body.appendChild(link);
+    //     link.click();
+    //     document.body.removeChild(link);
+    //   };
+    // } else {
+    //   showToast("error", "QR code not available for download.");
+    // }
   };
 
   const steps = [

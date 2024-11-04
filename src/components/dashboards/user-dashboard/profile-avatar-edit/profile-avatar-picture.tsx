@@ -6,11 +6,13 @@ import { UploadInput } from "../../../../shared/ui/inputs/upload-input";
 import { Flex, Avatar } from "@chakra-ui/react";
 import { useUserSignupStore } from "../../../../store/dashboard/user-auth";
 import axios from "axios";
+import useCustomToast from "../../../../shared/hooks/useCustomToast";
 
 interface ProfileAvatarPictureProps {}
 
 export const ProfileAvatarPicture: React.FC<ProfileAvatarPictureProps> = () => {
   const { t } = useTranslation("forms");
+  const showToast = useCustomToast();
   const { updateUserFields, avatar, username } = useUserSignupStore();
 
   const [profileImage, setProfileImage] = useState("");
@@ -65,8 +67,11 @@ export const ProfileAvatarPicture: React.FC<ProfileAvatarPictureProps> = () => {
           },
         });
         updateUserFields({ avatar: response.data.avatar });
+        showToast("success", "Avatar updated successfully");
         console.log("Avatar updated successfully:", response.data);
-      } catch (error) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      } catch (error: any) {
+        showToast("error", error.response?.data.message);
         console.error("Error updating avatar:", error);
       }
     } else {
