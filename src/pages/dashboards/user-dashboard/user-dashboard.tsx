@@ -8,6 +8,7 @@ import { TiHome } from "react-icons/ti";
 import { FaUserAlt, FaWallet, FaFacebookMessenger } from "react-icons/fa";
 import { FiPackage } from "react-icons/fi";
 import { MdCalendarMonth } from "react-icons/md";
+import { PiUserListFill } from "react-icons/pi";
 
 export const UserDashboard = () => {
   const data = [
@@ -17,6 +18,7 @@ export const UserDashboard = () => {
     { link: "/user-dashboard/wallet", name: "Wallet", icon: FaWallet },
     { link: "/user-dashboard/package-selection", name: "Select Package", icon: FiPackage },
     { link: "/user-dashboard/user-monthly-profile", name: "Monthly Profile", icon: MdCalendarMonth },
+    { link: "/user-dashboard/host-reffer", name: "Host Reffer", icon: PiUserListFill },
   ];
 
   return (

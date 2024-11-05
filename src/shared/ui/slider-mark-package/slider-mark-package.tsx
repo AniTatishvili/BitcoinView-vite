@@ -29,7 +29,7 @@ export const SliderMarkPackage = () => {
 
   const { setUserPackageData, resetUserPackageData } = useUserSelectedPackageStore();
   const { active_package } = useUserSignupStore();
-  const { userBalance, estimatedBalance } = useUserBalance();
+  const { userBalance, fetchBalance, estimatedBalance } = useUserBalance();
   const { setUserPackageNameData } = useUserPackageNameStore();
 
   const package_id = active_package - 2;
@@ -418,6 +418,12 @@ export const SliderMarkPackage = () => {
   ];
 
   React.useEffect(() => {
+    if (userBalance) {
+      fetchBalance();
+    }
+  }, [userBalance, setUserPackageCancelData, userPackageCancelData]);
+
+  React.useEffect(() => {
     setActiveIndex(package_id < 0 ? 0 : package_id);
   }, [package_id]);
 
@@ -458,7 +464,7 @@ export const SliderMarkPackage = () => {
         try {
           const response = await axios.post(
             purckageUlr,
-            { package_id: package_id },
+            { package_id: package_id, custom_amount: input || null },
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -467,7 +473,7 @@ export const SliderMarkPackage = () => {
           );
 
           const packageAmount = input ? input : activePackage.amount;
-
+          console.log(input, "input", packageAmount);
           if (response.data.purchase.status == "Inactive") {
             setUserPackageData({
               amount: packageAmount - Number(userBalance) - Number(estimatedBalance),
