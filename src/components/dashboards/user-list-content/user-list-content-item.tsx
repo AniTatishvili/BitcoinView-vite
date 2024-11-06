@@ -7,6 +7,8 @@ import { PercentageDoughnut } from "../../../shared/ui/charts";
 import { UserAvatar } from "../../../shared/user-avatar";
 
 import { MdNotificationsNone } from "react-icons/md";
+import { FaCalculator } from "react-icons/fa";
+// import { IoCall } from "react-icons/io5";
 
 interface UserListContentItemProps {
   full_name: string;
@@ -60,13 +62,27 @@ export const UserListContentItem: React.FC<UserListContentItemProps> = ({
             <Text>Last Update: {last_update}</Text>
           </ListItem>
         </List>
-        <Flex justify={"flex-end"} gap={2}>
-          <Button bg={"#3AAB41"} p={2}>
-            <MdNotificationsNone />
-          </Button>
-          <Button bg={"#f7931a"} p={2}>
-            <FiMessageSquare />
-          </Button>
+        <Button w={"fit-content"} p={2} float={"right"}>
+          <FaCalculator />
+        </Button>
+        <Flex justify={"space-between"} align={"center"}>
+          <Flex gap={2}>
+            {/* <Button bg={"#3AAB41"} p={2}>
+              <IoCall />
+              <Text ml={1}>Call</Text>
+            </Button> */}
+            <Button bg={"#f7931a"} p={2}>
+              <Text>Assign</Text>
+            </Button>
+          </Flex>
+          <Flex gap={2}>
+            <Button bg={"#3AAB41"} p={2}>
+              <MdNotificationsNone />
+            </Button>
+            <Button bg={"#f7931a"} p={2}>
+              <FiMessageSquare />
+            </Button>
+          </Flex>
         </Flex>
       </Flex>
     </Box>

@@ -15,7 +15,7 @@ import { useUserSelectedPackageStore } from "../../../store/dashboard/user-selec
 import { PButton } from "../../../shared/ui/buttons";
 // import { sendAmointValues } from "../../../shared/form";
 import { TbCopyPlusFilled } from "react-icons/tb";
-
+import { saveAs } from "file-saver";
 import btc from "../../../assets/images/wallet-logos/bitcoin-btc-logo.svg";
 import useCustomToast from "../../../shared/hooks/useCustomToast";
 import credit_logo from "../../../assets/images/wallet-logos/credit-card.png";
@@ -138,30 +138,12 @@ export const DashboardDepositSteps: React.FC<DashboardDepositStepsProps> = () =>
   };
 
   const handleDownloadQRCode = () => {
-    // const canvas = document.createElement("canvas");
-    // const ctx = canvas.getContext("2d");
+    const qrCodeImage = userData?.qr_code.split("/").pop();
+    const url = `https://phplaravel-1309375-4888543.cloudwaysapps.com/api/download-image/${qrCodeImage}`;
 
-    const qrCodeImage = userData?.qr_code;
-    window.open(`${qrCodeImage}`, "_blank");
-
-    // if (qrCodeImage && ctx) {
-    //   const img = new window.Image();
-    //   img.crossOrigin = "Anonymous";
-    //   img.src = qrCodeImage;
-    //   img.onload = () => {
-    //     canvas.width = img.width;
-    //     canvas.height = img.height;
-    //     ctx.drawImage(img, 0, 0);
-    //     const link = document.createElement("a");
-    //     link.href = canvas.toDataURL("image/png");
-    //     link.download = "qr_code.png";
-    //     document.body.appendChild(link);
-    //     link.click();
-    //     document.body.removeChild(link);
-    //   };
-    // } else {
-    //   showToast("error", "QR code not available for download.");
-    // }
+    if (qrCodeImage) {
+      saveAs(url, "downloaded-image.jpg");
+    }
   };
 
   const steps = [

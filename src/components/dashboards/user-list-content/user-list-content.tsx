@@ -1,5 +1,5 @@
 import React from "react";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Checkbox } from "@chakra-ui/react";
 import { useUserListFilterStore } from "../../../store/dashboard/user-list-flter-store";
 import { UserListContentItem } from "./user-list-content-item";
 import { UserListFilter } from "./user-list-filter";
@@ -9,6 +9,7 @@ export const UserListContent = () => {
   const { user_list_filter_id } = useUserListFilterStore();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedPackage, setSelectedPackage] = React.useState("");
+  const [checkedItems, setCheckedItems] = React.useState<string[]>([]);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const data = [
     {
@@ -83,7 +84,7 @@ export const UserListContent = () => {
 
   return (
     <Flex flexDir={"column"} gap={4}>
-      <UserListFilter onSearch={setSearchTerm} onSelectChange={setSelectedPackage} inputRef={inputRef} />
+      <UserListFilter checkedItems={checkedItems} onSearch={setSearchTerm} onSelectChange={setSelectedPackage} inputRef={inputRef} />
       <Flex w={"100%"} flexDir={{ base: "column", lg: "row" }} flexWrap={"wrap"} gap={4}>
         {filteredData.length > 0 ? (
           filteredData.map((item, i) => (
@@ -93,6 +94,20 @@ export const UserListContent = () => {
               backgroundColor={"#1F2027"}
               borderRadius={"8px"}
               p={"1rem"}>
+              <Checkbox
+                colorScheme={"green"}
+                onChange={(event) => {
+                  const isChecked = event.target.checked;
+                  const itemKey = item.username;
+                  setCheckedItems((prevCheckedItems) => {
+                    if (isChecked) {
+                      return [...prevCheckedItems, itemKey];
+                    } else {
+                      return prevCheckedItems.filter((checkedItem) => checkedItem !== itemKey);
+                    }
+                  });
+                }}
+              />
               {user_list_filter_id === 1 ? (
                 <UserListContentItem
                   full_name={item.full_name}
