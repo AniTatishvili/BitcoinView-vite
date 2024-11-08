@@ -62,7 +62,7 @@ export const LoginForm = () => {
   const redirectUserByRole = (role: string) => {
     if (role === "admin") {
       navigate("/admin-dashboard/admin-dashboard-overview");
-    } else if (role === "advisor") {
+    } else if (role === "adviser") {
       navigate("/adviser-dashboard/adviser-dashboard-overview");
     } else if (role === "subscriber") {
       navigate("/user-dashboard/overview");

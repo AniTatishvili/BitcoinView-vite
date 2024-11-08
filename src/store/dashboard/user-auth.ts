@@ -15,7 +15,7 @@ type UserSignupStoreType = {
   referer_id: string;
   chat_notifications: boolean;
   account_status: string;
-  advisor_username: string;
+  adviser_username: string;
   created_at: string;
   currency: string;
   current_balance: string;
@@ -53,7 +53,7 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   referer_id: "",
   chat_notifications: false,
   account_status: "",
-  advisor_username: "",
+  adviser_username: "",
   created_at: "",
   currency: "",
   current_balance: "",

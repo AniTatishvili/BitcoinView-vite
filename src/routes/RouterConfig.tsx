@@ -35,6 +35,8 @@ import { PackageSelection, PackageSelectionSuccess } from "../pages/dashboards/p
 import { UserMonthlyProfile } from "../pages/dashboards/user-monthly-profile";
 import { UserRequests } from "../pages/dashboards/user-requests";
 import { HostReffer } from "../pages/dashboards/user-dashboard/host-reffer";
+import { Accounting } from "../pages/dashboards/accounting";
+import { PushNotifications } from "../pages/dashboards/push-notifications";
 
 export function RouterConfig() {
   return (
@@ -58,10 +60,12 @@ export function RouterConfig() {
           <Route path="chart" element={<Chart />} />
           <Route path="user-list" element={<UserList />} />
           <Route path="user-requests" element={<UserRequests />} />
+          <Route path="push-notifications" element={<PushNotifications />} />
+          <Route path="accounting" element={<Accounting />} />
         </Route>
       </Route>
       /
-      <Route element={<Protected allowedRoles="advisor" />}>
+      <Route element={<Protected allowedRoles="adviser" />}>
         <Route path="adviser-dashboard" element={<AdviserDashboard />}>
           <Route path="adviser-dashboard-overview" element={<AdviserDashboardOverview />} />
           <Route path="messages" element={<Messages />} />
@@ -69,6 +73,8 @@ export function RouterConfig() {
           <Route path="asset" element={<Asset />} />
           <Route path="chart" element={<Chart />} />
           <Route path="user-list" element={<UserList />} />
+          <Route path="push-notifications" element={<PushNotifications />} />
+          <Route path="accounting" element={<Accounting />} />
         </Route>
       </Route>
       <Route element={<Protected allowedRoles="subscriber" />}>

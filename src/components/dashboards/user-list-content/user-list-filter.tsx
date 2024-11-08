@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Flex, Input, List, ListItem, Select, Text } from "@chakra-ui/react";
 import { MdViewList } from "react-icons/md";
 import { PiGridFourFill } from "react-icons/pi";
-import { CgMathPlus } from "react-icons/cg";
+// import { CgMathPlus } from "react-icons/cg";
 import { CgPlayListCheck } from "react-icons/cg";
 import { IoClose } from "react-icons/io5";
 import { useUserListFilterStore } from "../../../store/dashboard/user-list-flter-store";
@@ -13,9 +13,10 @@ interface UserListFilterProps {
   onSelectChange: (value: string) => void;
   inputRef: React.RefObject<HTMLInputElement>;
   checkedItems: string[];
+  adviserData: string[];
 }
 
-export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSelectChange, inputRef, checkedItems }) => {
+export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSelectChange, inputRef, checkedItems, adviserData }) => {
   const { save_user_filer_id } = useUserListFilterStore();
   const [isActive, setIsActive] = React.useState<number>(1);
 
@@ -39,9 +40,9 @@ export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSele
         <ListItem color={isActive === 2 ? "#f7931a" : "#fff"} cursor={"pointer"} onClick={() => handleClick(2)}>
           <MdViewList />
         </ListItem>
-        <ListItem color={isActive === 2 ? "#f7931a" : "#fff"} cursor={"pointer"} onClick={() => handleClick(2)}>
+        {/* <ListItem color={isActive === 2 ? "#f7931a" : "#fff"} cursor={"pointer"} onClick={() => handleClick(2)}>
           <CgMathPlus />
-        </ListItem>
+        </ListItem> */}
       </List>
       <Flex bg={"#1F2027"} align={"center"} gap={4} borderRadius={"8px"} ps={3} pe={1} py={1}>
         <Button w={"fit-content"} bg={"none"} fontSize={"24px"} _hover={{ bg: "none" }} p={0}>
@@ -54,16 +55,15 @@ export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSele
         <Text fontSize={"28px"}>
           <CgPlayListCheck />
         </Text>
-        <Select
-          value={""}
-          onChange={(event) => {
-            const selectedValue = event.target.value;
-            onSelectChange(selectedValue);
-          }}>
-          <option value="">Advisers</option>
-          <option value="">Adviser 1</option>
-          <option value="">Adviser 2</option>
-          <option value="">Adviser 3</option>
+        <Select>
+          <option value="Advisers" disabled>
+            Advisers
+          </option>
+          {adviserData?.map((item, i) => (
+            <option value={item} key={i}>
+              {item}
+            </option>
+          ))}
         </Select>
       </Flex>
     </Flex>

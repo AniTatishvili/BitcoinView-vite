@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+
 import { Flex, Box, Checkbox } from "@chakra-ui/react";
 import { useUserListFilterStore } from "../../../store/dashboard/user-list-flter-store";
 import { UserListContentItem } from "./user-list-content-item";
@@ -11,6 +13,8 @@ export const UserListContent = () => {
   const [selectedPackage, setSelectedPackage] = React.useState("");
   const [checkedItems, setCheckedItems] = React.useState<string[]>([]);
   const inputRef = React.useRef<HTMLInputElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [adviserData, setAdviserData] = React.useState<any>([]);
   const data = [
     {
       full_name: "Maka Areshidze",
@@ -64,6 +68,8 @@ export const UserListContent = () => {
     },
   ];
 
+  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+
   const filteredData = data.filter((item) => {
     const searchMatch =
       item.start_time.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -82,9 +88,27 @@ export const UserListContent = () => {
     setSearchTerm("");
   }, [selectedPackage]);
 
+  React.useEffect(() => {
+    const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/get-adviser-usernames";
+
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setAdviserData(response.data.advisers);
+        console.log("Adviser dashboard info:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
   return (
     <Flex flexDir={"column"} gap={4}>
-      <UserListFilter checkedItems={checkedItems} onSearch={setSearchTerm} onSelectChange={setSelectedPackage} inputRef={inputRef} />
+      <UserListFilter checkedItems={checkedItems} onSearch={setSearchTerm} onSelectChange={setSelectedPackage} inputRef={inputRef} adviserData={adviserData} />
       <Flex w={"100%"} flexDir={{ base: "column", lg: "row" }} flexWrap={"wrap"} gap={4}>
         {filteredData.length > 0 ? (
           filteredData.map((item, i) => (

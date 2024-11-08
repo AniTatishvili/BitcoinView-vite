@@ -11,7 +11,7 @@ import useCustomToast from "../../../shared/hooks/useCustomToast";
 export const UserDashboardPayments = () => {
   const showToast = useCustomToast();
   const { userPackageNameData } = useUserPackageNameStore();
-  const { active_package_name, advisor_username, referral_code } = useUserSignupStore();
+  const { active_package_name, adviser_username, referral_code } = useUserSignupStore();
 
   const [referralLink, setReferralLink] = React.useState<string>("");
 
@@ -62,13 +62,13 @@ export const UserDashboardPayments = () => {
               <MdOutlineDoneOutline />
             </Box>
           </Flex>
-          {advisor_username && (
+          {adviser_username && (
             <Flex flexDir={"column"}>
               <Text fontSize={{ base: "11px", sm: "14px" }} fontWeight={600}>
                 Adviser:
               </Text>
               <Text color={"#4caf50"} fontSize={{ base: "12px", sm: "16px" }} lineHeight={1}>
-                {advisor_username}
+                {adviser_username}
               </Text>
             </Flex>
           )}
