@@ -74,7 +74,6 @@ export function RouterConfig() {
           <Route path="chart" element={<Chart />} />
           <Route path="user-list" element={<UserList />} />
           <Route path="push-notifications" element={<PushNotifications />} />
-          <Route path="accounting" element={<Accounting />} />
         </Route>
       </Route>
       <Route element={<Protected allowedRoles="subscriber" />}>

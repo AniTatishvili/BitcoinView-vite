@@ -6,7 +6,6 @@ interface CustomTableBodyProps {
 }
 
 export const CustomTableBody = ({ data }: CustomTableBodyProps) => {
-  console.log(data, "data");
   return (
     <Tbody>
       {data.map((item, i) => (

@@ -52,3 +52,11 @@ export const paymentMethodSchema = Yup.object({
   exp_data: Yup.string().required("Enter data"),
   cvv: Yup.string().required("Enter card cvv").min(3, "Cvv must be 3 characters").max(3, "Cvv must be 3 characters"),
 });
+
+export const pushNotificationsSchema = Yup.object({
+  password: Yup.string().required("Enter your password").min(9, "Password must be 9 characters or more"),
+  password_confirmation: Yup.string()
+    .required("Enter password")
+    .min(9, "Password must be 9 characters or more")
+    .oneOf([Yup.ref("password")], "Passwords must match"),
+});

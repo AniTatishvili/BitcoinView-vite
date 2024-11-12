@@ -7,7 +7,7 @@ import { TiHome } from "react-icons/ti";
 import { FaFacebookMessenger } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { PiUserListFill } from "react-icons/pi";
-import { FaCalculator } from "react-icons/fa";
+import { BsFillSendFill } from "react-icons/bs";
 import { MenuItem } from "../../../utils/types/dashboard-types";
 
 export const AdviserDashboard = () => {
@@ -16,7 +16,7 @@ export const AdviserDashboard = () => {
     { link: "/adviser-dashboard/messages", name: "Messages", icon: FaFacebookMessenger },
     { link: "/adviser-dashboard/profile", name: "Profile", icon: FaUserAlt },
     { link: "/adviser-dashboard/user-list", name: "User list", icon: PiUserListFill },
-    { link: "/adviser-dashboard/accounting", name: "Accounting", icon: FaCalculator },
+    { link: "/adviser-dashboard/push-notifications", name: "Push notifications", icon: BsFillSendFill },
   ];
 
   return (

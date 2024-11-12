@@ -57,6 +57,12 @@ const formik_values = {
   sendWithdrawAmointValues: {
     btc_address: "",
   },
+
+  pushNotificationsValues: {
+    subject: "",
+    date: "",
+    send_to: "",
+  },
 };
 export const {
   initialValues,
@@ -68,4 +74,5 @@ export const {
   paymentMethodValues,
   sendAmointValues,
   sendWithdrawAmointValues,
+  pushNotificationsValues,
 } = formik_values;
