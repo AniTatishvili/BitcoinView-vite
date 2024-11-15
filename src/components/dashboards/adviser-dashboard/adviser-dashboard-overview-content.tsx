@@ -37,7 +37,7 @@ export const AdviserDashboardOverviewContent = () => {
       })
       .then((response) => {
         setInfoData(response.data);
-        console.log("Adviser dashboard info:", response.data);
+        // console.log("Adviser dashboard info:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -55,7 +55,7 @@ export const AdviserDashboardOverviewContent = () => {
       })
       .then((response) => {
         setAdviserUserListData(response.data);
-        console.log("Adviser dashboard info:", response.data);
+        // console.log("Adviser dashboard info:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);

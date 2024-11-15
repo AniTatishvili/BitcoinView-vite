@@ -10,3 +10,5 @@ export * from "./country-select.tsx";
 export * from "./form-select.tsx";
 export * from "./form-checkbox.tsx";
 export * from "./FormikLabel.tsx";
+export * from "./form-select-search.tsx";
+export * from "./form-select-multiple-search.tsx";

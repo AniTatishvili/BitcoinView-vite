@@ -7,6 +7,38 @@ import { UserListContentItem } from "./user-list-content-item";
 import { UserListFilter } from "./user-list-filter";
 import { UserListItemLists } from "./user-list-item-lists";
 
+interface PackageInfo {
+  monthly_profit: string;
+  amount: string;
+}
+
+interface Purchase {
+  start_time: string;
+  expire_time: string;
+  package_id: number;
+  package_info: PackageInfo;
+}
+
+interface User {
+  user_id: number;
+  first_name: string;
+  avatarUrl: string;
+  last_name: string;
+  username: string;
+  adviser: string | null;
+  adviser_username: string;
+  avatar: string;
+  purchase: Purchase;
+  full_name: string;
+  package_status: string;
+  current_package: string;
+  payment_package: string;
+  start_time: string;
+  expire_time: string;
+  monthly_profit: string;
+  last_update: string;
+}
+
 export const UserListContent = () => {
   const { user_list_filter_id } = useUserListFilterStore();
   const [searchTerm, setSearchTerm] = React.useState("");
@@ -15,66 +47,15 @@ export const UserListContent = () => {
   const inputRef = React.useRef<HTMLInputElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [adviserData, setAdviserData] = React.useState<any>([]);
-  const data = [
-    {
-      full_name: "Maka Areshidze",
-      username: "Maka34",
-      current_package: "Active",
-      payment_package: "Voyager",
-      start_time: "12/10/2024",
-      expire_time: "12/12/2024",
-      monthly_profit: "2%",
-      last_update: "12/05/2024",
-    },
-    {
-      full_name: "Nawka Areshidze",
-      username: "Maka34",
-      current_package: "Deactive",
-      payment_package: "Voyager",
-      start_time: "2/05/2024",
-      expire_time: "12/08/2024",
-      monthly_profit: "2%",
-      last_update: "12/05/2024",
-    },
-    {
-      full_name: "Mariami Kakashvili",
-      username: "Mariami4",
-      current_package: "Active",
-      payment_package: "Titan",
-      start_time: "12/05/2024",
-      expire_time: "12/05/2024",
-      monthly_profit: "2%",
-      last_update: "12/05/2024",
-    },
-    {
-      full_name: "Tazo Aslanikashvili",
-      username: "Tazo",
-      current_package: "Active",
-      payment_package: "Orbit",
-      start_time: "12/05/2024",
-      expire_time: "12/05/2024",
-      monthly_profit: "2%",
-      last_update: "12/05/2024",
-    },
-    {
-      full_name: "Tika Areshidze",
-      username: "Tika34",
-      current_package: "Process",
-      payment_package: "Nexus",
-      start_time: "15/05/2024",
-      expire_time: "12/05/2024",
-      monthly_profit: "2%",
-      last_update: "12/05/2024",
-    },
-  ];
+  const [data, setData] = React.useState<User[]>([]);
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
 
   const filteredData = data.filter((item) => {
     const searchMatch =
-      item.start_time.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.expire_time.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      item.full_name.toLowerCase().includes(searchTerm.toLowerCase());
+      (item.start_time && item.start_time.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.expire_time && item.expire_time.toLowerCase().includes(searchTerm.toLowerCase())) ||
+      (item.full_name && item.full_name.toLowerCase().includes(searchTerm.toLowerCase()));
 
     const packageMatch = selectedPackage === "" || selectedPackage === "All" || item.payment_package === selectedPackage;
 
@@ -99,7 +80,45 @@ export const UserListContent = () => {
       })
       .then((response) => {
         setAdviserData(response.data.advisers);
-        console.log("Adviser dashboard info:", response.data);
+        // console.log("Adviser dashboard info:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching user data:", error);
+      });
+  }, []);
+
+  React.useEffect(() => {
+    const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/dashboard_users";
+
+    axios
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        if (response.data && Array.isArray(response.data)) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const usersWithPurchases = response.data?.map((user: any) => {
+            const packageInfo = user.purchase?.package_info || {};
+
+            return {
+              ...user,
+              full_name: `${user.first_name} ${user.last_name}`.trim(),
+              avatarUrl: user.avatar,
+              package_status: user.purchase?.package_status || null,
+              current_package: user.purchase?.package_name || null,
+              payment_package: user.purchase?.package_id || null,
+              start_time: user.purchase?.start_time || null,
+              expire_time: user.purchase?.expire_time || null,
+              monthly_profit: packageInfo.monthly_profit || null,
+              last_update: new Date().toLocaleDateString(),
+            };
+          });
+
+          setData(usersWithPurchases);
+        }
+        // console.log("Adviser dashboard info:", response.data);
       })
       .catch((error) => {
         console.error("Error fetching user data:", error);
@@ -135,24 +154,30 @@ export const UserListContent = () => {
               {user_list_filter_id === 1 ? (
                 <UserListContentItem
                   full_name={item.full_name}
+                  avatarUrl={item.avatarUrl}
                   username={item.username}
+                  package_status={item.package_status}
                   current_package={item.current_package}
-                  payment_package={item.payment_package}
+                  payment_package={"Current Package"}
                   start_time={item.start_time}
                   expire_time={item.expire_time}
                   monthly_profit={item.monthly_profit}
                   last_update={item.last_update}
+                  adviserData={adviserData}
                 />
               ) : (
                 <UserListItemLists
                   full_name={item.full_name}
+                  avatarUrl={item.avatarUrl}
                   username={item.username}
+                  package_status={item.package_status}
                   current_package={item.current_package}
-                  payment_package={item.payment_package}
+                  payment_package={"Current Package"}
                   start_time={item.start_time}
                   expire_time={item.expire_time}
                   monthly_profit={item.monthly_profit}
                   last_update={item.last_update}
+                  adviserData={adviserData}
                 />
               )}
             </Box>

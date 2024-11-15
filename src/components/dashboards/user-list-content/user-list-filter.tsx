@@ -19,7 +19,7 @@ interface UserListFilterProps {
 export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSelectChange, inputRef, checkedItems, adviserData }) => {
   const { save_user_filer_id } = useUserListFilterStore();
   const [isActive, setIsActive] = React.useState<number>(1);
-
+  console.log(checkedItems, "checkedItems");
   const handleClick = (indx: number) => {
     setIsActive(indx);
     save_user_filer_id(indx);
@@ -44,28 +44,30 @@ export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSele
           <CgMathPlus />
         </ListItem> */}
       </List>
-      <Flex bg={"#1F2027"} align={"center"} gap={4} borderRadius={"8px"} ps={3} pe={1} py={1}>
-        <Button w={"fit-content"} bg={"none"} fontSize={"24px"} _hover={{ bg: "none" }} p={0}>
-          <IoClose />
-        </Button>
-        <Flex whiteSpace={"nowrap"} gap={1}>
-          <Text>{checkedItems.length}</Text>
-          <Text>Selected</Text>
-        </Flex>
-        <Text fontSize={"28px"}>
-          <CgPlayListCheck />
-        </Text>
-        <Select>
-          <option value="Advisers" disabled>
-            Advisers
-          </option>
-          {adviserData?.map((item, i) => (
-            <option value={item} key={i}>
-              {item}
+      {checkedItems.length > 0 && (
+        <Flex bg={"#1F2027"} align={"center"} gap={4} borderRadius={"8px"} ps={3} pe={1} py={1}>
+          <Button w={"fit-content"} bg={"none"} fontSize={"24px"} _hover={{ bg: "none" }} p={0}>
+            <IoClose />
+          </Button>
+          <Flex whiteSpace={"nowrap"} gap={1}>
+            <Text>{checkedItems.length}</Text>
+            <Text>Selected</Text>
+          </Flex>
+          <Text fontSize={"28px"}>
+            <CgPlayListCheck />
+          </Text>
+          <Select>
+            <option value="Advisers" disabled>
+              Advisers
             </option>
-          ))}
-        </Select>
-      </Flex>
+            {adviserData?.map((item, i) => (
+              <option value={item} key={i}>
+                {item}
+              </option>
+            ))}
+          </Select>
+        </Flex>
+      )}
     </Flex>
   );
 };

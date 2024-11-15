@@ -11,6 +11,7 @@ type UserSignupStoreType = {
   mobile: string;
   country: string;
   role_name: string;
+  role_id: number;
   referral_code: string;
   referer_id: string;
   chat_notifications: boolean;
@@ -49,6 +50,7 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   mobile: "",
   country: "",
   role_name: "",
+  role_id: 0,
   referral_code: "",
   referer_id: "",
   chat_notifications: false,

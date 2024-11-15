@@ -136,6 +136,26 @@ option {
   color: #213547;
 }
 
+.css-1nmdiq5-menu {
+  background-color: #35363D !important;
+}
+
+.css-d7l1ni-option{
+  background-color: #999 !important
+}
+
+.css-tr4s17-option{
+  background-color: #f7931a !important;
+}
+
+.css-19bb58m {
+  color: #fff !important;
+}
+
+.css-19bb58m::placeholder, #react-select-3-input #react-select-3-input::placeholder {
+  color: #fff !important;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;

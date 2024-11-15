@@ -29,11 +29,11 @@ export const Login = () => {
             </Text>
             <LoginForm />
 
-            <Flex justify={"center"} gap={2}>
+            <Flex flexDir={{ base: "column", sm: "row" }} justify={"center"} align={"center"} gap={{ base: 1, sm: 2 }}>
               <Link to="/forget-password-email" style={{ fontSize: "14px" }}>
                 {t("common:USER.AUTH.FORGOT_YOUR_PASSWORD")}
               </Link>
-              /
+              <Text display={{ base: "none", sm: "block" }}>/</Text>
               <Text color={"#ccc"} fontSize={"14px"}>
                 Don't you have an account?
               </Text>

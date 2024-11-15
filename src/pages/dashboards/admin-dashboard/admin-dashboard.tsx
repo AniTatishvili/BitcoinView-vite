@@ -20,8 +20,8 @@ export const AdminDashboard = () => {
     { link: "/admin-dashboard/messages", name: "Messages", icon: FaFacebookMessenger },
     { link: "/admin-dashboard/profile", name: "Profile", icon: FaUserAlt },
     { link: "/admin-dashboard/user-list", name: "User list", icon: PiUserListFill },
-    { link: "/adviser-dashboard/accounting", name: "Accounting", icon: FaCalculator },
-    { link: "/adviser-dashboard/push-notifications", name: "Push notifications", icon: BsFillSendFill },
+    { link: "/admin-dashboard/accounting", name: "Accounting", icon: FaCalculator },
+    { link: "/admin-dashboard/push-notifications", name: "Push notifications", icon: BsFillSendFill },
   ];
 
   return (
