@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+
 import {
   useReactTable,
   getCoreRowModel,
@@ -9,24 +9,25 @@ import {
   ColumnFiltersState,
   flexRender,
   getFilteredRowModel,
-  FilterFn,
+  //   FilterFn,
 } from "@tanstack/react-table";
-import useCustomToast from "../../../../shared/hooks/useCustomToast";
+
 import { Box, Button, Flex, Select, Table, Tbody, Td, Th, Thead, Tr, Checkbox, Text, Input } from "@chakra-ui/react";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const numericFilter: FilterFn<any> = (row, columnId, filterValue) => {
-  const rowValue = row.getValue(columnId);
-  if (filterValue === undefined || filterValue === "") return true;
-  return rowValue !== undefined && rowValue === parseFloat(filterValue);
-};
+// const numericFilter: FilterFn<any> = (row, columnId, filterValue) => {
+//   const rowValue = row.getValue(columnId);
+//   if (filterValue === undefined || filterValue === "") return true;
+//   return rowValue !== undefined && rowValue === parseFloat(filterValue);
+// };
 
-export const HostRefferContent = () => {
-  const showToast = useCustomToast();
-
+interface TableProps {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [refData, setRefData] = React.useState<any[]>([]);
+  columns: ColumnDef<any, any>[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data: any[];
+}
 
+export const TanstackTable = ({ columns, data }: TableProps) => {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -34,21 +35,9 @@ export const HostRefferContent = () => {
   });
   const [globalFilter, setGlobalFilter] = React.useState("");
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const columns = React.useMemo<ColumnDef<any, any>[]>(
-    () => [
-      { id: "username", accessorKey: "username", header: "User Name", meta: { filterVariant: "text" } },
-      { id: "user_id", accessorKey: "user_id", header: "ID", meta: { filterVariant: "number" }, filterFn: numericFilter },
-      { id: "has_successful_deposit", accessorKey: "has_successful_deposit", header: "Deposit", meta: { filterVariant: "text" } },
-      { id: "referral_code", accessorKey: "referral_code", header: "Red Code", meta: { filterVariant: "text" } },
-      { id: "created_at", accessorKey: "created_at", header: "Reg/Date", meta: { filterVariant: "date" } },
-    ],
-    []
-  );
-
   const filteredData = React.useMemo(() => {
-    return refData.filter((row) => Object.values(row).some((value) => String(value).toLowerCase().includes(globalFilter.toLowerCase())));
-  }, [refData, globalFilter]);
+    return data.filter((row) => Object.values(row).some((value) => String(value).toLowerCase().includes(globalFilter.toLowerCase())));
+  }, [data, globalFilter]);
 
   const tableInstance = useReactTable({
     columns,
@@ -63,26 +52,6 @@ export const HostRefferContent = () => {
   });
 
   const { getHeaderGroups, getRowModel, getCanNextPage, getCanPreviousPage, getPageCount, nextPage, previousPage, setPageSize } = tableInstance;
-
-  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
-
-  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/referrals";
-
-  React.useEffect(() => {
-    axios
-      .get(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        setRefData(response.data);
-      })
-      .catch((error) => {
-        showToast("error", error.response?.data?.message || "Error fetching data.");
-        console.error("Error fetching user data:", error);
-      });
-  }, []);
 
   return (
     <Box w={"100%"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"}>

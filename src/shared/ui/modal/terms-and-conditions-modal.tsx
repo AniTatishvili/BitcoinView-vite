@@ -72,6 +72,23 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                   </ListItem>
                 </List>
                 <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
+                  Apollo
+                </Text>
+                <List fontSize={"12px"} mb={2}>
+                  <ListItem display={"flex"} gap={2}>
+                    <Text fontWeight={"600"}>• Minimum Deposit:</Text> $1,000
+                  </ListItem>
+                  <ListItem display={"flex"} gap={2}>
+                    <Text fontWeight={"600"}>• Profit:</Text> Guaranteed 1.9%
+                  </ListItem>
+                  <ListItem display={"flex"} gap={2}>
+                    <Text fontWeight={"600"}>• Eligible for First Profit Withdrawal:</Text> 45 days, after, every month
+                  </ListItem>
+                  <ListItem display={"flex"} gap={2}>
+                    <Text fontWeight={"600"}>• Restrictions:</Text> Only available once per client and per IP address
+                  </ListItem>
+                </List>
+                <Text as={"h4"} fontSize={"14px"} fontWeight={"600"} my={1}>
                   Voyager
                 </Text>
                 <List fontSize={"12px"} mb={2}>
@@ -85,7 +102,7 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                     <Text fontWeight={"600"}>• Eligible for First Profit Withdrawal:</Text> 45 days, after, every month
                   </ListItem>
                   <ListItem display={"flex"} gap={2}>
-                    <Text fontWeight={"600"}>• Duration:</Text> 3 months
+                    <Text fontWeight={"600"}>• Duration:</Text> 2 months
                   </ListItem>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Cancellation Fee:</Text> 20% to withdraw initial investment before contract matures

@@ -22,6 +22,7 @@ export const DashboardSideMenu: React.FC<DashboardSideMenuProps> = ({ data }) =>
         pos={"relative"}
         overflow={"hidden"}
         transition={"all 150ms ease"}
+
         // _before={{
         //   content: '""',
         //   position: "absolute",

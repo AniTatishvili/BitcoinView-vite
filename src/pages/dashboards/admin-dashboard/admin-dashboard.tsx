@@ -11,6 +11,9 @@ import { PiUserListFill } from "react-icons/pi";
 import { MdRequestPage } from "react-icons/md";
 import { FaCalculator } from "react-icons/fa";
 import { BsFillSendFill } from "react-icons/bs";
+import { LuPackagePlus } from "react-icons/lu";
+import { MdGroupAdd } from "react-icons/md";
+import { FaClipboardList } from "react-icons/fa";
 import { MenuItem } from "../../../utils/types/dashboard-types";
 
 export const AdminDashboard = () => {
@@ -22,6 +25,9 @@ export const AdminDashboard = () => {
     { link: "/admin-dashboard/user-list", name: "User list", icon: PiUserListFill },
     { link: "/admin-dashboard/accounting", name: "Accounting", icon: FaCalculator },
     { link: "/admin-dashboard/push-notifications", name: "Push notifications", icon: BsFillSendFill },
+    { link: "/admin-dashboard/packages", name: "Packages", icon: LuPackagePlus },
+    { link: "/admin-dashboard/add-adviser", name: "Add Adviser", icon: MdGroupAdd },
+    { link: "/admin-dashboard/admin-user-referral", name: "User Refferal", icon: FaClipboardList },
   ];
 
   return (
