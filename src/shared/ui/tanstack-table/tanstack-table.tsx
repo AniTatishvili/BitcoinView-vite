@@ -13,6 +13,7 @@ import {
 } from "@tanstack/react-table";
 
 import { Box, Button, Flex, Select, Table, Tbody, Td, Th, Thead, Tr, Checkbox, Text, Input } from "@chakra-ui/react";
+import { AddPackageModal } from "../modal";
 
 // const numericFilter: FilterFn<any> = (row, columnId, filterValue) => {
 //   const rowValue = row.getValue(columnId);
@@ -55,7 +56,10 @@ export const TanstackTable = ({ columns, data }: TableProps) => {
 
   return (
     <Box w={"100%"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"}>
-      <Input placeholder="Search" value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} w={"200px"} mb={4} />
+      <Flex>
+        <Input placeholder="Search" value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} w={"200px"} mb={4} />
+        <AddPackageModal />
+      </Flex>
       <Box
         overflowX={"scroll"}
         css={{

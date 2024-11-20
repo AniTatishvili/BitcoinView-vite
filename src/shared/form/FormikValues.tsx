@@ -63,6 +63,14 @@ const formik_values = {
     date: "",
     send_to: "",
   },
+
+  packageValues: {
+    package_name: "",
+    amount: "",
+    monthly_profit: "",
+    duration_time: "",
+    sort_order_id: "",
+  },
 };
 export const {
   initialValues,
@@ -75,4 +83,5 @@ export const {
   sendAmointValues,
   sendWithdrawAmointValues,
   pushNotificationsValues,
+  packageValues,
 } = formik_values;
