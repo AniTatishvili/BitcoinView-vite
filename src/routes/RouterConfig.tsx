@@ -40,6 +40,7 @@ import { PushNotifications } from "../pages/dashboards/push-notifications";
 import { Packages } from "../pages/dashboards/admin-dashboard/packages";
 import { AdminUserReferral } from "../pages/dashboards/admin-dashboard/admin-user-referral";
 import { AddAdviser } from "../pages/dashboards/admin-dashboard/add-adviser";
+import { Test } from "../pages/dashboards/test/test";
 
 export function RouterConfig() {
   return (
@@ -68,6 +69,7 @@ export function RouterConfig() {
           <Route path="packages" element={<Packages />} />
           <Route path="admin-user-referral" element={<AdminUserReferral />} />
           <Route path="add-adviser" element={<AddAdviser />} />
+          <Route path="test" element={<Test />} />
         </Route>
       </Route>
       /

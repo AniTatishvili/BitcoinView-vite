@@ -2,6 +2,7 @@ import { Flex } from "@chakra-ui/react";
 import { FormikInput } from "../../../../shared/form";
 import { PButton } from "../../../../shared/ui/buttons";
 import { useTranslation } from "react-i18next";
+import React from "react";
 
 interface LoginFieldsProps {
   formik: {
@@ -23,16 +24,16 @@ export const AdminPackagesContentFormFields: React.FC<LoginFieldsProps> = ({ for
         <FormikInput name="amount" type="text" placeholder="Package Amount" />
         <FormikInput name="duration_time" type="text" placeholder="Package Duration Time" />
         <FormikInput name="monthly_profit" type="text" placeholder="Package Monthly Profit" />
-        <FormikInput name="sort_order_id" type="text" placeholder="Package Sort Order Id" />
+        <FormikInput name="sort_order_id" type="number" placeholder="Package Sort Order Id" />
       </Flex>
       <Flex w={"100%"} flexDir={"column"} justify={"flex-end"} align={"flex-end"} gap={4}>
         <FormikInput name="cancellation_fee" type="text" placeholder="Package Cancellation Fee" />
-        <FormikInput name="condition" type="text" placeholder="Condition" />
         <FormikInput name="condition1" type="text" placeholder="Condition1" />
-        <FormikInput name="duration_time" type="text" placeholder="Package Duration Time" />
-        <FormikInput name="monthly_profit" type="text" placeholder="Package Monthly Profit" />
+        <FormikInput name="condition2" type="text" placeholder="Condition2" />
+        <FormikInput name="condition3" type="text" placeholder="Condition3" />
+        <FormikInput name="descriptions" type="text" placeholder="Package Descriptions" />
         <PButton type="submit" w={"fit-content"}>
-          {loading ? t("common:USER.AUTH.LOADING") : t("common:USER.AUTH.SIGNIN")}
+          {loading ? t("common:USER.AUTH.LOADING") : "Claims"}
         </PButton>
       </Flex>
     </Flex>

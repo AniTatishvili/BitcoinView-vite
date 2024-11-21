@@ -58,12 +58,12 @@ export const SliderMarkPackage = () => {
               <Text fontWeight={"600"} whiteSpace={"nowrap"}>
                 • Minimum Deposit:
               </Text>
-              <Box h={"22px"}>$50</Box>
+              <Box h={"22px"}>$50 (for test)</Box>
             </ListItem>
             <ListItem display={"flex"} gap={2}>
               <Text fontWeight={"600"}>• Profit:</Text>{" "}
               <Box h={"22px"} textAlign={"start"}>
-                Guaranteed 1.3% in 2 weeks
+                0%
               </Box>
             </ListItem>
             <ListItem display={"flex"} gap={2}>

@@ -59,10 +59,10 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                 </Text>
                 <List fontSize={"12px"} mb={2}>
                   <ListItem display={"flex"} gap={2}>
-                    <Text fontWeight={"600"}>• Minimum Deposit:</Text> $50
+                    <Text fontWeight={"600"}>• Minimum Deposit:</Text> $50 (for test)
                   </ListItem>
                   <ListItem display={"flex"} gap={2}>
-                    <Text fontWeight={"600"}>• Profit:</Text> Guaranteed 1.3% in 2 weeks
+                    <Text fontWeight={"600"}>• Profit:</Text> 0%
                   </ListItem>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Purpose:</Text> Test platform capabilities
@@ -83,6 +83,12 @@ export const TermsAndConditionsModal = ({ isChecked, onCheckboxChange }: TermsAn
                   </ListItem>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Eligible for First Profit Withdrawal:</Text> 45 days, after, every month
+                  </ListItem>
+                  <ListItem display={"flex"} gap={2}>
+                    <Text fontWeight={"600"}>• Duration:</Text> 2 months
+                  </ListItem>
+                  <ListItem display={"flex"} gap={2}>
+                    <Text fontWeight={"600"}>• Cancellation Fee:</Text> 20% to withdraw initial investment before contract matures
                   </ListItem>
                   <ListItem display={"flex"} gap={2}>
                     <Text fontWeight={"600"}>• Restrictions:</Text> Only available once per client and per IP address
