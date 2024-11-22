@@ -97,7 +97,6 @@ export const AdminPackagesContentForm: React.FC<AdminPackagesContentFormProps> =
         validateOnMount
         enableReinitialize
         onSubmit={(values) => {
-          console.log("Formik onSubmit called with values:", values);
           packageFormSubmit(values);
         }}>
         {(formik) => {
@@ -112,7 +111,6 @@ export const AdminPackagesContentForm: React.FC<AdminPackagesContentFormProps> =
                 }}
                 {...formik}
               />
-              <button type="submit">Submit</button>
             </Form>
           );
         }}

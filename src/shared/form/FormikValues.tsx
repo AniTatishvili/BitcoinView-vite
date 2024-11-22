@@ -77,6 +77,14 @@ const formik_values = {
     cancellation_fee: 0,
     package_status: 0,
   },
+
+  addUserSliderValues: {
+    title: "",
+    description: "",
+    external_link: "",
+    video_url: "",
+    image_url: "",
+  },
 };
 export const {
   initialValues,
@@ -90,4 +98,5 @@ export const {
   sendWithdrawAmointValues,
   pushNotificationsValues,
   packageValues,
+  addUserSliderValues,
 } = formik_values;

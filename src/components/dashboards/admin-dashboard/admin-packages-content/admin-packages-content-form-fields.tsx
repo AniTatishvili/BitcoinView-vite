@@ -1,10 +1,10 @@
+import React from "react";
+import { useTranslation } from "react-i18next";
 import { Flex } from "@chakra-ui/react";
 import { FormikInput } from "../../../../shared/form";
 import { PButton } from "../../../../shared/ui/buttons";
-import { useTranslation } from "react-i18next";
-import React from "react";
 
-interface LoginFieldsProps {
+interface AdminPackagesContentFormFieldsProps {
   formik: {
     loading: boolean;
     isValid: boolean;
@@ -13,7 +13,7 @@ interface LoginFieldsProps {
   };
 }
 
-export const AdminPackagesContentFormFields: React.FC<LoginFieldsProps> = ({ formik }) => {
+export const AdminPackagesContentFormFields: React.FC<AdminPackagesContentFormFieldsProps> = ({ formik }) => {
   const { t } = useTranslation();
   const { loading } = formik;
 

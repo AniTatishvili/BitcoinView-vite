@@ -30,11 +30,11 @@ export const Overview = () => {
         }}>
         <BreadCrumb items={items} />
         <Flex w={"100%"} h={"100%"} flexDir={{ base: "column", xl: "row" }} gap={"1rem"}>
-          <Flex w={"100%"} flexDir={"column"} gap={"1rem"} order={{ base: 2, lg: 1 }}>
+          <Flex w={{ base: "100%", xl: "70%" }} flexDir={"column"} gap={"1rem"} order={{ base: 2, lg: 1 }}>
             <UserDashboardOverview />
             <DashboardTable />
           </Flex>
-          <Flex w={{ base: "100%", xl: "40%" }} flexDir={"column"} gap={"1rem"} order={{ base: 1, lg: 2 }}>
+          <Flex w={{ base: "100%", xl: "30%" }} flexDir={"column"} gap={"1rem"} order={{ base: 1, lg: 2 }}>
             <UserDashboardDetails />
             <UserDashboardPayments />
             <Hide below={"sm"}>
