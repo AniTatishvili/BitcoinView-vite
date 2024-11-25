@@ -19,11 +19,11 @@ export const AddUserSliderContentFormFields: React.FC<AddUserSliderContentFormFi
 
   return (
     <Flex w={"100%"} flexDir={"column"} gap={4}>
-      <FormikInput name="title" type="text" placeholder="Package Name" />
-      <FormikInput name="description" type="text" placeholder="Package Amount" />
-      <FormikInput name="external_link" type="text" placeholder="Package Duration Time" />
-      <FormikInput name="video_url" type="text" placeholder="Package Monthly Profit" />
-      <FormikInput name="image_url" type="number" placeholder="Package Sort Order Id" />
+      <FormikInput name="title" type="text" placeholder="Event title" />
+      <FormikInput name="description" type="text" placeholder="Event description" />
+      <FormikInput name="external_link" type="text" placeholder="Event external link" />
+      <FormikInput name="video_url" type="text" placeholder="Event video url" />
+      <FormikInput name="image_url" type="number" placeholder="Event image url" />
 
       <PButton type="submit" w={"fit-content"}>
         {loading ? t("common:USER.AUTH.LOADING") : "Claims"}

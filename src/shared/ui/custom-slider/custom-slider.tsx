@@ -3,8 +3,7 @@ import axios from "axios";
 
 import { IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { Flex, Button, Text, Image, Stack, Box } from "@chakra-ui/react";
+import { Flex, Button, Image, Box, Text } from "@chakra-ui/react";
 
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
 import { Autoplay, Navigation, Pagination, Scrollbar, A11y } from "swiper/modules";
@@ -12,7 +11,7 @@ import { Autoplay, Navigation, Pagination, Scrollbar, A11y } from "swiper/module
 import { SliderBtn } from "./slider-btn";
 
 import "swiper/swiper-bundle.css";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 interface SliderItemType {
   title: string;
@@ -23,7 +22,7 @@ interface SliderItemType {
 }
 
 export const CustomSlider = () => {
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const [swiperKey] = React.useState(0);
   const refSlide = React.useRef<SwiperRef>(null);
@@ -73,7 +72,8 @@ export const CustomSlider = () => {
           <SwiperSlide key={i}>
             <Flex w={"100%"} pos={"relative"} zIndex={2}>
               <Image src={item.image_url} alt="item" w={"100%"} h={{ base: "100%", sm: "360px" }} objectFit={{ base: "contain", sm: "unset" }} />
-              {/* <Flex
+              <Flex
+                w={"100%"}
                 bg={"rgba(0,0,0,0.5)"}
                 flexDir={{ base: "column", md: "row" }}
                 justify={"space-between"}
@@ -85,15 +85,15 @@ export const CustomSlider = () => {
                 zIndex={3}
                 p={3}>
                 <Flex flexDir={"column"} gap={1} pr={4}>
-                  <Text as={"h2"}>{item.title}</Text>
-                  <Text fontSize={"sm"}>{item.description}</Text>
+                  {item.title && <Text as={"h2"}>{item.title}</Text>}
+                  {item.description && <Text fontSize={"sm"}>{item.description}</Text>}
                 </Flex>
                 {item.external_link && (
-                  <Button w={"140px"} onClick={() => navigate(`${item.external_link}`)}>
+                  <Button w={"140px"} onClick={() => navigate("../package-selection")}>
                     See more
                   </Button>
                 )}
-              </Flex> */}
+              </Flex>
             </Flex>
           </SwiperSlide>
         ))}

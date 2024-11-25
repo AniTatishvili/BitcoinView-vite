@@ -4,7 +4,7 @@ import { TradingViewChart, UserDashboardChart } from "../../../shared/ui/charts"
 import { CustomSlider } from "../../../shared/ui/custom-slider";
 
 export const UserDashboardOverview = () => {
-  const [tabIndex, setTabIndex] = React.useState(0);
+  const [tabIndex, setTabIndex] = React.useState(2);
 
   return (
     <Flex w={"100%"} h={"fit-content"} backgroundColor={"#1F2027"} flexDir={"column"} borderRadius={"8px"} p={"1rem"}>

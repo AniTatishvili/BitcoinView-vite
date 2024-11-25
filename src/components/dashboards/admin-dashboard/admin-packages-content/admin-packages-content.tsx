@@ -103,7 +103,7 @@ export const AdminPackagesContent = () => {
         console.error("Error deleting package:", error);
       });
   };
-  console.log(editingPackage, "editingPackage", isOpen);
+
   return (
     <>
       <TanstackTable columns={columnDefs} data={data} />
