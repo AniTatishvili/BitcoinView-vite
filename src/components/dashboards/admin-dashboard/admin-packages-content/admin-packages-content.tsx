@@ -10,6 +10,7 @@ import { TanstackTable } from "../../../../shared/ui/tanstack-table";
 import useCustomToast from "../../../../shared/hooks/useCustomToast";
 import { EditPackageModal } from "../../../../shared/ui/modal";
 import { AdminPackagesContentForm } from "./admin-packages-content-form";
+import { useAdminUpdateStore } from "../../../../store/dashboard/admin-data-update-store";
 
 interface UserData {
   amount: string;
@@ -28,6 +29,7 @@ interface UserData {
 }
 
 export const AdminPackagesContent = () => {
+  const { save_admin_add_package_id, admin_add_package_id } = useAdminUpdateStore();
   const showToast = useCustomToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -70,15 +72,15 @@ export const AdminPackagesContent = () => {
       })
       .then((response) => {
         setData(response.data.packages);
+        save_admin_add_package_id(0);
       })
       .catch((error) => {
         showToast("error", error.response.data.message);
         console.error("Error fetching user data:", error);
       });
-  }, []);
+  }, [admin_add_package_id]);
 
   const handleEdit = (rowData: UserData) => {
-    console.log("Editing package", rowData);
     onOpen();
     setEditingPackage(rowData);
   };

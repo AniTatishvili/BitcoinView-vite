@@ -4,6 +4,7 @@ import { Form, Formik } from "formik";
 import { AdminPackagesContentFormFields } from "./admin-packages-content-form-fields";
 import { packageValues } from "../../../../shared/form";
 import useCustomToast from "../../../../shared/hooks/useCustomToast";
+import { useAdminUpdateStore } from "../../../../store/dashboard/admin-data-update-store";
 // packageSchema,
 interface AdminPackagesContentFormValues {
   package_name: string;
@@ -26,10 +27,11 @@ interface AdminPackagesContentFormProps {
 }
 
 export const AdminPackagesContentForm: React.FC<AdminPackagesContentFormProps> = ({ editingPackage, id }) => {
+  const { save_admin_add_package_id } = useAdminUpdateStore();
   const showToast = useCustomToast();
 
   const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
-  console.log(editingPackage, "editingPackage");
+
   const initialValues = editingPackage
     ? {
         package_name: editingPackage.package_name || "",
@@ -47,10 +49,9 @@ export const AdminPackagesContentForm: React.FC<AdminPackagesContentFormProps> =
     : packageValues;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const packageFormSubmit = (values: AdminPackagesContentFormValues) => {
+  const packageFormSubmit = (values: AdminPackagesContentFormValues, actions: any) => {
     console.log(values, "values");
     if (!editingPackage) {
-      console.log(82);
       const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/package";
 
       axios
@@ -62,13 +63,15 @@ export const AdminPackagesContentForm: React.FC<AdminPackagesContentFormProps> =
         .then((response) => {
           console.log(response, "response");
           showToast("success", "Package added successfully");
+          actions.resetForm();
+          actions.setTouched({});
+          save_admin_add_package_id(1);
         })
         .catch((error) => {
           showToast("error", error.response.data.message);
           console.error("Error deleting package:", error);
         });
     } else {
-      console.log(12);
       const url = `https://phplaravel-1309375-4888543.cloudwaysapps.com/api/package/${id}`;
 
       axios
@@ -78,8 +81,8 @@ export const AdminPackagesContentForm: React.FC<AdminPackagesContentFormProps> =
           },
         })
         .then((response) => {
-          // setData((prevData) => [...prevData, response.data.package]);
           showToast("success", response.data.message);
+          save_admin_add_package_id(1);
           // onClose();
         })
         .catch((error) => {
@@ -96,8 +99,8 @@ export const AdminPackagesContentForm: React.FC<AdminPackagesContentFormProps> =
         validationSchema={null}
         validateOnMount
         enableReinitialize
-        onSubmit={(values) => {
-          packageFormSubmit(values);
+        onSubmit={(values, actions) => {
+          packageFormSubmit(values, actions);
         }}>
         {(formik) => {
           // console.log(formik);

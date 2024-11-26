@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 
 import {
   useReactTable,
@@ -13,7 +14,7 @@ import {
 } from "@tanstack/react-table";
 
 import { Box, Button, Flex, Select, Table, Tbody, Td, Th, Thead, Tr, Checkbox, Text, Input } from "@chakra-ui/react";
-import { AddPackageModal } from "../modal";
+import { AddNewEventModal, AddPackageModal } from "../modal";
 
 // const numericFilter: FilterFn<any> = (row, columnId, filterValue) => {
 //   const rowValue = row.getValue(columnId);
@@ -29,6 +30,8 @@ interface TableProps {
 }
 
 export const TanstackTable = ({ columns, data }: TableProps) => {
+  const location = useLocation();
+
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -58,7 +61,7 @@ export const TanstackTable = ({ columns, data }: TableProps) => {
     <Box w={"100%"} backgroundColor={"#1F2027"} borderRadius={"8px"} p={"1rem"}>
       <Flex>
         <Input placeholder="Search" value={globalFilter} onChange={(e) => setGlobalFilter(e.target.value)} w={"200px"} mb={4} />
-        <AddPackageModal />
+        {location.pathname.includes("add-user-slider") ? <AddNewEventModal /> : <AddPackageModal />}
       </Flex>
       <Box
         overflowX={"scroll"}

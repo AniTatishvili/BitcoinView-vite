@@ -14,6 +14,7 @@ import { BsFillSendFill } from "react-icons/bs";
 import { LuPackagePlus } from "react-icons/lu";
 import { MdGroupAdd } from "react-icons/md";
 import { FaClipboardList } from "react-icons/fa";
+import { BiSolidImageAdd } from "react-icons/bi";
 import { MenuItem } from "../../../utils/types/dashboard-types";
 
 export const AdminDashboard = () => {
@@ -28,6 +29,7 @@ export const AdminDashboard = () => {
     { link: "/admin-dashboard/packages", name: "Packages", icon: LuPackagePlus },
     { link: "/admin-dashboard/add-adviser", name: "Add Adviser", icon: MdGroupAdd },
     { link: "/admin-dashboard/admin-user-referral", name: "User Refferal", icon: FaClipboardList },
+    { link: "/admin-dashboard/add-user-slider", name: "Add Event", icon: BiSolidImageAdd },
   ];
 
   return (

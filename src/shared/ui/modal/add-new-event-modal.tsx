@@ -2,7 +2,7 @@ import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, 
 import { TbPlus } from "react-icons/tb";
 import { AddUserSliderContentForm } from "../../../components/dashboards/admin-dashboard/add-user-slider-content";
 
-export const AddNewEvent = () => {
+export const AddNewEventModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -23,7 +23,7 @@ export const AddNewEvent = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader bg={"#1F2027"} borderRadius={"8px 8px 0 0"}>
-            Add new Event
+            Add New Event
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody bg={"#1F2027"} pb={6}>

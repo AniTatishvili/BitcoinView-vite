@@ -1,8 +1,8 @@
 import React from "react";
-import { useTranslation } from "react-i18next";
+// import { useTranslation } from "react-i18next";
 import { Flex } from "@chakra-ui/react";
 import { FormikInput } from "../../../../shared/form";
-import { PButton } from "../../../../shared/ui/buttons";
+// import { PButton } from "../../../../shared/ui/buttons";
 
 interface AddUserSliderContentFormFieldsProps {
   formik: {
@@ -13,9 +13,9 @@ interface AddUserSliderContentFormFieldsProps {
   };
 }
 
-export const AddUserSliderContentFormFields: React.FC<AddUserSliderContentFormFieldsProps> = ({ formik }) => {
-  const { t } = useTranslation();
-  const { loading } = formik;
+export const AddUserSliderContentFormFields: React.FC<AddUserSliderContentFormFieldsProps> = () => {
+  // const { t } = useTranslation();
+  // const { loading } = formik;
 
   return (
     <Flex w={"100%"} flexDir={"column"} gap={4}>
@@ -23,11 +23,11 @@ export const AddUserSliderContentFormFields: React.FC<AddUserSliderContentFormFi
       <FormikInput name="description" type="text" placeholder="Event description" />
       <FormikInput name="external_link" type="text" placeholder="Event external link" />
       <FormikInput name="video_url" type="text" placeholder="Event video url" />
-      <FormikInput name="image_url" type="number" placeholder="Event image url" />
+      {/* <FormikInput name="image_url" type="file" placeholder="Upload Event Image" />
 
       <PButton type="submit" w={"fit-content"}>
         {loading ? t("common:USER.AUTH.LOADING") : "Claims"}
-      </PButton>
+      </PButton> */}
     </Flex>
   );
 };

@@ -15,7 +15,7 @@ export const MoonPayWidget: React.FC = () => {
 
   return (
     <>
-      <MoonPayBuyWidget variant="embedded" baseCurrencyCode="usd" baseCurrencyAmount="500" defaultCurrencyCode="btc" visible={visible} />
+      <MoonPayBuyWidget variant="embedded" baseCurrencyCode="usd" baseCurrencyAmount="500" defaultCurrencyCode="eth" visible={visible} />
       <Button onClick={() => setVisible(!visible)}>Toggle widget</Button>
     </>
   );
