@@ -20,6 +20,7 @@ interface Purchase {
 }
 
 interface User {
+  id: number;
   user_id: number;
   first_name: string;
   avatarUrl: string;
@@ -43,7 +44,7 @@ export const UserListContent = () => {
   const { user_list_filter_id } = useUserListFilterStore();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedPackage, setSelectedPackage] = React.useState("");
-  const [checkedItems, setCheckedItems] = React.useState<string[]>([]);
+  const [checkedItems, setCheckedItems] = React.useState<number[]>([]);
   const inputRef = React.useRef<HTMLInputElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [adviserData, setAdviserData] = React.useState<any>([]);
@@ -141,7 +142,8 @@ export const UserListContent = () => {
                 colorScheme={"green"}
                 onChange={(event) => {
                   const isChecked = event.target.checked;
-                  const itemKey = item.username;
+                  const itemKey = item.user_id;
+                  console.log(itemKey, isChecked);
                   setCheckedItems((prevCheckedItems) => {
                     if (isChecked) {
                       return [...prevCheckedItems, itemKey];

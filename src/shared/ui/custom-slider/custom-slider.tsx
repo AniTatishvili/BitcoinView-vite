@@ -12,6 +12,7 @@ import { SliderBtn } from "./slider-btn";
 
 import "swiper/swiper-bundle.css";
 import { useNavigate } from "react-router-dom";
+import { VideoPlayer } from "../../videos";
 
 interface SliderItemType {
   title: string;
@@ -71,13 +72,16 @@ export const CustomSlider = () => {
         {data?.map((item, i) => (
           <SwiperSlide key={i}>
             <Flex w={"100%"} pos={"relative"} zIndex={2}>
-              <Image
-                src={"https://phplaravel-1309375-4888543.cloudwaysapps.com" + item.image_url}
-                alt="item"
-                w={"100%"}
-                h={{ base: "100%", sm: "360px" }}
-                objectFit={{ base: "contain", sm: "contain" }}
-              />
+              {item.image_url && (
+                <Image
+                  src={"https://phplaravel-1309375-4888543.cloudwaysapps.com" + item.image_url}
+                  alt="item"
+                  w={"100%"}
+                  h={{ base: "100%", sm: "360px" }}
+                  objectFit={{ base: "contain", sm: "contain" }}
+                />
+              )}
+              {item.video_url && <VideoPlayer videoSource={item.video_url} />}
               <Flex
                 w={"100%"}
                 bg={"rgba(0,0,0,0.5)"}

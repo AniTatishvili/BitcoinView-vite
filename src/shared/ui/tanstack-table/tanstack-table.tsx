@@ -84,7 +84,7 @@ export const TanstackTable = ({ columns, data }: TableProps) => {
               {getHeaderGroups().map((headerGroup) => (
                 <Tr key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <Th key={header.id} p={2}>
+                    <Th key={header.id} p={2} whiteSpace={"nowrap"}>
                       {flexRender(header.column.columnDef.header, header.getContext())}
                     </Th>
                   ))}

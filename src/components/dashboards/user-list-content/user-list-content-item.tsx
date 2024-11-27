@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { useNavigate } from "react-router-dom";
 import { Box, Button, Flex, List, ListIcon, ListItem, Text } from "@chakra-ui/react";
 
@@ -11,11 +13,13 @@ import { UserAvatar } from "../../../shared/user-avatar";
 import { MdNotificationsNone } from "react-icons/md";
 import { FaCalculator } from "react-icons/fa";
 import FormSelectMultipleSearch from "../../../shared/form/form-select-multiple-search";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
 // import { IoCall } from "react-icons/io5";
 
 interface Adviser {
   id?: number;
   username: string;
+  advisor_group: string;
 }
 
 interface UserListContentItemProps {
@@ -46,8 +50,35 @@ export const UserListContentItem: React.FC<UserListContentItemProps> = ({
   adviserData,
 }) => {
   const navigate = useNavigate();
+  const showToast = useCustomToast();
 
   const { role_id } = useUserSignupStore();
+
+  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/assign-to-advisor";
+
+  //FIXME:
+  const handleClick = () => {
+    const checkedAdvisers = {
+      user_ids: [],
+      advisor_id: 0,
+    };
+
+    axios
+      .post(url, checkedAdvisers, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response, "response");
+        showToast("success", "Event added successfully");
+      })
+      .catch((error) => {
+        showToast("error", error.response.data.message);
+        console.error("Error deleting event:", error);
+      });
+  };
 
   return (
     <Box>
@@ -96,7 +127,7 @@ export const UserListContentItem: React.FC<UserListContentItemProps> = ({
             {role_id === 2 && <FormSelectMultipleSearch adviserData={adviserData} />}
 
             {role_id === 4 && (
-              <Button bg={"#f7931a"} p={2}>
+              <Button bg={"#f7931a"} p={2} onClick={handleClick}>
                 <Text>Assign me</Text>
               </Button>
             )}

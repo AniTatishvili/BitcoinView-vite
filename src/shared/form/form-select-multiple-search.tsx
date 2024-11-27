@@ -1,10 +1,14 @@
+import axios from "axios";
+
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import Select from "react-select";
+import useCustomToast from "../hooks/useCustomToast";
 
 interface Adviser {
   id?: number;
   username: string;
+  advisor_group: string;
 }
 
 interface FormSelectMultipleSearchProps {
@@ -12,6 +16,8 @@ interface FormSelectMultipleSearchProps {
 }
 
 const FormSelectMultipleSearch: React.FC<FormSelectMultipleSearchProps> = ({ adviserData }) => {
+  const showToast = useCustomToast();
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [selectedOptions, setSelectedOptions] = React.useState<any[]>([]);
 
@@ -21,10 +27,12 @@ const FormSelectMultipleSearch: React.FC<FormSelectMultipleSearchProps> = ({ adv
   }
 
   const colourOptions = adviserData.map((adviser) => ({
-    label: adviser,
-    value: adviser,
+    label: `${adviser.username} (${adviser.advisor_group})`,
+    value: adviser.id,
   }));
 
+  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/assign-to-advisor";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (selected: any) => {
     if (selected.length > 2) {
@@ -32,6 +40,26 @@ const FormSelectMultipleSearch: React.FC<FormSelectMultipleSearchProps> = ({ adv
     }
 
     setSelectedOptions(selected);
+
+    const val = {
+      user_ids: [],
+      advisor_id: selected[0].value,
+    };
+
+    axios
+      .post(url, val, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response, "response");
+        showToast("success", "Event added successfully");
+      })
+      .catch((error) => {
+        showToast("error", error.response.data.message);
+        console.error("Error deleting event:", error);
+      });
   };
 
   return (

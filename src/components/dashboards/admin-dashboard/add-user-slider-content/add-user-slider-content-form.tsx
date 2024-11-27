@@ -25,7 +25,7 @@ interface AddUserSliderContentFormProps {
 export const AddUserSliderContentForm: React.FC<AddUserSliderContentFormProps> = ({ editingPackage, id }) => {
   const { save_admin_add_event_id } = useAdminUpdateStore();
   const showToast = useCustomToast();
-  console.log(id, 111);
+
   const initialValues = editingPackage
     ? {
         title: editingPackage.title || "",
