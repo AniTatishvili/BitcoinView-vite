@@ -45,7 +45,6 @@ export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSele
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onAdviserChange = (e: any) => {
-    console.log(JSON.parse(e.target.value), "value");
     const checkedAdvisers = {
       user_ids: checkedItems,
       advisor_id: Number(e.target.value),

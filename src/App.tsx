@@ -44,7 +44,7 @@ const App: React.FC = () => {
           },
         })
         .then((response) => {
-          console.log("User data:", response.data);
+          // console.log("User data:", response.data);
           updateUserFields(response.data);
           setIsLoading(false);
         })

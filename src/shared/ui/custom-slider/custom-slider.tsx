@@ -12,7 +12,6 @@ import { SliderBtn } from "./slider-btn";
 
 import "swiper/swiper-bundle.css";
 import { useNavigate } from "react-router-dom";
-import { VideoPlayer } from "../../videos";
 
 interface SliderItemType {
   title: string;
@@ -81,7 +80,20 @@ export const CustomSlider = () => {
                   objectFit={{ base: "contain", sm: "contain" }}
                 />
               )}
-              {item.video_url && <VideoPlayer videoSource={item.video_url} />}
+              {item.video_url && (
+                <Box w="100%" h={{ base: "250px", sm: "360px" }} position="relative" overflow="hidden" borderRadius="8px">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={item.video_url.replace("watch?v=", "embed/")}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ objectFit: "cover", borderRadius: "8px" }}
+                  />
+                </Box>
+              )}
+
               <Flex
                 w={"100%"}
                 bg={"rgba(0,0,0,0.5)"}
