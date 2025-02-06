@@ -44,7 +44,7 @@ export const CurrentPackage = () => {
       .then((response) => {
         setData(response.data.active_purchase || null);
         setUserPackageNameData(response.data.active_purchase.package_name);
-        updateUserFields({ active_package: response.data.active_purchase.package_id });
+        updateUserFields({ sort_order_id: response.data.active_purchase.sort_order_id });
         // console.log("User package data:", response.data.active_purchase);
       })
       .catch((error) => {

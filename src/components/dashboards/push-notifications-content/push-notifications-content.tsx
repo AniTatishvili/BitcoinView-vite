@@ -2,8 +2,8 @@ import { Form, Formik } from "formik";
 import { Flex, Text } from "@chakra-ui/react";
 import { PushNotificationsFormFields } from "./push-notifications-form-fields";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { pushNotificationsSchema, pushNotificationsValues } from "../../../shared/form";
-
+import { pushNotificationsValues } from "../../../shared/form";
+// pushNotificationsSchema,
 export const PushNotificationsContent = () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const sendNewNotification = (values: any) => {

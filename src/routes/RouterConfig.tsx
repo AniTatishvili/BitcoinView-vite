@@ -37,6 +37,11 @@ import { UserRequests } from "../pages/dashboards/user-requests";
 import { HostReffer } from "../pages/dashboards/user-dashboard/host-reffer";
 import { Accounting } from "../pages/dashboards/accounting";
 import { PushNotifications } from "../pages/dashboards/push-notifications";
+import { Packages } from "../pages/dashboards/admin-dashboard/packages";
+import { AdminUserReferral } from "../pages/dashboards/admin-dashboard/admin-user-referral";
+import { AddAdviser } from "../pages/dashboards/admin-dashboard/add-adviser";
+import { Test } from "../pages/dashboards/test/test";
+import { AddUserSlider } from "../pages/dashboards/admin-dashboard/add-user-slider";
 
 export function RouterConfig() {
   return (
@@ -62,6 +67,11 @@ export function RouterConfig() {
           <Route path="user-requests" element={<UserRequests />} />
           <Route path="push-notifications" element={<PushNotifications />} />
           <Route path="accounting" element={<Accounting />} />
+          <Route path="packages" element={<Packages />} />
+          <Route path="admin-user-referral" element={<AdminUserReferral />} />
+          <Route path="add-adviser" element={<AddAdviser />} />
+          <Route path="add-user-slider" element={<AddUserSlider />} />
+          <Route path="test" element={<Test />} />
         </Route>
       </Route>
       /

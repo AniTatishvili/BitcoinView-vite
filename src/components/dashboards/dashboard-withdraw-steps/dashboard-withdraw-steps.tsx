@@ -88,7 +88,7 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
               <Input
                 type="number"
                 name="amount_usd"
-                placeholder="Type your wallet"
+                placeholder="Type amount"
                 style={{
                   width: "229px",
                   height: "40px",
@@ -134,7 +134,7 @@ export const DashboardWithdrawSteps: React.FC<DashboardDepositStepsProps> = () =
                         <Field
                           type="text"
                           name="btc_address"
-                          placeholder="Type amount"
+                          placeholder="Type your wallet"
                           style={{
                             width: "229px",
                             height: "40px",

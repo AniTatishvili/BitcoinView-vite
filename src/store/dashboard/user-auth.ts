@@ -25,6 +25,7 @@ type UserSignupStoreType = {
   deposit_notifications: boolean;
   employee: boolean;
   id: string;
+  sort_order_id: number;
   active_package: number;
   active_package_name: string;
   other_notifications: boolean;
@@ -64,6 +65,7 @@ export const useUserSignupStore = create<UserSignupStoreType>((set) => ({
   deposit_notifications: false,
   employee: false,
   id: "",
+  sort_order_id: 0,
   active_package: 0,
   active_package_name: "",
   other_notifications: false,

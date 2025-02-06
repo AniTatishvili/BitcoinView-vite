@@ -28,7 +28,7 @@ interface UserListContentItemProps {
 
 export const UserListItemLists: React.FC<UserListContentItemProps> = ({
   full_name,
-  avatarUrl,
+  // avatarUrl,
   username,
   package_status,
   current_package,
@@ -37,7 +37,7 @@ export const UserListItemLists: React.FC<UserListContentItemProps> = ({
   expire_time,
   monthly_profit,
   last_update,
-  adviserData,
+  // adviserData,
 }) => {
   const navigate = useNavigate();
 

@@ -1,4 +1,6 @@
 import React from "react";
+import axios from "axios";
+
 import { Button, Flex, Input, List, ListItem, Select, Text } from "@chakra-ui/react";
 import { MdViewList } from "react-icons/md";
 import { PiGridFourFill } from "react-icons/pi";
@@ -7,19 +9,31 @@ import { CgPlayListCheck } from "react-icons/cg";
 import { IoClose } from "react-icons/io5";
 import { useUserListFilterStore } from "../../../store/dashboard/user-list-flter-store";
 import { PackageFilter } from "../../../shared/package-filter";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
+
+interface Adviser {
+  id: number;
+  username: string;
+  advisor_group?: string; // If this property exists
+}
 
 interface UserListFilterProps {
   onSearch: (value: string) => void;
   onSelectChange: (value: string) => void;
   inputRef: React.RefObject<HTMLInputElement>;
-  checkedItems: string[];
-  adviserData: string[];
+  checkedItems: number[];
+  adviserData: Adviser[];
 }
 
 export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSelectChange, inputRef, checkedItems, adviserData }) => {
+  const showToast = useCustomToast();
+
   const { save_user_filer_id } = useUserListFilterStore();
   const [isActive, setIsActive] = React.useState<number>(1);
-  console.log(checkedItems, "checkedItems");
+
+  const token = typeof window !== "undefined" ? JSON.parse(window.localStorage.getItem("USER_AUTH") || "{}") : {};
+  const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/assign-to-advisor";
+
   const handleClick = (indx: number) => {
     setIsActive(indx);
     save_user_filer_id(indx);
@@ -27,6 +41,29 @@ export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSele
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onSearch(e.target.value);
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const onAdviserChange = (e: any) => {
+    const checkedAdvisers = {
+      user_ids: checkedItems,
+      advisor_id: Number(e.target.value),
+    };
+
+    axios
+      .post(url, checkedAdvisers, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log(response, "response");
+        showToast("success", "Event added successfully");
+      })
+      .catch((error) => {
+        showToast("error", error.response.data.message);
+        console.error("Error deleting event:", error);
+      });
   };
 
   return (
@@ -56,13 +93,11 @@ export const UserListFilter: React.FC<UserListFilterProps> = ({ onSearch, onSele
           <Text fontSize={"28px"}>
             <CgPlayListCheck />
           </Text>
-          <Select>
-            <option value="Advisers" disabled>
-              Advisers
-            </option>
+          <Select onChange={onAdviserChange}>
+            <option value="Advisers">Advisers</option>
             {adviserData?.map((item, i) => (
-              <option value={item} key={i}>
-                {item}
+              <option value={item.id} key={i}>
+                {item.username} ({item.advisor_group})
               </option>
             ))}
           </Select>

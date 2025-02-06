@@ -60,3 +60,17 @@ export const pushNotificationsSchema = Yup.object({
     .min(9, "Password must be 9 characters or more")
     .oneOf([Yup.ref("password")], "Passwords must match"),
 });
+
+export const packageSchema = Yup.object({
+  package_name: Yup.string().required("Enter package name"),
+  amount: Yup.string().required("Enter package amount"),
+  monthly_profit: Yup.string().required("Enter package monthly profit"),
+  duration_time: Yup.string().required("Enter package duration time"),
+  sort_order_id: Yup.string().required("Enter package sort order id"),
+  condition_1: Yup.string().required("Enter condition1"),
+  condition_2: Yup.string().required("Enter condition1"),
+  condition_3: Yup.string().required("Enter condition1"),
+  descriptions: Yup.string().required("Enter descriptions"),
+  cancellation_fee: Yup.string().required("Enter cancellation fee"),
+  package_status: Yup.string().required("Enter package status"),
+});

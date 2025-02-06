@@ -16,68 +16,62 @@ import FormSelectMultipleSearch from "../../../shared/form/form-select-multiple-
 interface Adviser {
   id?: number;
   username: string;
+  advisor_group: string;
 }
 
 interface UserListContentItemProps {
-  full_name: string;
-  avatarUrl: string;
-  username: string;
-  package_status: string;
-  current_package: string;
-  payment_package: string;
-  start_time: string;
-  expire_time: string;
-  monthly_profit: string;
-  last_update: string;
+  user: {
+    user_id: number;
+    full_name: string;
+    avatarUrl: string;
+    username: string;
+    package_status: string;
+    current_package: string;
+    payment_package: string;
+    start_time: string;
+    expire_time: string;
+    monthly_profit: string;
+    last_update: string;
+    // adviserData: Adviser[];
+  };
   adviserData: Adviser[];
+  onAssign: () => void;
 }
 
-export const UserListContentItem: React.FC<UserListContentItemProps> = ({
-  full_name,
-  avatarUrl,
-  username,
-  package_status,
-  current_package,
-  payment_package,
-  start_time,
-  expire_time,
-  monthly_profit,
-  last_update,
-  adviserData,
-}) => {
+export const UserListContentItem: React.FC<UserListContentItemProps> = ({ user, adviserData, onAssign }) => {
   const navigate = useNavigate();
 
   const { role_id } = useUserSignupStore();
 
   return (
     <Box>
-      <UserAvatar full_name={full_name} username={username} src={"https://phplaravel-1309375-4888543.cloudwaysapps.com" + avatarUrl} />
+      <UserAvatar full_name={user.full_name} username={user.username} src={"https://phplaravel-1309375-4888543.cloudwaysapps.com" + user.avatarUrl} />
       <Flex justify={"space-between"} align={"center"} gap={10}>
         <Flex align={"center"} gap={"8px"}>
-          <Text fontSize={"14px"}>{payment_package}</Text>
+          <Text fontSize={"14px"}>Current package</Text>
           <Button h={"30px"} bg={"#0E4534"} color={"#218B3D"} fontSize={"12px"} p={"4px"} cursor={"revert"}>
-            {package_status}
+            {user.package_status}
           </Button>
         </Flex>
         <PercentageDoughnut percentage={0} />
       </Flex>
       <Flex flexDir={"column"} gap={4} fontSize={"14px"}>
-        <Text fontWeight={"600"}>Package: {current_package}</Text>
+        <Text fontWeight={"600"}>Package: {user.current_package}</Text>
         <List>
           <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
             <ListIcon as={FaCircle} color="#44B96B" />
-            <Text>Start Time: {start_time}</Text>
+            <Text>Start Time: {user.start_time}</Text>
           </ListItem>
           <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
             <ListIcon as={FaCircle} color="#C05768" />
             <Box>
-              <Text>Expire Time: {expire_time}</Text>
-              <Text>Profit/ Monthly: {monthly_profit}</Text>
+              <Text>Expire Time: {user.expire_time}</Text>
+              <Text>Profit/ Monthly: {user.monthly_profit}</Text>
             </Box>
           </ListItem>
           <ListItem display={"flex"} flexDir={"row"} alignItems={"center"}>
             <ListIcon as={FaCircle} color="#D2C31E" />
-            <Text>Last Update: {last_update}</Text>
+            <Text>Last Update: {user.last_update}</Text>
           </ListItem>
         </List>
         {role_id === 2 && (
@@ -96,7 +90,7 @@ export const UserListContentItem: React.FC<UserListContentItemProps> = ({
             {role_id === 2 && <FormSelectMultipleSearch adviserData={adviserData} />}
 
             {role_id === 4 && (
-              <Button bg={"#f7931a"} p={2}>
+              <Button bg={"#f7931a"} p={2} onClick={onAssign}>
                 <Text>Assign me</Text>
               </Button>
             )}

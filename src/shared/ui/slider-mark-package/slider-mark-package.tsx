@@ -28,13 +28,13 @@ export const SliderMarkPackage = () => {
   const showToast = useCustomToast();
 
   const { setUserPackageData, resetUserPackageData } = useUserSelectedPackageStore();
-  const { active_package } = useUserSignupStore();
+  const { sort_order_id } = useUserSignupStore();
   const { userBalance, fetchBalance, estimatedBalance } = useUserBalance();
   const { setUserPackageNameData } = useUserPackageNameStore();
-
-  const package_id = active_package - 2;
-
   const [data, setData] = React.useState<UserData[]>([]);
+
+  const package_id = sort_order_id;
+
   const { setUserPackageCancelData, userPackageCancelData } = useUserPackageCancelStore();
   const [activeIndex, setActiveIndex] = React.useState<number | null>(package_id ?? userBalance ?? 0);
   const [isOrbitSelected, setIsOrbitSelected] = React.useState(false);
@@ -58,12 +58,12 @@ export const SliderMarkPackage = () => {
               <Text fontWeight={"600"} whiteSpace={"nowrap"}>
                 • Minimum Deposit:
               </Text>
-              <Box h={"22px"}>$50</Box>
+              <Box h={"22px"}>$50 (for test)</Box>
             </ListItem>
             <ListItem display={"flex"} gap={2}>
               <Text fontWeight={"600"}>• Profit:</Text>{" "}
               <Box h={"22px"} textAlign={"start"}>
-                Guaranteed 1.3% in 2 weeks
+                0%
               </Box>
             </ListItem>
             <ListItem display={"flex"} gap={2}>
@@ -77,6 +77,52 @@ export const SliderMarkPackage = () => {
               <Box h={"22px"} textAlign={"start"} alignItems={"start"} justifyContent={"start"}>
                 Only available once per client and per IP address
               </Box>
+            </ListItem>
+          </List>
+        </Box>
+      ),
+    },
+    {
+      label: (
+        <Box>
+          <Text as={"h4"} fontSize={"14px"} fontWeight={"600"}>
+            Apollo
+          </Text>
+          <List fontSize={"10px"}>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Minimum Deposit:
+              </Text>
+              <Box>$1,000</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Monthly Profit:
+              </Text>
+              <Box>1.9%</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Eligible for First Profit Withdrawal:
+              </Text>
+              <Box>45 days, after, every month</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"}>• Duration:</Text> <Box>2 months</Box>
+            </ListItem>
+            <ListItem display={"flex"} gap={2}>
+              <Text fontWeight={"600"} whiteSpace={"nowrap"}>
+                • Cancellation Fee:
+              </Text>
+              <Flex textAlign={"start"} alignItems={"start"} justifyContent={"start"}>
+                20% to withdraw initial investment before contract matures
+              </Flex>
+            </ListItem>
+            <ListItem display={"flex"} alignItems={"start"} justifyContent={"start"} gap={2}>
+              <Text fontWeight={"600"}>• Withdrawals:</Text>
+              <Flex textAlign={"start"} alignItems={"start"} justifyContent={"start"}>
+                Monthly profits can be withdrawn without penalties.
+              </Flex>
             </ListItem>
           </List>
         </Box>
@@ -482,7 +528,7 @@ export const SliderMarkPackage = () => {
               purchase_id: response.data.purchase.id,
             });
 
-            setActiveIndex(response.data.purchase.id - 2);
+            setActiveIndex(response.data.purchase.id);
             navigate("/user-dashboard/deposit");
           } else {
             setActiveIndex(activeIndex);
@@ -501,14 +547,10 @@ export const SliderMarkPackage = () => {
     setInput(inputAmount);
 
     const filteredPackages = data.filter(({ amount }) => amount <= inputAmount);
-    console.log("Input Amount:", inputAmount);
-    console.log("Filtered Packages:", filteredPackages);
 
     if (filteredPackages.length > 0) {
       const maxAmount = Math.max(...filteredPackages.map((pkg) => pkg.amount));
       const closestPackage = data.findIndex((pkg) => Math.abs(pkg.amount - maxAmount) < 0.01);
-
-      console.log(closestPackage, "closestPackage", maxAmount);
 
       if (closestPackage) {
         setActiveIndex(closestPackage);
@@ -521,8 +563,23 @@ export const SliderMarkPackage = () => {
   return (
     <>
       <Flex w={"100%"} flexDir={"column"} align={"flex-end"}>
-        <Flex w={"100%"} overflowX={"auto"}>
-          <Flex w={`{base:"750px", 2xl:"800px"}`} h={"120px"} justify={"space-between"} align={"center"} pos={"relative"} zIndex={2}>
+        <Flex
+          w={"100%"}
+          overflowX={"scroll"}
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "4px",
+              height: "4px",
+            },
+            "&::-webkit-scrollbar-track": {
+              width: "6px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#f7931a",
+              borderRadius: "24px",
+            },
+          }}>
+          <Flex w={`{base:"700px", 2xl:"750px"}`} h={"120px"} justify={"space-between"} align={"center"} pos={"relative"} zIndex={2}>
             <Flex
               w={"100%"}
               h={"7px"}

@@ -8,19 +8,35 @@ export const DashboardMenuList: React.FC<DashboardSideMenuProps> = ({ data }) =>
   const { user_dashboard_menu_visibility } = useUserDashboardStore();
 
   return (
-    <Flex flexDir={"column"} className="side-menu">
-      {data.map((item, i) => (
-        <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-          <Flex h={"44px"} color={"#fff"} align={"center"} gap={4}>
-            <Flex fontSize={"18px"}>
-              <Icon as={item.icon} />
+    <Flex
+      maxH={"calc(100vh - 160px)"}
+      overflowY={"scroll"}
+      css={{
+        "&::-webkit-scrollbar": {
+          width: "4px",
+        },
+        "&::-webkit-scrollbar-track": {
+          width: "6px",
+        },
+        "&::-webkit-scrollbar-thumb": {
+          background: "#f7931a",
+          borderRadius: "24px",
+        },
+      }}>
+      <Flex flexDir={"column"} mr={2} className="side-menu">
+        {data.map((item, i) => (
+          <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
+            <Flex h={"40px"} color={"#fff"} align={"center"} gap={3}>
+              <Flex fontSize={"18px"}>
+                <Icon as={item.icon} />
+              </Flex>
+              <Text fontSize={"15px"} whiteSpace={"nowrap"}>
+                {user_dashboard_menu_visibility ? item.name : null}
+              </Text>
             </Flex>
-            <Text fontSize={"16px"} whiteSpace={"nowrap"}>
-              {user_dashboard_menu_visibility ? item.name : null}
-            </Text>
-          </Flex>
-        </NavLink>
-      ))}
+          </NavLink>
+        ))}
+      </Flex>
     </Flex>
   );
 };

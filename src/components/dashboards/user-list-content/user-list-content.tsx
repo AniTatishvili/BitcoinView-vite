@@ -6,6 +6,7 @@ import { useUserListFilterStore } from "../../../store/dashboard/user-list-flter
 import { UserListContentItem } from "./user-list-content-item";
 import { UserListFilter } from "./user-list-filter";
 import { UserListItemLists } from "./user-list-item-lists";
+import useCustomToast from "../../../shared/hooks/useCustomToast";
 
 interface PackageInfo {
   monthly_profit: string;
@@ -20,6 +21,7 @@ interface Purchase {
 }
 
 interface User {
+  id: number;
   user_id: number;
   first_name: string;
   avatarUrl: string;
@@ -40,10 +42,12 @@ interface User {
 }
 
 export const UserListContent = () => {
+  const showToast = useCustomToast();
+
   const { user_list_filter_id } = useUserListFilterStore();
   const [searchTerm, setSearchTerm] = React.useState("");
   const [selectedPackage, setSelectedPackage] = React.useState("");
-  const [checkedItems, setCheckedItems] = React.useState<string[]>([]);
+  const [checkedItems, setCheckedItems] = React.useState<number[]>([]);
   const inputRef = React.useRef<HTMLInputElement>(null);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [adviserData, setAdviserData] = React.useState<any>([]);
@@ -125,6 +129,31 @@ export const UserListContent = () => {
       });
   }, []);
 
+  const handleAssign = (userId: number) => {
+    if (adviserData.id !== null) {
+      const url = "https://phplaravel-1309375-4888543.cloudwaysapps.com/api/assign-to-advisor";
+
+      const assign = {
+        user_ids: [userId],
+        advisor_id: adviserData[0].id,
+      };
+
+      axios
+        .post(url, assign, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then((response) => {
+          showToast("success", response.data.message);
+          console.log(response);
+        })
+        .catch((error) => {
+          console.error("Error assigning adviser:", error);
+        });
+    }
+  };
+
   return (
     <Flex flexDir={"column"} gap={4}>
       <UserListFilter checkedItems={checkedItems} onSearch={setSearchTerm} onSelectChange={setSelectedPackage} inputRef={inputRef} adviserData={adviserData} />
@@ -141,7 +170,8 @@ export const UserListContent = () => {
                 colorScheme={"green"}
                 onChange={(event) => {
                   const isChecked = event.target.checked;
-                  const itemKey = item.username;
+                  const itemKey = item.user_id;
+                  console.log(itemKey, isChecked);
                   setCheckedItems((prevCheckedItems) => {
                     if (isChecked) {
                       return [...prevCheckedItems, itemKey];
@@ -153,17 +183,20 @@ export const UserListContent = () => {
               />
               {user_list_filter_id === 1 ? (
                 <UserListContentItem
-                  full_name={item.full_name}
-                  avatarUrl={item.avatarUrl}
-                  username={item.username}
-                  package_status={item.package_status}
-                  current_package={item.current_package}
-                  payment_package={"Current Package"}
-                  start_time={item.start_time}
-                  expire_time={item.expire_time}
-                  monthly_profit={item.monthly_profit}
-                  last_update={item.last_update}
+                  // full_name={item.full_name}
+                  // avatarUrl={item.avatarUrl}
+                  // username={item.username}
+                  // package_status={item.package_status}
+                  // current_package={item.current_package}
+                  // payment_package={"Current Package"}
+                  // start_time={item.start_time}
+                  // expire_time={item.expire_time}
+                  // monthly_profit={item.monthly_profit}
+                  // last_update={item.last_update}
+                  // adviserData={adviserData}
                   adviserData={adviserData}
+                  user={item}
+                  onAssign={() => handleAssign(item.user_id)}
                 />
               ) : (
                 <UserListItemLists

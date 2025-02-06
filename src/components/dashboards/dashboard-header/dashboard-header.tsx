@@ -292,12 +292,14 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
           <MenuList w={"175px"} backgroundColor={"#35363D"} color={"#fff"} borderRadius={"8px"} px={"20px"} py={"16px"} zIndex={10}>
             {data.map((item, i) => (
               <NavLink key={i} to={item.link} className={({ isActive, isPending }) => (isPending ? "pending" : isActive ? "active" : "")}>
-                <Flex h={"44px"} color={"#fff"} align={"center"} gap={4} p={3} _hover={{ color: "#f7931a" }}>
+                <Flex h={"32px"} color={"#fff"} align={"center"} gap={3} p={2} _hover={{ color: "#f7931a" }}>
                   {item.name}
                 </Flex>
               </NavLink>
             ))}
-            <MenuItem onClick={signout}>{t("common:MENU.SIGN_OUT")}</MenuItem>
+            <MenuItem onClick={signout} mt={2}>
+              {t("common:MENU.SIGN_OUT")}
+            </MenuItem>
           </MenuList>
         </Menu>
         <Button
