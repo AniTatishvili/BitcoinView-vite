@@ -6,8 +6,8 @@ import { useNavigate, NavLink, Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
 
-import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image, Text, Divider, Stack } from "@chakra-ui/react";
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { Box, Menu, MenuButton, MenuList, MenuItem, Button, Flex, Image, Text, Divider, Stack, useColorMode } from "@chakra-ui/react";
+import { ChevronDownIcon, MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { IoNotifications } from "react-icons/io5";
 import { IoIosTime } from "react-icons/io";
 
@@ -32,6 +32,9 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const showToast = useCustomToast();
+
+  const { colorMode, toggleColorMode } = useColorMode();
+  const schema = window.localStorage.getItem("chakra-ui-color-mode") || "dark";
 
   const { username, first_name, last_name, avatar }: { username: string; first_name: string; last_name: string; avatar: string; current_balance: string } =
     useUserSignupStore((state) => ({
@@ -313,6 +316,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
             <GrRefresh />
           </Box>
         </Button>
+        <Button onClick={toggleColorMode}>{schema === "light" ? <MoonIcon></MoonIcon> : <SunIcon></SunIcon>}</Button>
       </Flex>
     </Flex>
   );

@@ -22,7 +22,9 @@ export default function NotFound() {
         <Flex>{t("NOTFOUND.TEXT")}</Flex>
       </Flex>
       <PButton onClick={getBack}>
-        <FaBackspace />
+        <Flex mr={2}>
+          <FaBackspace />
+        </Flex>
         {t("BUTTONS.BACK")}
       </PButton>
     </Flex>

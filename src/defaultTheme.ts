@@ -27,7 +27,7 @@ const config: ThemeConfig = {
 const styles: CustomStyles = {
   global: (props) => ({
     body: {
-      bg: mode("brand.dark", "brand.dark")(props),
+      bg: mode("brand.white", "brand.dark")(props),
     },
     p: {},
     a: {},
