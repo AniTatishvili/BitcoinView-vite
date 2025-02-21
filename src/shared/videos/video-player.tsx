@@ -25,6 +25,6 @@ export const VideoPlayer = (props: SliderItemType) => {
       src={videoSource}
       autoPlay
       muted
-      style={{ width: "100%", objectFit: "cover", objectPosition: "50% 25%", borderRadius: "8px", overflow: "hidden" }}></video>
+      style={{ width: "100%", objectFit: "cover", objectPosition: "50% 25%", borderRadius: "8px", overflow: "hidden", zIndex: 1 }}></video>
   );
 };

@@ -12,7 +12,7 @@ export const SignUp = () => {
 
   return (
     <Flex w={"100%"} h={"100%"} flexDir={{ base: "column", lg: "row" }} gap={1}>
-      <Flex w={{ base: "100%", lg: "50%" }} p={"0.5rem"}>
+      <Flex w={{ base: "100%", lg: "50%" }} h={"100vh"} pos={"relative"} p={"0.5rem"}>
         <VideoPlayer videoSource={videoSource} />
       </Flex>
       <Flex w={{ base: "100%", lg: "50%" }} justify={"center"} align={"center"} p={"0.5rem"}>

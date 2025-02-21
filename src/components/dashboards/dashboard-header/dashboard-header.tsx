@@ -33,7 +33,7 @@ export const DashboardHeader: React.FC<DashboardSideMenuProps> = ({ data }) => {
   const navigate = useNavigate();
   const showToast = useCustomToast();
 
-  const { colorMode, toggleColorMode } = useColorMode();
+  const { toggleColorMode } = useColorMode();
   const schema = window.localStorage.getItem("chakra-ui-color-mode") || "dark";
 
   const { username, first_name, last_name, avatar }: { username: string; first_name: string; last_name: string; avatar: string; current_balance: string } =
